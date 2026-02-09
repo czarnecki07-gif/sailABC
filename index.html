@@ -3,32 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="sailabc.com – portal żeglarski: ABC, giełdy, mariny, kursy, pogodę i społeczność." />
+  <meta name="description" content="sailabc.com – portal żeglarski: ABC, giełdy, mariny, kursy, pogoda i społeczność." />
   <title>sailabc.com — sailABC</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Przejdź do treści</a>
 
-  <header class="site-header" id="top">
-    <div class="container header-inner">
+  <!-- TOP NAV: wszystkie podstrony w jednym rzędzie -->
+  <header class="topbar" id="top">
+    <div class="container topbar-inner">
       <a class="brand" href="index.html" aria-label="sailABC — strona główna">
         <img class="brand-logo" src="logo.png" alt="sailABC" />
-        <div class="brand-text">
-          <span class="brand-name">sailABC</span>
-          <span class="brand-tagline">sailabc.com</span>
-        </div>
+        <span class="brand-name">sailABC</span>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="nav-toggle-lines" aria-hidden="true"></span>
-        <span class="sr-only">Menu</span>
-      </button>
-
-      <nav id="site-nav" class="site-nav" aria-label="Główna nawigacja">
-        <a href="abc.html">ABC Żeglarstwa</a>
-        <a href="gielda-jachtow.html">Giełda jachtów</a>
-        <a href="osprzet.html">Giełda osprzętu</a>
+      <nav class="nav" aria-label="Nawigacja">
+        <a href="abc.html">ABC</a>
+        <a href="quizy.html">Quizy</a>
+        <a href="gielda-jachtow.html">Jachty</a>
+        <a href="osprzet.html">Osprzęt</a>
         <a href="wolna-koja.html">Wolna koja</a>
         <a href="mariny.html">Mariny</a>
         <a href="kursy.html">Kursy</a>
@@ -36,229 +30,125 @@
         <a href="pogoda.html">Pogoda</a>
         <a href="spolecznosc.html">Społeczność</a>
         <a href="oprogramowanie.html">Oprogramowanie</a>
-        <a href="kontakt.html" class="nav-cta">Kontakt</a>
+        <a class="nav-cta" href="kontakt.html">Kontakt</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- Minimalistyczny HERO (bez marketingowego akapitu) -->
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <div class="hero-badges" aria-label="Skróty">
-            <span class="badge">Portal żeglarski</span>
-            <span class="badge badge-accent">Jasny UI</span>
-            <span class="badge">Mobile-first</span>
-          </div>
-
-          <h1>sailABC — wszystko do żeglowania w jednym miejscu</h1>
-
-          <p class="hero-lead">
-            ABC żeglarstwa, giełdy, wolne koje, mariny, kursy, poradniki, pogoda i społeczność.
+          <h1>Portal żeglarski sailABC</h1>
+          <p class="lead">
+            ABC żeglarstwa • giełdy • wolne koje • mariny • kursy • poradniki • pogoda • społeczność
           </p>
 
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="abc.html">Start: ABC Żeglarstwa</a>
-            <a class="btn btn-ghost" href="pogoda.html">Sprawdź pogodę</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="abc.html">Zacznij od ABC</a>
+            <a class="btn" href="pogoda.html">Pogoda i lokalizacja</a>
+            <a class="btn" href="quizy.html">Quizy</a>
           </div>
 
-          <div class="hero-links">
-            <a class="chip" href="gielda-jachtow.html">Giełda jachtów</a>
-            <a class="chip" href="wolna-koja.html">Wolna koja</a>
-            <a class="chip" href="mariny.html">Wolne miejsca w marinach</a>
-            <a class="chip" href="oprogramowanie.html">Oprogramowanie</a>
+          <div class="quick">
+            <a class="quick-link" href="gielda-jachtow.html">Giełda jachtów →</a>
+            <a class="quick-link" href="wolna-koja.html">Wolna koja →</a>
+            <a class="quick-link" href="mariny.html">Wolne miejsca w marinach →</a>
+            <a class="quick-link" href="oprogramowanie.html">Oprogramowanie →</a>
           </div>
         </div>
 
-        <aside class="hero-panel" aria-label="Szybki panel">
-          <div class="panel-card">
+        <aside class="hero-panel" aria-label="Podgląd">
+          <div class="panel">
             <div class="panel-head">
-              <h2>Szybki panel</h2>
-              <p class="muted">Wersja statyczna (GitHub Pages). Dane docelowo z JSON/API.</p>
+              <h2>Podgląd na dziś</h2>
+              <p class="muted">Przykładowe dane (statycznie)</p>
             </div>
 
-            <div class="panel-grid">
-              <div class="kpi">
-                <div class="kpi-top">
-                  <span class="kpi-label">Wiatr</span>
-                  <span class="kpi-value">12–16 kn</span>
-                </div>
-                <span class="kpi-sub">NW • porywy</span>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-k">Wiatr</span>
+                <span class="stat-v">12–16 kn</span>
+                <span class="stat-s">NW • porywy</span>
               </div>
-
-              <div class="kpi">
-                <div class="kpi-top">
-                  <span class="kpi-label">Fale</span>
-                  <span class="kpi-value">0.8 m</span>
-                </div>
-                <span class="kpi-sub">krótka fala</span>
+              <div class="stat">
+                <span class="stat-k">Fale</span>
+                <span class="stat-v">0.8 m</span>
+                <span class="stat-s">krótka fala</span>
               </div>
-
-              <div class="kpi">
-                <div class="kpi-top">
-                  <span class="kpi-label">Ogłoszenia</span>
-                  <span class="kpi-value">143</span>
-                </div>
-                <span class="kpi-sub">aktywnych</span>
+              <div class="stat">
+                <span class="stat-k">Mariny</span>
+                <span class="stat-v">4</span>
+                <span class="stat-s">z wolnymi miejscami</span>
               </div>
-
-              <div class="kpi">
-                <div class="kpi-top">
-                  <span class="kpi-label">Wolne koje</span>
-                  <span class="kpi-value">27</span>
-                </div>
-                <span class="kpi-sub">w tym tyg.</span>
+              <div class="stat">
+                <span class="stat-k">Koje</span>
+                <span class="stat-v">27</span>
+                <span class="stat-s">w tym tygodniu</span>
               </div>
             </div>
 
             <div class="panel-actions">
-              <a class="btn btn-small btn-primary" href="pogoda.html">Pogoda + lokalizacja</a>
-              <a class="btn btn-small btn-ghost" href="spolecznosc.html">Forum i grupy</a>
+              <a class="btn btn-primary btn-sm" href="pogoda.html">Sprawdź pogodę</a>
+              <a class="btn btn-sm" href="kontakt.html">Zadaj pytanie</a>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- MODULE GRID -->
+    <!-- Minimalne sekcje (bez dublowania podstron kartami) -->
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h2>Moduły sailABC</h2>
-          <p class="muted">Każdy dział jako osobna podstrona.</p>
+          <h2>Co znajdziesz na sailABC</h2>
+          <p class="muted">Przejdź górnym menu do wybranego działu.</p>
         </div>
 
-        <div class="cards-grid">
-          <a class="card card-link" href="abc.html">
-            <div class="card-icon">⛵</div>
-            <h3>ABC Żeglarstwa</h3>
-            <p>Bezpieczeństwo, nawigacja, praca żagli, manewry, węzły.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="gielda-jachtow.html">
-            <div class="card-icon">🛥️</div>
-            <h3>Giełda jachtów</h3>
-            <p>Oferty z filtrami: rok, cena, lokalizacja.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="osprzet.html">
-            <div class="card-icon">⚙️</div>
-            <h3>Giełda osprzętu</h3>
-            <p>Osprzęt, elektronika, żagle, bezpieczeństwo.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="wolna-koja.html">
-            <div class="card-icon">🧭</div>
-            <h3>Wolna koja</h3>
-            <p>Rejsy: jacht, termin, port, koszt.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="mariny.html">
-            <div class="card-icon">⚓</div>
-            <h3>Mariny</h3>
-            <p>Wolne miejsca, ceny i parametry marin.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="kursy.html">
-            <div class="card-icon">🎓</div>
-            <h3>Kursy i szkolenia</h3>
-            <p>Żeglarskie, motorowodne, nawigacyjne.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="artykuly.html">
-            <div class="card-icon">📝</div>
-            <h3>Artykuły i poradniki</h3>
-            <p>Checklisty, poradniki, przepisy, manewry.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="pogoda.html">
-            <div class="card-icon">🌤️</div>
-            <h3>Pogoda i warunki</h3>
-            <p>Wiatr, fale, ostrzeżenia + miejsce na lokalizację.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="spolecznosc.html">
-            <div class="card-icon">💬</div>
+        <div class="feature-list">
+          <div class="feature">
+            <h3>ABC żeglarstwa</h3>
+            <p>Bezpieczeństwo, nawigacja, żagle, manewry, węzły.</p>
+          </div>
+          <div class="feature">
+            <h3>Giełdy</h3>
+            <p>Jachty i osprzęt z filtrami i czytelnymi ofertami.</p>
+          </div>
+          <div class="feature">
+            <h3>Rejsy i mariny</h3>
+            <p>Wolna koja oraz wolne miejsca w marinach.</p>
+          </div>
+          <div class="feature">
+            <h3>Pogoda</h3>
+            <p>Widok przygotowany pod lokalizację i dane wiatru/fal/ostrzeżeń.</p>
+          </div>
+          <div class="feature">
             <h3>Społeczność</h3>
             <p>Forum, ogłoszenia, grupy rejsowe.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="oprogramowanie.html">
-            <div class="card-icon">🧩</div>
+          </div>
+          <div class="feature">
             <h3>Oprogramowanie</h3>
-            <p>Aplikacje, nawigacja, logbook, AIS, mapy offline.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <a class="card card-link" href="kontakt.html">
-            <div class="card-icon">📩</div>
-            <h3>Kontakt i FAQ</h3>
-            <p>Pytania, pomoc, współpraca.</p>
-            <span class="card-cta">Wejdź →</span>
-          </a>
-
-          <div class="card card-accent">
-            <div class="card-icon">✨</div>
-            <h3>Quizy jako podstrona</h3>
-            <p>W 2/3 dodam osobny plik <strong>quizy.html</strong> i link w nawigacji.</p>
-            <span class="pill">prosto</span>
-            <span class="pill">czytelnie</span>
-            <span class="pill">skaluje się</span>
+            <p>Nawigacja, logbook, AIS, mapy offline — narzędzia dla żeglarzy.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="site-footer">
+    <footer class="footer">
       <div class="container footer-inner">
-        <div>
+        <div class="footer-left">
           <strong>sailABC</strong>
-          <p class="muted small">sailabc.com • statyczny portal (GitHub Pages)</p>
+          <span class="muted">sailabc.com</span>
         </div>
-
-        <div class="footer-links">
-          <a href="abc.html">ABC</a>
-          <a href="pogoda.html">Pogoda</a>
-          <a href="gielda-jachtow.html">Jachty</a>
-          <a href="kontakt.html">Kontakt</a>
+        <div class="footer-right muted">
+          © <span id="year"></span>
         </div>
-
-        <div class="muted small">© <span id="year"></span> sailABC</div>
       </div>
     </footer>
   </main>
 
   <script>
-    // minimal: menu (mobile) + rok
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('#site-nav');
-
-    function setNav(open) {
-      if (!toggle || !nav) return;
-      toggle.setAttribute('aria-expanded', String(open));
-      nav.classList.toggle('open', open);
-    }
-
-    toggle?.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      setNav(!isOpen);
-    });
-
-    nav?.addEventListener('click', (e) => {
-      const t = e.target;
-      if (t && t.tagName === 'A') setNav(false);
-    });
-
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
