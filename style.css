@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #ffffff;
+    color: #1A1A1A;
+    line-height: 1.6;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    height: 50px;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #1A1A1A;
+    font-weight: 500;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #444;
+}
+
+.cta {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 10px;
+    display: inline-block;
+}
+
+.primary {
+    background: #1FBAD6;
+    color: white;
+}
+
+.secondary {
+    background: #E6EEF2;
+    color: #0A2A43;
+}
+
+.section {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid-3, .grid-2 {
+    display: grid;
+    gap: 30px;
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+    padding: 30px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fafafa;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+}
