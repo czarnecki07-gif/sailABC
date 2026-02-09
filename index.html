@@ -3,112 +3,811 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="sailABC – portal żeglarski." />
-  <title>sailABC — sailabc.com</title>
+  <meta name="description" content="sailABC — nowoczesny portal żeglarski: ABC, testy, giełda, wolna koja, mariny, kursy, poradniki, pogoda i społeczność." />
+  <title>sailABC — Portal Żeglarski</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Przejdź do treści</a>
-
-  <header class="header">
+  <!-- Header -->
+  <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="sailABC — strona główna">
-        <img src="logo.png" alt="sailABC" class="brand-logo" />
-        <span class="brand-name">sailABC</span>
+      <a class="brand" href="#top" aria-label="sailABC - strona główna">
+        <img src="logo.png" alt="sailABC logo" class="brand-logo" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC</span>
+          <span class="brand-tag">Ucz się • Pływaj • Kupuj • Planuj</span>
+        </div>
       </a>
 
-      <nav class="nav" aria-label="Nawigacja">
-        <a href="abc.html">ABC</a>
-        <a href="pogoda.html">Pogoda</a>
-        <a href="kursy.html">Kursy</a>
-        <a href="gielda-jachtow.html">Jachty</a>
-        <a href="wolna-koja.html">Wolna koja</a>
+      <button class="nav-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="siteNav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
 
-        <div class="dropdown">
-          <button class="dropbtn" type="button" aria-expanded="false" aria-controls="moreMenu">
-            Więcej
-          </button>
-          <div id="moreMenu" class="menu" role="menu">
-            <a role="menuitem" href="quizy.html">Quizy</a>
-            <a role="menuitem" href="osprzet.html">Osprzęt</a>
-            <a role="menuitem" href="mariny.html">Mariny</a>
-            <a role="menuitem" href="artykuly.html">Poradniki</a>
-            <a role="menuitem" href="spolecznosc.html">Społeczność</a>
-            <a role="menuitem" href="oprogramowanie.html">Oprogramowanie</a>
-            <a role="menuitem" href="kontakt.html">Kontakt</a>
-          </div>
-        </div>
+      <nav class="site-nav" id="siteNav" aria-label="Nawigacja główna">
+        <a href="#abc">ABC</a>
+        <a href="#quizy">Testy</a>
+        <a href="#jachty">Jachty</a>
+        <a href="#osprzet">Osprzęt</a>
+        <a href="#koja">Wolna koja</a>
+        <a href="#mariny">Mariny</a>
+        <a href="#kursy">Kursy</a>
+        <a href="#artykuly">Artykuły</a>
+        <a href="#pogoda">Pogoda</a>
+        <a href="#spolecznosc">Społeczność</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
+  <!-- Hero -->
+  <main id="top">
     <section class="hero">
-      <div class="container hero-inner">
-        <h1>Portal żeglarski sailABC</h1>
-        <p class="lead">Prosto. Czytelnie. Wszystkie działy w górnym menu.</p>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Portal żeglarski, który prowadzi od <span class="accent">A do Z</span>.</h1>
+          <p>
+            sailABC to baza wiedzy, testy na patent, giełda jachtów i osprzętu, wolna koja,
+            wolne miejsca w marinach, kursy, poradniki, pogoda i społeczność — w jednym miejscu.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#abc">Zacznij od ABC</a>
+            <a class="btn ghost" href="#quizy">Zrób test</a>
+          </div>
 
-        <div class="actions">
-          <a class="btn primary" href="abc.html">Start: ABC</a>
-          <a class="btn" href="pogoda.html">Pogoda</a>
-          <a class="btn" href="gielda-jachtow.html">Giełda jachtów</a>
+          <div class="hero-stats" role="list">
+            <div class="stat" role="listitem">
+              <span class="stat-num">11</span>
+              <span class="stat-label">modułów</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">responsywności</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num">0</span>
+              <span class="stat-label">frameworków</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <h2>Szybkie wyszukiwanie</h2>
+            <p>Znajdź jacht, osprzęt, rejs lub marinę w kilka sekund.</p>
+          </div>
+
+          <form class="quick-search" action="#" method="get">
+            <label class="field">
+              <span>Co szukasz?</span>
+              <select name="type">
+                <option value="jachty">Jacht</option>
+                <option value="osprzet">Osprzęt</option>
+                <option value="koja">Wolna koja</option>
+                <option value="mariny">Marina</option>
+                <option value="kursy">Kurs</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Lokalizacja</span>
+              <input type="text" name="location" placeholder="np. Gdynia, Mazury, Chorwacja" />
+            </label>
+
+            <label class="field">
+              <span>Budżet (opcjonalnie)</span>
+              <input type="text" name="budget" placeholder="np. 2000 zł / 500 €" />
+            </label>
+
+            <button class="btn primary full" type="submit">Szukaj</button>
+            <p class="form-note">To demo (GitHub Pages) — formularze są poglądowe.</p>
+          </form>
         </div>
       </div>
     </section>
 
-    <section class="container section">
-      <div class="mini">
-        <div class="mini-item">
-          <span class="k">Skrót</span>
-          <a class="v" href="wolna-koja.html">Wolna koja</a>
-          <span class="s">oferty rejsów</span>
+    <!-- Section: ABC Żeglarstwa -->
+    <section id="abc" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>ABC Żeglarstwa</h2>
+          <p>Najważniejsze podstawy: bezpieczeństwo, nawigacja, praca żagli, manewry i węzły.</p>
         </div>
-        <div class="mini-item">
-          <span class="k">Skrót</span>
-          <a class="v" href="mariny.html">Mariny</a>
-          <span class="s">wolne miejsca</span>
-        </div>
-        <div class="mini-item">
-          <span class="k">Skrót</span>
-          <a class="v" href="oprogramowanie.html">Oprogramowanie</a>
-          <span class="s">narzędzia i aplikacje</span>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Bezpieczeństwo</h3>
+              <p>Kamizelki, MOB, radio, zasady na pokładzie.</p>
+            </div>
+            <ul class="list">
+              <li>Checklista przed wyjściem w rejs</li>
+              <li>Manewr „Człowiek za burtą”</li>
+              <li>Środki ratunkowe i procedury</li>
+            </ul>
+            <a class="card-link" href="#kontakt" aria-label="Przejdź do FAQ">Zobacz FAQ →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Nawigacja</h3>
+              <p>Kursy, namiary, znaki nawigacyjne, mapy.</p>
+            </div>
+            <ul class="list">
+              <li>Podstawy map i symboli</li>
+              <li>Wyznaczanie kursu i drogi</li>
+              <li>Światła i znaki na wodzie</li>
+            </ul>
+            <a class="card-link" href="#artykuly">Poradniki nawigacji →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Praca żagli</h3>
+              <p>Trym, kursy względem wiatru i balast.</p>
+            </div>
+            <ul class="list">
+              <li>Kursy: bajdewind, półwiatr, baksztag</li>
+              <li>Podstawy trymu grota i foka</li>
+              <li>Jak czytać wiatr na wodzie</li>
+            </ul>
+            <a class="card-link" href="#pogoda">Sprawdź warunki →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Manewry</h3>
+              <p>Zwroty, podejście do kei, kotwiczenie.</p>
+            </div>
+            <ul class="list">
+              <li>Zwrot przez sztag i rufę</li>
+              <li>Praca silnikiem w porcie</li>
+              <li>Podstawy kotwiczenia</li>
+            </ul>
+            <a class="card-link" href="#quizy">Sprawdź się w testach →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Węzły</h3>
+              <p>Węzeł ratowniczy, ósemka, sztyk, cumowanie.</p>
+            </div>
+            <ul class="list">
+              <li>Ósemka i jej zastosowania</li>
+              <li>Sztyk i półsztyk</li>
+              <li>Ratowniczy + „na ucho”</li>
+            </ul>
+            <a class="card-link" href="#artykuly">Zobacz instrukcje →</a>
+          </article>
+
+          <article class="card card-highlight">
+            <div class="card-top">
+              <h3>Ścieżka „sailABC: Start”</h3>
+              <p>Zbiór lekcji w kolejności: od podstaw do pierwszych manewrów.</p>
+            </div>
+            <div class="pill-row">
+              <span class="pill">45 min</span>
+              <span class="pill">10 lekcji</span>
+              <span class="pill">quiz końcowy</span>
+            </div>
+            <a class="btn primary" href="#kursy">Przejdź do kursów</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <div class="container footer-inner">
-        <span class="foot-brand">sailABC</span>
-        <span class="muted">© <span id="year"></span> sailabc.com</span>
+    <!-- Section: Testy i quizy -->
+    <section id="quizy" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Testy i quizy żeglarskie</h2>
+          <p>ABC, patent żeglarza, przepisy, manewry — ucz się na pytaniach.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Quiz: ABC (start)</h3>
+              <p>Krótki test rozgrzewkowy — idealny na telefon.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">10 pytań</span>
+              <span class="badge">~4 min</span>
+              <span class="badge">poziom: easy</span>
+            </div>
+            <button class="btn ghost full" type="button" data-demo="quiz">Uruchom demo</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Patent żeglarza</h3>
+              <p>Zestawy pytań: teoria + praktyka manewrów.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">40 pytań</span>
+              <span class="badge">~20 min</span>
+              <span class="badge">poziom: średni</span>
+            </div>
+            <button class="btn ghost full" type="button" data-demo="quiz">Uruchom demo</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Przepisy na wodzie</h3>
+              <p>Pierwszeństwo, znaki, światła i bezpieczne zachowanie.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">25 pytań</span>
+              <span class="badge">~12 min</span>
+              <span class="badge">poziom: średni</span>
+            </div>
+            <button class="btn ghost full" type="button" data-demo="quiz">Uruchom demo</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Manewry (port)</h3>
+              <p>Wejście/wyjście z miejsca, podejście do kei, kotwiczenie.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">20 pytań</span>
+              <span class="badge">~10 min</span>
+              <span class="badge">poziom: pro</span>
+            </div>
+            <button class="btn ghost full" type="button" data-demo="quiz">Uruchom demo</button>
+          </article>
+        </div>
+
+        <div class="notice">
+          <strong>Tip:</strong> Na GitHub Pages możesz dodać pełne quizy w pliku <code>script.js</code>.
+          Jeśli chcesz — dopiszę działający quiz z punktacją.
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- Section: Giełda jachtów -->
+    <section id="jachty" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Giełda jachtów</h2>
+          <p>Ogłoszenia sprzedaży i czarteru. Filtry działają w JS (opcjonalnie).</p>
+        </div>
+
+        <div class="filters">
+          <div class="filter">
+            <label for="yachtQuery">Szukaj</label>
+            <input id="yachtQuery" type="text" placeholder="np. Antila, Bavaria, Beneteau" />
+          </div>
+          <div class="filter">
+            <label for="yachtType">Typ</label>
+            <select id="yachtType">
+              <option value="all">Wszystkie</option>
+              <option value="sprzedaz">Sprzedaż</option>
+              <option value="czarter">Czarter</option>
+            </select>
+          </div>
+          <div class="filter">
+            <label for="yachtLocation">Lokalizacja</label>
+            <select id="yachtLocation">
+              <option value="all">Wszędzie</option>
+              <option value="mazury">Mazury</option>
+              <option value="gdynia">Gdynia</option>
+              <option value="chorwacja">Chorwacja</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card listing" data-type="sprzedaz" data-location="mazury">
+            <img class="listing-img" src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=70" alt="Jacht na jeziorze" loading="lazy">
+            <div class="listing-body">
+              <h3>Antila 27</h3>
+              <p class="muted">Rok: 2018 • Cena: 129 000 PLN • Mazury</p>
+              <p>Wersja turystyczna, zadbany kadłub, komplet żagli + osprzęt portowy.</p>
+              <div class="listing-tags">
+                <span class="tag">sprzedaż</span><span class="tag">familijny</span><span class="tag">Mazury</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card listing" data-type="czarter" data-location="chorwacja">
+            <img class="listing-img" src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1200&q=70" alt="Jacht morski" loading="lazy">
+            <div class="listing-body">
+              <h3>Bavaria 46 (czarter)</h3>
+              <p class="muted">Rok: 2020 • Od: 2 490 EUR/tydz. • Chorwacja</p>
+              <p>4 kabiny, pełne wyposażenie, baza: Split. Idealny na rodzinny rejs.</p>
+              <div class="listing-tags">
+                <span class="tag">czarter</span><span class="tag">morski</span><span class="tag">Split</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card listing" data-type="sprzedaz" data-location="gdynia">
+            <img class="listing-img" src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1200&q=70" alt="Jacht w porcie" loading="lazy">
+            <div class="listing-body">
+              <h3>Beneteau Oceanis 34</h3>
+              <p class="muted">Rok: 2016 • Cena: 89 000 EUR • Gdynia</p>
+              <p>Serwisowany, gotowy do sezonu. Elektronika nawigacyjna + autopilot.</p>
+              <div class="listing-tags">
+                <span class="tag">sprzedaż</span><span class="tag">morski</span><span class="tag">Gdynia</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="notice subtle">
+          <strong>Uwaga:</strong> Filtry są statyczne w tym HTML. Jeśli poprosisz o <code>script.js</code>, dodam filtrowanie w czasie rzeczywistym.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Giełda osprzętu -->
+    <section id="osprzet" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Giełda osprzętu</h2>
+          <p>Sprzęt żeglarski: liny, kamizelki, bloczki, elektronika, osprzęt portowy.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card product">
+            <img class="product-img" src="https://images.unsplash.com/photo-1523419163445-5894b1ce40ac?auto=format&fit=crop&w=1200&q=70" alt="Kamizelka ratunkowa" loading="lazy">
+            <div class="product-body">
+              <h3>Kamizelka automatyczna 150N</h3>
+              <p class="muted">Stan: bardzo dobry • Cena: 320 PLN</p>
+              <div class="pill-row">
+                <span class="pill">bezpieczeństwo</span>
+                <span class="pill">kamizelki</span>
+              </div>
+              <button class="btn ghost full" type="button">Zobacz ogłoszenie</button>
+            </div>
+          </article>
+
+          <article class="card product">
+            <img class="product-img" src="https://images.unsplash.com/photo-1518544887873-2cc7c2df2a70?auto=format&fit=crop&w=1200&q=70" alt="Liny żeglarskie" loading="lazy">
+            <div class="product-body">
+              <h3>Lina 10mm (30m) — poliester</h3>
+              <p class="muted">Stan: nowa • Cena: 180 PLN</p>
+              <div class="pill-row">
+                <span class="pill">liny</span>
+                <span class="pill">osprzęt pokładowy</span>
+              </div>
+              <button class="btn ghost full" type="button">Zobacz ogłoszenie</button>
+            </div>
+          </article>
+
+          <article class="card product">
+            <img class="product-img" src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=1200&q=70" alt="Elektronika" loading="lazy">
+            <div class="product-body">
+              <h3>Plotter nawigacyjny 7"</h3>
+              <p class="muted">Stan: dobry • Cena: 950 PLN</p>
+              <div class="pill-row">
+                <span class="pill">nawigacja</span>
+                <span class="pill">elektronika</span>
+              </div>
+              <button class="btn ghost full" type="button">Zobacz ogłoszenie</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Wolna koja -->
+    <section id="koja" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Wolna koja</h2>
+          <p>Oferty rejsów: jacht, termin, port, koszt — znajdź załogę lub dołącz.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Bałtyk: weekend szkoleniowy</h3>
+              <p class="muted">Jacht: Oceanis 34 • Port: Gdynia • Termin: 12–14.04</p>
+            </div>
+            <ul class="list">
+              <li>Koszt: 690 PLN / osoba</li>
+              <li>Poziom: początkujący</li>
+              <li>Wymagane: sztormiaki, buty, rękawice</li>
+            </ul>
+            <button class="btn primary full" type="button">Zgłoś się</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Chorwacja: 7 dni (kabina)</h3>
+              <p class="muted">Jacht: Bavaria 46 • Port: Split • Termin: 01–08.06</p>
+            </div>
+            <ul class="list">
+              <li>Koszt: 450 EUR / osoba</li>
+              <li>Poziom: podstawy OK</li>
+              <li>W cenie: miejsce w kabinie + szkolenie</li>
+            </ul>
+            <button class="btn primary full" type="button">Zgłoś się</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Mazury: rejs rodzinny</h3>
+              <p class="muted">Jacht: Antila 27 • Port: Giżycko • Termin: 20–27.07</p>
+            </div>
+            <ul class="list">
+              <li>Koszt: 1 100 PLN / osoba</li>
+              <li>Dla: początkujących i rodzin</li>
+              <li>Opcja: nauka manewrów portowych</li>
+            </ul>
+            <button class="btn primary full" type="button">Zgłoś się</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Mariny -->
+    <section id="mariny" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Wolne miejsca w marinach</h2>
+          <p>Lista marin, wolne miejsca, ceny i parametry — planuj postoje.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card marina">
+            <div class="card-top">
+              <h3>Marina Gdynia</h3>
+              <p class="muted">Wolne miejsca: 12 • Od: 140 PLN/doba</p>
+            </div>
+            <div class="kv">
+              <div><span class="k">Woda</span><span class="v">Tak</span></div>
+              <div><span class="k">Prąd</span><span class="v">Tak</span></div>
+              <div><span class="k">Prysznice</span><span class="v">Tak</span></div>
+              <div><span class="k">Max LOA</span><span class="v">18 m</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Sprawdź szczegóły</button>
+          </article>
+
+          <article class="card marina">
+            <div class="card-top">
+              <h3>Port Giżycko</h3>
+              <p class="muted">Wolne miejsca: 7 • Od: 85 PLN/doba</p>
+            </div>
+            <div class="kv">
+              <div><span class="k">Woda</span><span class="v">Tak</span></div>
+              <div><span class="k">Prąd</span><span class="v">Tak</span></div>
+              <div><span class="k">Slip</span><span class="v">Tak</span></div>
+              <div><span class="k">Max LOA</span><span class="v">12 m</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Sprawdź szczegóły</button>
+          </article>
+
+          <article class="card marina">
+            <div class="card-top">
+              <h3>Marina Split</h3>
+              <p class="muted">Wolne miejsca: 4 • Od: 35 EUR/doba</p>
+            </div>
+            <div class="kv">
+              <div><span class="k">Woda</span><span class="v">Tak</span></div>
+              <div><span class="k">Prąd</span><span class="v">Tak</span></div>
+              <div><span class="k">Serwis</span><span class="v">Tak</span></div>
+              <div><span class="k">Max LOA</span><span class="v">25 m</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Sprawdź szczegóły</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Kursy i szkolenia -->
+    <section id="kursy" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kursy i szkolenia</h2>
+          <p>Żeglarskie, motorowodne, nawigacyjne — od startu do zaawansowanych manewrów.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Kurs: Patent żeglarza (teoria)</h3>
+              <p>Kompletny kurs teoretyczny + testy.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">online</span>
+              <span class="badge">30 lekcji</span>
+              <span class="badge">certyfikat</span>
+            </div>
+            <button class="btn primary full" type="button">Zobacz program</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Szkolenie: Manewry portowe</h3>
+              <p>Ćwiczenia na wodzie + checklista manewrów.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">weekend</span>
+              <span class="badge">Gdynia / Mazury</span>
+              <span class="badge">praktyka</span>
+            </div>
+            <button class="btn primary full" type="button">Zarezerwuj miejsce</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Nawigacja: podstawy + GPS</h3>
+              <p>Planowanie trasy, oznaczenia, bezpieczeństwo nawigacji.</p>
+            </div>
+            <div class="meta">
+              <span class="badge">online</span>
+              <span class="badge">12 lekcji</span>
+              <span class="badge">case studies</span>
+            </div>
+            <button class="btn primary full" type="button">Zobacz program</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Artykuły i poradniki -->
+    <section id="artykuly" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Artykuły i poradniki</h2>
+          <p>Lista artykułów + sekcja treści (demo). W realu: osobne podstrony.</p>
+        </div>
+
+        <div class="two-col">
+          <aside class="card">
+            <h3>Lista artykułów</h3>
+            <ul class="link-list">
+              <li><a href="#art-1">Jak dobrać kamizelkę ratunkową?</a></li>
+              <li><a href="#art-2">Zwrot przez sztag: krok po kroku</a></li>
+              <li><a href="#art-3">Znaki nawigacyjne: mini-ściąga</a></li>
+              <li><a href="#art-4">Kotwiczenie bez stresu</a></li>
+            </ul>
+            <p class="muted small">Tip: na GitHub Pages łatwo zrobisz bloga z folderem <code>/posts</code>.</p>
+          </aside>
+
+          <article class="card article">
+            <h3 id="art-1">Jak dobrać kamizelkę ratunkową?</h3>
+            <p class="muted small">Kategoria: bezpieczeństwo • Czas czytania: ~6 min</p>
+            <p>
+              Kamizelka to najprostszy „life saver” na wodzie. Dobieraj ją do warunków, typu pływania i wagi użytkownika.
+              Zwróć uwagę na wyporność (N), dopasowanie, stan naboju (w automatach) i wygodę w pracy na pokładzie.
+            </p>
+
+            <h4 id="art-2">Zwrot przez sztag: krok po kroku</h4>
+            <p>
+              Zapowiedź, obserwacja wiatru, praca fokiem, płynne przejście przez linię wiatru i ustabilizowanie trymu.
+              Ćwicz na spokojnej wodzie, aż ruchy załogi staną się automatyczne.
+            </p>
+
+            <h4 id="art-3">Znaki nawigacyjne: mini-ściąga</h4>
+            <p>
+              Czerwone i zielone pławy, kardynalne, znaki specjalne. Zanim wypłyniesz — sprawdź mapę, pilot book i komunikaty.
+            </p>
+
+            <h4 id="art-4">Kotwiczenie bez stresu</h4>
+            <p>
+              Sprawdź dno, głębokość, zasięg koła cyrkulacji i długość liny/łańcucha (zapas!). Po rzuceniu kotwicy: cofka,
+              kontrola trzymania, obserwacja punktów na brzegu.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Pogoda -->
+    <section id="pogoda" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pogoda i warunki na wodzie</h2>
+          <p>Wiatr, fale, ostrzeżenia — w wersji demo. Integrację z API dodamy w JS.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card weather">
+            <div class="card-top">
+              <h3>Bałtyk (Gdynia)</h3>
+              <p class="muted">Aktualizacja: dziś 12:00</p>
+            </div>
+            <div class="weather-grid">
+              <div class="w-item"><span class="k">Wiatr</span><span class="v">5–7 m/s</span></div>
+              <div class="w-item"><span class="k">Porywy</span><span class="v">10 m/s</span></div>
+              <div class="w-item"><span class="k">Fale</span><span class="v">0.7 m</span></div>
+              <div class="w-item"><span class="k">Ostrzeżenia</span><span class="v warn">brak</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Zobacz prognozę</button>
+          </article>
+
+          <article class="card weather">
+            <div class="card-top">
+              <h3>Mazury (Giżycko)</h3>
+              <p class="muted">Aktualizacja: dziś 12:00</p>
+            </div>
+            <div class="weather-grid">
+              <div class="w-item"><span class="k">Wiatr</span><span class="v">3–5 m/s</span></div>
+              <div class="w-item"><span class="k">Porywy</span><span class="v">7 m/s</span></div>
+              <div class="w-item"><span class="k">Fale</span><span class="v">0.2 m</span></div>
+              <div class="w-item"><span class="k">Ostrzeżenia</span><span class="v warn">burze po 18:00</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Zobacz prognozę</button>
+          </article>
+
+          <article class="card weather">
+            <div class="card-top">
+              <h3>Adriatyk (Split)</h3>
+              <p class="muted">Aktualizacja: dziś 12:00</p>
+            </div>
+            <div class="weather-grid">
+              <div class="w-item"><span class="k">Wiatr</span><span class="v">6–9 m/s</span></div>
+              <div class="w-item"><span class="k">Porywy</span><span class="v">12 m/s</span></div>
+              <div class="w-item"><span class="k">Fale</span><span class="v">1.1 m</span></div>
+              <div class="w-item"><span class="k">Ostrzeżenia</span><span class="v warn">bora</span></div>
+            </div>
+            <button class="btn ghost full" type="button">Zobacz prognozę</button>
+          </article>
+        </div>
+
+        <div class="notice">
+          <strong>Chcesz pełną pogodę?</strong> Poproś o <code>script.js</code> — podepnę darmowe API (np. Open-Meteo) + ostrzeżenia.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Społeczność -->
+    <section id="spolecznosc" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Społeczność</h2>
+          <p>Forum, ogłoszenia, grupy rejsowe — prosta struktura w kartach.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Forum</h3>
+              <p>Wątki: sprzęt, manewry, patenty, bezpieczeństwo.</p>
+            </div>
+            <ul class="list">
+              <li>Najpopularniejsze tematy tygodnia</li>
+              <li>Pytania początkujących</li>
+              <li>Checklista rejsowa</li>
+            </ul>
+            <button class="btn ghost full" type="button">Przeglądaj</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Ogłoszenia</h3>
+              <p>Kup/sprzedaj, szukam załogi, rejsy i szkolenia.</p>
+            </div>
+            <ul class="list">
+              <li>Dodaj ogłoszenie (demo)</li>
+              <li>Filtry kategorii</li>
+              <li>Kontakt do ogłoszeniodawcy</li>
+            </ul>
+            <button class="btn ghost full" type="button">Zobacz ogłoszenia</button>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Grupy rejsowe</h3>
+              <p>Stwórz ekipę na rejs, szkolenie lub regaty.</p>
+            </div>
+            <ul class="list">
+              <li>Szukanie wg regionu</li>
+              <li>Poziom zaawansowania</li>
+              <li>Chat (w przyszłości)</li>
+            </ul>
+            <button class="btn primary full" type="button">Dołącz</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Kontakt i FAQ -->
+    <section id="kontakt" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kontakt i FAQ</h2>
+          <p>Masz pytanie? Napisz. Poniżej szybkie odpowiedzi.</p>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <h3>Kontakt</h3>
+            <form class="contact-form" action="#" method="post">
+              <label class="field">
+                <span>Imię</span>
+                <input type="text" name="name" placeholder="np. Ola" required />
+              </label>
+
+              <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" placeholder="np. ola@mail.com" required />
+              </label>
+
+              <label class="field">
+                <span>Wiadomość</span>
+                <textarea name="message" rows="5" placeholder="Opisz, w czym pomóc…" required></textarea>
+              </label>
+
+              <button class="btn primary full" type="submit">Wyślij (demo)</button>
+              <p class="form-note">GitHub Pages: formularz możesz podpiąć np. przez Formspree / Netlify Forms.</p>
+            </form>
+          </article>
+
+          <article class="card">
+            <h3>FAQ</h3>
+
+            <details class="faq" open>
+              <summary>Jak zacząć naukę żeglarstwa?</summary>
+              <p>Zacznij od modułu ABC, potem zrób quizy, a na końcu wybierz kurs lub wolną koję na rejs szkoleniowy.</p>
+            </details>
+
+            <details class="faq">
+              <summary>Czy testy są zgodne z patentem?</summary>
+              <p>To demo struktury. Docelowo pytania będą ułożone według działów: przepisy, meteorologia, manewry, locja.</p>
+            </details>
+
+            <details class="faq">
+              <summary>Czy giełda obsługuje filtry?</summary>
+              <p>Tak, w wersji statycznej pokazujemy UI. Jeśli chcesz, dodam <code>script.js</code> z filtrowaniem bez backendu.</p>
+            </details>
+
+            <details class="faq">
+              <summary>Czy można dodać mapę marin?</summary>
+              <p>Tak — na GitHub Pages da się osadzić mapy (np. Leaflet) i trzymać dane marin w pliku JSON.</p>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>sailABC</strong>
+        <p class="muted small">Portal żeglarski — wersja statyczna (GitHub Pages).</p>
+      </div>
+      <div class="footer-links">
+        <a href="#abc">ABC</a>
+        <a href="#quizy">Testy</a>
+        <a href="#jachty">Jachty</a>
+        <a href="#mariny">Mariny</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="muted small">© <span id="year"></span> sailABC</div>
+    </div>
+  </footer>
+
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Dropdown "Więcej" — minimalistycznie i bez bibliotek
-    const btn = document.querySelector('.dropbtn');
-    const menu = document.querySelector('#moreMenu');
-
-    function setOpen(open){
+    // Minimalny JS inline: menu mobile + rok (bez osobnego script.js)
+    const btn = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#siteNav');
+    btn?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(open));
-      menu.classList.toggle('open', open);
-    }
-
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      setOpen(!open);
     });
 
-    document.addEventListener('click', (e) => {
-      const inDrop = e.target.closest('.dropdown');
-      if (!inDrop) setOpen(false);
+    document.querySelectorAll('.site-nav a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        btn?.setAttribute('aria-expanded', 'false');
+      });
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') setOpen(false);
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Demo buttons
+    document.querySelectorAll('[data-demo="quiz"]').forEach(b => {
+      b.addEventListener('click', () => alert('Demo: tu podepniemy quiz w script.js (pytania + punktacja).'));
     });
   </script>
 </body>
