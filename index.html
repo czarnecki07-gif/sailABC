@@ -3,153 +3,113 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="sailabc.com – portal żeglarski: ABC, giełdy, mariny, kursy, pogoda i społeczność." />
-  <title>sailabc.com — sailABC</title>
+  <meta name="description" content="sailABC – portal żeglarski." />
+  <title>sailABC — sailabc.com</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Przejdź do treści</a>
 
-  <!-- TOP NAV: wszystkie podstrony w jednym rzędzie -->
-  <header class="topbar" id="top">
-    <div class="container topbar-inner">
+  <header class="header">
+    <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="sailABC — strona główna">
-        <img class="brand-logo" src="logo.png" alt="sailABC" />
+        <img src="logo.png" alt="sailABC" class="brand-logo" />
         <span class="brand-name">sailABC</span>
       </a>
 
       <nav class="nav" aria-label="Nawigacja">
         <a href="abc.html">ABC</a>
-        <a href="quizy.html">Quizy</a>
-        <a href="gielda-jachtow.html">Jachty</a>
-        <a href="osprzet.html">Osprzęt</a>
-        <a href="wolna-koja.html">Wolna koja</a>
-        <a href="mariny.html">Mariny</a>
-        <a href="kursy.html">Kursy</a>
-        <a href="artykuly.html">Poradniki</a>
         <a href="pogoda.html">Pogoda</a>
-        <a href="spolecznosc.html">Społeczność</a>
-        <a href="oprogramowanie.html">Oprogramowanie</a>
-        <a class="nav-cta" href="kontakt.html">Kontakt</a>
+        <a href="kursy.html">Kursy</a>
+        <a href="gielda-jachtow.html">Jachty</a>
+        <a href="wolna-koja.html">Wolna koja</a>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" aria-expanded="false" aria-controls="moreMenu">
+            Więcej
+          </button>
+          <div id="moreMenu" class="menu" role="menu">
+            <a role="menuitem" href="quizy.html">Quizy</a>
+            <a role="menuitem" href="osprzet.html">Osprzęt</a>
+            <a role="menuitem" href="mariny.html">Mariny</a>
+            <a role="menuitem" href="artykuly.html">Poradniki</a>
+            <a role="menuitem" href="spolecznosc.html">Społeczność</a>
+            <a role="menuitem" href="oprogramowanie.html">Oprogramowanie</a>
+            <a role="menuitem" href="kontakt.html">Kontakt</a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- Minimalistyczny HERO (bez marketingowego akapitu) -->
     <section class="hero">
       <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1>Portal żeglarski sailABC</h1>
-          <p class="lead">
-            ABC żeglarstwa • giełdy • wolne koje • mariny • kursy • poradniki • pogoda • społeczność
-          </p>
+        <h1>Portal żeglarski sailABC</h1>
+        <p class="lead">Prosto. Czytelnie. Wszystkie działy w górnym menu.</p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="abc.html">Zacznij od ABC</a>
-            <a class="btn" href="pogoda.html">Pogoda i lokalizacja</a>
-            <a class="btn" href="quizy.html">Quizy</a>
-          </div>
-
-          <div class="quick">
-            <a class="quick-link" href="gielda-jachtow.html">Giełda jachtów →</a>
-            <a class="quick-link" href="wolna-koja.html">Wolna koja →</a>
-            <a class="quick-link" href="mariny.html">Wolne miejsca w marinach →</a>
-            <a class="quick-link" href="oprogramowanie.html">Oprogramowanie →</a>
-          </div>
+        <div class="actions">
+          <a class="btn primary" href="abc.html">Start: ABC</a>
+          <a class="btn" href="pogoda.html">Pogoda</a>
+          <a class="btn" href="gielda-jachtow.html">Giełda jachtów</a>
         </div>
-
-        <aside class="hero-panel" aria-label="Podgląd">
-          <div class="panel">
-            <div class="panel-head">
-              <h2>Podgląd na dziś</h2>
-              <p class="muted">Przykładowe dane (statycznie)</p>
-            </div>
-
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-k">Wiatr</span>
-                <span class="stat-v">12–16 kn</span>
-                <span class="stat-s">NW • porywy</span>
-              </div>
-              <div class="stat">
-                <span class="stat-k">Fale</span>
-                <span class="stat-v">0.8 m</span>
-                <span class="stat-s">krótka fala</span>
-              </div>
-              <div class="stat">
-                <span class="stat-k">Mariny</span>
-                <span class="stat-v">4</span>
-                <span class="stat-s">z wolnymi miejscami</span>
-              </div>
-              <div class="stat">
-                <span class="stat-k">Koje</span>
-                <span class="stat-v">27</span>
-                <span class="stat-s">w tym tygodniu</span>
-              </div>
-            </div>
-
-            <div class="panel-actions">
-              <a class="btn btn-primary btn-sm" href="pogoda.html">Sprawdź pogodę</a>
-              <a class="btn btn-sm" href="kontakt.html">Zadaj pytanie</a>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <!-- Minimalne sekcje (bez dublowania podstron kartami) -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Co znajdziesz na sailABC</h2>
-          <p class="muted">Przejdź górnym menu do wybranego działu.</p>
+    <section class="container section">
+      <div class="mini">
+        <div class="mini-item">
+          <span class="k">Skrót</span>
+          <a class="v" href="wolna-koja.html">Wolna koja</a>
+          <span class="s">oferty rejsów</span>
         </div>
-
-        <div class="feature-list">
-          <div class="feature">
-            <h3>ABC żeglarstwa</h3>
-            <p>Bezpieczeństwo, nawigacja, żagle, manewry, węzły.</p>
-          </div>
-          <div class="feature">
-            <h3>Giełdy</h3>
-            <p>Jachty i osprzęt z filtrami i czytelnymi ofertami.</p>
-          </div>
-          <div class="feature">
-            <h3>Rejsy i mariny</h3>
-            <p>Wolna koja oraz wolne miejsca w marinach.</p>
-          </div>
-          <div class="feature">
-            <h3>Pogoda</h3>
-            <p>Widok przygotowany pod lokalizację i dane wiatru/fal/ostrzeżeń.</p>
-          </div>
-          <div class="feature">
-            <h3>Społeczność</h3>
-            <p>Forum, ogłoszenia, grupy rejsowe.</p>
-          </div>
-          <div class="feature">
-            <h3>Oprogramowanie</h3>
-            <p>Nawigacja, logbook, AIS, mapy offline — narzędzia dla żeglarzy.</p>
-          </div>
+        <div class="mini-item">
+          <span class="k">Skrót</span>
+          <a class="v" href="mariny.html">Mariny</a>
+          <span class="s">wolne miejsca</span>
+        </div>
+        <div class="mini-item">
+          <span class="k">Skrót</span>
+          <a class="v" href="oprogramowanie.html">Oprogramowanie</a>
+          <span class="s">narzędzia i aplikacje</span>
         </div>
       </div>
     </section>
 
     <footer class="footer">
       <div class="container footer-inner">
-        <div class="footer-left">
-          <strong>sailABC</strong>
-          <span class="muted">sailabc.com</span>
-        </div>
-        <div class="footer-right muted">
-          © <span id="year"></span>
-        </div>
+        <span class="foot-brand">sailABC</span>
+        <span class="muted">© <span id="year"></span> sailabc.com</span>
       </div>
     </footer>
   </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dropdown "Więcej" — minimalistycznie i bez bibliotek
+    const btn = document.querySelector('.dropbtn');
+    const menu = document.querySelector('#moreMenu');
+
+    function setOpen(open){
+      btn.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('open', open);
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+
+    document.addEventListener('click', (e) => {
+      const inDrop = e.target.closest('.dropdown');
+      if (!inDrop) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
   </script>
 </body>
 </html>
