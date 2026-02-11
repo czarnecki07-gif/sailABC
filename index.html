@@ -219,6 +219,66 @@
       </div>
     </section>
 
+    <!-- AGREGATOR OFERT (MAKIETA) -->
+<section class="section" id="agregator">
+  <div class="container">
+    <div class="section-head">
+      <h2>Agregator ofert: jachty, łodzie i osprzęt</h2>
+      <p class="muted">Makieta (frontend-only): wyszukiwarka, filtry i lista wyników. Pod API podłączymy później.</p>
+    </div>
+
+    <div class="agg-toolbar card">
+      <div class="filters agg-filters">
+        <div class="field">
+          <label for="agg-q">Szukaj</label>
+          <input id="agg-q" type="search" placeholder="np. Antila, silnik, kamizelka, kotwica, plotter…" />
+        </div>
+
+        <div class="field">
+          <label for="agg-type">Typ</label>
+          <select id="agg-type">
+            <option value="all">Wszystko</option>
+            <option value="boat">Jachty / łodzie</option>
+            <option value="gear">Osprzęt</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="agg-region">Region</label>
+          <select id="agg-region">
+            <option value="all">Dowolnie</option>
+            <option value="Mazury">Mazury</option>
+            <option value="Bałtyk">Bałtyk</option>
+            <option value="Zalew Szczeciński">Zalew Szczeciński</option>
+            <option value="Polska">Polska</option>
+            <option value="Europa">Europa</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="agg-sort">Sortuj</label>
+          <select id="agg-sort">
+            <option value="new">Najnowsze</option>
+            <option value="priceAsc">Cena rosnąco</option>
+            <option value="priceDesc">Cena malejąco</option>
+          </select>
+        </div>
+
+        <button class="btn btn-ghost btn-align" id="agg-reset" type="button">Reset</button>
+      </div>
+
+      <div class="agg-stats">
+        <span class="pill" id="agg-count">0 ofert</span>
+        <span class="pill">Źródła: demo</span>
+        <span class="pill">API: w przygotowaniu</span>
+      </div>
+    </div>
+
+    <div class="listing-grid agg-grid" id="agg-list"></div>
+  </div>
+</section>
+
+
     <!-- 1. ABC Żeglarstwa -->
     <section class="section" id="abc">
       <div class="container">
