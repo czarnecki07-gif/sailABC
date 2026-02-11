@@ -61,9 +61,9 @@ btnSearchPlace.addEventListener("click", async () => {
 
   try {
     const g = await geocodePlace(q);
+    const zoom = Number.isFinite(g.suggested_zoom) ? g.suggested_zoom : 12;
 
-    // ustaw mapę i marker
-    map.setView([g.lat, g.lon], Math.max(10, g.suggested_zoom ?? 10));
+    map.setView([g.lat, g.lon], Math.max(10, zoom));
     setPicked(g.lat, g.lon, g.display_name);
 
     weatherNote.innerHTML = `<strong>OK:</strong> znaleziono miejsce.`;
