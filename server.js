@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(__dirname, { extensions: ["html"] }));
 
 function msToBeaufort(ms) {
+  // Progi (m/s) Beaufort 0–12
   const limits = [0.5, 1.6, 3.4, 5.5, 8.0, 10.8, 13.9, 17.2, 20.8, 24.5, 28.5, 32.7];
   let b = 0;
   while (b < limits.length && ms >= limits[b]) b++;
@@ -24,15 +25,15 @@ function degToCompass(deg) {
 }
 
 /**
- * Geocode via Nominatim (OpenStreetMap).
- * Własny endpoint (żeby ominąć CORS na front i trzymać 1 origin).
+ * Geocode (Nominatim / OpenStreetMap) — przez backend:
+ * - omija CORS
+ * - trzymasz jeden origin (Twoja domena)
  */
 app.get("/api/geocode", async (req, res) => {
   try {
     const q = String(req.query.q || "").trim();
     if (!q) return res.status(400).json({ error: "Brak parametru q." });
 
-    // Nominatim wymaga sensownego User-Agent; ustawiamy go w fetch przez headers.
     const url = new URL("https://nominatim.openstreetmap.org/search");
     url.searchParams.set("q", q);
     url.searchParams.set("format", "json");
@@ -41,6 +42,7 @@ app.get("/api/geocode", async (req, res) => {
 
     const r = await fetch(url.toString(), {
       headers: {
+        // W praktyce wpisz tu kontakt do siebie (wymóg Nominatim).
         "User-Agent": "sailABC-weather/1.0 (contact: kontakt@sailabc.com)"
       }
     });
@@ -55,6 +57,10 @@ app.get("/api/geocode", async (req, res) => {
     const item = arr[0];
     const lat = Number(item.lat);
     const lon = Number(item.lon);
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+      return res.status(502).json({ error: "Geokodowanie zwróciło nieprawidłowe współrzędne." });
+    }
 
     return res.json({
       display_name: item.display_name,
@@ -76,7 +82,7 @@ app.get("/api/weather", async (req, res) => {
       return res.status(400).json({ error: "Nieprawidłowe lat/lon." });
     }
 
-    // Open-Meteo (bez klucza) — current weather
+    // Open-Meteo (bez klucza) — aktualne warunki
     const url = new URL("https://api.open-meteo.com/v1/forecast");
     url.searchParams.set("latitude", String(lat));
     url.searchParams.set("longitude", String(lon));
