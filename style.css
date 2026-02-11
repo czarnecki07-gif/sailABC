@@ -753,3 +753,60 @@ textarea{ resize: vertical; min-height: 120px; }
 @media (max-width: 420px){
   .weather-map{ height: 340px; }
 }
+/* =========================
+   Agregator ofert (makieta)
+   ========================= */
+
+.agg-toolbar{
+  padding: 16px;
+}
+
+.agg-filters{
+  margin-bottom: 12px;
+}
+
+.agg-stats{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.agg-grid{
+  margin-top: 14px;
+}
+
+.agg-card{
+  padding: 0;
+  overflow: hidden;
+}
+
+.agg-thumb{
+  height: 150px;
+  background:
+    radial-gradient(700px 220px at 30% 0%, rgba(25,196,198,0.22), transparent 60%),
+    radial-gradient(700px 220px at 70% 0%, rgba(37,99,235,0.18), transparent 60%),
+    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.10));
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.agg-body{
+  padding: 16px;
+}
+
+.agg-meta{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0 10px;
+}
+
+.agg-source{
+  color: var(--muted2);
+  font-size: 12px;
+}
+
+@media (min-width: 720px){
+  .agg-toolbar .filters{
+    grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr auto;
+  }
+}
