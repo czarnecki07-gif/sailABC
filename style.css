@@ -568,7 +568,7 @@ input:focus, select:focus, textarea:focus{
 }
 .tags{ display:flex; flex-wrap: wrap; gap: 8px; }
 
-/* Weather */
+/* Weather (stare elementy UI, zostawiamy) */
 .metric{
   display:flex;
   flex-direction: column;
@@ -696,4 +696,60 @@ textarea{ resize: vertical; min-height: 120px; }
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
   html{ scroll-behavior: auto; }
+}
+
+/* =========================================================
+   Weather map + search (NOWE)
+   ========================================================= */
+
+.weather-search{
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.weather-search-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.weather-map{
+  height: 420px;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.14);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+}
+
+/* Leaflet controls dopasowane kolorystycznie */
+.leaflet-control-zoom a{
+  background: rgba(0,0,0,0.55) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+}
+.leaflet-control-zoom a:hover{
+  background: rgba(25,196,198,0.18) !important;
+  border-color: rgba(25,196,198,0.35) !important;
+}
+
+/* surowy JSON */
+.weather-raw{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.10);
+  overflow: auto;
+  max-height: 340px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.86);
+}
+
+/* na telefonie trochę niższa mapa */
+@media (max-width: 420px){
+  .weather-map{ height: 340px; }
 }
