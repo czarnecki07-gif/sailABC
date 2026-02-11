@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="sailabc.com – portal żeglarski: ABC, aplikacje, giełda jachtów i osprzętu, wolna koja, mariny, kursy, poradniki, pogoda i społeczność." />
 
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -182,7 +185,7 @@
           <a class="card card-link" href="#pogoda">
             <div class="card-icon">🌬️</div>
             <h3>Pogoda na wodzie</h3>
-            <p>Wiatr, fale, ostrzeżenia — szybki podgląd.</p>
+            <p>Mapa + wpisanie miejsca + Beaufort.</p>
             <span class="card-cta">Zobacz →</span>
           </a>
 
@@ -773,47 +776,56 @@
       </div>
     </section>
 
-    <!-- 9. Pogoda -->
+    <!-- 9. Pogoda (NOWA: mapa + wpisanie miejsca) -->
     <section class="section" id="pogoda">
       <div class="container">
         <div class="section-head">
           <h2>Pogoda i warunki na wodzie</h2>
-          <p class="muted">Wiatr, fale, ostrzeżenia — UI pod przyszłe API.</p>
+          <p class="muted">Wpisz miejsce albo kliknij na mapie, a potem sprawdź warunki (wiatr w Beauforcie, kierunek, temperatura).</p>
         </div>
 
-        <div class="cards-grid cards-3">
+        <div class="cards-grid cards-2">
           <article class="card">
-            <h3>Wiatr</h3>
-            <div class="metric">
-              <span class="metric-value">12–16 kn</span>
-              <span class="metric-sub">NW • porywy do 22 kn</span>
+            <h3>Wybierz miejsce</h3>
+
+            <div class="weather-search">
+              <div class="field" style="margin:0;">
+                <label for="place">Miejsce</label>
+                <input id="place" type="text" placeholder="np. Zalew Szczeciński / Szczecin / Hel / Giżycko" />
+              </div>
+
+              <div class="weather-search-actions">
+                <button class="btn btn-ghost" id="btnSearchPlace" type="button">Szukaj na mapie</button>
+                <button class="btn btn-primary" id="btnCheckWeather" type="button" disabled>Sprawdź pogodę</button>
+              </div>
+
+              <div class="muted small" id="pickedInfo">Kliknij na mapie albo wyszukaj miejsce.</div>
             </div>
-            <div class="meter" aria-label="Siła wiatru">
-              <span style="width: 62%"></span>
+
+            <div id="weatherMap" class="weather-map" aria-label="Mapa pogody"></div>
+
+            <div class="note" id="weatherNote" style="margin-top:12px;">
+              <strong>Tip:</strong> kliknij na mapie lub wyszukaj miejscowość/akwen.
             </div>
-            <p class="muted">Zalecenie: rozważ ref przy porywach.</p>
           </article>
 
           <article class="card">
-            <h3>Fale</h3>
-            <div class="metric">
-              <span class="metric-value">0.6–0.9 m</span>
-              <span class="metric-sub">krótka fala • 5–6 s</span>
-            </div>
-            <div class="meter" aria-label="Wysokość fali">
-              <span style="width: 44%"></span>
-            </div>
-            <p class="muted">Uwaga na grzywacze w szkwałach.</p>
-          </article>
+            <h3>Aktualne warunki</h3>
 
-          <article class="card alert-card">
-            <h3>Ostrzeżenia</h3>
-            <ul class="list compact">
-              <li><span class="dot dot-warn" aria-hidden="true"></span> Możliwe burze po 16:00</li>
-              <li><span class="dot dot-warn" aria-hidden="true"></span> Silniejsze porywy w pasie przybrzeżnym</li>
-              <li><span class="dot dot-ok" aria-hidden="true"></span> Widzialność dobra</li>
-            </ul>
-            <a class="btn btn-small btn-ghost" href="#kontakt">Jak interpretować ostrzeżenia?</a>
+            <div class="panel-grid" style="margin-top:8px;">
+              <div class="kpi">
+                <span class="kpi-label">Wiatr</span>
+                <span class="kpi-value" id="wWind">—</span>
+                <span class="kpi-sub" id="wWindSub">—</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Temperatura</span>
+                <span class="kpi-value" id="wTemp">—</span>
+                <span class="kpi-sub" id="wTime">—</span>
+              </div>
+            </div>
+
+            <pre class="weather-raw" id="wRaw" aria-label="Surowe dane">—</pre>
           </article>
         </div>
       </div>
@@ -932,7 +944,7 @@
 
             <details class="faq">
               <summary>Skąd pochodzą dane pogodowe?</summary>
-              <p>To placeholder. Docelowo sekcja może korzystać z publicznego API meteo i ostrzeżeń.</p>
+              <p>Ta sekcja korzysta z backendu (API meteo + geokodowanie). W tej wersji pobieramy warunki „current”.</p>
             </details>
 
             <details class="faq">
@@ -994,5 +1006,9 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <!-- Leaflet + pogoda -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="weather.js"></script>
 </body>
 </html>
