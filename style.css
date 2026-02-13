@@ -810,3 +810,29 @@ textarea{ resize: vertical; min-height: 120px; }
     grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr auto;
   }
 }
+.weather-map{
+  height: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  margin-top: 12px;
+}
+
+.weather-hero-actions,
+.weather-search-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.weather-raw{
+  margin: 12px 0 0;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.14);
+  color: rgba(255,255,255,0.85);
+  overflow:auto;
+  min-height: 120px;
+}
