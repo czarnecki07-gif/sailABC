@@ -74,47 +74,60 @@
           </div>
         </div>
 
-        <aside class="hero-panel" aria-label="Szybkie informacje">
-          <div class="panel-card">
-            <div class="panel-top">
-              <h2>Panel na dziś</h2>
-              <p class="muted">Dane przykładowe (frontend-only)</p>
-            </div>
+       <aside class="hero-panel" aria-label="Pogoda na teraz">
+  <div class="panel-card">
+    <div class="panel-top">
+      <h2>Pogoda na teraz</h2>
+      <p class="muted">Wpisz miejsce lub wybierz punkt na mapie (sekcja „Pogoda”).</p>
+    </div>
 
-            <div class="panel-grid">
-              <div class="kpi">
-                <span class="kpi-label">Wiatr</span>
-                <span class="kpi-value">12–16 kn</span>
-                <span class="kpi-sub">NW • porywy</span>
-              </div>
-              <div class="kpi">
-                <span class="kpi-label">Fale</span>
-                <span class="kpi-value">0.8 m</span>
-                <span class="kpi-sub">krótka fala</span>
-              </div>
-              <div class="kpi">
-                <span class="kpi-label">Oferty</span>
-                <span class="kpi-value">143</span>
-                <span class="kpi-sub">aktywnych</span>
-              </div>
-              <div class="kpi">
-                <span class="kpi-label">Wolne koje</span>
-                <span class="kpi-value">27</span>
-                <span class="kpi-sub">w tym tyg.</span>
-              </div>
-            </div>
+    <div class="weather-hero">
+      <div class="field" style="margin:0;">
+        <label for="heroPlace">Miejsce</label>
+        <input id="heroPlace" type="text" placeholder="np. Zalew Szczeciński / Hel / Giżycko" />
+      </div>
 
-            <div class="panel-actions">
-              <a class="btn btn-small btn-primary" href="#pogoda">Sprawdź pogodę</a>
-              <a class="btn btn-small btn-ghost" href="#spolecznosc">Społeczność</a>
-            </div>
+      <div class="weather-hero-actions">
+        <button class="btn btn-ghost btn-small" id="heroSearch" type="button">Szukaj</button>
+        <button class="btn btn-primary btn-small" id="heroCheck" type="button" disabled>Sprawdź</button>
+        <a class="btn btn-ghost btn-small" href="#pogoda">Mapa</a>
+      </div>
 
-            <div class="note">
-              <strong>Tip:</strong> W GitHub Pages możesz dodać dane jako JSON w repo
-              i czytać je fetch() w JS (bez backendu).
-            </div>
-          </div>
-        </aside>
+      <div class="panel-grid" style="margin-top:12px;">
+        <div class="kpi">
+          <span class="kpi-label">Wiatr</span>
+          <span class="kpi-value" id="heroWind">—</span>
+          <span class="kpi-sub" id="heroWindSub">—</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Temperatura</span>
+          <span class="kpi-value" id="heroTemp">—</span>
+          <span class="kpi-sub" id="heroTime">—</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Fala</span>
+          <span class="kpi-value" id="heroWave">—</span>
+          <span class="kpi-sub" id="heroWaveSub">—</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Skrót</span>
+          <span class="kpi-value">Mapa</span>
+          <span class="kpi-sub">kliknij punkt</span>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <a class="btn btn-small btn-primary" href="#pogoda">Otwórz mapę</a>
+        <a class="btn btn-small btn-ghost" href="#agregator">Agregator</a>
+      </div>
+
+      <div class="note">
+        <strong>Jak to działa:</strong> wpisz miejsce lub kliknij na mapie → „Sprawdź” → dostajesz realne dane.
+      </div>
+    </div>
+  </div>
+</aside>
+
       </div>
     </section>
 
