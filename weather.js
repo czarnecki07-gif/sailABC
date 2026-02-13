@@ -1,113 +1,165 @@
-// weather.js — mapa + wyszukiwanie miejsca + pobranie pogody z backendu
+// weather.js — Leaflet + wyszukiwanie miejsca + pobieranie realnych danych z /api/*
+// Wymaga backendu: /api/geocode i /api/weather (np. Cloudflare Worker)
+
+let map;
+let marker = null;
+let picked = null; // { lat, lon, label }
 
 const elPlace = document.getElementById("place");
-const btnSearchPlace = document.getElementById("btnSearchPlace");
-const btnCheckWeather = document.getElementById("btnCheckWeather");
-const pickedInfo = document.getElementById("pickedInfo");
-const weatherNote = document.getElementById("weatherNote");
+const elBtnSearchPlace = document.getElementById("btnSearchPlace");
+const elBtnCheckWeather = document.getElementById("btnCheckWeather");
+const elPickedInfo = document.getElementById("pickedInfo");
 
-const wWind = document.getElementById("wWind");
-const wWindSub = document.getElementById("wWindSub");
-const wTemp = document.getElementById("wTemp");
-const wTime = document.getElementById("wTime");
-const wRaw = document.getElementById("wRaw");
+const elWWind = document.getElementById("wWind");
+const elWWindSub = document.getElementById("wWindSub");
+const elWTemp = document.getElementById("wTemp");
+const elWTime = document.getElementById("wTime");
+const elWRaw = document.getElementById("wRaw");
 
-let picked = null;
-let marker = null;
+// HERO (panel na górze)
+const elHeroPlace = document.getElementById("heroPlace");
+const elHeroSearch = document.getElementById("heroSearch");
+const elHeroCheck = document.getElementById("heroCheck");
 
-// Start mapy: Zalew Szczeciński
-const map = L.map("weatherMap").setView([53.70, 14.60], 9);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap",
-}).addTo(map);
+const elHeroWind = document.getElementById("heroWind");
+const elHeroWindSub = document.getElementById("heroWindSub");
+const elHeroTemp = document.getElementById("heroTemp");
+const elHeroTime = document.getElementById("heroTime");
+const elHeroWave = document.getElementById("heroWave");
+const elHeroWaveSub = document.getElementById("heroWaveSub");
 
 function setPicked(lat, lon, label) {
-  picked = { lat, lon, label };
+  picked = { lat, lon, label: label || `${lat.toFixed(4)}, ${lon.toFixed(4)}` };
 
-  if (marker) marker.remove();
-  marker = L.marker([lat, lon]).addTo(map);
+  if (elBtnCheckWeather) elBtnCheckWeather.disabled = false;
+  if (elHeroCheck) elHeroCheck.disabled = false;
 
-  pickedInfo.textContent = label
-    ? `Wybrano: ${label} (lat ${lat.toFixed(5)}, lon ${lon.toFixed(5)})`
-    : `Wybrano: lat ${lat.toFixed(5)}, lon ${lon.toFixed(5)}`;
+  if (elPickedInfo) {
+    elPickedInfo.textContent = `Wybrane: ${picked.label} (${picked.lat.toFixed(4)}, ${picked.lon.toFixed(4)})`;
+  }
 
-  btnCheckWeather.disabled = false;
-  weatherNote.innerHTML = `<strong>Gotowe:</strong> kliknij „Sprawdź pogodę”.`;
+  if (map) {
+    if (!marker) marker = L.marker([lat, lon]).addTo(map);
+    marker.setLatLng([lat, lon]);
+    map.setView([lat, lon], Math.max(map.getZoom(), 10));
+  }
 }
 
-map.on("click", (e) => {
-  setPicked(e.latlng.lat, e.latlng.lng, "punkt z mapy");
-});
-
-async function geocodePlace(q) {
-  const url = `/api/geocode?q=${encodeURIComponent(q)}`;
-  const r = await fetch(url);
-  const data = await r.json();
-  if (!r.ok) throw new Error(data?.error || "Błąd geokodowania");
+async function apiGeocode(q) {
+  const r = await fetch(`/api/geocode?q=${encodeURIComponent(q)}`);
+  const data = await r.json().catch(() => null);
+  if (!r.ok || !data) throw new Error(data?.error || "Błąd geokodowania.");
   return data;
 }
 
-btnSearchPlace.addEventListener("click", async () => {
-  const q = (elPlace.value || "").trim();
-  if (!q) {
-    weatherNote.innerHTML = `<strong>Uwaga:</strong> wpisz nazwę miejsca.`;
-    return;
+async function apiWeather(lat, lon) {
+  const r = await fetch(`/api/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`);
+  const data = await r.json().catch(() => null);
+  if (!r.ok || !data) throw new Error(data?.error || "Błąd pobierania pogody.");
+  return data;
+}
+
+function renderWeather(data) {
+  const c = data.current;
+  const w = c.wind;
+  const m = c.marine;
+
+  // Sekcja pogoda
+  if (elWWind) elWWind.textContent = `${w.beaufort}°B`;
+  if (elWWindSub) {
+    elWWindSub.textContent = `${w.dir_compass} (${Math.round(w.dir_deg)}°) • ${w.speed_kn} kn • porywy ${w.gust_kn} kn`;
   }
+  if (elWTemp) elWTemp.textContent = `${Math.round(c.temperature_c)}°C`;
+  if (elWTime) elWTime.textContent = `czas: ${c.time_local}`;
+  if (elWRaw) elWRaw.textContent = JSON.stringify(data, null, 2);
 
-  btnSearchPlace.disabled = true;
-  btnSearchPlace.textContent = "Szukam…";
+  // HERO
+  if (elHeroWind) elHeroWind.textContent = `${w.beaufort}°B`;
+  if (elHeroWindSub) elHeroWindSub.textContent = `${w.dir_compass} • ${w.speed_kn} kn (porywy ${w.gust_kn} kn)`;
+  if (elHeroTemp) elHeroTemp.textContent = `${Math.round(c.temperature_c)}°C`;
+  if (elHeroTime) elHeroTime.textContent = c.time_local;
 
-  try {
-    const g = await geocodePlace(q);
-    const zoom = Number.isFinite(g.suggested_zoom) ? g.suggested_zoom : 12;
-
-    map.setView([g.lat, g.lon], Math.max(10, zoom));
-    setPicked(g.lat, g.lon, g.display_name);
-
-    weatherNote.innerHTML = `<strong>OK:</strong> znaleziono miejsce.`;
-  } catch (err) {
-    weatherNote.innerHTML = `<strong>Błąd:</strong> ${err.message}`;
-  } finally {
-    btnSearchPlace.disabled = false;
-    btnSearchPlace.textContent = "Szukaj na mapie";
+  // Fala (jeśli dostępna)
+  if (elHeroWave) {
+    elHeroWave.textContent = (m.wave_height_m == null) ? "—" : `${m.wave_height_m.toFixed(1)} m`;
   }
-});
-
-elPlace.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    btnSearchPlace.click();
+  if (elHeroWaveSub) {
+    if (m.wave_height_m == null) {
+      elHeroWaveSub.textContent = "fala: brak danych (punkt na lądzie)";
+    } else {
+      const dir = m.wave_dir_compass ?? "—";
+      const per = (m.wave_period_s == null) ? "—" : `${m.wave_period_s.toFixed(0)} s`;
+      elHeroWaveSub.textContent = `${dir} • okres ${per}`;
+    }
   }
-});
+}
 
-btnCheckWeather.addEventListener("click", async () => {
+async function searchAndPick(inputEl) {
+  const q = (inputEl?.value || "").trim();
+  if (!q) return;
+
+  const g = await apiGeocode(q);
+  setPicked(Number(g.lat), Number(g.lon), g.display_name);
+
+  // synchronizuj oba pola
+  if (elPlace && inputEl !== elPlace) elPlace.value = q;
+  if (elHeroPlace && inputEl !== elHeroPlace) elHeroPlace.value = q;
+}
+
+async function checkWeather() {
   if (!picked) return;
+  const data = await apiWeather(picked.lat, picked.lon);
+  renderWeather(data);
+}
 
-  btnCheckWeather.disabled = true;
-  btnCheckWeather.textContent = "Sprawdzam…";
+function initMap() {
+  const mapEl = document.getElementById("weatherMap");
+  if (!mapEl) return;
 
-  try {
-    const url = `/api/weather?lat=${encodeURIComponent(picked.lat)}&lon=${encodeURIComponent(picked.lon)}`;
-    const r = await fetch(url);
-    const data = await r.json();
-    if (!r.ok) throw new Error(data?.error || "Błąd API pogody");
+  map = L.map("weatherMap").setView([53.5, 16.2], 6);
 
-    const c = data.current;
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; OpenStreetMap',
+    maxZoom: 18
+  }).addTo(map);
 
-    wWind.textContent = `${c.wind_beaufort}°B`;
-    wWindSub.textContent = `${c.wind_ms} m/s • ${c.wind_dir_compass} (${c.wind_dir_deg}°)`;
+  map.on("click", (e) => {
+    const { lat, lng } = e.latlng;
+    setPicked(lat, lng, "Punkt na mapie");
+  });
+}
 
-    wTemp.textContent = `${c.temperature_c}°C`;
-    wTime.textContent = `czas: ${c.time_local}`;
+function bind() {
+  // Sekcja pogoda
+  elBtnSearchPlace?.addEventListener("click", async () => {
+    try { await searchAndPick(elPlace); } catch (e) { alert(e.message); }
+  });
+  elBtnCheckWeather?.addEventListener("click", async () => {
+    try { await checkWeather(); } catch (e) { alert(e.message); }
+  });
 
-    wRaw.textContent = JSON.stringify(data, null, 2);
-    weatherNote.innerHTML = `<strong>OK:</strong> dane pobrane.`;
-  } catch (err) {
-    weatherNote.innerHTML = `<strong>Błąd:</strong> ${err.message}`;
-  } finally {
-    btnCheckWeather.disabled = false;
-    btnCheckWeather.textContent = "Sprawdź pogodę";
-  }
-});
+  elPlace?.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      try { await searchAndPick(elPlace); } catch (err) { alert(err.message); }
+    }
+  });
+
+  // HERO
+  elHeroSearch?.addEventListener("click", async () => {
+    try { await searchAndPick(elHeroPlace); } catch (e) { alert(e.message); }
+  });
+  elHeroCheck?.addEventListener("click", async () => {
+    try { await checkWeather(); } catch (e) { alert(e.message); }
+  });
+
+  elHeroPlace?.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      try { await searchAndPick(elHeroPlace); } catch (err) { alert(err.message); }
+    }
+  });
+}
+
+initMap();
+bind();
