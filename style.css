@@ -871,3 +871,12 @@ textarea{ resize: vertical; min-height: 120px; }
 @media (min-width: 980px){
   .forecast-grid{ grid-template-columns: repeat(3, 1fr); }
 }
+.weather-cta{
+  text-align: center;
+}
+
+.weather-big-btn{
+  margin-top: 14px;
+  font-size: 18px;
+  padding: 16px 18px;
+}
