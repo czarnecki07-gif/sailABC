@@ -836,3 +836,38 @@ textarea{ resize: vertical; min-height: 120px; }
   overflow:auto;
   min-height: 120px;
 }
+.forecast-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.forecast-day{
+  background: rgba(0,0,0,0.14);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 12px;
+  display:grid;
+  gap: 6px;
+}
+.forecast-top{
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.forecast-date{ font-weight: 900; }
+.forecast-temp{ font-weight: 900; }
+.forecast-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: rgba(255,255,255,0.80);
+  font-size: 13px;
+}
+@media (min-width: 720px){
+  .forecast-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 980px){
+  .forecast-grid{ grid-template-columns: repeat(3, 1fr); }
+}
