@@ -1,13 +1,12 @@
-// weather.js — REALNA pogoda (Open-Meteo) + mapa Leaflet
-// Działa po: kliknięciu mapy lub wpisaniu miejsca + „Sprawdź”
-// Wpisany tekst ma zawsze pierwszeństwo nad kliknięciem na mapie.
-// Usunięte: okno z kodem JSON.
+// weather.js — REALNA pogoda (Open-Meteo) + mapa Leaflet + prognoza 7 dni
+// Działa po kliknięciu mapy lub wpisaniu miejsca + „Sprawdź”.
+// Wpisany tekst ma zawsze pierwszeństwo nad mapą.
 
 let map;
 let marker = null;
 let picked = null;
 
-// Sekcja pogody
+// Sekcja pogody (current)
 const elPlace = document.getElementById("place");
 const elBtnSearchPlace = document.getElementById("btnSearchPlace");
 const elBtnCheckWeather = document.getElementById("btnCheckWeather");
@@ -18,7 +17,11 @@ const elWWindSub = document.getElementById("wWindSub");
 const elWTemp = document.getElementById("wTemp");
 const elWTime = document.getElementById("wTime");
 
-// Panel górny (hero) — jeśli masz te elementy w HTML, zaktualizują się automatycznie
+// Prognoza 7 dni (daily)
+const elForecast7 = document.getElementById("forecast7");
+const elForecastMeta = document.getElementById("forecastMeta");
+
+// Panel górny (hero) — jeśli masz te elementy w HTML
 const elHeroPlace = document.getElementById("heroPlace");
 const elHeroSearch = document.getElementById("heroSearch");
 const elHeroCheck = document.getElementById("heroCheck");
@@ -55,6 +58,10 @@ function setPicked(lat, lon, label) {
     elPickedInfo.textContent = `Wybrane: ${picked.label} (${picked.lat.toFixed(4)}, ${picked.lon.toFixed(4)})`;
   }
 
+  if (elForecastMeta) {
+    elForecastMeta.textContent = `Prognoza dla: ${picked.label}`;
+  }
+
   if (map) {
     if (!marker) marker = L.marker([lat, lon]).addTo(map);
     marker.setLatLng([lat, lon]);
@@ -82,14 +89,30 @@ async function geocodePlace(q) {
 }
 
 async function fetchWeather(lat, lon) {
-  // Forecast (temperatura + wiatr + porywy + kierunek)
+  // current + daily jednym strzałem
   const forecast = new URL("https://api.open-meteo.com/v1/forecast");
   forecast.searchParams.set("latitude", String(lat));
   forecast.searchParams.set("longitude", String(lon));
   forecast.searchParams.set("timezone", "auto");
+
+  // CURRENT
   forecast.searchParams.set(
     "current",
-    "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m"
+    "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover"
+  );
+
+  // DAILY (7 dni)
+  forecast.searchParams.set(
+    "daily",
+    [
+      "temperature_2m_max",
+      "temperature_2m_min",
+      "wind_speed_10m_max",
+      "wind_gusts_10m_max",
+      "wind_direction_10m_dominant",
+      "precipitation_sum",
+      "cloud_cover_mean"
+    ].join(",")
   );
 
   // Marine (fala)
@@ -107,6 +130,7 @@ async function fetchWeather(lat, lon) {
   if (!rf.ok || !f || !f.current) throw new Error("Nie udało się pobrać pogody (Open-Meteo).");
 
   const c = f.current;
+  const d = f.daily || {};
   const mc = m?.current || {};
 
   // Open-Meteo: km/h -> m/s
@@ -118,46 +142,113 @@ async function fetchWeather(lat, lon) {
   const windDeg = Number(c.wind_direction_10m ?? 0);
 
   return {
-    time: c.time,
-    temp: c.temperature_2m,
-    windBf: beaufortFromMs(windMs),
-    windKn: Number(windKn.toFixed(1)),
-    gustKn: Number(gustKn.toFixed(1)),
-    windDir: degToCompass(windDeg),
-    windDeg: Math.round(((windDeg % 360) + 360) % 360),
-
-    waveH: (typeof mc.wave_height === "number") ? mc.wave_height : null,
-    waveDir: (typeof mc.wave_direction === "number") ? degToCompass(mc.wave_direction) : null,
-    waveP: (typeof mc.wave_period === "number") ? mc.wave_period : null
+    current: {
+      time: c.time,
+      temp: c.temperature_2m,
+      precip: c.precipitation,
+      cloud: c.cloud_cover,
+      windBf: beaufortFromMs(windMs),
+      windKn: Number(windKn.toFixed(1)),
+      gustKn: Number(gustKn.toFixed(1)),
+      windDir: degToCompass(windDeg),
+      windDeg: Math.round(((windDeg % 360) + 360) % 360),
+      waveH: (typeof mc.wave_height === "number") ? mc.wave_height : null,
+      waveDir: (typeof mc.wave_direction === "number") ? degToCompass(mc.wave_direction) : null,
+      waveP: (typeof mc.wave_period === "number") ? mc.wave_period : null
+    },
+    daily: {
+      time: d.time || [],
+      tmax: d.temperature_2m_max || [],
+      tmin: d.temperature_2m_min || [],
+      windMax: d.wind_speed_10m_max || [],       // km/h
+      gustMax: d.wind_gusts_10m_max || [],       // km/h
+      windDirDom: d.wind_direction_10m_dominant || [],
+      precipSum: d.precipitation_sum || [],     // mm
+      cloudMean: d.cloud_cover_mean || []       // %
+    }
   };
 }
 
-function renderWeather(w) {
-  // Sekcja #pogoda
-  if (elWWind) elWWind.textContent = `${w.windBf}°B`;
-  if (elWWindSub) {
-    elWWindSub.textContent = `${w.windDir} (${w.windDeg}°) • ${w.windKn} kn • porywy ${w.gustKn} kn`;
-  }
-  if (elWTemp) elWTemp.textContent = `${Math.round(w.temp)}°C`;
-  if (elWTime) elWTime.textContent = `czas: ${w.time}`;
+function renderCurrent(c) {
+  if (elWWind) elWWind.textContent = `${c.windBf}°B`;
+  if (elWWindSub) elWWindSub.textContent = `${c.windDir} (${c.windDeg}°) • ${c.windKn} kn • porywy ${c.gustKn} kn`;
+  if (elWTemp) elWTemp.textContent = `${Math.round(c.temp)}°C`;
+  if (elWTime) elWTime.textContent = `czas: ${c.time} • opad: ${c.precip ?? 0} mm • zachmurzenie: ${c.cloud ?? 0}%`;
 
   // HERO
-  if (elHeroWind) elHeroWind.textContent = `${w.windBf}°B`;
-  if (elHeroWindSub) elHeroWindSub.textContent = `${w.windDir} • ${w.windKn} kn (porywy ${w.gustKn} kn)`;
-  if (elHeroTemp) elHeroTemp.textContent = `${Math.round(w.temp)}°C`;
-  if (elHeroTime) elHeroTime.textContent = w.time;
+  if (elHeroWind) elHeroWind.textContent = `${c.windBf}°B`;
+  if (elHeroWindSub) elHeroWindSub.textContent = `${c.windDir} • ${c.windKn} kn (porywy ${c.gustKn} kn)`;
+  if (elHeroTemp) elHeroTemp.textContent = `${Math.round(c.temp)}°C`;
+  if (elHeroTime) elHeroTime.textContent = c.time;
 
-  if (elHeroWave) elHeroWave.textContent = (w.waveH == null) ? "—" : `${w.waveH.toFixed(1)} m`;
+  if (elHeroWave) elHeroWave.textContent = (c.waveH == null) ? "—" : `${c.waveH.toFixed(1)} m`;
   if (elHeroWaveSub) {
     elHeroWaveSub.textContent =
-      (w.waveH == null)
+      (c.waveH == null)
         ? "fala: brak danych (punkt na lądzie)"
-        : `${w.waveDir} • okres ${Math.round(w.waveP)} s`;
+        : `${c.waveDir} • okres ${Math.round(c.waveP)} s`;
   }
 }
 
+function formatDayLabel(isoDate) {
+  // isoDate = YYYY-MM-DD
+  const dt = new Date(isoDate + "T00:00:00");
+  const days = ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"];
+  const d = days[dt.getDay()];
+  const dd = String(dt.getDate()).padStart(2, "0");
+  const mm = String(dt.getMonth() + 1).padStart(2, "0");
+  return `${d} ${dd}.${mm}`;
+}
+
+function renderForecast(d) {
+  if (!elForecast7) return;
+
+  const n = Math.min(7, d.time.length);
+  if (!n) {
+    elForecast7.innerHTML = `<div class="muted">Brak danych prognozy.</div>`;
+    return;
+  }
+
+  const items = [];
+  for (let i = 0; i < n; i++) {
+    const label = formatDayLabel(d.time[i]);
+
+    const tmax = Math.round(d.tmax[i] ?? 0);
+    const tmin = Math.round(d.tmin[i] ?? 0);
+
+    // km/h -> kn
+    const windMaxKn = msToKn((d.windMax[i] ?? 0) / 3.6);
+    const gustMaxKn = msToKn((d.gustMax[i] ?? 0) / 3.6);
+    const windDir = degToCompass(d.windDirDom[i] ?? 0);
+    const bf = beaufortFromMs(((d.windMax[i] ?? 0) / 3.6));
+
+    const precip = (d.precipSum[i] ?? 0).toFixed(1);
+    const cloud = Math.round(d.cloudMean[i] ?? 0);
+
+    items.push(`
+      <div class="forecast-day">
+        <div class="forecast-top">
+          <div class="forecast-date">${label}</div>
+          <div class="forecast-temp">${tmin}–${tmax}°C</div>
+        </div>
+        <div class="forecast-row">
+          <span>Wiatr: <strong>${bf}°B</strong> ${windDir}</span>
+          <span>${windMaxKn.toFixed(0)} kn</span>
+          <span>porywy ${gustMaxKn.toFixed(0)} kn</span>
+        </div>
+        <div class="forecast-row">
+          <span>Opady: <strong>${precip} mm</strong></span>
+          <span>Zachmurzenie: <strong>${cloud}%</strong></span>
+        </div>
+      </div>
+    `);
+  }
+
+  elForecast7.innerHTML = items.join("");
+}
+
 async function checkWeather() {
-  // Wpisany tekst ma pierwszeństwo — jeśli jest, zawsze geokoduj i ustaw punkt
+  // tekst ma pierwszeństwo
   const q = (elPlace?.value || elHeroPlace?.value || "").trim();
 
   if (q) {
@@ -170,8 +261,9 @@ async function checkWeather() {
     return;
   }
 
-  const w = await fetchWeather(picked.lat, picked.lon);
-  renderWeather(w);
+  const data = await fetchWeather(picked.lat, picked.lon);
+  renderCurrent(data.current);
+  renderForecast(data.daily);
 }
 
 function initMap() {
@@ -185,13 +277,11 @@ function initMap() {
   }).addTo(map);
 
   map.on("click", (e) => {
-    // klik na mapie ustawia punkt
     setPicked(e.latlng.lat, e.latlng.lng, "Punkt na mapie");
   });
 }
 
 function bind() {
-  // wpisywanie ma pierwszeństwo nad mapą
   elPlace?.addEventListener("input", () => {
     picked = null;
     if (elBtnCheckWeather) elBtnCheckWeather.disabled = false;
@@ -202,25 +292,14 @@ function bind() {
     if (elHeroCheck) elHeroCheck.disabled = false;
   });
 
-  // "Szukaj" ustawia punkt i od razu pobiera pogodę
   elBtnSearchPlace?.addEventListener("click", async () => {
-    try {
-      await checkWeather();
-    } catch (e) {
-      alert(e.message);
-    }
+    try { await checkWeather(); } catch (e) { alert(e.message); }
   });
 
-  // "Sprawdź" pobiera pogodę (po wpisaniu lub po mapie)
   elBtnCheckWeather?.addEventListener("click", async () => {
-    try {
-      await checkWeather();
-    } catch (e) {
-      alert("Błąd pobierania pogody");
-    }
+    try { await checkWeather(); } catch (_) { alert("Błąd pobierania pogody"); }
   });
 
-  // Enter w polu sekcji pogoda
   elPlace?.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -228,7 +307,6 @@ function bind() {
     }
   });
 
-  // HERO: szukaj/sprawdź
   elHeroSearch?.addEventListener("click", async () => {
     try { await checkWeather(); } catch (e) { alert(e.message); }
   });
@@ -237,7 +315,6 @@ function bind() {
     try { await checkWeather(); } catch (_) { alert("Błąd pobierania pogody"); }
   });
 
-  // Enter w polu hero
   elHeroPlace?.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
