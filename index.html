@@ -48,6 +48,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container hero-inner">
+
         <div class="hero-copy">
           <div class="hero-eyebrow">
             <span class="pill">sailabc.com</span>
@@ -74,43 +75,28 @@
           </div>
         </div>
 
-       <section class="hero">
-  <div class="container hero-inner">
+        <!-- NOWY: CTA do panelu pogody -->
+        <aside class="hero-panel" aria-label="Pogoda">
+          <div class="panel-card weather-cta">
+            <h2>🌬️ Pogoda żeglarska — mapa + prognoza 7 dni</h2>
 
-    <div class="hero-copy">
-      ...
-      <div class="hero-badges" aria-label="Szybkie skróty">
-        <a class="chip" href="#pogoda">Wiatr i ostrzeżenia</a>
-        <a class="chip" href="#koja">Wolna koja</a>
-        <a class="chip" href="#jachty">Giełda jachtów</a>
-        <a class="chip" href="#mariny">Mariny</a>
-      </div>
-    </div> <!-- KONIEC hero-copy -->
+            <p class="muted">
+              Sprawdź wiatr w skali Beauforta, kierunek, falę,
+              opady i zachmurzenie dla dowolnego akwenu.
+            </p>
 
-    <aside class="hero-panel" aria-label="Pogoda">
-      <div class="panel-card weather-cta">
+            <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
+              Otwórz panel pogody
+            </a>
 
-        <h2>🌬️ Pogoda żeglarska — mapa + prognoza 7 dni</h2>
-
-        <p class="muted">
-          Sprawdź wiatr w skali Beauforta, kierunek, falę,
-          opady i zachmurzenie dla dowolnego akwenu.
-        </p>
-
-        <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
-          Otwórz panel pogody
-        </a>
-
-        <div class="note" style="margin-top:12px;">
-          Kliknij punkt na mapie lub wpisz miejsce — np. Zalew Szczeciński, Hel, Giżycko.
-        </div>
+            <div class="note" style="margin-top:12px;">
+              Kliknij punkt na mapie lub wpisz miejsce — np. Zalew Szczeciński, Hel, Giżycko.
+            </div>
+          </div>
+        </aside>
 
       </div>
-    </aside>
-
-  </div> <!-- KONIEC hero-inner -->
-</section>
-
+    </section>
 
     <!-- MODULES OVERVIEW -->
     <section class="section">
@@ -214,64 +200,63 @@
     </section>
 
     <!-- AGREGATOR OFERT (MAKIETA) -->
-<section class="section" id="agregator">
-  <div class="container">
-    <div class="section-head">
-      <h2>Agregator ofert: jachty, łodzie i osprzęt</h2>
-      <p class="muted">Makieta (frontend-only): wyszukiwarka, filtry i lista wyników. Pod API podłączymy później.</p>
-    </div>
-
-    <div class="agg-toolbar card">
-      <div class="filters agg-filters">
-        <div class="field">
-          <label for="agg-q">Szukaj</label>
-          <input id="agg-q" type="search" placeholder="np. Antila, silnik, kamizelka, kotwica, plotter…" />
+    <section class="section" id="agregator">
+      <div class="container">
+        <div class="section-head">
+          <h2>Agregator ofert: jachty, łodzie i osprzęt</h2>
+          <p class="muted">Makieta (frontend-only): wyszukiwarka, filtry i lista wyników. Pod API podłączymy później.</p>
         </div>
 
-        <div class="field">
-          <label for="agg-type">Typ</label>
-          <select id="agg-type">
-            <option value="all">Wszystko</option>
-            <option value="boat">Jachty / łodzie</option>
-            <option value="gear">Osprzęt</option>
-          </select>
+        <div class="agg-toolbar card">
+          <div class="filters agg-filters">
+            <div class="field">
+              <label for="agg-q">Szukaj</label>
+              <input id="agg-q" type="search" placeholder="np. Antila, silnik, kamizelka, kotwica, plotter…" />
+            </div>
+
+            <div class="field">
+              <label for="agg-type">Typ</label>
+              <select id="agg-type">
+                <option value="all">Wszystko</option>
+                <option value="boat">Jachty / łodzie</option>
+                <option value="gear">Osprzęt</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="agg-region">Region</label>
+              <select id="agg-region">
+                <option value="all">Dowolnie</option>
+                <option value="Mazury">Mazury</option>
+                <option value="Bałtyk">Bałtyk</option>
+                <option value="Zalew Szczeciński">Zalew Szczeciński</option>
+                <option value="Polska">Polska</option>
+                <option value="Europa">Europa</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="agg-sort">Sortuj</label>
+              <select id="agg-sort">
+                <option value="new">Najnowsze</option>
+                <option value="priceAsc">Cena rosnąco</option>
+                <option value="priceDesc">Cena malejąco</option>
+              </select>
+            </div>
+
+            <button class="btn btn-ghost btn-align" id="agg-reset" type="button">Reset</button>
+          </div>
+
+          <div class="agg-stats">
+            <span class="pill" id="agg-count">0 ofert</span>
+            <span class="pill">Źródła: demo</span>
+            <span class="pill">API: w przygotowaniu</span>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="agg-region">Region</label>
-          <select id="agg-region">
-            <option value="all">Dowolnie</option>
-            <option value="Mazury">Mazury</option>
-            <option value="Bałtyk">Bałtyk</option>
-            <option value="Zalew Szczeciński">Zalew Szczeciński</option>
-            <option value="Polska">Polska</option>
-            <option value="Europa">Europa</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="agg-sort">Sortuj</label>
-          <select id="agg-sort">
-            <option value="new">Najnowsze</option>
-            <option value="priceAsc">Cena rosnąco</option>
-            <option value="priceDesc">Cena malejąco</option>
-          </select>
-        </div>
-
-        <button class="btn btn-ghost btn-align" id="agg-reset" type="button">Reset</button>
+        <div class="listing-grid agg-grid" id="agg-list"></div>
       </div>
-
-      <div class="agg-stats">
-        <span class="pill" id="agg-count">0 ofert</span>
-        <span class="pill">Źródła: demo</span>
-        <span class="pill">API: w przygotowaniu</span>
-      </div>
-    </div>
-
-    <div class="listing-grid agg-grid" id="agg-list"></div>
-  </div>
-</section>
-
+    </section>
 
     <!-- 1. ABC Żeglarstwa -->
     <section class="section" id="abc">
@@ -831,7 +816,7 @@
       </div>
     </section>
 
-    <!-- 9. Pogoda (NOWA: mapa + wpisanie miejsca) -->
+    <!-- 9. Pogoda -->
     <section class="section" id="pogoda">
       <div class="container">
         <div class="section-head">
@@ -879,11 +864,10 @@
                 <span class="kpi-sub" id="wTime">—</span>
               </div>
             </div>
-<h3>Prognoza 7 dni</h3>
-<p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
 
-<div class="forecast-grid" id="forecast7"></div>
-
+            <h3 style="margin-top:14px;">Prognoza 7 dni</h3>
+            <p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+            <div class="forecast-grid" id="forecast7"></div>
           </article>
         </div>
       </div>
@@ -1067,7 +1051,7 @@
 
   <!-- Leaflet + pogoda -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="weather.js?v=5"></script>
+  <script src="weather.js?v=5"></script>
   <script src="aggregator.js"></script>
 </body>
 </html>
