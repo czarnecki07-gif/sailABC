@@ -1,12 +1,11 @@
-// weather.js — REALNA pogoda (Open-Meteo) + mapa Leaflet + prognoza 7 dni
-// Działa po kliknięciu mapy lub wpisaniu miejsca + „Sprawdź”.
-// Wpisany tekst ma zawsze pierwszeństwo nad mapą.
+// weather.js — Open-Meteo + Leaflet + prognoza: current + 24h + 7 dni (tabele)
+// Tekst ma pierwszeństwo nad mapą. Bez emoji/infantylnych ikonek.
 
 let map;
 let marker = null;
 let picked = null;
 
-// Sekcja pogody (current)
+// UI
 const elPlace = document.getElementById("place");
 const elBtnSearchPlace = document.getElementById("btnSearchPlace");
 const elBtnCheckWeather = document.getElementById("btnCheckWeather");
@@ -17,11 +16,14 @@ const elWWindSub = document.getElementById("wWindSub");
 const elWTemp = document.getElementById("wTemp");
 const elWTime = document.getElementById("wTime");
 
-// Prognoza 7 dni (daily)
+// Prognoza: 24h + 7 dni (TBODY w tabelach)
+const elForecast24 = document.getElementById("forecast24");
+const elHourlyMeta = document.getElementById("hourlyMeta");
+
 const elForecast7 = document.getElementById("forecast7");
 const elForecastMeta = document.getElementById("forecastMeta");
 
-// Panel górny (hero) — jeśli masz te elementy w HTML
+// (opcjonalne) elementy hero — jeśli kiedyś je dodasz
 const elHeroPlace = document.getElementById("heroPlace");
 const elHeroSearch = document.getElementById("heroSearch");
 const elHeroCheck = document.getElementById("heroCheck");
@@ -32,6 +34,8 @@ const elHeroTemp = document.getElementById("heroTemp");
 const elHeroTime = document.getElementById("heroTime");
 const elHeroWave = document.getElementById("heroWave");
 const elHeroWaveSub = document.getElementById("heroWaveSub");
+
+// ===== Utils =====
 
 function beaufortFromMs(ms) {
   const limits = [0.5, 1.6, 3.4, 5.5, 8.0, 10.8, 13.9, 17.2, 20.8, 24.5, 28.5, 32.7];
@@ -48,6 +52,54 @@ function degToCompass(deg) {
 
 function msToKn(ms) { return ms * 1.943844; }
 
+function fmtHour(iso) {
+  const d = new Date(iso);
+  const hh = String(d.getHours()).padStart(2, "0");
+  return `${hh}:00`;
+}
+
+function fmtDay(isoDate) {
+  // isoDate = YYYY-MM-DD
+  const dt = new Date(isoDate + "T00:00:00");
+  const days = ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"];
+  const d = days[dt.getDay()];
+  const dd = String(dt.getDate()).padStart(2, "0");
+  const mm = String(dt.getMonth() + 1).padStart(2, "0");
+  return `${d} ${dd}.${mm}`;
+}
+
+// Open-Meteo weathercode -> neutralny opis tekstowy (bez ikon)
+function weatherText(code) {
+  const c = Number(code);
+  if (Number.isNaN(c)) return "Zmienne";
+
+  if (c === 0) return "Słonecznie";
+  if (c === 1) return "Przeważnie słonecznie";
+  if (c === 2) return "Częściowe zachmurzenie";
+  if (c === 3) return "Zachmurzenie";
+
+  if (c === 45 || c === 48) return "Mgła";
+
+  if ([51,53,55].includes(c)) return "Mżawka";
+  if ([56,57].includes(c)) return "Marznąca mżawka";
+
+  if ([61,63,65].includes(c)) return "Deszcz";
+  if ([66,67].includes(c)) return "Marznący deszcz";
+
+  if ([71,73,75].includes(c)) return "Śnieg";
+  if (c === 77) return "Ziarna śniegu";
+
+  if ([80,81,82].includes(c)) return "Przelotny deszcz";
+  if ([85,86].includes(c)) return "Przelotny śnieg";
+
+  if (c === 95) return "Burza";
+  if ([96,99].includes(c)) return "Burza z gradem";
+
+  return "Zmienne";
+}
+
+// ===== Core =====
+
 function setPicked(lat, lon, label) {
   picked = { lat, lon, label: label || "Punkt" };
 
@@ -58,9 +110,8 @@ function setPicked(lat, lon, label) {
     elPickedInfo.textContent = `Wybrane: ${picked.label} (${picked.lat.toFixed(4)}, ${picked.lon.toFixed(4)})`;
   }
 
-  if (elForecastMeta) {
-    elForecastMeta.textContent = `Prognoza dla: ${picked.label}`;
-  }
+  if (elForecastMeta) elForecastMeta.textContent = `Prognoza dla: ${picked.label}`;
+  if (elHourlyMeta) elHourlyMeta.textContent = `Prognoza 24h dla: ${picked.label}`;
 
   if (map) {
     if (!marker) marker = L.marker([lat, lon]).addTo(map);
@@ -89,7 +140,6 @@ async function geocodePlace(q) {
 }
 
 async function fetchWeather(lat, lon) {
-  // current + daily jednym strzałem
   const forecast = new URL("https://api.open-meteo.com/v1/forecast");
   forecast.searchParams.set("latitude", String(lat));
   forecast.searchParams.set("longitude", String(lon));
@@ -101,10 +151,23 @@ async function fetchWeather(lat, lon) {
     "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover"
   );
 
-  // DAILY (7 dni)
+  // HOURLY (24h)
+  forecast.searchParams.set(
+    "hourly",
+    [
+      "temperature_2m",
+      "precipitation",
+      "weathercode",
+      "wind_speed_10m",
+      "wind_direction_10m"
+    ].join(",")
+  );
+
+  // DAILY (7 dni) + weathercode
   forecast.searchParams.set(
     "daily",
     [
+      "weathercode",
       "temperature_2m_max",
       "temperature_2m_min",
       "wind_speed_10m_max",
@@ -131,6 +194,7 @@ async function fetchWeather(lat, lon) {
 
   const c = f.current;
   const d = f.daily || {};
+  const h = f.hourly || {};
   const mc = m?.current || {};
 
   // Open-Meteo: km/h -> m/s
@@ -156,15 +220,24 @@ async function fetchWeather(lat, lon) {
       waveDir: (typeof mc.wave_direction === "number") ? degToCompass(mc.wave_direction) : null,
       waveP: (typeof mc.wave_period === "number") ? mc.wave_period : null
     },
+    hourly: {
+      time: h.time || [],
+      temp: h.temperature_2m || [],
+      precip: h.precipitation || [],
+      code: h.weathercode || [],
+      wind: h.wind_speed_10m || [],         // km/h
+      windDir: h.wind_direction_10m || []   // deg
+    },
     daily: {
       time: d.time || [],
+      code: d.weathercode || [],
       tmax: d.temperature_2m_max || [],
       tmin: d.temperature_2m_min || [],
       windMax: d.wind_speed_10m_max || [],       // km/h
       gustMax: d.wind_gusts_10m_max || [],       // km/h
       windDirDom: d.wind_direction_10m_dominant || [],
-      precipSum: d.precipitation_sum || [],     // mm
-      cloudMean: d.cloud_cover_mean || []       // %
+      precipSum: d.precipitation_sum || [],      // mm
+      cloudMean: d.cloud_cover_mean || []        // %
     }
   };
 }
@@ -175,7 +248,7 @@ function renderCurrent(c) {
   if (elWTemp) elWTemp.textContent = `${Math.round(c.temp)}°C`;
   if (elWTime) elWTime.textContent = `czas: ${c.time} • opad: ${c.precip ?? 0} mm • zachmurzenie: ${c.cloud ?? 0}%`;
 
-  // HERO
+  // HERO (opcjonalnie)
   if (elHeroWind) elHeroWind.textContent = `${c.windBf}°B`;
   if (elHeroWindSub) elHeroWindSub.textContent = `${c.windDir} • ${c.windKn} kn (porywy ${c.gustKn} kn)`;
   if (elHeroTemp) elHeroTemp.textContent = `${Math.round(c.temp)}°C`;
@@ -190,65 +263,77 @@ function renderCurrent(c) {
   }
 }
 
-function formatDayLabel(isoDate) {
-  // isoDate = YYYY-MM-DD
-  const dt = new Date(isoDate + "T00:00:00");
-  const days = ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"];
-  const d = days[dt.getDay()];
-  const dd = String(dt.getDate()).padStart(2, "0");
-  const mm = String(dt.getMonth() + 1).padStart(2, "0");
-  return `${d} ${dd}.${mm}`;
-}
+function renderHourly24(h) {
+  if (!elForecast24) return;
 
-function renderForecast(d) {
-  if (!elForecast7) return;
+  // czyścimy
+  elForecast24.innerHTML = "";
 
-  const n = Math.min(7, d.time.length);
+  const n = Math.min(24, h.time.length);
   if (!n) {
-    elForecast7.innerHTML = `<div class="muted">Brak danych prognozy.</div>`;
+    elForecast24.innerHTML = `<tr><td colspan="5" class="muted">Brak danych prognozy 24h.</td></tr>`;
     return;
   }
 
-  const items = [];
   for (let i = 0; i < n; i++) {
-    const label = formatDayLabel(d.time[i]);
+    const windMs = (h.wind[i] ?? 0) / 3.6;
+    const bf = beaufortFromMs(windMs);
+    const windKn = msToKn(windMs);
+    const wdir = degToCompass(h.windDir[i] ?? 0);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${fmtHour(h.time[i])}</td>
+      <td>${weatherText(h.code[i])}</td>
+      <td><strong>${bf}°B</strong> ${wdir} • ${windKn.toFixed(0)} kn</td>
+      <td>${Math.round(h.temp[i] ?? 0)}°C</td>
+      <td>${Number(h.precip[i] ?? 0).toFixed(1)} mm</td>
+    `;
+    elForecast24.appendChild(tr);
+  }
+}
+
+function renderDaily7(d) {
+  if (!elForecast7) return;
+
+  elForecast7.innerHTML = "";
+
+  const n = Math.min(7, d.time.length);
+  if (!n) {
+    elForecast7.innerHTML = `<tr><td colspan="5" class="muted">Brak danych prognozy 7 dni.</td></tr>`;
+    return;
+  }
+
+  for (let i = 0; i < n; i++) {
+    const label = fmtDay(d.time[i]);
 
     const tmax = Math.round(d.tmax[i] ?? 0);
     const tmin = Math.round(d.tmin[i] ?? 0);
 
-    // km/h -> kn
-    const windMaxKn = msToKn((d.windMax[i] ?? 0) / 3.6);
-    const gustMaxKn = msToKn((d.gustMax[i] ?? 0) / 3.6);
-    const windDir = degToCompass(d.windDirDom[i] ?? 0);
-    const bf = beaufortFromMs(((d.windMax[i] ?? 0) / 3.6));
+    const windMs = (d.windMax[i] ?? 0) / 3.6;
+    const gustMs = (d.gustMax[i] ?? 0) / 3.6;
 
-    const precip = (d.precipSum[i] ?? 0).toFixed(1);
-    const cloud = Math.round(d.cloudMean[i] ?? 0);
+    const windMaxKn = msToKn(windMs);
+    const gustMaxKn = msToKn(gustMs);
 
-    items.push(`
-      <div class="forecast-day">
-        <div class="forecast-top">
-          <div class="forecast-date">${label}</div>
-          <div class="forecast-temp">${tmin}–${tmax}°C</div>
-        </div>
-        <div class="forecast-row">
-          <span>Wiatr: <strong>${bf}°B</strong> ${windDir}</span>
-          <span>${windMaxKn.toFixed(0)} kn</span>
-          <span>porywy ${gustMaxKn.toFixed(0)} kn</span>
-        </div>
-        <div class="forecast-row">
-          <span>Opady: <strong>${precip} mm</strong></span>
-          <span>Zachmurzenie: <strong>${cloud}%</strong></span>
-        </div>
-      </div>
-    `);
+    const wdir = degToCompass(d.windDirDom[i] ?? 0);
+    const bf = beaufortFromMs(windMs);
+
+    const precip = Number(d.precipSum[i] ?? 0).toFixed(1);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${label}</td>
+      <td>${weatherText(d.code[i])}</td>
+      <td><strong>${bf}°B</strong> ${wdir} • ${windMaxKn.toFixed(0)} kn • porywy ${gustMaxKn.toFixed(0)} kn</td>
+      <td>${tmin}–${tmax}°C</td>
+      <td>${precip} mm</td>
+    `;
+    elForecast7.appendChild(tr);
   }
-
-  elForecast7.innerHTML = items.join("");
 }
 
 async function checkWeather() {
-  // tekst ma pierwszeństwo
   const q = (elPlace?.value || elHeroPlace?.value || "").trim();
 
   if (q) {
@@ -262,8 +347,10 @@ async function checkWeather() {
   }
 
   const data = await fetchWeather(picked.lat, picked.lon);
+
   renderCurrent(data.current);
-  renderForecast(data.daily);
+  renderHourly24(data.hourly);
+  renderDaily7(data.daily);
 }
 
 function initMap() {
