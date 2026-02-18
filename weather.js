@@ -199,13 +199,8 @@ function weatherIcon(code) {
 
   if (c === 45 || c === 48) return svgFog();
 
-  // mżawka / deszcz / przelotne / marznące
   if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(c)) return svgRain();
-
-  // śnieg / przelotny śnieg / ziarna
   if ([71,73,75,77,85,86].includes(c)) return svgSnow();
-
-  // burze
   if ([95,96,99].includes(c)) return svgStorm();
 
   return svgCloud();
@@ -264,7 +259,7 @@ async function fetchWeather(lat, lon) {
     "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover"
   );
 
-  // HOURLY (24h) + porywy
+  // HOURLY
   forecast.searchParams.set(
     "hourly",
     [
@@ -277,7 +272,7 @@ async function fetchWeather(lat, lon) {
     ].join(",")
   );
 
-  // DAILY (7 dni) + weathercode
+  // DAILY
   forecast.searchParams.set(
     "daily",
     [
@@ -311,7 +306,6 @@ async function fetchWeather(lat, lon) {
   const h = f.hourly || {};
   const mc = m?.current || {};
 
-  // Open-Meteo: km/h -> m/s
   const windMs = (c.wind_speed_10m ?? 0) / 3.6;
   const gustMs = (c.wind_gusts_10m ?? 0) / 3.6;
 
@@ -339,20 +333,20 @@ async function fetchWeather(lat, lon) {
       temp: h.temperature_2m || [],
       precip: h.precipitation || [],
       code: h.weathercode || [],
-      wind: h.wind_speed_10m || [],       // km/h
-      gust: h.wind_gusts_10m || [],       // km/h
-      windDir: h.wind_direction_10m || [] // deg
+      wind: h.wind_speed_10m || [],
+      gust: h.wind_gusts_10m || [],
+      windDir: h.wind_direction_10m || []
     },
     daily: {
       time: d.time || [],
       code: d.weathercode || [],
       tmax: d.temperature_2m_max || [],
       tmin: d.temperature_2m_min || [],
-      windMax: d.wind_speed_10m_max || [],       // km/h
-      gustMax: d.wind_gusts_10m_max || [],       // km/h
+      windMax: d.wind_speed_10m_max || [],
+      gustMax: d.wind_gusts_10m_max || [],
       windDirDom: d.wind_direction_10m_dominant || [],
-      precipSum: d.precipitation_sum || [],      // mm
-      cloudMean: d.cloud_cover_mean || []        // %
+      precipSum: d.precipitation_sum || [],
+      cloudMean: d.cloud_cover_mean || []
     }
   };
 }
@@ -363,7 +357,6 @@ function renderCurrent(c) {
   if (elWTemp) elWTemp.textContent = `${Math.round(c.temp)}°C`;
   if (elWTime) elWTime.textContent = `czas: ${c.time} • opad: ${c.precip ?? 0} mm • zachmurzenie: ${c.cloud ?? 0}%`;
 
-  // HERO (opcjonalnie)
   if (elHeroWind) elHeroWind.textContent = `${c.windBf}°B`;
   if (elHeroWindSub) elHeroWindSub.textContent = `${c.windDir} • ${c.windKn} kn (porywy ${c.gustKn} kn)`;
   if (elHeroTemp) elHeroTemp.textContent = `${Math.round(c.temp)}°C`;
