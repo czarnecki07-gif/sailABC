@@ -1,18 +1,12 @@
-/* sailabc.com — UI (mobile-first). Bez frameworków. */
-
 :root{
   --bg: #0b1220;
   --bg2: #0f1a2f;
-
-  --card: rgba(255,255,255,0.08);
-  --stroke: rgba(255,255,255,0.12);
 
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.68);
   --muted2: rgba(255,255,255,0.52);
 
   --accent: #19c4c6;
-  --accent2: #2563eb;
 
   --shadow: 0 20px 60px rgba(0,0,0,0.35);
   --radius: 18px;
@@ -69,9 +63,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   white-space:nowrap;border:0;
 }
 
-/* =========================
-   HEADER
-   ========================= */
+/* HEADER */
 .site-header{
   position: sticky;
   top:0;
@@ -80,7 +72,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(10,16,28,0.55);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
 .header-inner{
   display:flex;
   align-items:center;
@@ -88,7 +79,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   gap:12px;
   padding:18px 0;
 }
-
 .brand{
   display:flex;
   align-items:center;
@@ -155,7 +145,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   border-bottom: 1px solid rgba(255,255,255,0.08);
   max-width: none;
 }
-
 .nav-btn{
   font-size:14px;
   color: var(--muted);
@@ -173,7 +162,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 .nav-btn-ghost{ background: rgba(0,0,0,0.14); }
-
 .nav-sep{
   width:1px;
   height:26px;
@@ -181,50 +169,39 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   margin:0 6px;
 }
 
-/* =========================
-   HERO
-   ========================= */
-.hero{
-  padding:34px 0 18px;
-}
-.hero-inner{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap:16px;
-  align-items:start;
-}
-.hero-copy{ padding:10px 0; }
+/* HERO */
+.hero{ padding:34px 0 18px; }
 
-.hero h1{
-  font-size: clamp(28px, 4.5vw, 46px);
-  margin-bottom:10px;
+.hero-top{
+  padding: 10px 0 14px;
+}
+.hero-top h1{
+  font-size: clamp(30px, 4.8vw, 48px);
   letter-spacing:-0.6px;
+  margin:0 0 10px;
 }
 .hero-lead{
   color: var(--muted);
   font-size:16px;
-  max-width:62ch;
+  max-width:70ch;
+  margin:0;
 }
 
-/* =========================
-   PORADNIKI (LEWO) + KURSY (PRAWO)
-   ========================= */
-.courses-hero{
-  display:grid;
+/* dół hero: mobile = jedna kolumna, desktop = dwie */
+.hero-bottom{
+  display: grid;
   grid-template-columns: 1fr;
-  gap:14px;
-  width:100%;
+  gap: 14px;
+  align-items: start;
 }
 
-/* LEWA: poradniki w siatce */
+/* Poradniki */
 .courses-guides{
   display:grid;
   gap:10px;
   align-content:start;
-  grid-template-columns: repeat(2, minmax(140px, 1fr)); /* mobile */
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
 }
-
-/* chip poradnika: pełny tekst, zawijanie */
 .courses-guides .chip{
   display:flex;
   justify-content:center;
@@ -235,60 +212,18 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   overflow: visible;
   text-overflow: clip;
   line-height: 1.15;
-  min-height: 44px;
+  min-height: 46px;
   padding: 10px 12px;
 }
 
-/* PRAWA: pogoda-mini + kursy */
-.courses-paid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap:10px;
-  align-content:start;
+/* Prawa kolumna */
+.right-rail{
+  display: grid;
+  gap: 10px;
+  align-content: start;
 }
 
-/* Mini karta pogody (tylko tytuł + przycisk) */
-.weather-mini{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:12px 14px;
-}
-.weather-mini-title{
-  font-size:16px;
-  margin:0;
-  line-height:1.1;
-  white-space: nowrap;
-}
-.weather-mini-btn{
-  padding: 10px 14px;
-  font-size: 14px;
-  border-radius: 12px;
-  white-space: nowrap;
-}
-
-/* =========================
-   SECTIONS / CARDS
-   ========================= */
-.section{ padding:26px 0; }
-.section-tight{ padding:18px 0; }
-
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:14px;
-}
-.section-head h2{
-  font-size:22px;
-  letter-spacing:-0.25px;
-}
-
-.muted{ color: var(--muted); }
-.small{ font-size:12px; color: var(--muted); }
-
+/* Karty */
 .card{
   border:1px solid rgba(255,255,255,0.10);
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
@@ -296,36 +231,22 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   padding:16px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.22);
 }
-.card h3{ font-size:18px; }
-.card p{ color: var(--muted); }
 
-.cards-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap: var(--gap);
+.weather-mini{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 12px 14px;
 }
-.cards-2{ grid-template-columns:1fr; }
-.cards-3{ grid-template-columns:1fr; }
-
-.card-link{
-  display:block;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-}
-.card-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(25,196,198,0.35);
-  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
-}
-.card-cta{
-  display:inline-block;
-  margin-top:8px;
-  color: rgba(25,196,198,0.95);
-  font-weight:800;
+.weather-mini-title{
+  font-size: 16px;
+  margin:0;
+  line-height:1.1;
+  white-space: nowrap;
 }
 
-/* =========================
-   BUTTONS / CHIPS
-   ========================= */
+/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -345,12 +266,10 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(255,255,255,0.09);
   border-color: rgba(255,255,255,0.18);
 }
-.btn:active{ transform: translateY(0); }
 .btn:focus-visible{
   outline:3px solid rgba(25,196,198,0.35);
   outline-offset:2px;
 }
-
 .btn-primary{
   border-color: rgba(25,196,198,0.55);
   background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
@@ -361,16 +280,25 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
   border-color: rgba(25,196,198,0.70);
 }
-
 .btn-ghost{ background: rgba(0,0,0,0.14); }
-.btn-full{ width:100%; }
 
-/* duże przyciski kursów */
+.weather-mini-btn{
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Kursy */
+.courses-paid{
+  display: grid;
+  gap: 10px;
+}
 .btn-big{
   width:100%;
   font-size:18px;
-  padding:16px 18px;
-  border-radius:14px;
+  padding:18px 18px;
+  border-radius:16px;
   justify-content:flex-start;
   text-align:left;
 
@@ -380,6 +308,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   text-overflow:ellipsis;
 }
 
+/* chips */
 .chip{
   display:inline-block;
   font-size:13px;
@@ -396,9 +325,24 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 
-/* =========================
-   WEATHER
-   ========================= */
+.section{ padding:26px 0; }
+.section-tight{ padding:18px 0; }
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.section-head h2{
+  font-size:22px;
+  letter-spacing:-0.25px;
+}
+.muted{ color: var(--muted); }
+.small{ font-size:12px; color: var(--muted); }
+
+/* Weather section below */
 .weather-search{
   display:grid;
   gap:12px;
@@ -419,17 +363,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(0,0,0,0.14);
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
-
-.leaflet-control-zoom a{
-  background: rgba(0,0,0,0.55) !important;
-  color: rgba(255,255,255,0.92) !important;
-  border:1px solid rgba(255,255,255,0.18) !important;
-}
-.leaflet-control-zoom a:hover{
-  background: rgba(25,196,198,0.18) !important;
-  border-color: rgba(25,196,198,0.35) !important;
-}
-
 .note{
   margin-top:12px;
   color: var(--muted);
@@ -439,7 +372,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   border-radius:14px;
   padding:12px;
 }
-
 .panel-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -481,9 +413,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   font-size:13px;
 }
 
-/* =========================
-   FOOTER
-   ========================= */
+/* footer */
 .site-footer{
   padding:26px 0 34px;
   border-top:1px solid rgba(255,255,255,0.08);
@@ -514,9 +444,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   color: var(--text);
 }
 
-/* =========================
-   RESPONSIVE
-   ========================= */
+/* RESPONSIVE */
 @media (min-width: 720px){
   .site-nav{ display:flex; }
   .nav-toggle{ display:none; }
@@ -524,24 +452,17 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 
   .hero{ padding:48px 0 22px; }
 
-  .cards-grid{ grid-template-columns: repeat(2, 1fr); }
-  .cards-2{ grid-template-columns: repeat(2, 1fr); }
-  .cards-3{ grid-template-columns: repeat(3, 1fr); }
-
-  .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items:center; }
-
-  /* LEWO/PRAWO: poradniki + kursy */
-  .courses-hero{
-    grid-template-columns: 1.35fr minmax(420px, 0.85fr);
-    align-items: start;
+  /* tu jest klucz: poradniki mają szeroko, a prawa kolumna ma stałą sensowną szerokość */
+  .hero-bottom{
+    grid-template-columns: 1fr minmax(420px, 460px);
+    gap: 18px;
   }
 
-  /* poradniki: gęściej na desktopie */
   .courses-guides{
-    grid-template-columns: repeat(3, minmax(170px, 1fr));
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
   }
 
-  /* kursy: na desktopie 2 linie (czytelnie, bez ścisku) */
+  /* kursy na desktop: 2 linie zamiast ścisku */
   .btn-big{
     white-space: normal;
     text-overflow: clip;
@@ -552,14 +473,13 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items:center; }
 }
 
 @media (min-width: 980px){
   .courses-guides{
-    grid-template-columns: repeat(4, minmax(190px, 1fr));
-  }
-  .courses-hero{
-    grid-template-columns: 1.4fr minmax(460px, 0.8fr);
+    grid-template-columns: repeat(4, minmax(230px, 1fr));
   }
 }
 
@@ -567,7 +487,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   .weather-map{ height:340px; }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
   html{ scroll-behavior:auto; }
