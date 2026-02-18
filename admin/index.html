@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>sailABC.com — Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" id="loginCard" aria-label="Logowanie">
+      <h1>Panel admina</h1>
+      <p class="muted">Dostęp tylko dla uprawnionych.</p>
+
+      <form id="loginForm" class="form" autocomplete="off">
+        <label class="label" for="user">Login</label>
+        <input id="user" class="input" type="text" required />
+
+        <label class="label" for="pass">Hasło</label>
+        <input id="pass" class="input" type="password" required />
+
+        <button class="btn" type="submit">Zaloguj</button>
+        <p class="muted small" id="loginMsg"></p>
+      </form>
+    </section>
+
+    <section class="card hidden" id="appCard" aria-label="Admin">
+      <div class="top">
+        <h1>Admin</h1>
+        <button class="btn btn-ghost" id="logoutBtn" type="button">Wyloguj</button>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <h2>Treści (placeholder)</h2>
+          <p class="muted small">W tej wersji zapis jest lokalny (przeglądarka). Backend dodamy później.</p>
+          <label class="label" for="contentKey">Klucz</label>
+          <input id="contentKey" class="input" type="text" value="home" />
+
+          <label class="label" for="contentValue">Treść (JSON / tekst)</label>
+          <textarea id="contentValue" class="textarea" rows="10" placeholder="Wpisz treść..."></textarea>
+
+          <div class="row">
+            <button class="btn" id="saveBtn" type="button">Zapisz lokalnie</button>
+            <button class="btn btn-ghost" id="loadBtn" type="button">Wczytaj</button>
+            <button class="btn btn-ghost" id="exportBtn" type="button">Eksport JSON</button>
+          </div>
+
+          <p class="muted small" id="saveMsg"></p>
+        </div>
+
+        <div class="panel">
+          <h2>Asystent AI (placeholder)</h2>
+          <p class="muted small">Tu będzie podpięcie AI po dodaniu backendu / klucza API.</p>
+          <textarea class="textarea" rows="10" placeholder="Opisz co chcesz dodać/zmienić..."></textarea>
+          <button class="btn btn-ghost" type="button" disabled>Generuj (w przygotowaniu)</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
