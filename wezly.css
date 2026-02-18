@@ -1,0 +1,159 @@
+/* wezly.css – styl tylko dla /wezly.html (nie psuje strony głównej) */
+
+.page-wezly {
+  /* delikatne „dopasowanie” do dark UI, ale bez grzebania w Twoim style.css */
+  color: inherit;
+}
+
+.wezly-wrap {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.wezly-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(10, 18, 30, 0.65);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.wezly-top .wezly-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+}
+
+.wezly-brand {
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.wezly-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wezly-nav a {
+  text-decoration: none;
+  opacity: .9;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+}
+
+.wezly-hero {
+  padding: 28px 0 10px;
+}
+
+.wezly-hero h1 {
+  font-size: 44px;
+  line-height: 1.08;
+  margin: 0 0 10px;
+}
+
+.wezly-lead {
+  max-width: 75ch;
+  opacity: .86;
+  margin: 0;
+}
+
+.wezly-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.wezly-chip {
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+
+.wezly-grid {
+  display: grid;
+  gap: 16px;
+  padding: 16px 0 6px;
+}
+
+.wezly-card {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+}
+
+.wezly-card__text h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.wezly-card__text p {
+  margin: 0 0 10px;
+  opacity: .9;
+}
+
+.wezly-card__text ol {
+  margin: 0;
+  padding-left: 18px;
+  opacity: .92;
+}
+
+.wezly-card__text li {
+  margin: 6px 0;
+}
+
+.wezly-card__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.12);
+}
+
+.wezly-hint {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: .78;
+}
+
+.wezly-warn {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: .9;
+  border-left: 3px solid rgba(255, 200, 60, .8);
+  padding-left: 10px;
+}
+
+.wezly-foot {
+  padding: 18px 0 40px;
+}
+
+.wezly-foot h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.wezly-foot ul {
+  margin: 0;
+  padding-left: 18px;
+  opacity: .9;
+}
+
+@media (max-width: 860px) {
+  .wezly-hero h1 { font-size: 34px; }
+  .wezly-card { grid-template-columns: 1fr; }
+}
