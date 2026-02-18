@@ -568,3 +568,43 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   *{ transition:none !important; scroll-behavior:auto !important; }
   html{ scroll-behavior:auto; }
 }
+/* === FIX: poradniki (chips) mają pokazywać cały tekst === */
+
+/* Siatka poradników: lepsze dopasowanie szerokości */
+.courses-guides{
+  grid-template-columns: repeat(2, minmax(140px, 1fr)); /* mobile: 2 w rzędzie, ale nie za wąskie */
+}
+
+/* Na tablet/desktop zostawiasz swoje 3/4 kolumny – tylko doprecyzuję minimalną szerokość */
+@media (min-width: 720px){
+  .courses-guides{ grid-template-columns: repeat(3, minmax(170px, 1fr)); }
+}
+@media (min-width: 980px){
+  .courses-guides{ grid-template-columns: repeat(4, minmax(190px, 1fr)); }
+}
+
+/* Chipy poradników: pełny tekst, zawijanie, wyśrodkowanie */
+.courses-guides .chip{
+  display: flex;                 /* zamiast inline-flex */
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  white-space: normal;           /* klucz: pozwól łamać linie */
+  overflow: visible;             /* nie ucinaj */
+  text-overflow: clip;           /* wyłącz ... */
+  line-height: 1.15;
+
+  min-height: 44px;              /* tap target + równe kafelki */
+  padding: 10px 12px;            /* trochę więcej miejsca na tekst */
+}
+
+/* Jeśli masz bardzo długie tytuły, to max 2 linie (opcjonalnie – odkomentuj)
+.courses-guides .chip{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+*/
