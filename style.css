@@ -113,6 +113,7 @@ code{
 .brand-name{ font-weight: 900; letter-spacing: 0.2px; }
 .brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
 
+/* NAV */
 .site-nav{
   display: none;
   gap: 8px;
@@ -120,6 +121,8 @@ code{
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+/* bazowy wygląd linków nav (fallback) */
 .site-nav a{
   font-size: 14px;
   color: var(--muted);
@@ -132,6 +135,45 @@ code{
   background: rgba(255,255,255,0.06);
   border-color: rgba(25,196,198,0.25);
   color: var(--text);
+}
+
+/* NAV jako przyciski (docelowo) */
+.site-nav.nav-buttons a.nav-btn{
+  color: rgba(255,255,255,0.88);
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.site-nav.nav-buttons a.nav-btn:hover{
+  background: rgba(25,196,198,0.12);
+  border-color: rgba(25,196,198,0.35);
+  color: var(--text);
+}
+
+.site-nav.nav-buttons a.nav-btn-ghost{
+  background: rgba(0,0,0,0.14);
+}
+
+.site-nav.nav-buttons a.nav-btn-accent{
+  border-color: rgba(25,196,198,0.55);
+  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
+  color: #041116;
+}
+.site-nav.nav-buttons a.nav-btn-accent:hover{
+  background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
+  border-color: rgba(25,196,198,0.70);
+}
+
+.nav-sep{
+  width: 10px;
+  height: 1px;
+  opacity: .25;
+  background: rgba(255,255,255,0.6);
+  margin: 0 6px;
 }
 
 .nav-toggle{
@@ -173,6 +215,14 @@ code{
   padding: 12px 16px 16px;
   background: rgba(10,16,28,0.92);
   border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* na telefonie w dropdownie przyciski na całą szerokość */
+@media (max-width: 719px){
+  .site-nav.open a.nav-btn{
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* Hero */
@@ -248,8 +298,33 @@ code{
   flex-wrap: wrap;
 }
 
+/* HERO above-the-fold dla układu 1–4 */
+.hero.hero-fold{
+  padding: 22px 0 14px;
+}
+.hero-links-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2px;
+}
+.chip.chip-link{ text-decoration: none; }
+
+.courses-hero{
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  margin-top: 2px;
+}
+.btn.btn-big{
+  padding: 14px 14px;
+  font-size: 0.98rem;
+  border-radius: 14px;
+}
+
 /* Sections */
 .section{ padding: 26px 0; }
+.section.section-tight{ padding-top: 18px; }
 .section-head{
   display:flex;
   align-items:flex-end;
@@ -692,6 +767,27 @@ textarea{ resize: vertical; min-height: 120px; }
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
 }
 
+@media (min-width: 700px){
+  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 980px){
+  .hero.hero-fold .hero-inner{
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+  }
+  .hero-links-row,
+  .courses-hero{
+    grid-column: 1 / -1;
+  }
+  .hero.hero-fold h1{ margin-bottom: 8px; }
+  .hero.hero-fold .hero-lead{ font-size: 15px; }
+  .hero.hero-fold .hero-copy{ padding: 0; }
+  .weather-big-btn{ font-size: 16px; padding: 14px 16px; }
+}
+@media (min-width: 1100px){
+  .courses-hero{ grid-template-columns: repeat(3, 1fr); }
+}
+
 /* Accessibility / reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
@@ -699,9 +795,8 @@ textarea{ resize: vertical; min-height: 120px; }
 }
 
 /* =========================================================
-   Weather map + search (NOWE)
+   Weather map + search (jedna spójna wersja)
    ========================================================= */
-
 .weather-search{
   display: grid;
   gap: 12px;
@@ -753,10 +848,61 @@ textarea{ resize: vertical; min-height: 120px; }
 @media (max-width: 420px){
   .weather-map{ height: 340px; }
 }
+
+/* CTA pogody w hero */
+.weather-cta{ text-align: center; }
+.weather-big-btn{
+  margin-top: 14px;
+  font-size: 18px;
+  padding: 16px 18px;
+}
+
+/* =========================================================
+   Prognoza: tabele 24h + 7 dni (wiersze)
+   ========================================================= */
+.forecast-table-wrap{
+  overflow: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.10);
+}
+
+.forecast-table{
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.forecast-table th,
+.forecast-table td{
+  text-align: left;
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.86);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.forecast-table th{
+  color: rgba(255,255,255,0.92);
+  font-size: 13px;
+}
+
+.forecast-icon{
+  font-size: 18px;
+}
+
+/* na bardzo małych ekranach chowamy opad */
+@media (max-width: 520px){
+  .forecast-table th:nth-child(5),
+  .forecast-table td:nth-child(5){
+    display:none;
+  }
+}
+
 /* =========================
    Agregator ofert (makieta)
    ========================= */
-
 .agg-toolbar{
   padding: 16px;
 }
@@ -809,74 +955,4 @@ textarea{ resize: vertical; min-height: 120px; }
   .agg-toolbar .filters{
     grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr auto;
   }
-}
-.weather-map{
-  height: 320px;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  margin-top: 12px;
-}
-
-.weather-hero-actions,
-.weather-search-actions{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.weather-raw{
-  margin: 12px 0 0;
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.14);
-  color: rgba(255,255,255,0.85);
-  overflow:auto;
-  min-height: 120px;
-}
-.forecast-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 12px;
-}
-.forecast-day{
-  background: rgba(0,0,0,0.14);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 12px;
-  display:grid;
-  gap: 6px;
-}
-.forecast-top{
-  display:flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-}
-.forecast-date{ font-weight: 900; }
-.forecast-temp{ font-weight: 900; }
-.forecast-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: rgba(255,255,255,0.80);
-  font-size: 13px;
-}
-@media (min-width: 720px){
-  .forecast-grid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 980px){
-  .forecast-grid{ grid-template-columns: repeat(3, 1fr); }
-}
-.weather-cta{
-  text-align: center;
-}
-
-.weather-big-btn{
-  margin-top: 14px;
-  font-size: 18px;
-  padding: 16px 18px;
 }
