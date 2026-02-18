@@ -1,5 +1,6 @@
 // weather.js — Open-Meteo + Leaflet + prognoza: current + 24h + 7 dni (tabele)
 // Tekst ma pierwszeństwo nad mapą. Bez emoji/infantylnych ikonek.
+// 24h: pokazuje też porywy wiatru (wind_gusts_10m) i liczy "następne 24h od teraz".
 
 let map;
 let marker = null;
@@ -59,7 +60,6 @@ function fmtHour(iso) {
 }
 
 function fmtDay(isoDate) {
-  // isoDate = YYYY-MM-DD
   const dt = new Date(isoDate + "T00:00:00");
   const days = ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"];
   const d = days[dt.getDay()];
@@ -96,6 +96,26 @@ function weatherText(code) {
   if ([96,99].includes(c)) return "Burza z gradem";
 
   return "Zmienne";
+}
+
+// start prognozy 24h: najbliższa następna pełna godzina (>= teraz zaokrąglone w górę)
+function findStartIndex(hourlyTimes) {
+  if (!Array.isArray(hourlyTimes) || hourlyTimes.length === 0) return 0;
+
+  const now = new Date();
+
+  // "ceiling" do kolejnej pełnej godziny
+  const nowCeil = new Date(now);
+  nowCeil.setMinutes(0, 0, 0);
+  if (now.getMinutes() > 0 || now.getSeconds() > 0 || now.getMilliseconds() > 0) {
+    nowCeil.setHours(nowCeil.getHours() + 1);
+  }
+
+  for (let i = 0; i < hourlyTimes.length; i++) {
+    const t = new Date(hourlyTimes[i]);
+    if (t >= nowCeil) return i;
+  }
+  return 0;
 }
 
 // ===== Core =====
@@ -151,7 +171,7 @@ async function fetchWeather(lat, lon) {
     "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover"
   );
 
-  // HOURLY (24h)
+  // HOURLY (24h) + porywy
   forecast.searchParams.set(
     "hourly",
     [
@@ -159,6 +179,7 @@ async function fetchWeather(lat, lon) {
       "precipitation",
       "weathercode",
       "wind_speed_10m",
+      "wind_gusts_10m",
       "wind_direction_10m"
     ].join(",")
   );
@@ -225,8 +246,9 @@ async function fetchWeather(lat, lon) {
       temp: h.temperature_2m || [],
       precip: h.precipitation || [],
       code: h.weathercode || [],
-      wind: h.wind_speed_10m || [],         // km/h
-      windDir: h.wind_direction_10m || []   // deg
+      wind: h.wind_speed_10m || [],       // km/h
+      gust: h.wind_gusts_10m || [],       // km/h
+      windDir: h.wind_direction_10m || [] // deg
     },
     daily: {
       time: d.time || [],
@@ -266,26 +288,34 @@ function renderCurrent(c) {
 function renderHourly24(h) {
   if (!elForecast24) return;
 
-  // czyścimy
   elForecast24.innerHTML = "";
 
-  const n = Math.min(24, h.time.length);
-  if (!n) {
+  const start = findStartIndex(h.time);
+  const end = Math.min(start + 24, h.time.length);
+
+  if (start >= h.time.length || end <= start) {
     elForecast24.innerHTML = `<tr><td colspan="5" class="muted">Brak danych prognozy 24h.</td></tr>`;
     return;
   }
 
-  for (let i = 0; i < n; i++) {
+  for (let i = start; i < end; i++) {
     const windMs = (h.wind[i] ?? 0) / 3.6;
+    const gustMs = (h.gust[i] ?? 0) / 3.6;
+
     const bf = beaufortFromMs(windMs);
     const windKn = msToKn(windMs);
+    const gustKn = msToKn(gustMs);
+
     const wdir = degToCompass(h.windDir[i] ?? 0);
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${fmtHour(h.time[i])}</td>
       <td>${weatherText(h.code[i])}</td>
-      <td><strong>${bf}°B</strong> ${wdir} • ${windKn.toFixed(0)} kn</td>
+      <td>
+        <strong>${bf}°B</strong> ${wdir} • ${windKn.toFixed(0)} kn
+        <br><span class="muted">porywy ${gustKn.toFixed(0)} kn</span>
+      </td>
       <td>${Math.round(h.temp[i] ?? 0)}°C</td>
       <td>${Number(h.precip[i] ?? 0).toFixed(1)} mm</td>
     `;
