@@ -580,3 +580,23 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
     -webkit-box-orient: vertical;
   }
 }
+@media (min-width: 720px){
+
+  /* 1) Poradniki: zawsze 3 w rzędzie */
+  .courses-guides{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  /* 2) Kursy mniej w prawo: zwężamy prawą kolumnę i dajemy więcej miejsca lewemu blokowi */
+  .catalog-row{
+    grid-template-columns: 1.35fr 0.65fr !important; /* było 1fr minmax(420px,460px) */
+    gap: 16px !important;
+  }
+
+  /* 3) Prawa kolumna (kursy) ma się dopasować i nie być “przyklejona” do prawej */
+  .courses-paid{
+    justify-self: start;          /* zamiast stretch do prawej krawędzi */
+    width: 100%;
+    max-width: 380px;             /* żeby wyglądało kompaktowo (zmień na 360–420 wg gustu) */
+  }
+}
