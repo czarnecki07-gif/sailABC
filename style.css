@@ -1,958 +1,301 @@
-/* sailabc.com — nowoczesny, responsywny UI (mobile-first). Bez frameworków. */
-
-:root{
-  --bg: #0b1220;
-  --bg2: #0f1a2f;
-
-  --card: rgba(255,255,255,0.08);
-  --card2: rgba(255,255,255,0.06);
-  --stroke: rgba(255,255,255,0.12);
-
-  --text: rgba(255,255,255,0.92);
-  --muted: rgba(255,255,255,0.68);
-  --muted2: rgba(255,255,255,0.52);
-
-  --accent: #19c4c6;     /* turkus */
-  --accent2: #2563eb;    /* niebieski */
-  --warn: #d7b85a;       /* złoto */
-  --danger: #ef4444;
-
-  --shadow: 0 20px 60px rgba(0,0,0,0.35);
-  --radius: 18px;
-  --radius-sm: 12px;
-
-  --max: 1120px;
-  --gap: 16px;
-}
-
-*{ box-sizing: border-box; }
-html,body{ height: 100%; }
-html{ scroll-behavior: smooth; }
-
-body{
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-  color: var(--text);
-  background:
-    radial-gradient(1200px 900px at 18% -10%, rgba(25,196,198,0.20), transparent 55%),
-    radial-gradient(1000px 700px at 92% 10%, rgba(37,99,235,0.18), transparent 55%),
-    radial-gradient(1200px 700px at 50% 120%, rgba(25,196,198,0.10), transparent 60%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
-  line-height: 1.55;
-}
-
-img{ max-width: 100%; display: block; }
-a{ color: inherit; text-decoration: none; }
-p{ margin: 0 0 12px; }
-h1,h2,h3,h4{ line-height: 1.15; margin: 0 0 10px; }
-ul{ margin: 0; padding-left: 18px; }
-
-code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.95em;
-}
-
-.container{
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.skip-link{
-  position: absolute;
-  left: -999px;
-  top: 10px;
-  background: #fff;
-  color: #000;
-  padding: 10px 12px;
-  border-radius: 12px;
-  z-index: 1000;
-}
-.skip-link:focus{ left: 12px; }
-
-.sr-only{
-  position:absolute;
-  width:1px;height:1px;
-  padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0,0,0,0);
-  white-space:nowrap;border:0;
-}
-
-/* Header */
-.site-header{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(10px);
-  background: rgba(10,16,28,0.55);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.header-inner{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 20px 0;
-}
-
-.brand{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 180px;
-}
-.brand-logo{
-  width: 130px;
-  height: 90px;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
-}
-.brand-text{ display: flex; flex-direction: column; }
-.brand-name{ font-weight: 900; letter-spacing: 0.2px; }
-.brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
-
-/* NAV */
-.site-nav{
-  display: none;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-/* bazowy wygląd linków nav (fallback) */
-.site-nav a{
-  font-size: 14px;
-  color: var(--muted);
-  padding: 10px 10px;
-  border-radius: 12px;
-  transition: background .2s ease, color .2s ease, border-color .2s ease;
-  border: 1px solid transparent;
-}
-.site-nav a:hover{
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(25,196,198,0.25);
-  color: var(--text);
-}
-
-/* NAV jako przyciski (docelowo) */
-.site-nav.nav-buttons a.nav-btn{
-  color: rgba(255,255,255,0.88);
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  font-weight: 800;
-  line-height: 1;
-}
-
-.site-nav.nav-buttons a.nav-btn:hover{
-  background: rgba(25,196,198,0.12);
-  border-color: rgba(25,196,198,0.35);
-  color: var(--text);
-}
-
-.site-nav.nav-buttons a.nav-btn-ghost{
-  background: rgba(0,0,0,0.14);
-}
-
-.site-nav.nav-buttons a.nav-btn-accent{
-  border-color: rgba(25,196,198,0.55);
-  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
-  color: #041116;
-}
-.site-nav.nav-buttons a.nav-btn-accent:hover{
-  background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
-  border-color: rgba(25,196,198,0.70);
-}
-
-.nav-sep{
-  width: 10px;
-  height: 1px;
-  opacity: .25;
-  background: rgba(255,255,255,0.6);
-  margin: 0 6px;
-}
-
-.nav-toggle{
-  appearance: none;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: var(--text);
-  border-radius: 14px;
-  padding: 10px 12px;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.22);
-}
-.nav-toggle:focus-visible{
-  outline: 3px solid rgba(25,196,198,0.35);
-  outline-offset: 2px;
-}
-.nav-toggle-lines{
-  display: inline-block;
-  width: 18px; height: 12px;
-  position: relative;
-}
-.nav-toggle-lines::before,
-.nav-toggle-lines::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  height:2px;
-  background: rgba(255,255,255,0.86);
-  border-radius: 99px;
-}
-.nav-toggle-lines::before{ top: 1px; }
-.nav-toggle-lines::after{ bottom: 1px; }
-
-.site-nav.open{
-  display: flex;
-  position: absolute;
-  left: 0; right: 0;
-  top: 64px;
-  padding: 12px 16px 16px;
-  background: rgba(10,16,28,0.92);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-/* na telefonie w dropdownie przyciski na całą szerokość */
-@media (max-width: 719px){
-  .site-nav.open a.nav-btn{
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Hero */
-.hero{
-  padding: 34px 0 18px;
-}
-.hero-inner{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: start;
-}
-.hero-copy{ padding: 10px 0; }
-
-.hero-eyebrow{
-  display:flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.hero h1{
-  font-size: clamp(28px, 4.5vw, 46px);
-  margin-bottom: 10px;
-  letter-spacing: -0.6px;
-}
-.hero-lead{
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 62ch;
-}
-
-.hero-cta{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-.hero-badges{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.hero-panel .panel-card{
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-}
-.panel-top h2{ font-size: 18px; margin-bottom: 2px; }
-.panel-grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 12px;
-}
-.kpi{
-  background: rgba(0,0,0,0.18);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 12px;
-}
-.kpi-label{ display:block; color: var(--muted2); font-size: 12px; }
-.kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
-.kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-.panel-actions{
-  display:flex;
-  gap: 10px;
-  margin-top: 14px;
-  flex-wrap: wrap;
-}
-
-/* HERO above-the-fold dla układu 1–4 */
-.hero.hero-fold{
-  padding: 22px 0 14px;
-}
-.hero-links-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 2px;
-}
-.chip.chip-link{ text-decoration: none; }
-
-.courses-hero{
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr;
-  margin-top: 2px;
-}
-.btn.btn-big{
-  padding: 14px 14px;
-  font-size: 0.98rem;
-  border-radius: 14px;
-}
-
-/* Sections */
-.section{ padding: 26px 0; }
-.section.section-tight{ padding-top: 18px; }
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.section-head h2{
-  font-size: 22px;
-  letter-spacing: -0.25px;
-}
-.muted{ color: var(--muted); }
-.small{ font-size: 12px; color: var(--muted); }
-
-/* Cards */
-.card{
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-}
-.card h3{ font-size: 18px; }
-.card p{ color: var(--muted); }
-
-.cards-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
-}
-.cards-2{ grid-template-columns: 1fr; }
-.cards-3{ grid-template-columns: 1fr; }
-
-.card-link{
-  display:block;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-}
-.card-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(25,196,198,0.35);
-  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
-}
-.card-icon{
-  width: 44px; height: 44px;
-  display:grid; place-items:center;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.10);
-  margin-bottom: 10px;
-  font-size: 22px;
-}
-.card-cta{
-  display:inline-block;
-  margin-top: 8px;
-  color: rgba(25,196,198,0.95);
-  font-weight: 800;
-}
-
-.card-accent{
-  background: linear-gradient(180deg, rgba(37,99,235,0.14), rgba(25,196,198,0.10));
-  border-color: rgba(255,255,255,0.14);
-}
-
-/* Pills / chips */
-.pill{
-  display:inline-block;
-  font-size: 12px;
-  color: rgba(255,255,255,0.86);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.chip{
-  display:inline-block;
-  font-size: 13px;
-  color: rgba(255,255,255,0.88);
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  transition: background .2s ease, border-color .2s ease, transform .12s ease;
-}
-.chip:hover{
-  background: rgba(25,196,198,0.12);
-  border-color: rgba(25,196,198,0.35);
-  transform: translateY(-1px);
-}
-
-/* Buttons */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap: 8px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: var(--text);
-  font-weight: 800;
-  cursor: pointer;
-  transition: transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.btn:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.18);
-}
-.btn:active{ transform: translateY(0); }
-.btn:focus-visible{
-  outline: 3px solid rgba(25,196,198,0.35);
-  outline-offset: 2px;
-}
-
-.btn-primary{
-  border-color: rgba(25,196,198,0.55);
-  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
-  color: #041116;
-  box-shadow: 0 18px 40px rgba(25,196,198,0.12);
-}
-.btn-primary:hover{
-  background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
-  border-color: rgba(25,196,198,0.70);
-}
-
-.btn-ghost{ background: rgba(0,0,0,0.14); }
-.btn-full{ width: 100%; }
-.btn-small{ padding: 10px 12px; border-radius: 12px; font-size: 13px; }
-
-/* Links */
-.link{
-  color: rgba(25,196,198,0.95);
-  font-weight: 800;
-}
-.link:hover{ text-decoration: underline; }
-
-/* Lists */
-.list{ color: var(--muted); }
-.list li{ margin-bottom: 8px; }
-.list.compact li{ margin-bottom: 6px; }
-
-.two-col{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-.mini-title{
-  font-size: 12px;
-  color: var(--muted2);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin-bottom: 8px;
-}
-
-/* Filters */
-.filters{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.field label{
-  display:block;
-  font-size: 12px;
-  color: var(--muted2);
-  margin-bottom: 6px;
-}
-input, select, textarea{
-  width: 100%;
-  padding: 12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.16);
-  color: var(--text);
-  outline: none;
-}
-input::placeholder, textarea::placeholder{ color: rgba(255,255,255,0.45); }
-input:focus, select:focus, textarea:focus{
-  border-color: rgba(25,196,198,0.55);
-  box-shadow: 0 0 0 4px rgba(25,196,198,0.16);
-}
-.btn-align{ align-self: end; }
-
-/* Listings */
-.listing-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-.listing{
-  padding: 0;
-  overflow: hidden;
-}
-.thumb{
-  height: 160px;
-  background:
-    radial-gradient(700px 200px at 30% 0%, rgba(25,196,198,0.28), transparent 60%),
-    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.10));
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-}
-.thumb-gear{
-  background:
-    radial-gradient(700px 200px at 60% 0%, rgba(37,99,235,0.24), transparent 60%),
-    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.10));
-}
-.listing-body{ padding: 16px; }
-
-.price-row{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 10px 0 10px;
-}
-.price{
-  font-weight: 950;
-  letter-spacing: -0.2px;
-}
-
-/* Table */
-.table-card{ padding: 16px; }
-.table-head{
-  display:flex;
-  gap: 12px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.table-filters{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.table-filters select{ width: auto; min-width: 170px; }
-
-.table-wrap{
-  overflow:auto;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.table{
-  width:100%;
-  border-collapse: collapse;
-  min-width: 680px;
-  background: rgba(0,0,0,0.10);
-}
-.table th, .table td{
-  text-align:left;
-  padding: 12px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.86);
-  font-size: 14px;
-}
-.table th{
-  color: rgba(255,255,255,0.92);
-  font-size: 13px;
-}
-.status{
-  display:inline-flex;
-  min-width: 36px;
-  justify-content:center;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-weight: 900;
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.status.ok{ background: rgba(25,196,198,0.16); }
-.status.warn{ background: rgba(215,184,90,0.16); }
-.status.bad{ background: rgba(239,68,68,0.16); }
-
-.note{
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  background: rgba(255,255,255,0.05);
-  border: 1px dashed rgba(255,255,255,0.16);
-  border-radius: 14px;
-  padding: 12px;
-}
-
-/* Content split (articles + list) */
-.content-split{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-.content-list .item{
-  display:block;
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.14);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: border-color .2s ease, background .2s ease, transform .12s ease;
-}
-.content-list .item + .item{ margin-top: 10px; }
-.content-list .item:hover{
-  background: rgba(25,196,198,0.10);
-  border-color: rgba(25,196,198,0.35);
-  transform: translateY(-1px);
-}
-.item-title{ display:block; font-weight: 900; margin-bottom: 2px; }
-.item-meta{ display:block; font-size: 12px; color: var(--muted); }
-.stack{ display:flex; flex-direction: column; gap: 8px; }
-
-.article-head{ margin-bottom: 10px; }
-.article-body h4{ margin-top: 14px; }
-.article-footer{
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-.tags{ display:flex; flex-wrap: wrap; gap: 8px; }
-
-/* Weather (stare elementy UI, zostawiamy) */
-.metric{
-  display:flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 10px 0;
-}
-.metric-value{ font-size: 26px; font-weight: 950; letter-spacing: -0.4px; }
-.metric-sub{ color: var(--muted); font-size: 13px; }
-
-.meter{
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.10);
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  margin: 10px 0 10px;
-}
-.meter span{
-  display:block;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(25,196,198,0.95), rgba(37,99,235,0.75));
-}
-
-.alert-card{
-  border-color: rgba(215,184,90,0.20);
-  background: linear-gradient(180deg, rgba(215,184,90,0.12), rgba(255,255,255,0.05));
-}
-.dot{
-  width: 10px; height: 10px;
-  border-radius: 999px;
-  display:inline-block;
-  margin-right: 8px;
-}
-.dot-warn{ background: rgba(215,184,90,0.95); }
-.dot-ok{ background: rgba(25,196,198,0.95); }
-
-/* Forms */
-.form-row{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-.form .field{ margin-bottom: 12px; }
-textarea{ resize: vertical; min-height: 120px; }
-
-.faq{
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.14);
-  border-radius: 14px;
-  padding: 12px;
-  margin-top: 10px;
-}
-.faq summary{
-  cursor: pointer;
-  font-weight: 900;
-}
-.faq p{
-  margin-top: 8px;
-  color: var(--muted);
-}
-
-.contact-box{
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
-}
-
-/* Footer */
-.site-footer{
-  padding: 26px 0 34px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  margin-top: 22px;
-  background: rgba(0,0,0,0.10);
-}
-.footer-inner{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  align-items: start;
-}
-.footer-links{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.footer-links a{
-  color: var(--muted);
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  transition: background .2s ease, border-color .2s ease, color .2s ease;
-}
-.footer-links a:hover{
-  border-color: rgba(25,196,198,0.30);
-  background: rgba(25,196,198,0.10);
-  color: var(--text);
-}
-
-/* Responsive */
-@media (min-width: 720px){
-  .site-nav{ display:flex; }
-  .nav-toggle{ display:none; }
-  .site-nav.open{ position: static; padding: 0; background: transparent; border: 0; }
-
-  .hero{ padding: 48px 0 22px; }
-  .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
-
-  .filters{ grid-template-columns: 1.4fr 1fr 1fr 1fr auto; }
-  .cards-grid{ grid-template-columns: repeat(2, 1fr); }
-  .cards-2{ grid-template-columns: repeat(2, 1fr); }
-  .cards-3{ grid-template-columns: repeat(3, 1fr); }
-
-  .listing-grid{ grid-template-columns: repeat(3, 1fr); }
-  .content-split{ grid-template-columns: 0.95fr 1.35fr; }
-  .two-col{ grid-template-columns: 1fr 1fr; }
-
-  .table-head{ flex-direction: row; align-items: center; }
-  .form-row{ grid-template-columns: 1fr 1fr; }
-  .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
-}
-
-@media (min-width: 700px){
-  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 980px){
-  .hero.hero-fold .hero-inner{
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 18px;
-  }
-  .hero-links-row,
-  .courses-hero{
-    grid-column: 1 / -1;
-  }
-  .hero.hero-fold h1{ margin-bottom: 8px; }
-  .hero.hero-fold .hero-lead{ font-size: 15px; }
-  .hero.hero-fold .hero-copy{ padding: 0; }
-  .weather-big-btn{ font-size: 16px; padding: 14px 16px; }
-}
-@media (min-width: 1100px){
-  .courses-hero{ grid-template-columns: repeat(3, 1fr); }
-}
-
-/* Accessibility / reduced motion */
-@media (prefers-reduced-motion: reduce){
-  *{ transition: none !important; scroll-behavior: auto !important; }
-  html{ scroll-behavior: auto; }
-}
-
-/* =========================================================
-   Weather map + search (jedna spójna wersja)
-   ========================================================= */
-.weather-search{
-  display: grid;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.weather-search-actions{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.weather-map{
-  height: 420px;
-  width: 100%;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.14);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-}
-
-/* Leaflet controls dopasowane kolorystycznie */
-.leaflet-control-zoom a{
-  background: rgba(0,0,0,0.55) !important;
-  color: rgba(255,255,255,0.92) !important;
-  border: 1px solid rgba(255,255,255,0.18) !important;
-}
-.leaflet-control-zoom a:hover{
-  background: rgba(25,196,198,0.18) !important;
-  border-color: rgba(25,196,198,0.35) !important;
-}
-
-/* surowy JSON */
-.weather-raw{
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.18);
-  border: 1px solid rgba(255,255,255,0.10);
-  overflow: auto;
-  max-height: 340px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.86);
-}
-
-/* na telefonie trochę niższa mapa */
-@media (max-width: 420px){
-  .weather-map{ height: 340px; }
-}
-
-/* CTA pogody w hero */
-.weather-cta{ text-align: center; }
-.weather-big-btn{
-  margin-top: 14px;
-  font-size: 18px;
-  padding: 16px 18px;
-}
-
-/* =========================================================
-   Prognoza: tabele 24h + 7 dni (wiersze)
-   ========================================================= */
-.forecast-table-wrap{
-  overflow: auto;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.10);
-}
-
-.forecast-table{
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 520px;
-}
-
-.forecast-table th,
-.forecast-table td{
-  text-align: left;
-  padding: 10px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.86);
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.forecast-table th{
-  color: rgba(255,255,255,0.92);
-  font-size: 13px;
-}
-
-.forecast-icon{
-  font-size: 18px;
-}
-
-/* na bardzo małych ekranach chowamy opad */
-@media (max-width: 520px){
-  .forecast-table th:nth-child(5),
-  .forecast-table td:nth-child(5){
-    display:none;
-  }
-}
-
-/* =========================
-   Agregator ofert (makieta)
-   ========================= */
-.agg-toolbar{
-  padding: 16px;
-}
-
-.agg-filters{
-  margin-bottom: 12px;
-}
-
-.agg-stats{
-  display:flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.agg-grid{
-  margin-top: 14px;
-}
-
-.agg-card{
-  padding: 0;
-  overflow: hidden;
-}
-
-.agg-thumb{
-  height: 150px;
-  background:
-    radial-gradient(700px 220px at 30% 0%, rgba(25,196,198,0.22), transparent 60%),
-    radial-gradient(700px 220px at 70% 0%, rgba(37,99,235,0.18), transparent 60%),
-    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.10));
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-}
-
-.agg-body{
-  padding: 16px;
-}
-
-.agg-meta{
-  display:flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 8px 0 10px;
-}
-
-.agg-source{
-  color: var(--muted2);
-  font-size: 12px;
-}
-
-@media (min-width: 720px){
-  .agg-toolbar .filters{
-    grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr auto;
-  }
-}
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="sailabc.com – portal żeglarski: ABC, aplikacje, giełda jachtów i osprzętu, wolna koja, mariny, kursy, poradniki, pogoda i społeczność." />
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>sailABC.com — Portal dla żeglarzy</title>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <!-- 1. GÓRNE MENU: przyciski + logo + sailABC.com -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
+        <!-- 13. Sekcje główne -->
+        <a class="nav-btn" href="/abc.html">ABC</a>
+        <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+        <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
+        <a class="nav-btn" href="/mariny.html">Wolne miejsca w marinach</a>
+        <a class="nav-btn" href="/spolecznosc.html">Społeczność</a>
+        <a class="nav-btn" href="/kontakt.html">Kontakt i FAQ</a>
+
+        <span class="nav-sep" aria-hidden="true"></span>
+
+        <!-- 14. Do podstron -->
+        <a class="nav-btn nav-btn-ghost" href="/gielda-jachtow.html">Giełda jachtów</a>
+        <a class="nav-btn nav-btn-ghost" href="/gielda-osprzetu.html">Giełda osprzętu</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-regat.html">Agregator regat</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-ofert.html">Agregator ofert</a>
+        <a class="nav-btn nav-btn-ghost" href="/artykuly.html">Artykuły i poradniki</a>
+
+        <span class="nav-sep" aria-hidden="true"></span>
+
+        <!-- 15. Admin -->
+        <a class="nav-btn nav-btn-accent" href="/admin/">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 2–5. ABOVE THE FOLD: tytuł+opis (lewo), przycisk pogody (prawo), linki, kursy -->
+    <section class="hero hero-fold" aria-label="Start">
+      <div class="container hero-inner hero-fold-inner">
+
+        <!-- 2. lewa -->
+        <div class="hero-copy">
+          <h1>Portal dla żeglarzy</h1>
+          <p class="hero-lead">
+            sailABC wspiera edukację i praktykę żeglarską: ABC, testy, poradniki, narzędzia, wolna koja,
+            mariny oraz rozbudowana prognoza pogody dla żeglugi.
+          </p>
+        </div>
+
+        <!-- 2. prawa -->
+        <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
+          <div class="panel-card weather-cta">
+            <h2>Pogoda żeglarska</h2>
+            <p class="muted">
+              Wybierz punkt na mapie lub wpisz nazwę miejsca. Zobacz aktualnie, 24 godziny i 7 dni.
+            </p>
+            <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
+              Otwórz pogodę
+            </a>
+            <div class="note" style="margin-top:12px;">
+              Przykłady: Zalew Szczeciński, Hel, Giżycko, Zatoka Gdańska.
+            </div>
+          </div>
+        </aside>
+
+        <!-- 3. przyciski-linki -->
+        <div class="hero-links-row" aria-label="Skróty tematyczne">
+          <a class="chip chip-link" href="/wezly.html">Węzły</a>
+          <a class="chip chip-link" href="/manewry.html">Manewry</a>
+          <a class="chip chip-link" href="/nawigacja.html">Nawigacja</a>
+          <a class="chip chip-link" href="/praca-zagli.html">Praca żagli</a>
+          <a class="chip chip-link" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
+          <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
+        </div>
+
+        <!-- 4. duże przyciski kursów (linki do Fabryki Kursów) -->
+        <div class="courses-hero" aria-label="Kursy (płatne)">
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/nawigacja-elektroniczna" target="_blank" rel="noopener">Obsługa nawigacji elektronicznej – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-src" target="_blank" rel="noopener">Operator SRC – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-lrc" target="_blank" rel="noopener">Operator LRC – kurs</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6–9. POGODA POD 1–4 -->
+    <section class="section section-tight" id="pogoda" aria-label="Pogoda">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pogoda i warunki na wodzie</h2>
+          <p class="muted">Wpisz miejsce albo kliknij na mapie. Pokażemy warunki aktualne, 24 godziny i 7 dni.</p>
+        </div>
+
+        <div class="cards-grid cards-2">
+          <article class="card">
+            <h3>Wybierz miejsce</h3>
+
+            <div class="weather-search">
+              <div class="field" style="margin:0;">
+                <label for="place">Miejsce</label>
+                <input id="place" type="text" placeholder="np. Zalew Szczeciński / Szczecin / Hel / Giżycko" />
+              </div>
+
+              <div class="weather-search-actions">
+                <button class="btn btn-ghost" id="btnSearchPlace" type="button">Szukaj na mapie</button>
+                <button class="btn btn-primary" id="btnCheckWeather" type="button" disabled>Sprawdź pogodę</button>
+              </div>
+
+              <div class="muted small" id="pickedInfo">Kliknij na mapie albo wyszukaj miejsce.</div>
+            </div>
+
+            <div id="weatherMap" class="weather-map" aria-label="Mapa pogody"></div>
+
+            <div class="note" id="weatherNote" style="margin-top:12px;">
+              Kliknij na mapie lub wyszukaj miejscowość/akwen.
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Aktualne warunki</h3>
+
+            <div class="panel-grid" style="margin-top:8px;">
+              <div class="kpi">
+                <span class="kpi-label">Wiatr</span>
+                <span class="kpi-value" id="wWind">—</span>
+                <span class="kpi-sub" id="wWindSub">—</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Temperatura</span>
+                <span class="kpi-value" id="wTemp">—</span>
+                <span class="kpi-sub" id="wTime">—</span>
+              </div>
+            </div>
+
+            <h3 style="margin-top:14px;">Prognoza 24 godziny</h3>
+            <p class="muted" id="hourlyMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 24h" tabindex="0">
+              <table class="forecast-table" aria-describedby="hourlyMeta">
+                <thead>
+                  <tr>
+                    <th>Godzina</th>
+                    <th>Warunki</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast24">
+                  <!-- wiersze generuje weather.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="margin-top:14px;">Prognoza 7 dni</h3>
+            <p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 7 dni" tabindex="0">
+              <table class="forecast-table" aria-describedby="forecastMeta">
+                <thead>
+                  <tr>
+                    <th>Dzień</th>
+                    <th>Warunki</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast7">
+                  <!-- wiersze generuje weather.js -->
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Sekcje pod pogodą (bez ikonek/emoji) -->
+    <section class="section" id="panele" aria-label="Sekcje portalu">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sekcje portalu</h2>
+          <p class="muted">Wszystkie działy jako podstrony (treści dodamy później).</p>
+        </div>
+
+        <div class="cards-grid cards-3">
+          <a class="card card-link" href="/abc.html">
+            <h3>Panele ABC żeglarstwa</h3>
+            <p>Bezpieczeństwo, nawigacja, praca żagli, manewry, węzły.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <a class="card card-link" href="/quizy.html">
+            <h3>Testy i quizy żeglarskie</h3>
+            <p>Quizy ABC, patenty, przepisy, manewry.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <a class="card card-link" href="/wolna-koja.html">
+            <h3>Wolna koja</h3>
+            <p>System ofert rejsów i wolnych miejsc na jachtach.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <a class="card card-link" href="/mariny.html">
+            <h3>System wolnych miejsc w marinach</h3>
+            <p>Docelowo: baza marin + dostępność i parametry.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <a class="card card-link" href="/spolecznosc.html">
+            <h3>Społeczność</h3>
+            <p>Forum, ogłoszenia, grupy rejsowe.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <a class="card card-link" href="/kontakt.html">
+            <h3>Kontakt i FAQ</h3>
+            <p>Pomoc, pytania, współpraca.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>sailABC</strong>
+          <p class="muted small">sailabc.com • Twój portal żeglarski</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="/abc.html">ABC</a>
+          <a href="#pogoda">Pogoda</a>
+          <a href="/kontakt.html">Kontakt</a>
+          <a href="/admin/">Admin</a>
+        </div>
+
+        <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // minimal: menu (mobile) + rok
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#site-nav');
+
+    function setNav(open) {
+      if (!toggle || !nav) return;
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('open', open);
+    }
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setNav(!isOpen);
+    });
+
+    nav?.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'A') setNav(false);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Leaflet + pogoda -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="weather.js?v=6"></script>
+</body>
+</html>
