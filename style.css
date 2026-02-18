@@ -89,36 +89,39 @@ code{
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* POPRAWKA: menu nie nachodzi na logo */
 .header-inner{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 14px 0;
-  flex-wrap: wrap; /* pozwala spadać menu do kolejnej linii */
+  gap: 14px;
+  padding: 16px 0;
+  flex-wrap: wrap; /* <-- FIX: nie nachodzi na logo */
 }
 
 .brand{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 240px;  /* nie ściskamy logo+tekstu */
+  min-width: 220px; /* <-- FIX: miejsce na logo + tekst */
   flex: 0 0 auto;
 }
-
 .brand-logo{
   width: 130px;
   height: 90px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
 }
-
 .brand-text{ display: flex; flex-direction: column; }
-.brand-name{ font-weight: 900; letter-spacing: 0.2px; white-space: nowrap; }
-.brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
+.brand-name{ font-weight: 900; letter-spacing: 0.2px; }
 
-/* hamburger */
+.site-nav{
+  display: none;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .nav-toggle{
   appearance: none;
   border: 1px solid rgba(255,255,255,0.12);
@@ -128,7 +131,6 @@ code{
   padding: 10px 12px;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.22);
-  flex: 0 0 auto;
 }
 .nav-toggle:focus-visible{
   outline: 3px solid rgba(25,196,198,0.35);
@@ -151,61 +153,48 @@ code{
 .nav-toggle-lines::before{ top: 1px; }
 .nav-toggle-lines::after{ bottom: 1px; }
 
-/* nav */
-.site-nav{
-  display: none;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  width: 100%;
-  order: 3; /* menu pod logo, gdy brakuje miejsca */
-  padding-top: 10px;
-}
-
-/* mobile open */
 .site-nav.open{
   display: flex;
+  position: absolute;
+  left: 0; right: 0;
+  top: 110px; /* <-- FIX: nie nachodzi na logo */
+  padding: 12px 16px 16px;
   background: rgba(10,16,28,0.92);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 12px 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* nav buttons */
-.nav-buttons .nav-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size: 13px;
-  font-weight: 850;
-  color: rgba(255,255,255,0.86);
+/* NAV BUTTONS (dla Twojego menu) */
+.nav-buttons{ gap: 8px; }
+.nav-btn{
+  font-size: 14px;
+  color: var(--muted);
   padding: 10px 12px;
   border-radius: 12px;
   transition: background .2s ease, color .2s ease, border-color .2s ease, transform .12s ease;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
   white-space: nowrap;
 }
-.nav-buttons .nav-btn:hover{
-  background: rgba(25,196,198,0.12);
-  border-color: rgba(25,196,198,0.35);
+.nav-btn:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(25,196,198,0.25);
   color: var(--text);
   transform: translateY(-1px);
 }
-
-.nav-buttons .nav-btn-ghost{ background: rgba(0,0,0,0.14); }
-
-.nav-buttons .nav-btn-accent{
+.nav-btn-ghost{
+  background: rgba(0,0,0,0.14);
+}
+.nav-btn-accent{
   border-color: rgba(25,196,198,0.55);
   background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
   color: #041116;
+  font-weight: 900;
 }
-
 .nav-sep{
   width: 1px;
-  height: 22px;
+  height: 28px;
   background: rgba(255,255,255,0.12);
-  margin: 0 4px;
+  margin: 0 6px;
 }
 
 /* Hero */
@@ -218,6 +207,7 @@ code{
   gap: 16px;
   align-items: start;
 }
+
 .hero-copy{ padding: 10px 0; }
 
 .hero h1{
@@ -229,13 +219,6 @@ code{
   color: var(--muted);
   font-size: 16px;
   max-width: 62ch;
-}
-
-.hero-links-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 6px;
 }
 
 .hero-panel .panel-card{
@@ -262,20 +245,19 @@ code{
 .kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
 .kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-/* Kursy (DUŻE) */
+/* Hero: dodatkowe rzędy */
+.hero-links-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .courses-hero{
   display:grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-/* to trzyma rozmiar DUŻY zawsze */
-.courses-hero .btn-big{
-  font-size: 18px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  line-height: 1.15;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 /* Sections */
@@ -324,6 +306,7 @@ code{
   border-color: rgba(25,196,198,0.35);
   background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
 }
+
 .card-cta{
   display:inline-block;
   margin-top: 8px;
@@ -396,7 +379,13 @@ code{
 
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width: 100%; }
-.btn-small{ padding: 10px 12px; border-radius: 12px; font-size: 13px; }
+
+/* DUŻE PRZYCISKI KURSÓW (nie zmniejszam) */
+.btn-big{
+  font-size: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+}
 
 /* Forms */
 .field label{
@@ -420,26 +409,14 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 0 0 4px rgba(25,196,198,0.16);
 }
 
-/* Note */
-.note{
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  background: rgba(255,255,255,0.05);
-  border: 1px dashed rgba(255,255,255,0.16);
-  border-radius: 14px;
-  padding: 12px;
-}
-
-/* Weather search + map */
+/* Weather */
 .weather-search{
   display: grid;
   gap: 12px;
   margin-bottom: 12px;
 }
-
 .weather-search-actions{
-  display: flex;
+  display:flex;
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
@@ -448,15 +425,15 @@ input:focus, select:focus, textarea:focus{
 .weather-map{
   height: 320px;
   width: 100%;
-  border-radius: var(--radius);
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.10);
+  margin-top: 12px;
   background: rgba(0,0,0,0.14);
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-  margin-top: 12px;
 }
 
-/* Leaflet controls */
+/* Leaflet controls dopasowane kolorystycznie */
 .leaflet-control-zoom a{
   background: rgba(0,0,0,0.55) !important;
   color: rgba(255,255,255,0.92) !important;
@@ -467,7 +444,26 @@ input:focus, select:focus, textarea:focus{
   border-color: rgba(25,196,198,0.35) !important;
 }
 
-/* Forecast tables */
+.note{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.16);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.weather-cta{
+  text-align: center;
+}
+.weather-big-btn{
+  margin-top: 14px;
+  font-size: 18px;
+  padding: 16px 18px;
+}
+
+/* FORECAST TABLES */
 .forecast-table-wrap{
   overflow:auto;
   border-radius: 14px;
@@ -479,54 +475,35 @@ input:focus, select:focus, textarea:focus{
 .forecast-table{
   width: 100%;
   border-collapse: collapse;
-  min-width: 640px;
+  min-width: 720px;
 }
 
 .forecast-table th,
 .forecast-table td{
-  text-align: left;
+  text-align:left;
   padding: 10px 12px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.86);
   font-size: 14px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .forecast-table th{
   color: rgba(255,255,255,0.92);
   font-size: 13px;
-  position: sticky;
-  top: 0;
-  background: rgba(10,16,28,0.65);
-  backdrop-filter: blur(8px);
 }
 
-/* Weather icon cell (SVG) */
-.wxcell{
-  width: 1%;
-  white-space: nowrap;
-}
-.wx-icon{
-  width: 18px;
-  height: 18px;
-  display:inline-block;
-  vertical-align: middle;
-  opacity: 0.95;
-}
-.wx-icon svg{
-  width: 100%;
-  height: 100%;
-  display:block;
-}
-.wx-icon path,
-.wx-icon circle,
-.wx-icon line,
-.wx-icon polyline{
-  stroke: rgba(255,255,255,0.88);
-  stroke-width: 1.8;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.wx-ic{
+  display:inline-flex;
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content:center;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.18);
+  margin-right: 8px;
+  font-size: 16px;
 }
 
 /* Footer */
@@ -564,7 +541,7 @@ input:focus, select:focus, textarea:focus{
 @media (min-width: 720px){
   .site-nav{ display:flex; }
   .nav-toggle{ display:none; }
-  .site-nav.open{ background: transparent; border: 0; padding: 10px 0 0; }
+  .site-nav.open{ position: static; padding: 0; background: transparent; border: 0; }
 
   .hero{ padding: 48px 0 22px; }
   .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
@@ -573,27 +550,21 @@ input:focus, select:focus, textarea:focus{
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
-  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
+  .courses-hero{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
-}
-
-@media (min-width: 1100px){
-  /* na bardzo szerokich: menu może wejść w ten sam wiersz */
-  .header-inner{ flex-wrap: nowrap; }
-  .site-nav{
-    width: auto;
-    order: 0;
-    padding-top: 0;
-  }
-}
-
-@media (max-width: 420px){
-  .weather-map{ height: 300px; }
 }
 
 /* Accessibility / reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
   html{ scroll-behavior: auto; }
+}
+
+/* na telefonie trochę niższa mapa */
+@media (max-width: 420px){
+  .weather-map{ height: 340px; }
 }
