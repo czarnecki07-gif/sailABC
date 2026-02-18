@@ -1,8 +1,8 @@
 // weather.js — Open-Meteo + Leaflet
-// - CURRENT: temperatura, wiatr, kierunek, porywy, opad, zachmurzenie
-// - HOURLY 24H: następne 24 godziny od momentu sprawdzania (z porywami)
-// - DAILY 7D: wierszami (z ikonkami)
-// Jednostki: km/h (nie kn)
+// - CURRENT: temperatura, wiatr, kierunek, porywy, opad, zachmurzenie + Beaufort
+// - HOURLY 24H: następne 24 godziny od momentu sprawdzania (z porywami + Beaufort)
+// - DAILY 7D: wierszami (z ikonkami + Beaufort)
+// Jednostki: km/h
 
 let map;
 let marker = null;
@@ -40,8 +40,6 @@ function degToCompass(deg) {
 function pad2(n){ return String(n).padStart(2, "0"); }
 
 function formatHour(iso) {
-  // iso: YYYY-MM-DDTHH:MM
-  // pokazujemy HH:MM
   const t = iso.split("T")[1] || "";
   return t.slice(0,5);
 }
@@ -55,10 +53,7 @@ function formatDayLabel(isoDate) {
   return `${d} ${dd}.${mm}`;
 }
 
-/**
- * Open-Meteo weather_code -> ikonka (bez tekstów)
- * Źródło: WMO codes używane przez Open-Meteo.
- */
+/** Open-Meteo weather_code -> ikonka */
 function wxIcon(code) {
   const c = Number(code);
   if (c === 0) return "☀️";
@@ -67,11 +62,9 @@ function wxIcon(code) {
   if (c === 3) return "☁️";
   if ([45,48].includes(c)) return "🌫️";
   if ([51,53,55,56,57].includes(c)) return "🌦️";
-  if ([61,63,65].includes(c)) return "🌧️";
-  if ([66,67].includes(c)) return "🌧️";
-  if ([71,73,75,77].includes(c)) return "🌨️";
+  if ([61,63,65,66,67].includes(c)) return "🌧️";
+  if ([71,73,75,77,85,86].includes(c)) return "🌨️";
   if ([80,81,82].includes(c)) return "🌦️";
-  if ([85,86].includes(c)) return "🌨️";
   if ([95,96,99].includes(c)) return "⛈️";
   return "•";
 }
@@ -126,7 +119,7 @@ async function fetchWeather(lat, lon) {
     "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover,weather_code"
   );
 
-  // HOURLY (na 24h od teraz)
+  // HOURLY
   forecast.searchParams.set(
     "hourly",
     [
@@ -135,12 +128,11 @@ async function fetchWeather(lat, lon) {
       "wind_speed_10m",
       "wind_gusts_10m",
       "wind_direction_10m",
-      "weather_code",
-      "cloud_cover"
+      "weather_code"
     ].join(",")
   );
 
-  // DAILY (7 dni)
+  // DAILY
   forecast.searchParams.set(
     "daily",
     [
@@ -159,27 +151,23 @@ async function fetchWeather(lat, lon) {
 
   if (!rf.ok || !f || !f.current) throw new Error("Nie udało się pobrać pogody (Open-Meteo).");
 
-  return {
-    current: f.current,
-    hourly: f.hourly || null,
-    daily: f.daily || null
-  };
+  return { current: f.current, hourly: f.hourly || null, daily: f.daily || null };
 }
 
 function renderCurrent(c) {
-  // Open-Meteo current wind_speed_10m: km/h
   const windKmh = Number(c.wind_speed_10m ?? 0);
   const gustKmh = Number(c.wind_gusts_10m ?? 0);
-  const windMs = windKmh / 3.6;
-  const bf = beaufortFromMs(windMs);
+  const bf = beaufortFromMs(windKmh / 3.6);
+
   const windDeg = Number(c.wind_direction_10m ?? 0);
   const windDir = degToCompass(windDeg);
 
   if (elWWind) elWWind.textContent = `${bf}°B`;
-  if (elWWindSub) elWWindSub.textContent = `${windDir} (${Math.round(windDeg)}°) • ${Math.round(windKmh)} km/h • porywy ${Math.round(gustKmh)} km/h`;
+  if (elWWindSub) elWWindSub.textContent =
+    `${windDir} (${Math.round(windDeg)}°) • ${Math.round(windKmh)} km/h • porywy ${Math.round(gustKmh)} km/h`;
+
   if (elWTemp) elWTemp.textContent = `${Math.round(Number(c.temperature_2m ?? 0))}°C`;
 
-  // bez rozbudowywania tekstów – tylko Twoje pola
   const t = c.time || "—";
   const precip = Number(c.precipitation ?? 0);
   const cloud = Number(c.cloud_cover ?? 0);
@@ -187,8 +175,6 @@ function renderCurrent(c) {
 }
 
 function findHourlyStartIndex(hourlyTime) {
-  // hourly.time: array ISO "YYYY-MM-DDTHH:00"
-  // bierzemy index >= teraz
   const now = new Date();
   for (let i = 0; i < hourlyTime.length; i++) {
     const dt = new Date(hourlyTime[i]);
@@ -211,11 +197,12 @@ function renderForecast24(h) {
   const rows = [];
   for (let i = start; i < end; i++) {
     const hour = formatHour(h.time[i]);
-    const code = h.weather_code?.[i];
-    const ic = wxIcon(code);
+    const ic = wxIcon(h.weather_code?.[i]);
 
-    const wind = Math.round(Number(h.wind_speed_10m?.[i] ?? 0));
-    const gust = Math.round(Number(h.wind_gusts_10m?.[i] ?? 0));
+    const wind = Number(h.wind_speed_10m?.[i] ?? 0);
+    const gust = Number(h.wind_gusts_10m?.[i] ?? 0);
+    const bf = beaufortFromMs(wind / 3.6);
+
     const deg = Number(h.wind_direction_10m?.[i] ?? 0);
     const dir = degToCompass(deg);
 
@@ -226,7 +213,7 @@ function renderForecast24(h) {
       <tr>
         <td>${hour}</td>
         <td><span class="wx-ic" aria-hidden="true">${ic}</span></td>
-        <td>${dir} • ${wind} km/h • porywy ${gust} km/h</td>
+        <td>${bf}°B • ${dir} • ${Math.round(wind)} km/h • porywy ${Math.round(gust)} km/h</td>
         <td>${temp}°C</td>
         <td>${precip.toFixed(1)} mm</td>
       </tr>
@@ -254,8 +241,10 @@ function renderForecast7(d) {
     const tmax = Math.round(Number(d.temperature_2m_max?.[i] ?? 0));
     const tmin = Math.round(Number(d.temperature_2m_min?.[i] ?? 0));
 
-    const wind = Math.round(Number(d.wind_speed_10m_max?.[i] ?? 0));
-    const gust = Math.round(Number(d.wind_gusts_10m_max?.[i] ?? 0));
+    const wind = Number(d.wind_speed_10m_max?.[i] ?? 0);
+    const gust = Number(d.wind_gusts_10m_gusts?.[i] ?? d.wind_gusts_10m_max?.[i] ?? 0); // kompatybilnie
+    const bf = beaufortFromMs(wind / 3.6);
+
     const deg = Number(d.wind_direction_10m_dominant?.[i] ?? 0);
     const dir = degToCompass(deg);
 
@@ -265,7 +254,7 @@ function renderForecast7(d) {
       <tr>
         <td>${label}</td>
         <td><span class="wx-ic" aria-hidden="true">${ic}</span></td>
-        <td>${dir} • ${wind} km/h • porywy ${gust} km/h</td>
+        <td>${bf}°B • ${dir} • ${Math.round(wind)} km/h • porywy ${Math.round(gust)} km/h</td>
         <td>${tmin}–${tmax}°C</td>
         <td>${precip.toFixed(1)} mm</td>
       </tr>
