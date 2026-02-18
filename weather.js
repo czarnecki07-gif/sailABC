@@ -1,6 +1,7 @@
 // weather.js — Open-Meteo + Leaflet + prognoza: current + 24h + 7 dni (tabele)
-// Tekst ma pierwszeństwo nad mapą. Bez emoji/infantylnych ikonek.
-// 24h: pokazuje też porywy wiatru (wind_gusts_10m) i liczy "następne 24h od teraz".
+// 24h: "następne 24h od teraz" (od najbliższej kolejnej pełnej godziny)
+// Warunki: ikonka SVG (bez emoji) zamiast tekstu, opis w title/aria-label
+// Wiatr: pokazuje też porywy.
 
 let map;
 let marker = null;
@@ -68,8 +69,29 @@ function fmtDay(isoDate) {
   return `${d} ${dd}.${mm}`;
 }
 
-// Open-Meteo weathercode -> neutralny opis tekstowy (bez ikon)
-function weatherText(code) {
+// start prognozy 24h: najbliższa następna pełna godzina (>= teraz zaokrąglone w górę)
+function findStartIndex(hourlyTimes) {
+  if (!Array.isArray(hourlyTimes) || hourlyTimes.length === 0) return 0;
+
+  const now = new Date();
+
+  // "ceiling" do kolejnej pełnej godziny
+  const nowCeil = new Date(now);
+  nowCeil.setMinutes(0, 0, 0);
+  if (now.getMinutes() > 0 || now.getSeconds() > 0 || now.getMilliseconds() > 0) {
+    nowCeil.setHours(nowCeil.getHours() + 1);
+  }
+
+  for (let i = 0; i < hourlyTimes.length; i++) {
+    const t = new Date(hourlyTimes[i]);
+    if (t >= nowCeil) return i;
+  }
+  return 0;
+}
+
+// ===== Warunki: label + ikony SVG (bez emoji) =====
+
+function weatherLabel(code) {
   const c = Number(code);
   if (Number.isNaN(c)) return "Zmienne";
 
@@ -98,24 +120,95 @@ function weatherText(code) {
   return "Zmienne";
 }
 
-// start prognozy 24h: najbliższa następna pełna godzina (>= teraz zaokrąglone w górę)
-function findStartIndex(hourlyTimes) {
-  if (!Array.isArray(hourlyTimes) || hourlyTimes.length === 0) return 0;
+function svgSun() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <line x1="12" y1="2" x2="12" y2="5"></line>
+    <line x1="12" y1="19" x2="12" y2="22"></line>
+    <line x1="2" y1="12" x2="5" y2="12"></line>
+    <line x1="19" y1="12" x2="22" y2="12"></line>
+    <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
+    <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
+    <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
+    <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
+  </svg>`;
+}
 
-  const now = new Date();
+function svgCloud() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7.5 18.5h10a4 4 0 0 0 .7-7.9A5.5 5.5 0 0 0 7.7 9.7 3.8 3.8 0 0 0 7.5 18.5z"></path>
+  </svg>`;
+}
 
-  // "ceiling" do kolejnej pełnej godziny
-  const nowCeil = new Date(now);
-  nowCeil.setMinutes(0, 0, 0);
-  if (now.getMinutes() > 0 || now.getSeconds() > 0 || now.getMilliseconds() > 0) {
-    nowCeil.setHours(nowCeil.getHours() + 1);
-  }
+function svgCloudSun() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="7.5" cy="9" r="2.5"></circle>
+    <line x1="7.5" y1="3" x2="7.5" y2="4.6"></line>
+    <line x1="3.5" y1="9" x2="5.1" y2="9"></line>
+    <line x1="10" y1="6.5" x2="11.2" y2="5.3"></line>
+    <path d="M9 18.5h8.5a3.6 3.6 0 0 0 .6-7.1A5 5 0 0 0 9.1 12"></path>
+  </svg>`;
+}
 
-  for (let i = 0; i < hourlyTimes.length; i++) {
-    const t = new Date(hourlyTimes[i]);
-    if (t >= nowCeil) return i;
-  }
-  return 0;
+function svgRain() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7.5 14.5h10a4 4 0 0 0 .7-7.9A5.5 5.5 0 0 0 7.7 5.7 3.8 3.8 0 0 0 7.5 14.5z"></path>
+    <line x1="9" y1="17" x2="8" y2="21"></line>
+    <line x1="13" y1="17" x2="12" y2="21"></line>
+    <line x1="17" y1="17" x2="16" y2="21"></line>
+  </svg>`;
+}
+
+function svgSnow() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7.5 14.5h10a4 4 0 0 0 .7-7.9A5.5 5.5 0 0 0 7.7 5.7 3.8 3.8 0 0 0 7.5 14.5z"></path>
+    <line x1="10" y1="18" x2="10" y2="20"></line>
+    <line x1="14" y1="18" x2="14" y2="20"></line>
+    <line x1="12" y1="19" x2="12" y2="21"></line>
+  </svg>`;
+}
+
+function svgFog() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <line x1="4" y1="9" x2="20" y2="9"></line>
+    <line x1="6" y1="13" x2="18" y2="13"></line>
+    <line x1="5" y1="17" x2="19" y2="17"></line>
+  </svg>`;
+}
+
+function svgStorm() {
+  return `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7.5 14.5h10a4 4 0 0 0 .7-7.9A5.5 5.5 0 0 0 7.7 5.7 3.8 3.8 0 0 0 7.5 14.5z"></path>
+    <polyline points="12,15 10,19 13,19 11,22"></polyline>
+  </svg>`;
+}
+
+function weatherIcon(code) {
+  const c = Number(code);
+
+  if (c === 0) return svgSun();
+  if (c === 1 || c === 2) return svgCloudSun();
+  if (c === 3) return svgCloud();
+
+  if (c === 45 || c === 48) return svgFog();
+
+  // mżawka / deszcz / przelotne / marznące
+  if ([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(c)) return svgRain();
+
+  // śnieg / przelotny śnieg / ziarna
+  if ([71,73,75,77,85,86].includes(c)) return svgSnow();
+
+  // burze
+  if ([95,96,99].includes(c)) return svgStorm();
+
+  return svgCloud();
 }
 
 // ===== Core =====
@@ -308,10 +401,16 @@ function renderHourly24(h) {
 
     const wdir = degToCompass(h.windDir[i] ?? 0);
 
+    const label = weatherLabel(h.code[i]);
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${fmtHour(h.time[i])}</td>
-      <td>${weatherText(h.code[i])}</td>
+      <td class="wxcell" title="${label}">
+        <span class="wx-icon" aria-label="${label}">
+          ${weatherIcon(h.code[i])}
+        </span>
+      </td>
       <td>
         <strong>${bf}°B</strong> ${wdir} • ${windKn.toFixed(0)} kn
         <br><span class="muted">porywy ${gustKn.toFixed(0)} kn</span>
@@ -335,7 +434,7 @@ function renderDaily7(d) {
   }
 
   for (let i = 0; i < n; i++) {
-    const label = fmtDay(d.time[i]);
+    const labelDay = fmtDay(d.time[i]);
 
     const tmax = Math.round(d.tmax[i] ?? 0);
     const tmin = Math.round(d.tmin[i] ?? 0);
@@ -350,11 +449,16 @@ function renderDaily7(d) {
     const bf = beaufortFromMs(windMs);
 
     const precip = Number(d.precipSum[i] ?? 0).toFixed(1);
+    const label = weatherLabel(d.code[i]);
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${label}</td>
-      <td>${weatherText(d.code[i])}</td>
+      <td>${labelDay}</td>
+      <td class="wxcell" title="${label}">
+        <span class="wx-icon" aria-label="${label}">
+          ${weatherIcon(d.code[i])}
+        </span>
+      </td>
       <td><strong>${bf}°B</strong> ${wdir} • ${windMaxKn.toFixed(0)} kn • porywy ${gustMaxKn.toFixed(0)} kn</td>
       <td>${tmin}–${tmax}°C</td>
       <td>${precip} mm</td>
