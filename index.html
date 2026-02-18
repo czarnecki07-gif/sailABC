@@ -60,25 +60,10 @@
           </p>
         </div>
 
-        <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
-          <div class="panel-card weather-cta">
-            <h2>Pogoda żeglarska</h2>
-            <p class="muted">
-              Wybierz punkt na mapie lub wpisz nazwę miejsca. Zobacz aktualnie, 24 godziny i 7 dni.
-            </p>
-            <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
-              Otwórz pogodę
-            </a>
-            <div class="note" style="margin-top:12px;">
-              Przykłady: Zalew Szczeciński, Hel, Giżycko, Zatoka Gdańska.
-            </div>
-          </div>
-        </aside>
-
         <!-- PORADNIKI (LEWA) + KURSY (PRAWA) -->
         <div class="courses-hero" aria-label="Poradniki i kursy">
 
-          <!-- LEWA: WSZYSTKIE PORADNIKI jako identyczne małe przyciski -->
+          <!-- LEWA: PORADNIKI -->
           <div class="courses-guides" aria-label="Poradniki">
             <a class="chip chip-link" href="/wezly.html">Węzły</a>
             <a class="chip chip-link" href="/manewry.html">Manewry</a>
@@ -111,8 +96,15 @@
             <a class="chip chip-link" href="/elektroniczna-vs-papierowa.html">Nawigacja elektroniczna vs papierowa — procedury awaryjne</a>
           </div>
 
-          <!-- PRAWA: KURSY jako większe przyciski (bez zmian) -->
-          <div class="courses-paid" aria-label="Kursy (płatne)">
+          <!-- PRAWA: POGODA (mini) + KURSY -->
+          <div class="courses-paid" aria-label="Pogoda i kursy">
+
+            <!-- Mini karta: tylko nazwa + przycisk -->
+            <div class="card weather-mini" aria-label="Pogoda dla żeglarzy">
+              <h2 class="weather-mini-title">Pogoda dla żeglarzy</h2>
+              <a class="btn btn-primary weather-mini-btn" href="#pogoda">Otwórz pogodę</a>
+            </div>
+
             <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
             <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
             <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
@@ -280,6 +272,7 @@
         <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
       </div>
     </footer>
+
   </main>
 
   <script>
