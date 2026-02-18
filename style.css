@@ -95,14 +95,14 @@ code{
   justify-content: space-between;
   gap: 14px;
   padding: 16px 0;
-  flex-wrap: wrap; /* <-- FIX: nie nachodzi na logo */
+  flex-wrap: wrap; /* FIX: menu nie nachodzi na logo */
 }
 
 .brand{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 220px; /* <-- FIX: miejsce na logo + tekst */
+  min-width: 220px; /* FIX: miejsce na logo+tekst */
   flex: 0 0 auto;
 }
 .brand-logo{
@@ -157,13 +157,13 @@ code{
   display: flex;
   position: absolute;
   left: 0; right: 0;
-  top: 110px; /* <-- FIX: nie nachodzi na logo */
+  top: 110px; /* FIX: dropdown nie nachodzi na logo */
   padding: 12px 16px 16px;
   background: rgba(10,16,28,0.92);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* NAV BUTTONS (dla Twojego menu) */
+/* NAV BUTTONS */
 .nav-buttons{ gap: 8px; }
 .nav-btn{
   font-size: 14px;
@@ -181,15 +181,7 @@ code{
   color: var(--text);
   transform: translateY(-1px);
 }
-.nav-btn-ghost{
-  background: rgba(0,0,0,0.14);
-}
-.nav-btn-accent{
-  border-color: rgba(25,196,198,0.55);
-  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
-  color: #041116;
-  font-weight: 900;
-}
+.nav-btn-ghost{ background: rgba(0,0,0,0.14); }
 .nav-sep{
   width: 1px;
   height: 28px;
@@ -201,6 +193,7 @@ code{
 .hero{
   padding: 34px 0 18px;
 }
+
 .hero-inner{
   display: grid;
   grid-template-columns: 1fr;
@@ -245,7 +238,7 @@ code{
 .kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
 .kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-/* Hero: dodatkowe rzędy */
+/* Hero: skróty */
 .hero-links-row{
   display:flex;
   flex-wrap: wrap;
@@ -253,12 +246,33 @@ code{
   margin-top: 10px;
 }
 
+/* Kursy: domyślnie 1 kolumna na mobile */
 .courses-hero{
-  display:grid;
+  width: 100%;
+  display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 12px;
   margin-top: 10px;
 }
+
+/* DUŻE przyciski kursów */
+.btn-big{
+  width: 100%;
+  font-size: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
+}
+
+/* Żeby nie było "pustego pola": wymuszamy kolejność w hero */
+.hero-fold-inner{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.hero-fold-inner > .hero-copy{ order: 1; }
+.hero-fold-inner > .hero-panel{ order: 2; }
+.hero-fold-inner > .hero-links-row{ order: 3; }
+.hero-fold-inner > .courses-hero{ order: 4; }
 
 /* Sections */
 .section{ padding: 26px 0; }
@@ -380,13 +394,6 @@ code{
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width: 100%; }
 
-/* DUŻE PRZYCISKI KURSÓW (nie zmniejszam) */
-.btn-big{
-  font-size: 16px;
-  padding: 16px 18px;
-  border-radius: 16px;
-}
-
 /* Forms */
 .field label{
   display:block;
@@ -454,9 +461,7 @@ input:focus, select:focus, textarea:focus{
   padding: 12px;
 }
 
-.weather-cta{
-  text-align: center;
-}
+.weather-cta{ text-align: center; }
 .weather-big-btn{
   margin-top: 14px;
   font-size: 18px;
@@ -550,12 +555,15 @@ input:focus, select:focus, textarea:focus{
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
-  .courses-hero{
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  /* Kursy: na tablet 2 w rzędzie */
+  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
 
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
+}
+
+/* Kursy: na laptop/desktop 3 w rzędzie */
+@media (min-width: 980px){
+  .courses-hero{ grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Accessibility / reduced motion */
