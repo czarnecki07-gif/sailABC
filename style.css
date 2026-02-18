@@ -663,3 +663,19 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   .catalog-row{ grid-template-columns: 1fr 360px !important; }
   .courses-paid{ max-width: 360px; }
 }
+/* FIX: poradniki nie mogą być ucinane (kasuje stare max-height/overflow) */
+@media (min-width: 720px){
+  .courses-guides{
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* czasem ucinanie siedzi na rodzicu — zdejmujemy je też tam */
+  .catalog-row,
+  .hero,
+  .hero-fold,
+  .container{
+    overflow: visible;
+  }
+}
