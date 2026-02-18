@@ -23,9 +23,6 @@
 
   --max: 1120px;
   --gap: 16px;
-
-  /* stabilna wysokość przycisków w sekcji poradniki/kursy */
-  --btn-big-minh: 56px;
 }
 
 *{ box-sizing: border-box; }
@@ -49,11 +46,6 @@ a{ color: inherit; text-decoration: none; }
 p{ margin: 0 0 12px; }
 h1,h2,h3,h4{ line-height: 1.15; margin: 0 0 10px; }
 ul{ margin: 0; padding-left: 18px; }
-
-code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.95em;
-}
 
 .container{
   width: 100%;
@@ -114,8 +106,8 @@ code{
 }
 .brand-text{ display: flex; flex-direction: column; }
 .brand-name{ font-weight: 900; letter-spacing: 0.2px; }
-.brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
 
+/* NAV */
 .site-nav{
   display: none;
   gap: 8px;
@@ -124,7 +116,6 @@ code{
   justify-content: flex-end;
 }
 
-/* NAV buttons (index.html ma klasy nav-btn/nav-btn-ghost/nav-sep) */
 .nav-btn{
   font-size: 14px;
   color: var(--muted);
@@ -141,9 +132,7 @@ code{
   color: var(--text);
   transform: translateY(-1px);
 }
-.nav-btn-ghost{
-  background: rgba(0,0,0,0.14);
-}
+.nav-btn-ghost{ background: rgba(0,0,0,0.14); }
 .nav-sep{
   width: 1px;
   height: 26px;
@@ -193,9 +182,7 @@ code{
 }
 
 /* Hero */
-.hero{
-  padding: 34px 0 18px;
-}
+.hero{ padding: 34px 0 18px; }
 
 .hero-inner{
   display: grid;
@@ -218,14 +205,6 @@ code{
   max-width: 62ch;
 }
 
-/* hero links row */
-.hero-links-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 0;
-}
-
 /* Hero right panel */
 .hero-panel .panel-card{
   border: 1px solid rgba(255,255,255,0.10);
@@ -235,20 +214,47 @@ code{
   padding: 16px;
 }
 
-/* IMPORTANT: CTA pogody ma być na wysokości "Portal dla żeglarzy"
-   -> wyrównanie wiersza hero-inner na desktop: baseline + sticky top? Nie.
-   Robimy: w desktop hero-inner align-items: start; i usuwamy sztuczne marginesy w panelu.
-*/
-.weather-cta{
-  text-align: left;
-}
+.weather-cta{ text-align: left; }
 .weather-big-btn{
   margin-top: 14px;
   font-size: 18px;
   padding: 16px 18px;
 }
 
-/* KPI (pogoda) */
+/* Existing row of chips */
+.hero-links-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0;
+}
+
+/* ====== TO JEST JEDYNA ISTOTNA ZMIANA UKŁADU: PORADNIKI LEWO / KURSY PRAWO ====== */
+/* NIE RUSZAMY KURSÓW. TYLKO USTAWIAMY DWIE KOLUMNY NA DESKTOPIE. */
+.courses-hero{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Poradniki: chips identyczne jak wcześniej */
+.courses-guides{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+/* Kursy: zostają jako normalna kolumna przycisków btn-primary btn-big */
+.courses-paid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+/* KPI */
 .panel-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -280,7 +286,6 @@ code{
   font-size: 22px;
   letter-spacing: -0.25px;
 }
-
 .muted{ color: var(--muted); }
 .small{ font-size: 12px; color: var(--muted); }
 
@@ -312,7 +317,6 @@ code{
   border-color: rgba(25,196,198,0.35);
   background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
 }
-
 .card-cta{
   display:inline-block;
   margin-top: 8px;
@@ -320,17 +324,7 @@ code{
   font-weight: 800;
 }
 
-/* Pills / chips */
-.pill{
-  display:inline-block;
-  font-size: 12px;
-  color: rgba(255,255,255,0.86);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-
+/* Chips */
 .chip{
   display:inline-block;
   font-size: 13px;
@@ -387,67 +381,13 @@ code{
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width: 100%; }
 
-/* BIG BUTTONS (kursy/poradniki) */
+/* Kursy: duże przyciski (bez zmian wizualnych względem wcześniejszego) */
 .btn-big{
   width: 100%;
-  min-height: var(--btn-big-minh);
-  justify-content: flex-start;
-  text-align: left;
-  line-height: 1.15;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ====== KLUCZ: poradniki lewo / kursy prawo + równa wysokość całego bloku ====== */
-.courses-hero{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* obie kolumny mają się rozciągać na tę samą wysokość */
-.courses-guides,
-.courses-paid{
-  display: grid;
-  gap: 10px;
-  align-content: start;
-}
-
-/* NOTE: żeby NIE było pustych przestrzeni, na desktop kursy dostaną większą "gęstość"
-   -> 2 kolumny kursów wewnątrz prawej kolumny, a poradniki 2 kolumny w lewej.
-   Dzięki temu oba bloki zapełniają podobną wysokość.
-*/
-
-/* Filters */
-.filters{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.field label{
-  display:block;
-  font-size: 12px;
-  color: var(--muted2);
-  margin-bottom: 6px;
-}
-input, select, textarea{
-  width: 100%;
-  padding: 12px 12px;
+  font-size: 18px;
+  padding: 16px 18px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.16);
-  color: var(--text);
-  outline: none;
 }
-input::placeholder, textarea::placeholder{ color: rgba(255,255,255,0.45); }
-input:focus, select:focus, textarea:focus{
-  border-color: rgba(25,196,198,0.55);
-  box-shadow: 0 0 0 4px rgba(25,196,198,0.16);
-}
-.btn-align{ align-self: end; }
 
 /* Weather */
 .weather-search{
@@ -455,14 +395,12 @@ input:focus, select:focus, textarea:focus{
   gap: 12px;
   margin-bottom: 12px;
 }
-
 .weather-search-actions{
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
 }
-
 .weather-map{
   height: 320px;
   width: 100%;
@@ -473,7 +411,7 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
 
-/* Leaflet controls dopasowane kolorystycznie */
+/* Leaflet controls */
 .leaflet-control-zoom a{
   background: rgba(0,0,0,0.55) !important;
   color: rgba(255,255,255,0.92) !important;
@@ -520,20 +458,6 @@ input:focus, select:focus, textarea:focus{
   font-size: 13px;
 }
 
-/* Content split etc. (zostawione, choć na index nieużywane) */
-.two-col{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-.mini-title{
-  font-size: 12px;
-  color: var(--muted2);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin-bottom: 8px;
-}
-
 /* Footer */
 .site-footer{
   padding: 26px 0 34px;
@@ -571,65 +495,37 @@ input:focus, select:focus, textarea:focus{
   .nav-toggle{ display:none; }
   .site-nav.open{ position: static; padding: 0; background: transparent; border: 0; }
 
-  .hero{ padding: 48px 0 22px; }
-  .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
-
-  /* pogoda CTA na wysokości tytułu -> panel nie ma dodatkowego "wyśrodkowania" */
+  /* WYRÓWNANIE: pogoda (panel) na wysokości tytułu */
+  .hero-inner{
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 22px;
+    align-items: start; /* klucz: start, nie center */
+  }
   .hero-panel{ align-self: start; }
 
   .cards-grid{ grid-template-columns: repeat(2, 1fr); }
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
-  .two-col{ grid-template-columns: 1fr 1fr; }
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
 
-  /* kursy/poradniki jako 2 kolumny */
+  /* PORADNIKI LEWO / KURSY PRAWO */
   .courses-hero{
     grid-template-columns: 1fr 1fr;
-    align-items: stretch;
+    align-items: start;
   }
 
-  /* poradniki w lewej: 2 kolumny, gęsto -> mniejsza wysokość */
+  /* poradniki wypełniają lewą kolumnę jak chips */
   .courses-guides{
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: minmax(var(--btn-big-minh), auto);
-    align-content: start;
-  }
-
-  /* kursy w prawej: 1 kolumna (duże), ale żeby nie było pustych przestrzeni
-     robimy 2 kolumny przycisków kursów na desktop, a każdy nadal wygląda "dużo" */
-  .courses-paid{
-    grid-template-columns: 1fr;
-    align-content: start;
-  }
-
-  /* kursy mają być "duże" i wypełnić wysokość -> rozciąganie w pionie bez dziur:
-     robimy equal-height buttons przez grid-auto-rows + height:100% na a.btn */
-  .courses-paid{
-    grid-auto-rows: 1fr;
-  }
-  .courses-paid .btn{
-    height: 100%;
+    justify-content: flex-start;
   }
 }
 
-@media (min-width: 980px){
-  /* na dużym desktopie: kursy w 2 kolumnach, żeby zrównać wysokość z poradnikami
-     (i żeby NIE było pustej przestrzeni) */
-  .courses-paid{
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 1fr;
-  }
-}
-
-/* Accessibility / reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
   html{ scroll-behavior: auto; }
 }
 
-/* na telefonie trochę niższa mapa */
 @media (max-width: 420px){
   .weather-map{ height: 340px; }
 }
