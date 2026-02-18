@@ -10,7 +10,7 @@ const ADMIN_USER = "admin";
 
 // Hasło ustaw tutaj (prosto, bez kombinacji).
 // Jeśli chcesz „lepiej”: powiedz, to zrobię wersję z hash (SHA-256) w przeglądarce.
-const ADMIN_PASS = "ZMIEN_TO_HASLO";
+const ADMIN_PASS = sailABC
 
 const loginCard = document.getElementById("loginCard");
 const appCard = document.getElementById("appCard");
