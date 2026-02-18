@@ -30,7 +30,7 @@
       </button>
 
       <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
-        <!-- 13. Sekcje główne -->
+        <!-- Sekcje główne -->
         <a class="nav-btn" href="/abc.html">ABC</a>
         <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
         <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
@@ -40,7 +40,7 @@
 
         <span class="nav-sep" aria-hidden="true"></span>
 
-        <!-- 14. Do podstron -->
+        <!-- Podstrony -->
         <a class="nav-btn nav-btn-ghost" href="/gielda-jachtow.html">Giełda jachtów</a>
         <a class="nav-btn nav-btn-ghost" href="/gielda-osprzetu.html">Giełda osprzętu</a>
         <a class="nav-btn nav-btn-ghost" href="/agregator-regat.html">Agregator regat</a>
@@ -52,11 +52,11 @@
 
   <main id="main">
 
-    <!-- 2–5. ABOVE THE FOLD -->
+    <!-- HERO -->
     <section class="hero hero-fold" aria-label="Start">
       <div class="container hero-inner hero-fold-inner">
 
-        <!-- 2. lewa -->
+        <!-- LEWA -->
         <div class="hero-copy">
           <h1>Portal dla żeglarzy</h1>
           <p class="hero-lead">
@@ -65,7 +65,7 @@
           </p>
         </div>
 
-        <!-- 2. prawa -->
+        <!-- PRAWA: przycisk pogody (na wysokości tytułu, wyrównanie robi CSS) -->
         <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
           <div class="panel-card weather-cta">
             <h2>Pogoda żeglarska</h2>
@@ -81,7 +81,7 @@
           </div>
         </aside>
 
-        <!-- 3. przyciski-linki -->
+        <!-- SKRÓTY TEMATYCZNE (ZOSTAJĄ) -->
         <div class="hero-links-row" aria-label="Skróty tematyczne">
           <a class="chip chip-link" href="/wezly.html">Węzły</a>
           <a class="chip chip-link" href="/manewry.html">Manewry</a>
@@ -91,36 +91,46 @@
           <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
         </div>
 
-        <!-- 4. DUŻE PRZYCISKI: po LEWEJ poradniki, po PRAWEJ kursy (W TYM SAMYM BLOKU, bez przebudowy strony) -->
+        <!-- PORADNIKI (LEWO - identyczne "chips") + KURSY (PRAWO - bez zmian) -->
         <div class="courses-hero" aria-label="Poradniki i kursy">
 
-          <!-- LEWA: PORADNIKI (NOWE, więcej przycisków) -->
+          <!-- LEWA: PORADNIKI jako CHIP (identycznie jak 6 powyżej) -->
           <div class="courses-guides" aria-label="Poradniki">
-            <a class="btn btn-ghost btn-big" href="/przepisy-i-znaki.html">Przepisy i znaki (COLREG + śródlądzie)</a>
-            <a class="btn btn-ghost btn-big" href="/meteo.html">Meteo i interpretacja prognoz</a>
-            <a class="btn btn-ghost btn-big" href="/locja.html">Locja i wejścia do portów</a>
-            <a class="btn btn-ghost btn-big" href="/cumowanie-i-kotwiczenie.html">Cumowanie i kotwiczenie</a>
-            <a class="btn btn-ghost btn-big" href="/planowanie-trasy-i-wachty.html">Planowanie trasy i wachty</a>
-            <a class="btn btn-ghost btn-big" href="/vhf-procedury.html">Komunikacja VHF / procedury radiowe</a>
-            <a class="btn btn-ghost btn-big" href="/pierwsza-pomoc-na-wodzie.html">Pierwsza pomoc na wodzie</a>
-            <a class="btn btn-ghost btn-big" href="/awarie.html">Awaryjne sytuacje (MOB, pożar, wyciek, uszkodzenie steru)</a>
+            <!-- istniejące 6 -->
+            <a class="chip chip-link" href="/wezly.html">Węzły</a>
+            <a class="chip chip-link" href="/manewry.html">Manewry</a>
+            <a class="chip chip-link" href="/nawigacja.html">Nawigacja</a>
+            <a class="chip chip-link" href="/praca-zagli.html">Praca żagli</a>
+            <a class="chip chip-link" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
+            <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
 
-            <a class="btn btn-ghost btn-big" href="/silnik-serwis.html">Silnik i podstawy serwisu</a>
-            <a class="btn btn-ghost btn-big" href="/takielunek-olinowanie.html">Takielunek i olinowanie (kontrola, wymiana)</a>
-            <a class="btn btn-ghost btn-big" href="/elektronika-pokladowa.html">Elektronika pokładowa (AIS, radar, autopilot)</a>
-            <a class="btn btn-ghost btn-big" href="/energia-na-jachcie.html">Energia na jachcie (akumulatory, ładowanie, solary)</a>
-            <a class="btn btn-ghost btn-big" href="/srodki-ratunkowe.html">Środki ratunkowe i dobór kamizelek</a>
-            <a class="btn btn-ghost btn-big" href="/checklisty.html">Lista check-list (przed wyjściem / po rejsie / zimowanie)</a>
-
-            <a class="btn btn-ghost btn-big" href="/rejs-morski-vs-srodladowy.html">Rejs morski vs śródlądowy — różnice</a>
-            <a class="btn btn-ghost btn-big" href="/praktyka-kapitanska.html">Praktyka kapitańska (briefing, podział ról)</a>
-            <a class="btn btn-ghost btn-big" href="/pakowanie.html">Pakowanie i wyposażenie załogi</a>
-            <a class="btn btn-ghost btn-big" href="/dziennik-jachtowy.html">Dziennik jachtowy — jak prowadzić</a>
-            <a class="btn btn-ghost btn-big" href="/etykieta-marin.html">Etykieta i dobre praktyki w marinie</a>
-
-            <a class="btn btn-ghost btn-big" href="/nawigacja-nocna.html">Nawigacja nocna</a>
-            <a class="btn btn-ghost btn-big" href="/ograniczona-widzialnosc.html">Nawigacja w ograniczonej widzialności</a>
-            <a class="btn btn-ghost btn-big" href="/elektroniczna-vs-papierowa.html">Nawigacja elektroniczna vs papierowa — procedury awaryjne</a>
+            <!-- dodatkowe -->
+            <a class="chip chip-link" href="/teoria-i-praktyka.html">Teoria i praktyka</a>
+            <a class="chip chip-link" href="/przepisy-i-znaki.html">Przepisy i znaki (COLREG + śródlądzie)</a>
+            <a class="chip chip-link" href="/meteo.html">Meteo i interpretacja prognoz</a>
+            <a class="chip chip-link" href="/locja.html">Locja i wejścia do portów</a>
+            <a class="chip chip-link" href="/cumowanie-i-kotwiczenie.html">Cumowanie i kotwiczenie</a>
+            <a class="chip chip-link" href="/planowanie-trasy-i-wachty.html">Planowanie trasy i wachty</a>
+            <a class="chip chip-link" href="/vhf-procedury.html">Komunikacja VHF / procedury radiowe</a>
+            <a class="chip chip-link" href="/pierwsza-pomoc-na-wodzie.html">Pierwsza pomoc na wodzie</a>
+            <a class="chip chip-link" href="/awaryjne-sytuacje.html">Awaryjne sytuacje (MOB, pożar, wyciek, uszkodzenie steru)</a>
+            <a class="chip chip-link" href="/sprzet-i-serwis.html">Sprzęt i serwis</a>
+            <a class="chip chip-link" href="/silnik-serwis.html">Silnik i podstawy serwisu</a>
+            <a class="chip chip-link" href="/takielunek-olinowanie.html">Takielunek i olinowanie (kontrola, wymiana)</a>
+            <a class="chip chip-link" href="/elektronika-pokladowa.html">Elektronika pokładowa (AIS, radar, autopilot)</a>
+            <a class="chip chip-link" href="/energia-na-jachcie.html">Energia na jachcie (akumulatory, ładowanie, solary)</a>
+            <a class="chip chip-link" href="/srodki-ratunkowe.html">Środki ratunkowe i dobór kamizelek</a>
+            <a class="chip chip-link" href="/checklisty.html">Lista check-list (przed wyjściem / po rejsie / zimowanie)</a>
+            <a class="chip chip-link" href="/rejsy-organizacja.html">Rejsy i organizacja</a>
+            <a class="chip chip-link" href="/rejs-morski-vs-srodladowy.html">Rejs morski vs śródlądowy — różnice</a>
+            <a class="chip chip-link" href="/praktyka-kapitanska.html">Praktyka kapitańska (briefing, podział ról)</a>
+            <a class="chip chip-link" href="/pakowanie.html">Pakowanie i wyposażenie załogi</a>
+            <a class="chip chip-link" href="/dziennik-jachtowy.html">Dziennik jachtowy — jak prowadzić</a>
+            <a class="chip chip-link" href="/etykieta-mariny.html">Etykieta i dobre praktyki w marinie</a>
+            <a class="chip chip-link" href="/nawigacja-pro.html">Nawigacja “pro”</a>
+            <a class="chip chip-link" href="/nawigacja-nocna.html">Nawigacja nocna</a>
+            <a class="chip chip-link" href="/ograniczona-widzialnosc.html">Nawigacja w ograniczonej widzialności</a>
+            <a class="chip chip-link" href="/elektroniczna-vs-papierowa.html">Nawigacja elektroniczna vs papierowa — procedury awaryjne</a>
           </div>
 
           <!-- PRAWA: KURSY (BEZ ZMIAN) -->
@@ -139,7 +149,7 @@
       </div>
     </section>
 
-    <!-- 6–9. POGODA POD 1–4 -->
+    <!-- POGODA -->
     <section class="section section-tight" id="pogoda" aria-label="Pogoda">
       <div class="container">
         <div class="section-head">
@@ -228,7 +238,7 @@
       </div>
     </section>
 
-    <!-- 13. Sekcje pod pogodą -->
+    <!-- Sekcje portalu -->
     <section class="section" id="panele" aria-label="Sekcje portalu">
       <div class="container">
         <div class="section-head">
@@ -317,6 +327,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
+  <!-- Leaflet + pogoda -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="weather.js?v=6"></script>
 </body>
