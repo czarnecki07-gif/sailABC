@@ -172,10 +172,17 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 /* HERO */
 .hero{ padding:34px 0 18px; }
 
-.hero-top{
-  padding: 10px 0 14px;
+/* RZĄD 1: Portal + Pogoda */
+.hero-row{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 14px;
 }
-.hero-top h1{
+
+.hero-copy{ padding: 10px 0; }
+.hero-copy h1{
   font-size: clamp(30px, 4.8vw, 48px);
   letter-spacing:-0.6px;
   margin:0 0 10px;
@@ -187,43 +194,15 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   margin:0;
 }
 
-/* dół hero: mobile = jedna kolumna, desktop = dwie */
-.hero-bottom{
-  display: grid;
+/* RZĄD 2: Poradniki + Kursy */
+.catalog-row{
+  display:grid;
   grid-template-columns: 1fr;
   gap: 14px;
   align-items: start;
 }
 
-/* Poradniki */
-.courses-guides{
-  display:grid;
-  gap:10px;
-  align-content:start;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-}
-.courses-guides .chip{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  width:100%;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  line-height: 1.15;
-  min-height: 46px;
-  padding: 10px 12px;
-}
-
-/* Prawa kolumna */
-.right-rail{
-  display: grid;
-  gap: 10px;
-  align-content: start;
-}
-
-/* Karty */
+/* Cards */
 .card{
   border:1px solid rgba(255,255,255,0.10);
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
@@ -232,6 +211,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   box-shadow: 0 20px 50px rgba(0,0,0,0.22);
 }
 
+/* Mini pogoda (kompakt) */
 .weather-mini{
   display:flex;
   align-items:center;
@@ -289,26 +269,28 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   white-space: nowrap;
 }
 
-/* Kursy */
-.courses-paid{
-  display: grid;
-  gap: 10px;
+/* Poradniki */
+.courses-guides{
+  display:grid;
+  gap:10px;
+  align-content:start;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
 }
-.btn-big{
+.courses-guides .chip{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
   width:100%;
-  font-size:18px;
-  padding:18px 18px;
-  border-radius:16px;
-  justify-content:flex-start;
-  text-align:left;
-
-  /* mobile: 1 linia + ... */
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.15;
+  min-height: 46px;
+  padding: 10px 12px;
 }
 
-/* chips */
+/* Chip base */
 .chip{
   display:inline-block;
   font-size:13px;
@@ -325,6 +307,27 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 
+/* Kursy */
+.courses-paid{
+  display:grid;
+  gap:10px;
+  align-content:start;
+}
+.btn-big{
+  width:100%;
+  font-size:18px;
+  padding:18px 18px;
+  border-radius:16px;
+  justify-content:flex-start;
+  text-align:left;
+
+  /* mobile: 1 linia + ... */
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* SEKCJE */
 .section{ padding:26px 0; }
 .section-tight{ padding:18px 0; }
 
@@ -342,7 +345,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 .muted{ color: var(--muted); }
 .small{ font-size:12px; color: var(--muted); }
 
-/* Weather section below */
+/* WEATHER (duża sekcja) */
 .weather-search{
   display:grid;
   gap:12px;
@@ -413,7 +416,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   font-size:13px;
 }
 
-/* footer */
+/* FOOTER */
 .site-footer{
   padding:26px 0 34px;
   border-top:1px solid rgba(255,255,255,0.08);
@@ -452,17 +455,26 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 
   .hero{ padding:48px 0 22px; }
 
-  /* tu jest klucz: poradniki mają szeroko, a prawa kolumna ma stałą sensowną szerokość */
-  .hero-bottom{
-    grid-template-columns: 1fr minmax(420px, 460px);
+  /* Portal + Pogoda obok siebie */
+  .hero-row{
+    grid-template-columns: 1fr minmax(320px, 420px);
     gap: 18px;
+    align-items: start;
   }
 
+  /* Poradniki + kursy obok siebie */
+  .catalog-row{
+    grid-template-columns: 1fr minmax(420px, 460px);
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* Poradniki gęściej */
   .courses-guides{
     grid-template-columns: repeat(3, minmax(220px, 1fr));
   }
 
-  /* kursy na desktop: 2 linie zamiast ścisku */
+  /* Kursy: 2 linie na desktop */
   .btn-big{
     white-space: normal;
     text-overflow: clip;
