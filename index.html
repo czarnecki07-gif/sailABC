@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="sailabc.com – portal żeglarski: ABC, aplikacje, giełda jachtów i osprzętu, wolna koja, mariny, kursy, poradniki, pogoda i społeczność." />
 
-  <!-- Leaflet (mapa) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css" />
   <title>sailABC.com — Portal dla żeglarzy</title>
@@ -50,9 +49,10 @@
   <main id="main">
 
     <section class="hero hero-fold" aria-label="Start">
-      <div class="container hero-inner hero-fold-inner">
+      <div class="container">
 
-        <div class="hero-copy">
+        <!-- GÓRA HERO: tytuł + opis na pełną szerokość -->
+        <div class="hero-top">
           <h1>Portal dla żeglarzy</h1>
           <p class="hero-lead">
             sailABC wspiera edukację i praktykę żeglarską: ABC, testy, poradniki, narzędzia, wolna koja,
@@ -60,10 +60,9 @@
           </p>
         </div>
 
-        <!-- PORADNIKI (LEWA) + KURSY (PRAWA) -->
-        <div class="courses-hero" aria-label="Poradniki i kursy">
+        <!-- DÓŁ HERO: poradniki (lewo) + pogoda+kursosy (prawo) -->
+        <div class="hero-bottom">
 
-          <!-- LEWA: PORADNIKI -->
           <div class="courses-guides" aria-label="Poradniki">
             <a class="chip chip-link" href="/wezly.html">Węzły</a>
             <a class="chip chip-link" href="/manewry.html">Manewry</a>
@@ -96,26 +95,26 @@
             <a class="chip chip-link" href="/elektroniczna-vs-papierowa.html">Nawigacja elektroniczna vs papierowa — procedury awaryjne</a>
           </div>
 
-          <!-- PRAWA: POGODA (mini) + KURSY -->
-          <div class="courses-paid" aria-label="Pogoda i kursy">
+          <aside class="right-rail" aria-label="Pogoda i kursy">
 
-            <!-- Mini karta: tylko nazwa + przycisk -->
-            <div class="card weather-mini" aria-label="Pogoda dla żeglarzy">
+            <div class="card weather-mini">
               <h2 class="weather-mini-title">Pogoda dla żeglarzy</h2>
               <a class="btn btn-primary weather-mini-btn" href="#pogoda">Otwórz pogodę</a>
             </div>
 
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/nawigacja-elektroniczna" target="_blank" rel="noopener">Obsługa nawigacji elektronicznej – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-src" target="_blank" rel="noopener">Operator SRC – kurs</a>
-            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-lrc" target="_blank" rel="noopener">Operator LRC – kurs</a>
-          </div>
+            <div class="courses-paid" aria-label="Kursy (płatne)">
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/nawigacja-elektroniczna" target="_blank" rel="noopener">Obsługa nawigacji elektronicznej – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-src" target="_blank" rel="noopener">Operator SRC – kurs</a>
+              <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-lrc" target="_blank" rel="noopener">Operator LRC – kurs</a>
+            </div>
+
+          </aside>
 
         </div>
-
       </div>
     </section>
 
