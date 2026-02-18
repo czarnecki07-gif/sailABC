@@ -503,3 +503,80 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   *{ transition:none !important; scroll-behavior:auto !important; }
   html{ scroll-behavior:auto; }
 }
+/* =========================
+   DESKTOP LAYOUT: 2 rzędy, 2 kolumny
+   - pogoda nie nachodzi na chipsy
+   - kursy zawsze w prawej kolumnie (obok poradników)
+   - poradniki limitujemy do kilku wierszy, żeby kursy były w "fold"
+   ========================= */
+
+@media (min-width: 720px){
+
+  /* 1) RZĄD 1: Portal + Pogoda — pogoda kompaktowa i nie rozpycha */
+  .hero-row{
+    align-items: start;
+  }
+
+  .hero-panel{
+    align-self: start;
+  }
+
+  .hero-panel .weather-mini{
+    height: 64px;                 /* kompakt */
+    padding: 10px 12px;
+    overflow: hidden;
+  }
+
+  .hero-panel .weather-mini-title{
+    margin: 0;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  /* 2) RZĄD 2: Poradniki + Kursy — wymuszamy kolumny obok siebie */
+  .catalog-row{
+    display: grid !important;
+    grid-template-columns: 1fr minmax(420px, 460px) !important;
+    gap: 18px !important;
+    align-items: start !important;
+  }
+
+  /* prawa kolumna nie może spaść pod spód */
+  .courses-paid{
+    align-self: start;
+  }
+
+  /* 3) Poradniki: nie mogą zjechać pod pogodę / nie mogą rozepchać wysokości całego folda */
+  .courses-guides{
+    align-self: start;
+    /* pokaż max kilka wierszy bez przewijania całej strony */
+    max-height: 250px;            /* dopasuj: 220–320 */
+    overflow: hidden;             /* reszta chipsów schowana */
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  /* żeby chipsy wyglądały równo w ograniczonej wysokości */
+  .courses-guides .chip{
+    min-height: 42px;
+    padding: 9px 12px;
+  }
+
+  /* 4) Kursy: czytelne i mieszczą się — trochę mniejsze, ale nadal “duże” */
+  .btn-big{
+    font-size: 16px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+
+  /* desktop: 2 linie max, żeby nie robić bardzo wysokich przycisków */
+  .btn-big{
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+    line-height: 1.15;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
