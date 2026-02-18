@@ -79,9 +79,7 @@ code{
   white-space:nowrap;border:0;
 }
 
-/* =========================================================
-   Header (POPRAWIONE: menu nie nachodzi na logo)
-   ========================================================= */
+/* Header */
 .site-header{
   position: sticky;
   top: 0;
@@ -91,21 +89,22 @@ code{
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+/* POPRAWKA: menu nie nachodzi na logo */
 .header-inner{
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 14px 0;
-  flex-wrap: wrap;              /* <<< ważne */
+  flex-wrap: wrap; /* pozwala spadać menu do kolejnej linii */
 }
 
 .brand{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 220px;             /* <<< nie ściskamy */
-  flex: 0 0 auto;               /* <<< nie kurcz się */
+  min-width: 240px;  /* nie ściskamy logo+tekstu */
+  flex: 0 0 auto;
 }
 
 .brand-logo{
@@ -116,14 +115,10 @@ code{
 }
 
 .brand-text{ display: flex; flex-direction: column; }
-.brand-name{
-  font-weight: 900;
-  letter-spacing: 0.2px;
-  white-space: nowrap;          /* <<< nie łam */
-}
+.brand-name{ font-weight: 900; letter-spacing: 0.2px; white-space: nowrap; }
 .brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
 
-/* Mobile: hamburger */
+/* hamburger */
 .nav-toggle{
   appearance: none;
   border: 1px solid rgba(255,255,255,0.12);
@@ -156,52 +151,49 @@ code{
 .nav-toggle-lines::before{ top: 1px; }
 .nav-toggle-lines::after{ bottom: 1px; }
 
-/* Nav wrapper */
+/* nav */
 .site-nav{
   display: none;
-  align-items: center;
-  justify-content: flex-end;
   gap: 8px;
+  align-items: center;
   flex-wrap: wrap;
-  flex: 1 1 auto;
+  justify-content: flex-end;
+  width: 100%;
+  order: 3; /* menu pod logo, gdy brakuje miejsca */
+  padding-top: 10px;
 }
 
-/* Open on mobile */
+/* mobile open */
 .site-nav.open{
   display: flex;
-  width: 100%;
-  order: 3;
-  padding: 12px 0 10px;
-  background: rgba(10,16,28,0.35);
+  background: rgba(10,16,28,0.92);
   border-top: 1px solid rgba(255,255,255,0.08);
-  margin-top: 10px;
+  padding: 12px 0 12px;
 }
 
-/* Nav as buttons */
+/* nav buttons */
 .nav-buttons .nav-btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.86);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   font-size: 13px;
   font-weight: 850;
-  transition: transform .12s ease, background .2s ease, border-color .2s ease, color .2s ease;
+  color: rgba(255,255,255,0.86);
+  padding: 10px 12px;
+  border-radius: 12px;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .12s ease;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
   white-space: nowrap;
 }
 .nav-buttons .nav-btn:hover{
-  transform: translateY(-1px);
   background: rgba(25,196,198,0.12);
   border-color: rgba(25,196,198,0.35);
   color: var(--text);
+  transform: translateY(-1px);
 }
 
-.nav-buttons .nav-btn-ghost{
-  background: rgba(0,0,0,0.14);
-}
+.nav-buttons .nav-btn-ghost{ background: rgba(0,0,0,0.14); }
 
 .nav-buttons .nav-btn-accent{
   border-color: rgba(25,196,198,0.55);
@@ -216,20 +208,16 @@ code{
   margin: 0 4px;
 }
 
-/* =========================================================
-   Hero
-   ========================================================= */
+/* Hero */
 .hero{
   padding: 34px 0 18px;
 }
-
 .hero-inner{
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
 }
-
 .hero-copy{ padding: 10px 0; }
 
 .hero h1{
@@ -237,11 +225,17 @@ code{
   margin-bottom: 10px;
   letter-spacing: -0.6px;
 }
-
 .hero-lead{
   color: var(--muted);
   font-size: 16px;
   max-width: 62ch;
+}
+
+.hero-links-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
 }
 
 .hero-panel .panel-card{
@@ -258,37 +252,30 @@ code{
   gap: 12px;
   margin-top: 12px;
 }
-
 .kpi{
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 12px;
 }
-
 .kpi-label{ display:block; color: var(--muted2); font-size: 12px; }
 .kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
 .kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-/* Hero extras (links + courses) */
-.hero-links-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 6px;
-}
-
+/* Kursy (DUŻE) */
 .courses-hero{
   display:grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 12px;
   margin-top: 12px;
 }
 
-.btn-big{
-  font-size: 15px;
-  padding: 14px 16px;
-  border-radius: 16px;
+/* to trzyma rozmiar DUŻY zawsze */
+.courses-hero .btn-big{
+  font-size: 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  line-height: 1.15;
 }
 
 /* Sections */
@@ -302,12 +289,10 @@ code{
   gap: 14px;
   margin-bottom: 14px;
 }
-
 .section-head h2{
   font-size: 22px;
   letter-spacing: -0.25px;
 }
-
 .muted{ color: var(--muted); }
 .small{ font-size: 12px; color: var(--muted); }
 
@@ -413,19 +398,7 @@ code{
 .btn-full{ width: 100%; }
 .btn-small{ padding: 10px 12px; border-radius: 12px; font-size: 13px; }
 
-/* Links */
-.link{
-  color: rgba(25,196,198,0.95);
-  font-weight: 800;
-}
-.link:hover{ text-decoration: underline; }
-
-/* Lists */
-.list{ color: var(--muted); }
-.list li{ margin-bottom: 8px; }
-.list.compact li{ margin-bottom: 6px; }
-
-/* Filters / inputs */
+/* Forms */
 .field label{
   display:block;
   font-size: 12px;
@@ -447,10 +420,18 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 0 0 4px rgba(25,196,198,0.16);
 }
 
-/* =========================================================
-   Weather: search + map
-   ========================================================= */
+/* Note */
+.note{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.16);
+  border-radius: 14px;
+  padding: 12px;
+}
 
+/* Weather search + map */
 .weather-search{
   display: grid;
   gap: 12px;
@@ -475,7 +456,7 @@ input:focus, select:focus, textarea:focus{
   margin-top: 12px;
 }
 
-/* Leaflet controls dopasowane kolorystycznie */
+/* Leaflet controls */
 .leaflet-control-zoom a{
   background: rgba(0,0,0,0.55) !important;
   color: rgba(255,255,255,0.92) !important;
@@ -486,10 +467,7 @@ input:focus, select:focus, textarea:focus{
   border-color: rgba(25,196,198,0.35) !important;
 }
 
-/* =========================================================
-   Weather: forecast tables (24h + 7 dni)
-   ========================================================= */
-
+/* Forecast tables */
 .forecast-table-wrap{
   overflow:auto;
   border-radius: 14px;
@@ -501,7 +479,7 @@ input:focus, select:focus, textarea:focus{
 .forecast-table{
   width: 100%;
   border-collapse: collapse;
-  min-width: 640px; /* żeby nie łamało brzydko na wąsko */
+  min-width: 640px;
 }
 
 .forecast-table th,
@@ -523,7 +501,7 @@ input:focus, select:focus, textarea:focus{
   backdrop-filter: blur(8px);
 }
 
-/* Warunki: tylko ikonka */
+/* Weather icon cell (SVG) */
 .wxcell{
   width: 1%;
   white-space: nowrap;
@@ -549,17 +527,6 @@ input:focus, select:focus, textarea:focus{
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-/* Note */
-.note{
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  background: rgba(255,255,255,0.05);
-  border: 1px dashed rgba(255,255,255,0.16);
-  border-radius: 14px;
-  padding: 12px;
 }
 
 /* Footer */
@@ -595,23 +562,9 @@ input:focus, select:focus, textarea:focus{
 
 /* Responsive */
 @media (min-width: 720px){
-  /* desktop: nav widoczna, hamburger znika */
-  .site-nav{
-    display:flex;
-    flex: 1 1 100%;
-    order: 3;                 /* <<< nav pod brandem, nie nachodzi */
-    justify-content: flex-end;
-    padding-top: 10px;
-  }
+  .site-nav{ display:flex; }
   .nav-toggle{ display:none; }
-  .site-nav.open{
-    position: static;
-    width: auto;
-    padding: 10px 0 0;
-    background: transparent;
-    border: 0;
-    margin-top: 0;
-  }
+  .site-nav.open{ background: transparent; border: 0; padding: 10px 0 0; }
 
   .hero{ padding: 48px 0 22px; }
   .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
@@ -620,26 +573,21 @@ input:focus, select:focus, textarea:focus{
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
-  .courses-hero{
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
 
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
 }
 
-@media (min-width: 980px){
-  /* na bardzo szerokim: pozwól menu być w tym samym wierszu, jeśli się mieści */
-  .header-inner{
-    flex-wrap: nowrap;
-  }
+@media (min-width: 1100px){
+  /* na bardzo szerokich: menu może wejść w ten sam wiersz */
+  .header-inner{ flex-wrap: nowrap; }
   .site-nav{
-    flex: 1 1 auto;
+    width: auto;
     order: 0;
     padding-top: 0;
   }
 }
 
-/* na telefonie trochę niższa mapa */
 @media (max-width: 420px){
   .weather-map{ height: 300px; }
 }
