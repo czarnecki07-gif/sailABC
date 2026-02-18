@@ -7,15 +7,15 @@
 
   <!-- Leaflet (mapa) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <a class="skip-link" href="#main">Przejdź do treści</a>
 
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="sailABC — strona główna">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
         <img class="brand-logo" src="logo.png" alt="sailABC.com" />
         <div class="brand-text">
           <span class="brand-name">sailABC.com</span>
@@ -27,806 +27,97 @@
         <span class="sr-only">Menu</span>
       </button>
 
-      <nav id="site-nav" class="site-nav" aria-label="Główna nawigacja">
-        <a href="#abc">ABC</a>
-        <a href="#quizy">Testy</a>
-        <a href="#jachty">Jachty</a>
-        <a href="#osprzet">Osprzęt</a>
-        <a href="#koja">Wolna koja</a>
-        <a href="#mariny">Mariny</a>
-        <a href="#kursy">Kursy</a>
-        <a href="#artykuly">Poradniki</a>
-        <a href="#pogoda">Pogoda</a>
-        <a href="#agregator">Agregator</a>
-        <a href="#spolecznosc">Społeczność</a>
-        <a href="#kontakt">Kontakt</a>
+      <!-- Menu = małe estetyczne przyciski -->
+      <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
+        <a class="nav-btn" href="/abc.html">ABC</a>
+        <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+        <a class="nav-btn" href="/kursy.html">Kursy</a>
+        <a class="nav-btn" href="#pogoda">Pogoda</a>
+        <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
+        <a class="nav-btn" href="/mariny.html">Mariny</a>
+        <a class="nav-btn" href="/spolecznosc.html">Społeczność</a>
+        <a class="nav-btn" href="/kontakt.html">Kontakt i FAQ</a>
+
+        <span class="nav-sep" aria-hidden="true"></span>
+
+        <a class="nav-btn nav-btn-ghost" href="/gielda-jachtow.html">Giełda jachtów</a>
+        <a class="nav-btn nav-btn-ghost" href="/gielda-osprzetu.html">Giełda osprzętu</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-regat.html">Agregator regat</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-ofert.html">Agregator ofert</a>
+        <a class="nav-btn nav-btn-ghost" href="/artykuly.html">Artykuły i poradniki</a>
+
+        <span class="nav-sep" aria-hidden="true"></span>
+
+        <a class="nav-btn nav-btn-accent" href="/admin/">Admin</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-inner">
+    <!-- ABOVE THE FOLD: 1–4 (bez „dopisków czata”) -->
+    <section class="hero hero-fold">
+      <div class="container hero-inner hero-fold-inner">
 
+        <!-- 2. lewa: tytuł + opis -->
         <div class="hero-copy">
-          <div class="hero-eyebrow">
-            <span class="pill">sailabc.com</span>
-            <span class="pill">mobile-first</span>
-            <span class="pill">bez backendu</span>
-          </div>
-
           <h1>Portal dla żeglarzy</h1>
           <p class="hero-lead">
-            sailABC to portal wspierający edukację i praktykę żeglarską.
-            Tu znajdziesz jacht lub osprzęt, sprawdzisz pogodę, wolne koje i mariny
-            a dodatkowym wsparciem są przydatne aplikacje dla żeglarzy.
+            sailABC wspiera edukację i praktykę żeglarską: ABC, testy i quizy, poradniki, aplikacje,
+            wolna koja, mariny oraz narzędzia pogodowe pod żeglugę.
           </p>
-
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#abc">Start: ABC Żeglarstwa</a>
-          </div>
-
-          <div class="hero-badges" aria-label="Szybkie skróty">
-            <a class="chip" href="#pogoda">Wiatr i ostrzeżenia</a>
-            <a class="chip" href="#koja">Wolna koja</a>
-            <a class="chip" href="#jachty">Giełda jachtów</a>
-            <a class="chip" href="#mariny">Mariny</a>
-          </div>
         </div>
 
-        <!-- NOWY: CTA do panelu pogody -->
-        <aside class="hero-panel" aria-label="Pogoda">
+        <!-- 2. prawa: przycisk do pogody -->
+        <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
           <div class="panel-card weather-cta">
-            <h2>🌬️ Pogoda żeglarska — mapa + prognoza 7 dni</h2>
-
+            <h2>🌬️ Pogoda żeglarska</h2>
             <p class="muted">
-              Sprawdź wiatr w skali Beauforta, kierunek, falę,
-              opady i zachmurzenie dla dowolnego akwenu.
+              Wybierz punkt na mapie lub wpisz miejsce, a zobaczysz aktualne warunki, 24h i 7 dni.
             </p>
-
             <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
-              Otwórz panel pogody
+              Otwórz pogodę
             </a>
-
             <div class="note" style="margin-top:12px;">
-              Kliknij punkt na mapie lub wpisz miejsce — np. Zalew Szczeciński, Hel, Giżycko.
+              Przykłady: Zalew Szczeciński, Hel, Giżycko, Zatoka Gdańska.
             </div>
           </div>
         </aside>
 
+        <!-- 3. przyciski-linki -->
+        <div class="hero-links-row" aria-label="Skróty edukacyjne">
+          <a class="chip chip-link" href="/wezly.html">Węzły</a>
+          <a class="chip chip-link" href="/manewry.html">Manewry</a>
+          <a class="chip chip-link" href="/nawigacja.html">Nawigacja</a>
+          <a class="chip chip-link" href="/praca-zagli.html">Praca żagli</a>
+          <a class="chip chip-link" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
+          <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
+        </div>
+
+        <!-- 4. duże przyciski kursów -->
+        <div class="courses-hero" aria-label="Kursy">
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zzeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/nawigacja-elektroniczna" target="_blank" rel="noopener">Obsługa nawigacji elektronicznej – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-src" target="_blank" rel="noopener">Operator SRC – kurs</a>
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-lrc" target="_blank" rel="noopener">Operator LRC – kurs</a>
+        </div>
+
       </div>
     </section>
 
-    <!-- MODULES OVERVIEW -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Moduły portalu sailABC</h2>
-          <p class="muted">Wszystkie działy w formie kart </p>
-        </div>
-
-        <div class="cards-grid">
-          <a class="card card-link" href="#abc">
-            <div class="card-icon">⛵</div>
-            <h3>ABC Żeglarstwa</h3>
-            <p>Bezpieczeństwo, nawigacja, praca żagli, manewry, węzły.</p>
-            <span class="card-cta">Otwórz →</span>
-          </a>
-
-          <a class="card card-link" href="#quizy">
-            <div class="card-icon">🧠</div>
-            <h3>Testy i quizy</h3>
-            <p>ABC, patent żeglarza, przepisy, manewry.</p>
-            <span class="card-cta">Zacznij →</span>
-          </a>
-
-          <a class="card card-link" href="#jachty">
-            <div class="card-icon">🛥️</div>
-            <h3>Giełda jachtów</h3>
-            <p>Zdjęcia, opisy, rok, cena, lokalizacja i filtry.</p>
-            <span class="card-cta">Przeglądaj →</span>
-          </a>
-
-          <a class="card card-link" href="#osprzet">
-            <div class="card-icon">⚙️</div>
-            <h3>Giełda osprzętu</h3>
-            <p>Stan, cena, kategorie, szybkie ogłoszenia.</p>
-            <span class="card-cta">Zobacz →</span>
-          </a>
-
-          <a class="card card-link" href="#koja">
-            <div class="card-icon">🧭</div>
-            <h3>Wolna koja</h3>
-            <p>Rejsy: jacht, termin, port, koszt.</p>
-            <span class="card-cta">Szukaj →</span>
-          </a>
-
-          <a class="card card-link" href="#mariny">
-            <div class="card-icon">⚓</div>
-            <h3>Mariny</h3>
-            <p>Wolne miejsca, ceny i parametry w marinach.</p>
-            <span class="card-cta">Sprawdź →</span>
-          </a>
-
-          <a class="card card-link" href="#kursy">
-            <div class="card-icon">🎓</div>
-            <h3>Kursy i szkolenia</h3>
-            <p>Żeglarskie, motorowodne i nawigacyjne.</p>
-            <span class="card-cta">Zapisz się →</span>
-          </a>
-
-          <a class="card card-link" href="#artykuly">
-            <div class="card-icon">📝</div>
-            <h3>Artykuły i poradniki</h3>
-            <p>Lista artykułów + sekcja treści.</p>
-            <span class="card-cta">Czytaj →</span>
-          </a>
-
-          <a class="card card-link" href="#pogoda">
-            <div class="card-icon">🌬️</div>
-            <h3>Pogoda na wodzie</h3>
-            <p>Mapa + wpisanie miejsca + Beaufort.</p>
-            <span class="card-cta">Zobacz →</span>
-          </a>
-
-          <a class="card card-link" href="#spolecznosc">
-            <div class="card-icon">💬</div>
-            <h3>Społeczność</h3>
-            <p>Forum, ogłoszenia, grupy rejsowe.</p>
-            <span class="card-cta">Dołącz →</span>
-          </a>
-
-          <a class="card card-link" href="#kontakt">
-            <div class="card-icon">📩</div>
-            <h3>Kontakt i FAQ</h3>
-            <p>Pomoc, pytania, współpraca.</p>
-            <span class="card-cta">Napisz →</span>
-          </a>
-
-          <div class="card card-accent">
-            <div class="card-icon">✨</div>
-            <h3>Statycznie, ale porządnie</h3>
-            <p>
-              Ta strona działa na GitHub Pages. Dodatkowe funkcje (filtry/quizy)
-              możemy dodać przez JS + JSON (również bez backendu).
-            </p>
-            <span class="pill">nowoczesny UI</span>
-            <span class="pill">cards</span>
-            <span class="pill">responsive</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AGREGATOR OFERT (MAKIETA) -->
-    <section class="section" id="agregator">
-      <div class="container">
-        <div class="section-head">
-          <h2>Agregator ofert: jachty, łodzie i osprzęt</h2>
-          <p class="muted">Makieta (frontend-only): wyszukiwarka, filtry i lista wyników. Pod API podłączymy później.</p>
-        </div>
-
-        <div class="agg-toolbar card">
-          <div class="filters agg-filters">
-            <div class="field">
-              <label for="agg-q">Szukaj</label>
-              <input id="agg-q" type="search" placeholder="np. Antila, silnik, kamizelka, kotwica, plotter…" />
-            </div>
-
-            <div class="field">
-              <label for="agg-type">Typ</label>
-              <select id="agg-type">
-                <option value="all">Wszystko</option>
-                <option value="boat">Jachty / łodzie</option>
-                <option value="gear">Osprzęt</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="agg-region">Region</label>
-              <select id="agg-region">
-                <option value="all">Dowolnie</option>
-                <option value="Mazury">Mazury</option>
-                <option value="Bałtyk">Bałtyk</option>
-                <option value="Zalew Szczeciński">Zalew Szczeciński</option>
-                <option value="Polska">Polska</option>
-                <option value="Europa">Europa</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="agg-sort">Sortuj</label>
-              <select id="agg-sort">
-                <option value="new">Najnowsze</option>
-                <option value="priceAsc">Cena rosnąco</option>
-                <option value="priceDesc">Cena malejąco</option>
-              </select>
-            </div>
-
-            <button class="btn btn-ghost btn-align" id="agg-reset" type="button">Reset</button>
-          </div>
-
-          <div class="agg-stats">
-            <span class="pill" id="agg-count">0 ofert</span>
-            <span class="pill">Źródła: demo</span>
-            <span class="pill">API: w przygotowaniu</span>
-          </div>
-        </div>
-
-        <div class="listing-grid agg-grid" id="agg-list"></div>
-      </div>
-    </section>
-
-    <!-- 1. ABC Żeglarstwa -->
-    <section class="section" id="abc">
-      <div class="container">
-        <div class="section-head">
-          <h2>ABC Żeglarstwa</h2>
-          <p class="muted">Zacznij od fundamentów: bezpieczeństwo, nawigacja, żagle, manewry i węzły.</p>
-        </div>
-
-        <div class="cards-grid cards-2">
-          <article class="card">
-            <h3>Bezpieczeństwo</h3>
-            <ul class="list">
-              <li>Wyposażenie obowiązkowe i dobre praktyki</li>
-              <li>Procedury MOB (człowiek za burtą)</li>
-              <li>Komunikacja VHF, sygnały alarmowe</li>
-              <li>Checklisty: przed wyjściem i po cumowaniu</li>
-            </ul>
-            <a class="link" href="#kontakt">FAQ bezpieczeństwa →</a>
-          </article>
-
-          <article class="card">
-            <h3>Nawigacja</h3>
-            <ul class="list">
-              <li>Znaki, światła, tory wodne</li>
-              <li>Mapa, kurs, odległość, poprawki</li>
-              <li>Locja: porty i podejścia</li>
-              <li>Planowanie trasy i alternatywy</li>
-            </ul>
-            <a class="link" href="#artykuly">Poradniki nawigacyjne →</a>
-          </article>
-
-          <article class="card">
-            <h3>Praca żagli</h3>
-            <ul class="list">
-              <li>Trym grota i foka</li>
-              <li>Ostrzenie/odpadanie — co i po co</li>
-              <li>Refowanie i zachowanie w szkwale</li>
-              <li>Typowe błędy i szybkie korekty</li>
-            </ul>
-            <a class="link" href="#kursy">Kurs trymu →</a>
-          </article>
-
-          <article class="card">
-            <h3>Manewry i węzły</h3>
-            <div class="two-col">
-              <div>
-                <h4 class="mini-title">Manewry</h4>
-                <ul class="list compact">
-                  <li>Zwrot przez sztag</li>
-                  <li>Zwrot przez rufę</li>
-                  <li>Cumowanie/odejście</li>
-                  <li>Stawanie w dryf</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="mini-title">Węzły</h4>
-                <ul class="list compact">
-                  <li>Ósemka</li>
-                  <li>Wyblinka</li>
-                  <li>Sztyk</li>
-                  <li>Ratowniczy</li>
-                </ul>
-              </div>
-            </div>
-            <a class="link" href="#quizy">Sprawdź się w quizie →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Testy i quizy -->
-    <section class="section" id="quizy">
-      <div class="container">
-        <div class="section-head">
-          <h2>Testy i quizy żeglarskie</h2>
-          <p class="muted">Wybierz zestaw. (Demo UI — logika quizów może być w script.js)</p>
-        </div>
-
-        <div class="cards-grid cards-3">
-          <article class="card">
-            <h3>Quiz: ABC</h3>
-            <p>Podstawy, bezpieczeństwo, węzły.</p>
-            <div class="meta-row">
-              <span class="pill">10 pytań</span>
-              <span class="pill">łatwy</span>
-            </div>
-            <button class="btn btn-primary btn-full" type="button">Rozpocznij</button>
-          </article>
-
-          <article class="card">
-            <h3>Patent żeglarza</h3>
-            <p>Manewry, locja, teoria, praktyka.</p>
-            <div class="meta-row">
-              <span class="pill">20 pytań</span>
-              <span class="pill">średni</span>
-            </div>
-            <button class="btn btn-primary btn-full" type="button">Rozpocznij</button>
-          </article>
-
-          <article class="card">
-            <h3>Przepisy</h3>
-            <p>Pierwszeństwo, znaki, światła, sygnały.</p>
-            <div class="meta-row">
-              <span class="pill">15 pytań</span>
-              <span class="pill">średni</span>
-            </div>
-            <button class="btn btn-ghost btn-full" type="button">Zobacz przykłady</button>
-          </article>
-
-          <article class="card">
-            <h3>Manewry</h3>
-            <p>Zwroty, MOB, cumowanie, praca załogi.</p>
-            <div class="meta-row">
-              <span class="pill">15 pytań</span>
-              <span class="pill">praktyczny</span>
-            </div>
-            <button class="btn btn-ghost btn-full" type="button">Zobacz przykłady</button>
-          </article>
-
-          <article class="card">
-            <h3>Nawigacja</h3>
-            <p>Kurs, poprawki, mapa, locja.</p>
-            <div class="meta-row">
-              <span class="pill">12 pytań</span>
-              <span class="pill">techniczny</span>
-            </div>
-            <button class="btn btn-ghost btn-full" type="button">Zobacz przykłady</button>
-          </article>
-
-          <article class="card">
-            <h3>Mix egzaminacyjny</h3>
-            <p>Losowy zestaw z różnych działów.</p>
-            <div class="meta-row">
-              <span class="pill">25 pytań</span>
-              <span class="pill">trudny</span>
-            </div>
-            <button class="btn btn-primary btn-full" type="button">Start</button>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Giełda jachtów -->
-    <section class="section" id="jachty">
-      <div class="container">
-        <div class="section-head">
-          <h2>Giełda jachtów</h2>
-          <p class="muted">Zdjęcie, opis, rok, cena, lokalizacja + filtry (UI).</p>
-        </div>
-
-        <div class="filters">
-          <div class="field">
-            <label for="yacht-q">Szukaj</label>
-            <input id="yacht-q" type="search" placeholder="np. Antila, Twister, Jeanneau…" />
-          </div>
-          <div class="field">
-            <label for="yacht-price">Cena do</label>
-            <select id="yacht-price">
-              <option value="">bez limitu</option>
-              <option>50 000 PLN</option>
-              <option>100 000 PLN</option>
-              <option>200 000 PLN</option>
-              <option>500 000 PLN</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="yacht-year">Rok od</label>
-            <select id="yacht-year">
-              <option value="">dowolnie</option>
-              <option>2000</option>
-              <option>2010</option>
-              <option>2015</option>
-              <option>2020</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="yacht-loc">Lokalizacja</label>
-            <select id="yacht-loc">
-              <option value="">dowolnie</option>
-              <option>Mazury</option>
-              <option>Gdańsk</option>
-              <option>Szczecin</option>
-              <option>Chorwacja</option>
-            </select>
-          </div>
-          <button class="btn btn-ghost btn-align" type="button">Filtruj</button>
-        </div>
-
-        <div class="listing-grid">
-          <article class="card listing">
-            <div class="thumb" role="img" aria-label="Zdjęcie jachtu"></div>
-            <div class="listing-body">
-              <h3>Antila 27 — gotowa do sezonu</h3>
-              <p class="muted">Rok: 2018 • Lokalizacja: Mazury</p>
-              <div class="price-row">
-                <span class="price">159 000 PLN</span>
-                <span class="pill">żagiel</span>
-              </div>
-              <p>Komplet żagli, silnik 9.9, elektronika, nowa tapicerka.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-
-          <article class="card listing">
-            <div class="thumb" role="img" aria-label="Zdjęcie jachtu"></div>
-            <div class="listing-body">
-              <h3>Twister 26 — klasyk</h3>
-              <p class="muted">Rok: 2006 • Lokalizacja: Gdańsk</p>
-              <div class="price-row">
-                <span class="price">74 900 PLN</span>
-                <span class="pill">turystyka</span>
-              </div>
-              <p>Nowy takielunek (2023), zimowany w hali.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-
-          <article class="card listing">
-            <div class="thumb" role="img" aria-label="Zdjęcie jachtu"></div>
-            <div class="listing-body">
-              <h3>Sun Odyssey 36i — morski komfort</h3>
-              <p class="muted">Rok: 2010 • Lokalizacja: Chorwacja</p>
-              <div class="price-row">
-                <span class="price">79 000 EUR</span>
-                <span class="pill">morski</span>
-              </div>
-              <p>3 kabiny, autopilot, regularny serwis.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Giełda osprzętu -->
-    <section class="section" id="osprzet">
-      <div class="container">
-        <div class="section-head">
-          <h2>Giełda osprzętu</h2>
-          <p class="muted">Zdjęcie, stan, cena, kategorie.</p>
-        </div>
-
-        <div class="filters">
-          <div class="field">
-            <label for="gear-cat">Kategoria</label>
-            <select id="gear-cat">
-              <option value="">wszystkie</option>
-              <option>Elektronika</option>
-              <option>Żagle</option>
-              <option>Liny</option>
-              <option>Osprzęt pokładowy</option>
-              <option>Bezpieczeństwo</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="gear-state">Stan</label>
-            <select id="gear-state">
-              <option value="">dowolny</option>
-              <option>Nowy</option>
-              <option>Bardzo dobry</option>
-              <option>Używany</option>
-              <option>Do serwisu</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="gear-q">Szukaj</label>
-            <input id="gear-q" type="search" placeholder="np. kabestan, kamizelka, GPS…" />
-          </div>
-          <button class="btn btn-ghost btn-align" type="button">Filtruj</button>
-        </div>
-
-        <div class="listing-grid">
-          <article class="card listing">
-            <div class="thumb thumb-gear" role="img" aria-label="Zdjęcie osprzętu"></div>
-            <div class="listing-body">
-              <h3>Kamizelka automatyczna 150N</h3>
-              <p class="muted">Stan: bardzo dobry • Kategoria: Bezpieczeństwo</p>
-              <div class="price-row">
-                <span class="price">299 PLN</span>
-                <span class="pill">okazja</span>
-              </div>
-              <p>Po przeglądzie, kompletna, z nabojem.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-
-          <article class="card listing">
-            <div class="thumb thumb-gear" role="img" aria-label="Zdjęcie osprzętu"></div>
-            <div class="listing-body">
-              <h3>Plotter 7"</h3>
-              <p class="muted">Stan: używany • Kategoria: Elektronika</p>
-              <div class="price-row">
-                <span class="price">1 450 PLN</span>
-                <span class="pill">GPS</span>
-              </div>
-              <p>Sprawny, ekran bez rys.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-
-          <article class="card listing">
-            <div class="thumb thumb-gear" role="img" aria-label="Zdjęcie osprzętu"></div>
-            <div class="listing-body">
-              <h3>Fok 12 m²</h3>
-              <p class="muted">Stan: używany • Kategoria: Żagle</p>
-              <div class="price-row">
-                <span class="price">650 PLN</span>
-                <span class="pill">żagiel</span>
-              </div>
-              <p>Bez rozdarć, lekkie przetarcia na liku.</p>
-              <a class="btn btn-small btn-primary" href="#kontakt">Zapytaj</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Wolna koja -->
-    <section class="section" id="koja">
-      <div class="container">
-        <div class="section-head">
-          <h2>Wolna koja</h2>
-          <p class="muted">Oferty rejsów: jacht, termin, port, koszt.</p>
-        </div>
-
-        <div class="cards-grid cards-3">
-          <article class="card">
-            <h3>Bałtyk: Hel → Bornholm</h3>
-            <p class="muted">Jacht: 36 ft • Termin: 12–18.07 • Port: Gdynia</p>
-            <div class="price-row">
-              <span class="price">1 900 PLN</span>
-              <span class="pill">morski</span>
-            </div>
-            <p>Rejs szkoleniowo-turystyczny z nawigacją nocną.</p>
-            <a class="btn btn-small btn-primary" href="#kontakt">Aplikuj</a>
-          </article>
-
-          <article class="card">
-            <h3>Mazury: tydzień szkoleniowy</h3>
-            <p class="muted">Jacht: 28 ft • Termin: 05–12.08 • Port: Giżycko</p>
-            <div class="price-row">
-              <span class="price">990 PLN</span>
-              <span class="pill">patent</span>
-            </div>
-            <p>Manewry portowe, zwroty, praca żagli, bezpieczeństwo.</p>
-            <a class="btn btn-small btn-primary" href="#kontakt">Aplikuj</a>
-          </article>
-
-          <article class="card">
-            <h3>Adriatyk: flotylla</h3>
-            <p class="muted">Jacht: 45 ft • Termin: 20–27.09 • Port: Split</p>
-            <div class="price-row">
-              <span class="price">690 EUR</span>
-              <span class="pill">premium</span>
-            </div>
-            <p>Wyspy, kotwicowiska, wejścia do marin wieczorem.</p>
-            <a class="btn btn-small btn-primary" href="#kontakt">Aplikuj</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Mariny -->
-    <section class="section" id="mariny">
-      <div class="container">
-        <div class="section-head">
-          <h2>System wolnych miejsc w marinach</h2>
-          <p class="muted">Lista marin, wolne miejsca, ceny, parametry.</p>
-        </div>
-
-        <div class="table-card card">
-          <div class="table-head">
-            <div>
-              <h3>Lista marin</h3>
-              <p class="muted">Akwen, LOA, udogodnienia — przykład.</p>
-            </div>
-            <div class="table-filters">
-              <select aria-label="Akwen">
-                <option>Akwen: wszystkie</option>
-                <option>Mazury</option>
-                <option>Bałtyk</option>
-                <option>Zalew Szczeciński</option>
-              </select>
-              <select aria-label="Długość jachtu">
-                <option>LOA: dowolnie</option>
-                <option>do 8 m</option>
-                <option>do 10 m</option>
-                <option>do 12 m</option>
-                <option>powyżej 12 m</option>
-              </select>
-              <button class="btn btn-ghost btn-small" type="button">Filtruj</button>
-            </div>
-          </div>
-
-          <div class="table-wrap" role="region" aria-label="Tabela marin" tabindex="0">
-            <table class="table">
-              <thead>
-              <tr>
-                <th>Marina</th>
-                <th>Akwen</th>
-                <th>Wolne miejsca</th>
-                <th>Cena/doba</th>
-                <th>Parametry</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Marina Gdańsk</td>
-                <td>Bałtyk</td>
-                <td><span class="status ok">12</span></td>
-                <td>140 PLN</td>
-                <td>prąd • woda • prysznice • slip</td>
-              </tr>
-              <tr>
-                <td>Port Giżycko</td>
-                <td>Mazury</td>
-                <td><span class="status warn">4</span></td>
-                <td>95 PLN</td>
-                <td>prąd • woda • serwis • gastronomia</td>
-              </tr>
-              <tr>
-                <td>Marina Szczecin</td>
-                <td>Zalew</td>
-                <td><span class="status ok">9</span></td>
-                <td>120 PLN</td>
-                <td>prąd • woda • ochrona • sklep</td>
-              </tr>
-              <tr>
-                <td>Marina Hel</td>
-                <td>Bałtyk</td>
-                <td><span class="status bad">0</span></td>
-                <td>160 PLN</td>
-                <td>prąd • woda • bosman • prysznice</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="note">
-            <strong>Tip:</strong> w GitHub Pages możesz trzymać dane w pliku <code>data/mariny.json</code>
-            i aktualizować je z repo, a UI odświeżać JS-em.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Kursy -->
-    <section class="section" id="kursy">
-      <div class="container">
-        <div class="section-head">
-          <h2>Kursy i szkolenia</h2>
-          <p class="muted">Żeglarskie, motorowodne, nawigacyjne.</p>
-        </div>
-
-        <div class="cards-grid cards-3">
-          <article class="card">
-            <h3>Patent żeglarza jachtowego</h3>
-            <p class="muted">Teoria + praktyka • Weekendowe terminy</p>
-            <ul class="list compact">
-              <li>Manewry portowe</li>
-              <li>Przepisy i bezpieczeństwo</li>
-              <li>Trym żagli</li>
-            </ul>
-            <a class="btn btn-primary btn-full" href="#kontakt">Zapytaj o termin</a>
-          </article>
-
-          <article class="card">
-            <h3>Sternik motorowodny</h3>
-            <p class="muted">Szybki kurs • Skupienie na praktyce</p>
-            <ul class="list compact">
-              <li>Bezpieczeństwo i obsługa</li>
-              <li>Manewry</li>
-              <li>Podstawy nawigacji</li>
-            </ul>
-            <a class="btn btn-primary btn-full" href="#kontakt">Zapytaj o termin</a>
-          </article>
-
-          <article class="card">
-            <h3>Nawigacja: mapa + GPS</h3>
-            <p class="muted">Warsztaty • Dla początkujących i średniozaaw.</p>
-            <ul class="list compact">
-              <li>Planowanie trasy</li>
-              <li>Poprawki i pozycja</li>
-              <li>Awaryjna nawigacja</li>
-            </ul>
-            <a class="btn btn-ghost btn-full" href="#kontakt">Zobacz program</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. Artykuły -->
-    <section class="section" id="artykuly">
-      <div class="container">
-        <div class="section-head">
-          <h2>Artykuły i poradniki</h2>
-          <p class="muted">Lista artykułów + przykładowa sekcja treści.</p>
-        </div>
-
-        <div class="content-split">
-          <aside class="card content-list" aria-label="Lista artykułów">
-            <h3>Lista artykułów</h3>
-            <div class="stack">
-              <a class="item" href="#art-1">
-                <span class="item-title">Checklist: przygotowanie jachtu do rejsu</span>
-                <span class="item-meta">bezpieczeństwo • 6 min</span>
-              </a>
-              <a class="item" href="#art-2">
-                <span class="item-title">Trym foka w zmiennym wietrze</span>
-                <span class="item-meta">żagle • 8 min</span>
-              </a>
-              <a class="item" href="#art-3">
-                <span class="item-title">Zwrot przez rufę bez stresu</span>
-                <span class="item-meta">manewry • 5 min</span>
-              </a>
-              <a class="item" href="#art-4">
-                <span class="item-title">Podstawy świateł i znaków</span>
-                <span class="item-meta">przepisy • 10 min</span>
-              </a>
-            </div>
-          </aside>
-
-          <article class="card content-article" id="art-1" aria-label="Treść artykułu">
-            <div class="article-head">
-              <h3>Checklist: przygotowanie jachtu do rejsu</h3>
-              <p class="muted">Zanim odbijesz — szybka lista kontrolna.</p>
-            </div>
-
-            <div class="article-body">
-              <h4>1) Bezpieczeństwo</h4>
-              <ul class="list">
-                <li>Kamizelki dla całej załogi, koło ratunkowe, apteczka.</li>
-                <li>Sprawdź gaśnicę, sygnały i oświetlenie.</li>
-                <li>Ustal procedurę MOB i role załogi.</li>
-              </ul>
-
-              <h4>2) Sprzęt i żagle</h4>
-              <ul class="list">
-                <li>Sprawdź takielunek, knagi, bloczki, stan lin.</li>
-                <li>Przejrzyj żagle pod kątem przetarć i uszkodzeń.</li>
-                <li>Upewnij się, że refy działają i są przygotowane.</li>
-              </ul>
-
-              <h4>3) Plan rejsu</h4>
-              <p class="muted">
-                Zaplanuj trasę, alternatywne porty i sprawdź prognozę wiatru oraz ostrzeżenia.
-              </p>
-            </div>
-
-            <div class="article-footer">
-              <a class="btn btn-small btn-ghost" href="#kontakt">Zadaj pytanie</a>
-              <a class="btn btn-small btn-primary" href="#quizy">Sprawdź wiedzę</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. Pogoda -->
-    <section class="section" id="pogoda">
+    <!-- 6–9. POGODA PRZENIESIONA DO GÓRY + 24h + 7 dni wierszami -->
+    <section class="section section-tight" id="pogoda">
       <div class="container">
         <div class="section-head">
           <h2>Pogoda i warunki na wodzie</h2>
-          <p class="muted">Wpisz miejsce albo kliknij na mapie, a potem sprawdź warunki (wiatr w Beauforcie, kierunek, temperatura).</p>
+          <p class="muted">Wpisz miejsce albo kliknij na mapie. Pokażemy: aktualnie, 24h oraz 7 dni.</p>
         </div>
 
         <div class="cards-grid cards-2">
           <article class="card">
-            <h3>Wybierz miejsce</h3>
+            <h3>Prognoza aktualna — wybierz miejsce</h3>
 
             <div class="weather-search">
               <div class="field" style="margin:0;">
@@ -865,143 +156,104 @@
               </div>
             </div>
 
+            <!-- 8. Prognoza 24h -->
+            <h3 style="margin-top:14px;">Prognoza 24 godziny</h3>
+            <p class="muted" id="hourlyMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 24h" tabindex="0">
+              <table class="forecast-table" aria-describedby="hourlyMeta">
+                <thead>
+                  <tr>
+                    <th>Godzina</th>
+                    <th>Ikona</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast24">
+                  <!-- wiersze z JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 9. Prognoza 7 dni -->
             <h3 style="margin-top:14px;">Prognoza 7 dni</h3>
             <p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
-            <div class="forecast-grid" id="forecast7"></div>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 7 dni" tabindex="0">
+              <table class="forecast-table" aria-describedby="forecastMeta">
+                <thead>
+                  <tr>
+                    <th>Dzień</th>
+                    <th>Ikona</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast7">
+                  <!-- wiersze z JS -->
+                </tbody>
+              </table>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- 10. Społeczność -->
-    <section class="section" id="spolecznosc">
+    <!-- 13. Pod pogodą – zostają sekcje (na razie jak w Twoim układzie),
+         ale docelowo linkujesz do podstron. Tu zostawiam tylko lekkie "landing" dla 13,
+         żeby nie rozbudowywać strony w dół i utrzymać założenia. -->
+    <section class="section" id="panele-abc">
       <div class="container">
         <div class="section-head">
-          <h2>Społeczność</h2>
-          <p class="muted">Forum, ogłoszenia, grupy rejsowe (makieta).</p>
+          <h2>Panele ABC żeglarstwa</h2>
+          <p class="muted">Tak jak są — docelowo pełne treści na podstronach.</p>
         </div>
 
         <div class="cards-grid cards-3">
-          <article class="card">
-            <h3>Forum</h3>
-            <ul class="list compact">
-              <li>Sprzęt i modernizacje</li>
-              <li>Manewry i szkolenie</li>
-              <li>Trasy i akweny</li>
-              <li>Prawo i przepisy</li>
-            </ul>
-            <a class="btn btn-small btn-primary" href="#kontakt">Zaproponuj temat</a>
-          </article>
+          <a class="card card-link" href="/abc.html">
+            <div class="card-icon">⛵</div>
+            <h3>ABC żeglarstwa</h3>
+            <p>Fundamenty, teoria i praktyka.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
 
-          <article class="card">
-            <h3>Ogłoszenia</h3>
-            <ul class="list compact">
-              <li>Załoga szuka rejsu</li>
-              <li>Rejs szuka załogi</li>
-              <li>Wspólne szkolenia</li>
-              <li>Wymiana doświadczeń</li>
-            </ul>
-            <a class="btn btn-small btn-ghost" href="#koja">Zobacz „Wolną koję”</a>
-          </article>
+          <a class="card card-link" href="/quizy.html">
+            <div class="card-icon">🧠</div>
+            <h3>Testy i quizy żeglarskie</h3>
+            <p>Sprawdź wiedzę i przygotuj się do egzaminu.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
 
-          <article class="card">
-            <h3>Grupy rejsowe</h3>
-            <p class="muted">Dołącz do grupy tematycznej:</p>
-            <div class="tags">
-              <span class="pill">Mazury</span>
-              <span class="pill">Bałtyk</span>
-              <span class="pill">Chorwacja</span>
-              <span class="pill">Regaty</span>
-              <span class="pill">Rodzinne</span>
-            </div>
-            <a class="btn btn-small btn-primary" href="#kontakt">Dołącz</a>
-          </article>
-        </div>
-      </div>
-    </section>
+          <a class="card card-link" href="/wolna-koja.html">
+            <div class="card-icon">🧭</div>
+            <h3>Wolna koja</h3>
+            <p>Rejsy i miejsca na jachtach (docelowo system ogłoszeń).</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
 
-    <!-- 11. Kontakt i FAQ -->
-    <section class="section" id="kontakt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Kontakt i FAQ</h2>
-          <p class="muted">Masz pytanie? Napisz. (Formularz demo)</p>
-        </div>
+          <a class="card card-link" href="/mariny.html">
+            <div class="card-icon">⚓</div>
+            <h3>System wolnych miejsc w marinach</h3>
+            <p>Docelowo baza marin + dostępność.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
 
-        <div class="content-split">
-          <section class="card">
-            <h3>Napisz do sailabc.com</h3>
-            <form class="form" action="#" method="post">
-              <div class="form-row">
-                <div class="field">
-                  <label for="name">Imię</label>
-                  <input id="name" name="name" type="text" placeholder="Twoje imię" required />
-                </div>
-                <div class="field">
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="twoj@email.pl" required />
-                </div>
-              </div>
+          <a class="card card-link" href="/spolecznosc.html">
+            <div class="card-icon">💬</div>
+            <h3>Społeczność</h3>
+            <p>Forum, grupy, ogłoszenia.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
 
-              <div class="field">
-                <label for="topic">Temat</label>
-                <select id="topic" name="topic" required>
-                  <option value="">Wybierz temat…</option>
-                  <option>ABC Żeglarstwa</option>
-                  <option>Quizy / patent</option>
-                  <option>Giełda jachtów</option>
-                  <option>Giełda osprzętu</option>
-                  <option>Wolna koja</option>
-                  <option>Mariny</option>
-                  <option>Kursy i szkolenia</option>
-                  <option>Współpraca</option>
-                  <option>Inne</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="msg">Wiadomość</label>
-                <textarea id="msg" name="message" rows="6" placeholder="Opisz problem lub pytanie…" required></textarea>
-              </div>
-
-              <button class="btn btn-primary" type="submit">Wyślij (demo)</button>
-              <p class="muted small">
-                GitHub Pages nie ma backendu — jeśli chcesz, dodamy integrację z Formspree / Netlify Forms.
-              </p>
-            </form>
-          </section>
-
-          <section class="card">
-            <h3>FAQ</h3>
-
-            <details class="faq" open>
-              <summary>Jak zacząć naukę od zera?</summary>
-              <p>Zacznij od działu ABC, a potem zrób quiz „ABC”. Dalej: manewry, przepisy i nawigacja.</p>
-            </details>
-
-            <details class="faq">
-              <summary>Czy mogę dodać ogłoszenie jachtu/osprzętu?</summary>
-              <p>W tej wersji to makieta. Docelowo można dodać formularz + zapis do pliku/arkusza lub prosty backend.</p>
-            </details>
-
-            <details class="faq">
-              <summary>Skąd pochodzą dane pogodowe?</summary>
-              <p>Ta sekcja korzysta z backendu (API meteo + geokodowanie). W tej wersji pobieramy warunki „current”.</p>
-            </details>
-
-            <details class="faq">
-              <summary>Czy strona jest responsywna?</summary>
-              <p>Tak — mobile-first. Menu rozwija się na telefonie, a na desktopie jest widoczne w nagłówku.</p>
-            </details>
-
-            <div class="contact-box">
-              <h4 class="mini-title">Kontakt</h4>
-              <p class="muted">
-                Email: <a class="link" href="mailto:kontakt@sailabc.com">kontakt@sailabc.com</a><br />
-                Social: <a class="link" href="#" aria-label="Social sailABC">sailABC</a>
-              </p>
-            </div>
-          </section>
+          <a class="card card-link" href="/kontakt.html">
+            <div class="card-icon">📩</div>
+            <h3>Kontakt i FAQ</h3>
+            <p>Pomoc, pytania i współpraca.</p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1014,10 +266,10 @@
         </div>
 
         <div class="footer-links">
-          <a href="#abc">ABC</a>
-          <a href="#jachty">Jachty</a>
+          <a href="/abc.html">ABC</a>
           <a href="#pogoda">Pogoda</a>
-          <a href="#kontakt">Kontakt</a>
+          <a href="/kontakt.html">Kontakt</a>
+          <a href="/admin/">Admin</a>
         </div>
 
         <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
@@ -1051,7 +303,6 @@
 
   <!-- Leaflet + pogoda -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="weather.js?v=5"></script>
-  <script src="aggregator.js"></script>
+  <script src="weather.js?v=6"></script>
 </body>
 </html>
