@@ -7,15 +7,20 @@
 
   <!-- Leaflet (mapa) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- CSS (UWAGA: cache-buster po tym jak w style.css był HTML) -->
+  <link rel="stylesheet" href="style.css?v=8" />
+
+  <title>sailABC.com — Portal dla żeglarzy</title>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Przejdź do treści</a>
 
+  <!-- 1. GÓRNE MENU: przyciski + logo + sailABC.com -->
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a class="brand" href="/" aria-label="sailABC — strona główna">
+      <a class="brand" href="./" aria-label="sailABC — strona główna">
         <img class="brand-logo" src="logo.png" alt="sailABC.com" />
         <div class="brand-text">
           <span class="brand-name">sailABC.com</span>
@@ -27,52 +32,53 @@
         <span class="sr-only">Menu</span>
       </button>
 
-      <!-- Menu = małe estetyczne przyciski -->
       <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
-        <a class="nav-btn" href="/abc.html">ABC</a>
-        <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
-        <a class="nav-btn" href="/kursy.html">Kursy</a>
-        <a class="nav-btn" href="#pogoda">Pogoda</a>
-        <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
-        <a class="nav-btn" href="/mariny.html">Mariny</a>
-        <a class="nav-btn" href="/spolecznosc.html">Społeczność</a>
-        <a class="nav-btn" href="/kontakt.html">Kontakt i FAQ</a>
+        <!-- 13. Sekcje główne -->
+        <a class="nav-btn" href="abc.html">ABC</a>
+        <a class="nav-btn" href="quizy.html">Testy i quizy</a>
+        <a class="nav-btn" href="wolna-koja.html">Wolna koja</a>
+        <a class="nav-btn" href="mariny.html">Wolne miejsca w marinach</a>
+        <a class="nav-btn" href="spolecznosc.html">Społeczność</a>
+        <a class="nav-btn" href="kontakt.html">Kontakt i FAQ</a>
 
         <span class="nav-sep" aria-hidden="true"></span>
 
-        <a class="nav-btn nav-btn-ghost" href="/gielda-jachtow.html">Giełda jachtów</a>
-        <a class="nav-btn nav-btn-ghost" href="/gielda-osprzetu.html">Giełda osprzętu</a>
-        <a class="nav-btn nav-btn-ghost" href="/agregator-regat.html">Agregator regat</a>
-        <a class="nav-btn nav-btn-ghost" href="/agregator-ofert.html">Agregator ofert</a>
-        <a class="nav-btn nav-btn-ghost" href="/artykuly.html">Artykuły i poradniki</a>
+        <!-- 14. Do podstron -->
+        <a class="nav-btn nav-btn-ghost" href="gielda-jachtow.html">Giełda jachtów</a>
+        <a class="nav-btn nav-btn-ghost" href="gielda-osprzetu.html">Giełda osprzętu</a>
+        <a class="nav-btn nav-btn-ghost" href="agregator-regat.html">Agregator regat</a>
+        <a class="nav-btn nav-btn-ghost" href="agregator-ofert.html">Agregator ofert</a>
+        <a class="nav-btn nav-btn-ghost" href="artykuly.html">Artykuły i poradniki</a>
 
         <span class="nav-sep" aria-hidden="true"></span>
 
-        <a class="nav-btn nav-btn-accent" href="/admin/">Admin</a>
+        <!-- 15. Admin (placeholder link) -->
+        <a class="nav-btn nav-btn-accent" href="admin/index.html">Admin</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ABOVE THE FOLD: 1–4 (bez „dopisków czata”) -->
-    <section class="hero hero-fold">
+
+    <!-- 2–5. ABOVE THE FOLD: tytuł+opis (lewo), przycisk pogody (prawo), linki, kursy -->
+    <section class="hero hero-fold" aria-label="Start">
       <div class="container hero-inner hero-fold-inner">
 
-        <!-- 2. lewa: tytuł + opis -->
+        <!-- 2. lewa -->
         <div class="hero-copy">
           <h1>Portal dla żeglarzy</h1>
           <p class="hero-lead">
-            sailABC wspiera edukację i praktykę żeglarską: ABC, testy i quizy, poradniki, aplikacje,
-            wolna koja, mariny oraz narzędzia pogodowe pod żeglugę.
+            sailABC wspiera edukację i praktykę żeglarską: ABC, testy, poradniki, narzędzia, wolna koja,
+            mariny oraz rozbudowana prognoza pogody dla żeglugi.
           </p>
         </div>
 
-        <!-- 2. prawa: przycisk do pogody -->
+        <!-- 2. prawa -->
         <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
           <div class="panel-card weather-cta">
-            <h2>🌬️ Pogoda żeglarska</h2>
+            <h2>Pogoda żeglarska</h2>
             <p class="muted">
-              Wybierz punkt na mapie lub wpisz miejsce, a zobaczysz aktualne warunki, 24h i 7 dni.
+              Wybierz punkt na mapie lub wpisz nazwę miejsca. Zobacz aktualnie, 24 godziny i 7 dni.
             </p>
             <a class="btn btn-primary btn-full weather-big-btn" href="#pogoda">
               Otwórz pogodę
@@ -84,18 +90,18 @@
         </aside>
 
         <!-- 3. przyciski-linki -->
-        <div class="hero-links-row" aria-label="Skróty edukacyjne">
-          <a class="chip chip-link" href="/wezly.html">Węzły</a>
-          <a class="chip chip-link" href="/manewry.html">Manewry</a>
-          <a class="chip chip-link" href="/nawigacja.html">Nawigacja</a>
-          <a class="chip chip-link" href="/praca-zagli.html">Praca żagli</a>
-          <a class="chip chip-link" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
-          <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
+        <div class="hero-links-row" aria-label="Skróty tematyczne">
+          <a class="chip chip-link" href="wezly.html">Węzły</a>
+          <a class="chip chip-link" href="manewry.html">Manewry</a>
+          <a class="chip chip-link" href="nawigacja.html">Nawigacja</a>
+          <a class="chip chip-link" href="praca-zagli.html">Praca żagli</a>
+          <a class="chip chip-link" href="bezpieczenstwo.html">Bezpieczeństwo</a>
+          <a class="chip chip-link" href="oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
         </div>
 
-        <!-- 4. duże przyciski kursów -->
-        <div class="courses-hero" aria-label="Kursy">
-          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zzeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
+        <!-- 4. duże przyciski kursów (linki do Fabryki Kursów) -->
+        <div class="courses-hero" aria-label="Kursy (płatne)">
+          <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
           <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
           <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
           <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
@@ -107,17 +113,17 @@
       </div>
     </section>
 
-    <!-- 6–9. POGODA PRZENIESIONA DO GÓRY + 24h + 7 dni wierszami -->
-    <section class="section section-tight" id="pogoda">
+    <!-- 6–9. POGODA POD 1–4 -->
+    <section class="section section-tight" id="pogoda" aria-label="Pogoda">
       <div class="container">
         <div class="section-head">
           <h2>Pogoda i warunki na wodzie</h2>
-          <p class="muted">Wpisz miejsce albo kliknij na mapie. Pokażemy: aktualnie, 24h oraz 7 dni.</p>
+          <p class="muted">Wpisz miejsce albo kliknij na mapie. Pokażemy warunki aktualne, 24 godziny i 7 dni.</p>
         </div>
 
         <div class="cards-grid cards-2">
           <article class="card">
-            <h3>Prognoza aktualna — wybierz miejsce</h3>
+            <h3>Wybierz miejsce</h3>
 
             <div class="weather-search">
               <div class="field" style="margin:0;">
@@ -136,7 +142,7 @@
             <div id="weatherMap" class="weather-map" aria-label="Mapa pogody"></div>
 
             <div class="note" id="weatherNote" style="margin-top:12px;">
-              <strong>Tip:</strong> kliknij na mapie lub wyszukaj miejscowość/akwen.
+              Kliknij na mapie lub wyszukaj miejscowość/akwen.
             </div>
           </article>
 
@@ -156,7 +162,6 @@
               </div>
             </div>
 
-            <!-- 8. Prognoza 24h -->
             <h3 style="margin-top:14px;">Prognoza 24 godziny</h3>
             <p class="muted" id="hourlyMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
 
@@ -165,19 +170,18 @@
                 <thead>
                   <tr>
                     <th>Godzina</th>
-                    <th>Ikona</th>
+                    <th>Warunki</th>
                     <th>Wiatr</th>
                     <th>Temp.</th>
                     <th>Opad</th>
                   </tr>
                 </thead>
                 <tbody id="forecast24">
-                  <!-- wiersze z JS -->
+                  <!-- wiersze generuje weather.js -->
                 </tbody>
               </table>
             </div>
 
-            <!-- 9. Prognoza 7 dni -->
             <h3 style="margin-top:14px;">Prognoza 7 dni</h3>
             <p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
 
@@ -186,14 +190,14 @@
                 <thead>
                   <tr>
                     <th>Dzień</th>
-                    <th>Ikona</th>
+                    <th>Warunki</th>
                     <th>Wiatr</th>
                     <th>Temp.</th>
                     <th>Opad</th>
                   </tr>
                 </thead>
                 <tbody id="forecast7">
-                  <!-- wiersze z JS -->
+                  <!-- wiersze generuje weather.js -->
                 </tbody>
               </table>
             </div>
@@ -202,56 +206,48 @@
       </div>
     </section>
 
-    <!-- 13. Pod pogodą – zostają sekcje (na razie jak w Twoim układzie),
-         ale docelowo linkujesz do podstron. Tu zostawiam tylko lekkie "landing" dla 13,
-         żeby nie rozbudowywać strony w dół i utrzymać założenia. -->
-    <section class="section" id="panele-abc">
+    <!-- 13. Sekcje pod pogodą (bez ikonek/emoji) -->
+    <section class="section" id="panele" aria-label="Sekcje portalu">
       <div class="container">
         <div class="section-head">
-          <h2>Panele ABC żeglarstwa</h2>
-          <p class="muted">Tak jak są — docelowo pełne treści na podstronach.</p>
+          <h2>Sekcje portalu</h2>
+          <p class="muted">Wszystkie działy jako podstrony (treści dodamy później).</p>
         </div>
 
         <div class="cards-grid cards-3">
-          <a class="card card-link" href="/abc.html">
-            <div class="card-icon">⛵</div>
-            <h3>ABC żeglarstwa</h3>
-            <p>Fundamenty, teoria i praktyka.</p>
+          <a class="card card-link" href="abc.html">
+            <h3>Panele ABC żeglarstwa</h3>
+            <p>Bezpieczeństwo, nawigacja, praca żagli, manewry, węzły.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
 
-          <a class="card card-link" href="/quizy.html">
-            <div class="card-icon">🧠</div>
+          <a class="card card-link" href="quizy.html">
             <h3>Testy i quizy żeglarskie</h3>
-            <p>Sprawdź wiedzę i przygotuj się do egzaminu.</p>
+            <p>Quizy ABC, patenty, przepisy, manewry.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
 
-          <a class="card card-link" href="/wolna-koja.html">
-            <div class="card-icon">🧭</div>
+          <a class="card card-link" href="wolna-koja.html">
             <h3>Wolna koja</h3>
-            <p>Rejsy i miejsca na jachtach (docelowo system ogłoszeń).</p>
+            <p>System ofert rejsów i wolnych miejsc na jachtach.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
 
-          <a class="card card-link" href="/mariny.html">
-            <div class="card-icon">⚓</div>
+          <a class="card card-link" href="mariny.html">
             <h3>System wolnych miejsc w marinach</h3>
-            <p>Docelowo baza marin + dostępność.</p>
+            <p>Docelowo: baza marin + dostępność i parametry.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
 
-          <a class="card card-link" href="/spolecznosc.html">
-            <div class="card-icon">💬</div>
+          <a class="card card-link" href="spolecznosc.html">
             <h3>Społeczność</h3>
-            <p>Forum, grupy, ogłoszenia.</p>
+            <p>Forum, ogłoszenia, grupy rejsowe.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
 
-          <a class="card card-link" href="/kontakt.html">
-            <div class="card-icon">📩</div>
+          <a class="card card-link" href="kontakt.html">
             <h3>Kontakt i FAQ</h3>
-            <p>Pomoc, pytania i współpraca.</p>
+            <p>Pomoc, pytania, współpraca.</p>
             <span class="card-cta">Otwórz →</span>
           </a>
         </div>
@@ -266,15 +262,16 @@
         </div>
 
         <div class="footer-links">
-          <a href="/abc.html">ABC</a>
+          <a href="abc.html">ABC</a>
           <a href="#pogoda">Pogoda</a>
-          <a href="/kontakt.html">Kontakt</a>
-          <a href="/admin/">Admin</a>
+          <a href="kontakt.html">Kontakt</a>
+          <a href="admin/index.html">Admin</a>
         </div>
 
         <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
       </div>
     </footer>
+
   </main>
 
   <script>
@@ -298,11 +295,12 @@
       if (t && t.tagName === 'A') setNav(false);
     });
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
   </script>
 
   <!-- Leaflet + pogoda -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="weather.js?v=6"></script>
+  <script src="weather.js?v=8"></script>
 </body>
 </html>
