@@ -608,3 +608,100 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   overflow: hidden;
 }
 */
+/* =========================
+   FIX 1: Kursy – szersza prawa kolumna
+   ========================= */
+@media (min-width: 720px){
+  /* zamiast 1.35fr / 0.65fr -> dajemy więcej miejsca kursom */
+  .courses-hero{
+    grid-template-columns: 1.25fr minmax(360px, 0.95fr);
+  }
+
+  /* opcjonalnie: wyrównanie prawej kolumny */
+  .courses-paid{
+    justify-self: stretch;
+  }
+}
+
+/* Na dużym ekranie jeszcze odrobina przestrzeni na kursy */
+@media (min-width: 980px){
+  .courses-hero{
+    grid-template-columns: 1.35fr minmax(420px, 0.9fr);
+  }
+}
+
+/* =========================
+   FIX 2: Przyciski kursów – większe, czytelne napisy (do 2 linii na desktop)
+   ========================= */
+.courses-paid .btn-big{
+  font-size: 18px;
+  padding: 18px 18px;
+  border-radius: 16px;
+  letter-spacing: -0.2px;
+}
+
+/* Desktop: pozwól na 2 linie zamiast ścinania tekstu */
+@media (min-width: 720px){
+  .courses-paid .btn-big{
+    white-space: normal;        /* zamiast nowrap */
+    overflow: hidden;
+    text-overflow: clip;
+    line-height: 1.15;
+
+    /* 2 linie max (czytelnie, bez rozjechania) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/* Mobile: można zostawić 1 linię z ellipsis (czytelniej przy małej szerokości) */
+@media (max-width: 719px){
+  .courses-paid .btn-big{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* =========================
+   FIX 3: Pogoda żeglarska – panel poziomy (opis + przycisk w jednym rzędzie)
+   ========================= */
+
+/* Robimy z karty pogody układ poziomy */
+@media (min-width: 720px){
+  .hero-panel .panel-card{
+    padding: 16px 16px;
+  }
+
+  .weather-cta{
+    display: grid;
+    grid-template-columns: 1fr auto; /* tekst + przycisk */
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* jeśli masz tytuł i opis w środku weather-cta, to będą w lewej kolumnie */
+  .weather-big-btn{
+    margin-top: 0;              /* było 14px */
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 14px;
+    white-space: nowrap;
+  }
+}
+
+/* Dodatkowo: ograniczamy „wysokość” panelu pogody, żeby nie był wielką cegłą */
+@media (min-width: 720px){
+  .hero-panel .panel-card{
+    max-height: 170px;          /* wygląda jak „na wysokość” H1+lead */
+    overflow: hidden;
+  }
+}
+
+/* Na bardzo dużych ekranach można delikatnie zwiększyć */
+@media (min-width: 980px){
+  .hero-panel .panel-card{
+    max-height: 190px;
+  }
+}
