@@ -1,5 +1,4 @@
 /* sailabc.com — UI (mobile-first). Bez frameworków. */
-/* NOWY style.css: tylko styling + poprawny układ poradniki(lewo) / kursy(prawo), bez “samowoli” tekstowej */
 
 :root{
   --bg: #0b1220;
@@ -90,7 +89,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   padding:18px 0;
 }
 
-/* brand */
 .brand{
   display:flex;
   align-items:center;
@@ -108,7 +106,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   letter-spacing:0.2px;
 }
 
-/* nav toggle */
 .nav-toggle{
   appearance:none;
   border:1px solid rgba(255,255,255,0.12);
@@ -140,7 +137,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 .nav-toggle-lines::before{ top:1px; }
 .nav-toggle-lines::after{ bottom:1px; }
 
-/* nav */
 .site-nav{
   display:none;
   gap:8px;
@@ -177,11 +173,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 .nav-btn-ghost{ background: rgba(0,0,0,0.14); }
-.nav-btn-accent{
-  border-color: rgba(25,196,198,0.55);
-  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
-  color:#041116;
-}
+
 .nav-sep{
   width:1px;
   height:26px;
@@ -214,35 +206,8 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   max-width:62ch;
 }
 
-/* right panel */
-.hero-panel .panel-card{
-  border:1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding:16px;
-}
-.weather-cta{ text-align:left; }
-.weather-big-btn{
-  margin-top:14px;
-  font-size:18px;
-  padding:16px 18px;
-}
-
-/* chips row */
-.hero-links-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
 /* =========================
    PORADNIKI (LEWO) + KURSY (PRAWO)
-   Wymagania:
-   - kursy po prawej (duże przyciski)
-   - poradniki po lewej (małe identyczne przyciski) i kilka w rzędzie
-   - lewa/prawa równa wysokość
-   - wypełniona szerokość
    ========================= */
 .courses-hero{
   display:grid;
@@ -251,30 +216,56 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   width:100%;
 }
 
-/* LEWA: poradniki jako siatka chipów */
+/* LEWA: poradniki w siatce */
 .courses-guides{
   display:grid;
   gap:10px;
   align-content:start;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* mobile */
+  grid-template-columns: repeat(2, minmax(140px, 1fr)); /* mobile */
 }
 
-/* chip – identyczny wygląd jak wcześniej, ale wypełnia komórkę siatki */
+/* chip poradnika: pełny tekst, zawijanie */
 .courses-guides .chip{
-  display:inline-flex;
+  display:flex;
   justify-content:center;
+  align-items:center;
+  text-align:center;
   width:100%;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.15;
+  min-height: 44px;
+  padding: 10px 12px;
 }
 
-/* PRAWA: kursy jako jedna kolumna dużych przycisków */
+/* PRAWA: pogoda-mini + kursy */
 .courses-paid{
   display:grid;
   grid-template-columns: 1fr;
   gap:10px;
   align-content:start;
+}
+
+/* Mini karta pogody (tylko tytuł + przycisk) */
+.weather-mini{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+}
+.weather-mini-title{
+  font-size:16px;
+  margin:0;
+  line-height:1.1;
+  white-space: nowrap;
+}
+.weather-mini-btn{
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  white-space: nowrap;
 }
 
 /* =========================
@@ -374,7 +365,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width:100%; }
 
-/* duże przyciski kursów (zostają duże) */
+/* duże przyciski kursów */
 .btn-big{
   width:100%;
   font-size:18px;
@@ -382,7 +373,9 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   border-radius:14px;
   justify-content:flex-start;
   text-align:left;
-  white-space:nowrap;
+
+  /* mobile: 1 linia + ... */
+  white-space: nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
@@ -530,8 +523,6 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   .site-nav.open{ position:static; padding:0; background:transparent; border:0; }
 
   .hero{ padding:48px 0 22px; }
-  .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap:22px; align-items:start; }
-  .hero-panel{ align-self:start; }
 
   .cards-grid{ grid-template-columns: repeat(2, 1fr); }
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
@@ -539,23 +530,36 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items:center; }
 
-  /* PORADNIKI LEWO / KURSY PRAWO + równa wysokość */
+  /* LEWO/PRAWO: poradniki + kursy */
   .courses-hero{
-    grid-template-columns: 1.35fr 0.65fr; /* lewa szerzej */
-    align-items: stretch;                  /* równa wysokość kolumn */
+    grid-template-columns: 1.35fr minmax(420px, 0.85fr);
+    align-items: start;
   }
-  .courses-guides, .courses-paid{ height: 100%; }
 
-  /* poradniki: kilka w rzędzie */
+  /* poradniki: gęściej na desktopie */
   .courses-guides{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(170px, 1fr));
+  }
+
+  /* kursy: na desktopie 2 linie (czytelnie, bez ścisku) */
+  .btn-big{
+    white-space: normal;
+    text-overflow: clip;
+    overflow: hidden;
+    line-height: 1.15;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 
 @media (min-width: 980px){
-  /* jeszcze gęściej na dużym ekranie */
   .courses-guides{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(190px, 1fr));
+  }
+  .courses-hero{
+    grid-template-columns: 1.4fr minmax(460px, 0.8fr);
   }
 }
 
@@ -567,258 +571,4 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
   html{ scroll-behavior:auto; }
-}
-/* === FIX: poradniki (chips) mają pokazywać cały tekst === */
-
-/* Siatka poradników: lepsze dopasowanie szerokości */
-.courses-guides{
-  grid-template-columns: repeat(2, minmax(140px, 1fr)); /* mobile: 2 w rzędzie, ale nie za wąskie */
-}
-
-/* Na tablet/desktop zostawiasz swoje 3/4 kolumny – tylko doprecyzuję minimalną szerokość */
-@media (min-width: 720px){
-  .courses-guides{ grid-template-columns: repeat(3, minmax(170px, 1fr)); }
-}
-@media (min-width: 980px){
-  .courses-guides{ grid-template-columns: repeat(4, minmax(190px, 1fr)); }
-}
-
-/* Chipy poradników: pełny tekst, zawijanie, wyśrodkowanie */
-.courses-guides .chip{
-  display: flex;                 /* zamiast inline-flex */
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  white-space: normal;           /* klucz: pozwól łamać linie */
-  overflow: visible;             /* nie ucinaj */
-  text-overflow: clip;           /* wyłącz ... */
-  line-height: 1.15;
-
-  min-height: 44px;              /* tap target + równe kafelki */
-  padding: 10px 12px;            /* trochę więcej miejsca na tekst */
-}
-
-/* Jeśli masz bardzo długie tytuły, to max 2 linie (opcjonalnie – odkomentuj)
-.courses-guides .chip{
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-*/
-/* =========================
-   FIX 1: Kursy – szersza prawa kolumna
-   ========================= */
-@media (min-width: 720px){
-  /* zamiast 1.35fr / 0.65fr -> dajemy więcej miejsca kursom */
-  .courses-hero{
-    grid-template-columns: 1.25fr minmax(360px, 0.95fr);
-  }
-
-  /* opcjonalnie: wyrównanie prawej kolumny */
-  .courses-paid{
-    justify-self: stretch;
-  }
-}
-
-/* Na dużym ekranie jeszcze odrobina przestrzeni na kursy */
-@media (min-width: 980px){
-  .courses-hero{
-    grid-template-columns: 1.35fr minmax(420px, 0.9fr);
-  }
-}
-
-/* =========================
-   FIX 2: Przyciski kursów – większe, czytelne napisy (do 2 linii na desktop)
-   ========================= */
-.courses-paid .btn-big{
-  font-size: 18px;
-  padding: 18px 18px;
-  border-radius: 16px;
-  letter-spacing: -0.2px;
-}
-
-/* Desktop: pozwól na 2 linie zamiast ścinania tekstu */
-@media (min-width: 720px){
-  .courses-paid .btn-big{
-    white-space: normal;        /* zamiast nowrap */
-    overflow: hidden;
-    text-overflow: clip;
-    line-height: 1.15;
-
-    /* 2 linie max (czytelnie, bez rozjechania) */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-}
-
-/* Mobile: można zostawić 1 linię z ellipsis (czytelniej przy małej szerokości) */
-@media (max-width: 719px){
-  .courses-paid .btn-big{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* =========================
-   FIX 3: Pogoda żeglarska – panel poziomy (opis + przycisk w jednym rzędzie)
-   ========================= */
-
-/* Robimy z karty pogody układ poziomy */
-@media (min-width: 720px){
-  .hero-panel .panel-card{
-    padding: 16px 16px;
-  }
-
-  .weather-cta{
-    display: grid;
-    grid-template-columns: 1fr auto; /* tekst + przycisk */
-    align-items: center;
-    gap: 14px;
-  }
-
-  /* jeśli masz tytuł i opis w środku weather-cta, to będą w lewej kolumnie */
-  .weather-big-btn{
-    margin-top: 0;              /* było 14px */
-    padding: 14px 18px;
-    font-size: 16px;
-    border-radius: 14px;
-    white-space: nowrap;
-  }
-}
-
-/* Dodatkowo: ograniczamy „wysokość” panelu pogody, żeby nie był wielką cegłą */
-@media (min-width: 720px){
-  .hero-panel .panel-card{
-    max-height: 170px;          /* wygląda jak „na wysokość” H1+lead */
-    overflow: hidden;
-  }
-}
-
-/* Na bardzo dużych ekranach można delikatnie zwiększyć */
-@media (min-width: 980px){
-  .hero-panel .panel-card{
-    max-height: 190px;
-  }
-}
-/* =========================
-   FIX: Pogoda żeglarska — przycisk wraca do karty i jest klikalny
-   ========================= */
-
-/* Cofamy ograniczanie wysokości i ucinanie w karcie pogody */
-@media (min-width: 720px){
-  .hero-panel .panel-card{
-    max-height: none;
-    overflow: visible;
-  }
-
-  /* Stabilny układ poziomy bez "uciekania" */
-  .weather-cta{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    width: 100%;
-    min-width: 0; /* ważne: pozwala tekstowi się zwijać zamiast wypychać */
-  }
-
-  /* Tekst (tytuł + opis) ma prawo się zwijać */
-  .weather-cta > :first-child{
-    min-width: 0;
-  }
-
-  /* Przycisk ma stałą, bezpieczną szerokość i nie wypycha kontenera */
-  .weather-big-btn{
-    margin-top: 0;
-    width: auto !important;        /* przebija ewentualne width:100% */
-    flex: 0 0 auto;
-    max-width: 220px;              /* dopasuj: 200–260 */
-    white-space: nowrap;
-    padding: 14px 18px;
-    font-size: 16px;
-    display: inline-flex;
-  }
-
-  /* Jeśli gdzieś masz .btn-full na tym przycisku, to go neutralizujemy */
-  .hero-panel .weather-big-btn.btn-full{
-    width: auto !important;
-  }
-}
-/* =========================
-   Pogoda: przenieś nad kursy i zrób kompakt
-   ========================= */
-
-/* 1) Na desktopie: ustawiamy prawą kolumnę jako "stack": najpierw pogoda, potem kursy */
-@media (min-width: 720px){
-  .hero-panel{
-    /* panel pogody ma się zachować jak element, który można wstawić do prawej kolumny */
-    align-self: start;
-  }
-
-  /* jeśli hero-inner ma 2 kolumny (copy + hero-panel), to OK.
-     jeśli chcesz pogodę NAD kursami w sekcji courses-hero, a nie w hero:
-     to potrzebujemy przenieść HTML. CSS-em się da tylko jeśli pogoda jest już w tej kolumnie.
-     Poniżej zakładam, że pogoda jest po prawej stronie hero (jak na screenie) — tylko ją dociągamy do lewej. */
-}
-
-/* 2) Naprawa "uciekania" w prawo: wymuś pełną szerokość karty w kolumnie */
-@media (min-width: 720px){
-  .hero-panel .panel-card{
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-/* 3) Kompaktowy układ: tylko tytuł + przycisk */
-@media (min-width: 720px){
-  .hero-panel .panel-card{
-    padding: 12px 14px;
-  }
-
-  .weather-cta{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    width: 100%;
-  }
-
-  /* Ukryj nadmiar tekstów w karcie pogody:
-     - chowamy wszystkie paragrafy/małe opisy poza tytułem
-  */
-  .hero-panel .panel-card p,
-  .hero-panel .panel-card .muted,
-  .hero-panel .panel-card .small,
-  .hero-panel .panel-card ul,
-  .hero-panel .panel-card ol{
-    display: none !important;
-  }
-
-  /* Jeśli w tytule masz inne brzmienie, ustawimy wygląd i skrócimy go.
-     (CSS nie zmieni dosłownie tekstu, ale możemy ograniczyć co widać)
-  */
-  .hero-panel .panel-card h2,
-  .hero-panel .panel-card h3{
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
-  }
-
-  /* Przycisk: mniejszy, nie wyjeżdża */
-  .weather-big-btn{
-    margin: 0 !important;
-    padding: 10px 14px;
-    font-size: 14px;
-    border-radius: 12px;
-    width: auto !important;
-    max-width: 170px;
-    white-space: nowrap;
-  }
 }
