@@ -600,3 +600,66 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
     max-width: 380px;             /* żeby wyglądało kompaktowo (zmień na 360–420 wg gustu) */
   }
 }
+/* === FIX: nie ucinaj poradników + kursy bez zbędnego "zapasu" === */
+@media (min-width: 720px){
+
+  /* 1) Poradniki: usuń obcinanie (wcześniejszy max-height/overflow) */
+  .courses-guides{
+    max-height: none !important;
+    overflow: visible !important;
+
+    /* 3 w rzędzie */
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  /* chipy: pozwól na pełny tekst (2 linie max dla estetyki) */
+  .courses-guides .chip{
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    line-height: 1.15;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;        /* max 2 linie, ale NIC nie ucinamy wysokością kontenera */
+    -webkit-box-orient: vertical;
+
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+
+  /* 2) Kolumny: daj kursom mniej szerokości (żeby nie było wielkiej pustki) */
+  .catalog-row{
+    grid-template-columns: 1fr 380px !important; /* stała, sensowna szerokość dla kursów */
+    gap: 16px !important;
+  }
+
+  /* 3) Kursy: mniej "pasów", bardziej kompaktowo */
+  .courses-paid{
+    width: 100%;
+    max-width: 380px;
+    justify-self: start;
+    gap: 10px;
+  }
+
+  .courses-paid .btn-big{
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    border-radius: 14px !important;
+
+    /* 2 linie, ale bez nadmiernej wysokości */
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    line-height: 1.15;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/* Opcjonalnie: na bardzo dużych ekranach jeszcze ciut węższa kolumna kursów */
+@media (min-width: 1100px){
+  .catalog-row{ grid-template-columns: 1fr 360px !important; }
+  .courses-paid{ max-width: 360px; }
+}
