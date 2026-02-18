@@ -748,3 +748,77 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
     width: auto !important;
   }
 }
+/* =========================
+   Pogoda: przenieś nad kursy i zrób kompakt
+   ========================= */
+
+/* 1) Na desktopie: ustawiamy prawą kolumnę jako "stack": najpierw pogoda, potem kursy */
+@media (min-width: 720px){
+  .hero-panel{
+    /* panel pogody ma się zachować jak element, który można wstawić do prawej kolumny */
+    align-self: start;
+  }
+
+  /* jeśli hero-inner ma 2 kolumny (copy + hero-panel), to OK.
+     jeśli chcesz pogodę NAD kursami w sekcji courses-hero, a nie w hero:
+     to potrzebujemy przenieść HTML. CSS-em się da tylko jeśli pogoda jest już w tej kolumnie.
+     Poniżej zakładam, że pogoda jest po prawej stronie hero (jak na screenie) — tylko ją dociągamy do lewej. */
+}
+
+/* 2) Naprawa "uciekania" w prawo: wymuś pełną szerokość karty w kolumnie */
+@media (min-width: 720px){
+  .hero-panel .panel-card{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* 3) Kompaktowy układ: tylko tytuł + przycisk */
+@media (min-width: 720px){
+  .hero-panel .panel-card{
+    padding: 12px 14px;
+  }
+
+  .weather-cta{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Ukryj nadmiar tekstów w karcie pogody:
+     - chowamy wszystkie paragrafy/małe opisy poza tytułem
+  */
+  .hero-panel .panel-card p,
+  .hero-panel .panel-card .muted,
+  .hero-panel .panel-card .small,
+  .hero-panel .panel-card ul,
+  .hero-panel .panel-card ol{
+    display: none !important;
+  }
+
+  /* Jeśli w tytule masz inne brzmienie, ustawimy wygląd i skrócimy go.
+     (CSS nie zmieni dosłownie tekstu, ale możemy ograniczyć co widać)
+  */
+  .hero-panel .panel-card h2,
+  .hero-panel .panel-card h3{
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  /* Przycisk: mniejszy, nie wyjeżdża */
+  .weather-big-btn{
+    margin: 0 !important;
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    width: auto !important;
+    max-width: 170px;
+    white-space: nowrap;
+  }
+}
