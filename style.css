@@ -23,6 +23,9 @@
 
   --max: 1120px;
   --gap: 16px;
+
+  /* stabilna wysokość przycisków = brak skoków */
+  --tile-h: 56px;
 }
 
 *{ box-sizing: border-box; }
@@ -46,11 +49,6 @@ a{ color: inherit; text-decoration: none; }
 p{ margin: 0 0 12px; }
 h1,h2,h3,h4{ line-height: 1.15; margin: 0 0 10px; }
 ul{ margin: 0; padding-left: 18px; }
-
-code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.95em;
-}
 
 .container{
   width: 100%;
@@ -102,7 +100,7 @@ code{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 220px; /* FIX: miejsce na logo+tekst */
+  min-width: 220px;
   flex: 0 0 auto;
 }
 .brand-logo{
@@ -157,7 +155,7 @@ code{
   display: flex;
   position: absolute;
   left: 0; right: 0;
-  top: 110px; /* FIX: dropdown nie nachodzi na logo */
+  top: 110px;
   padding: 12px 16px 16px;
   background: rgba(10,16,28,0.92);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -190,17 +188,13 @@ code{
 }
 
 /* Hero */
-.hero{
-  padding: 34px 0 18px;
-}
-
+.hero{ padding: 34px 0 18px; }
 .hero-inner{
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
 }
-
 .hero-copy{ padding: 10px 0; }
 
 .hero h1{
@@ -222,6 +216,13 @@ code{
   padding: 16px;
 }
 
+.hero-links-row{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .panel-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -238,106 +239,7 @@ code{
 .kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
 .kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-/* Hero: skróty */
-.hero-links-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Kursy: domyślnie 1 kolumna na mobile */
-.courses-hero{
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* DUŻE przyciski kursów */
-.btn-big{
-  width: 100%;
-  font-size: 18px;
-  padding: 18px 20px;
-  border-radius: 16px;
-}
-
-/* Żeby nie było "pustego pola": wymuszamy kolejność w hero */
-.hero-fold-inner{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-.hero-fold-inner > .hero-copy{ order: 1; }
-.hero-fold-inner > .hero-panel{ order: 2; }
-.hero-fold-inner > .hero-links-row{ order: 3; }
-.hero-fold-inner > .courses-hero{ order: 4; }
-
-/* Sections */
-.section{ padding: 26px 0; }
-.section-tight{ padding: 18px 0; }
-
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.section-head h2{
-  font-size: 22px;
-  letter-spacing: -0.25px;
-}
-.muted{ color: var(--muted); }
-.small{ font-size: 12px; color: var(--muted); }
-
-/* Cards */
-.card{
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-}
-.card h3{ font-size: 18px; }
-.card p{ color: var(--muted); }
-
-.cards-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
-}
-.cards-2{ grid-template-columns: 1fr; }
-.cards-3{ grid-template-columns: 1fr; }
-
-.card-link{
-  display:block;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-}
-.card-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(25,196,198,0.35);
-  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
-}
-
-.card-cta{
-  display:inline-block;
-  margin-top: 8px;
-  color: rgba(25,196,198,0.95);
-  font-weight: 800;
-}
-
 /* Pills / chips */
-.pill{
-  display:inline-block;
-  font-size: 12px;
-  color: rgba(255,255,255,0.86);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid rgba(255,255,255,0.10);
-}
 .chip{
   display:inline-block;
   font-size: 13px;
@@ -390,15 +292,156 @@ code{
   background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
   border-color: rgba(25,196,198,0.70);
 }
-
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width: 100%; }
+
+/* ===== PROFESJONALNY LANDING: PORADNIKI + KURSY ===== */
+
+.hero-dual{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Karty po lewej/prawej */
+.hero-box{
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px; /* stabilizacja wysokości -> brak skoków */
+}
+
+.hero-box-accent{
+  border-color: rgba(25,196,198,0.25);
+  background: linear-gradient(180deg, rgba(25,196,198,0.10), rgba(255,255,255,0.05));
+}
+
+.hero-box-head{
+  margin-bottom: 10px;
+}
+.hero-box-title{
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.hero-box-sub{
+  margin: 0;
+}
+
+/* grupy poradników */
+.guide-groups{
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* tytuł grupy */
+.guide-group-title{
+  font-size: 12px;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 10px 0 8px;
+}
+
+/* siatka przycisków poradników */
+.guide-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* siatka kursów */
+.courses-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* stała wysokość + równe przyciski = brak “schodków” */
+.btn-tile{
+  width: 100%;
+  min-height: var(--tile-h);
+  height: var(--tile-h);
+  padding: 0 14px;             /* stabilna wysokość, bez zmian */
+  border-radius: 14px;
+  justify-content: flex-start; /* “landing” */
+  text-align: left;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* kursy: też tile, ale primary */
+.btn-tile-primary{
+  justify-content: center;
+  text-align: center;
+}
+
+/* Sections */
+.section{ padding: 26px 0; }
+.section-tight{ padding: 18px 0; }
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.section-head h2{
+  font-size: 22px;
+  letter-spacing: -0.25px;
+}
+.muted{ color: rgba(255,255,255,0.68); }
+.small{ font-size: 12px; color: rgba(255,255,255,0.68); }
+
+/* Cards */
+.card{
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+}
+.card h3{ font-size: 18px; }
+.card p{ color: rgba(255,255,255,0.68); }
+
+.cards-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+.cards-2{ grid-template-columns: 1fr; }
+.cards-3{ grid-template-columns: 1fr; }
+
+.card-link{
+  display:block;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(25,196,198,0.35);
+  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
+}
+.card-cta{
+  display:inline-block;
+  margin-top: 8px;
+  color: rgba(25,196,198,0.95);
+  font-weight: 800;
+}
 
 /* Forms */
 .field label{
   display:block;
   font-size: 12px;
-  color: var(--muted2);
+  color: rgba(255,255,255,0.52);
   margin-bottom: 6px;
 }
 input, select, textarea{
@@ -407,7 +450,7 @@ input, select, textarea{
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(0,0,0,0.16);
-  color: var(--text);
+  color: rgba(255,255,255,0.92);
   outline: none;
 }
 input::placeholder, textarea::placeholder{ color: rgba(255,255,255,0.45); }
@@ -440,7 +483,7 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
 
-/* Leaflet controls dopasowane kolorystycznie */
+/* Leaflet */
 .leaflet-control-zoom a{
   background: rgba(0,0,0,0.55) !important;
   color: rgba(255,255,255,0.92) !important;
@@ -453,7 +496,7 @@ input:focus, select:focus, textarea:focus{
 
 .note{
   margin-top: 12px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.68);
   font-size: 13px;
   background: rgba(255,255,255,0.05);
   border: 1px dashed rgba(255,255,255,0.16);
@@ -468,7 +511,7 @@ input:focus, select:focus, textarea:focus{
   padding: 16px 18px;
 }
 
-/* FORECAST TABLES */
+/* Forecast tables */
 .forecast-table-wrap{
   overflow:auto;
   border-radius: 14px;
@@ -476,13 +519,11 @@ input:focus, select:focus, textarea:focus{
   background: rgba(0,0,0,0.10);
   margin-top: 10px;
 }
-
 .forecast-table{
   width: 100%;
   border-collapse: collapse;
   min-width: 720px;
 }
-
 .forecast-table th,
 .forecast-table td{
   text-align:left;
@@ -491,24 +532,6 @@ input:focus, select:focus, textarea:focus{
   color: rgba(255,255,255,0.86);
   font-size: 14px;
   vertical-align: middle;
-}
-
-.forecast-table th{
-  color: rgba(255,255,255,0.92);
-  font-size: 13px;
-}
-
-.wx-ic{
-  display:inline-flex;
-  width: 26px;
-  height: 26px;
-  border-radius: 10px;
-  align-items: center;
-  justify-content:center;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.18);
-  margin-right: 8px;
-  font-size: 16px;
 }
 
 /* Footer */
@@ -530,7 +553,7 @@ input:focus, select:focus, textarea:focus{
   gap: 10px;
 }
 .footer-links a{
-  color: var(--muted);
+  color: rgba(255,255,255,0.68);
   padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid transparent;
@@ -539,7 +562,7 @@ input:focus, select:focus, textarea:focus{
 .footer-links a:hover{
   border-color: rgba(25,196,198,0.30);
   background: rgba(25,196,198,0.10);
-  color: var(--text);
+  color: rgba(255,255,255,0.92);
 }
 
 /* Responsive */
@@ -555,24 +578,30 @@ input:focus, select:focus, textarea:focus{
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
-  /* Kursy: na tablet 2 w rzędzie */
-  .courses-hero{ grid-template-columns: repeat(2, 1fr); }
-
-  .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
+  /* w poradnikach i kursach na tablet: 2 kolumny przycisków */
+  .guide-grid{ grid-template-columns: 1fr 1fr; }
+  .courses-grid{ grid-template-columns: 1fr; } /* kursy w jednej kolumnie wyglądają lepiej */
 }
 
-/* Kursy: na laptop/desktop 3 w rzędzie */
+/* Desktop: poradniki po lewej, kursy po prawej */
 @media (min-width: 980px){
-  .courses-hero{ grid-template-columns: repeat(3, 1fr); }
+  .hero-dual{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* poradniki: gęściej, ale nadal czytelnie */
+  .guide-grid{
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-/* Accessibility / reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
   html{ scroll-behavior: auto; }
 }
 
-/* na telefonie trochę niższa mapa */
+/* na telefonie niższa mapa */
 @media (max-width: 420px){
   .weather-map{ height: 340px; }
 }
