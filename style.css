@@ -529,3 +529,34 @@ ul{ margin: 0; padding-left: 18px; }
 @media (max-width: 420px){
   .weather-map{ height: 340px; }
 }
+/* Poradniki (lewa) + Kursy (prawa) — równa wysokość kolumn */
+.courses-hero{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.courses-guides{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+.courses-paid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+@media (min-width: 720px){
+  .courses-hero{
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch; /* KLUCZ: równa wysokość */
+  }
+  .courses-guides,
+  .courses-paid{
+    height: 100%;        /* KLUCZ */
+  }
+}
