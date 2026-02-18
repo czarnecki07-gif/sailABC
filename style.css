@@ -705,3 +705,46 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
     max-height: 190px;
   }
 }
+/* =========================
+   FIX: Pogoda żeglarska — przycisk wraca do karty i jest klikalny
+   ========================= */
+
+/* Cofamy ograniczanie wysokości i ucinanie w karcie pogody */
+@media (min-width: 720px){
+  .hero-panel .panel-card{
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* Stabilny układ poziomy bez "uciekania" */
+  .weather-cta{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    min-width: 0; /* ważne: pozwala tekstowi się zwijać zamiast wypychać */
+  }
+
+  /* Tekst (tytuł + opis) ma prawo się zwijać */
+  .weather-cta > :first-child{
+    min-width: 0;
+  }
+
+  /* Przycisk ma stałą, bezpieczną szerokość i nie wypycha kontenera */
+  .weather-big-btn{
+    margin-top: 0;
+    width: auto !important;        /* przebija ewentualne width:100% */
+    flex: 0 0 auto;
+    max-width: 220px;              /* dopasuj: 200–260 */
+    white-space: nowrap;
+    padding: 14px 18px;
+    font-size: 16px;
+    display: inline-flex;
+  }
+
+  /* Jeśli gdzieś masz .btn-full na tym przycisku, to go neutralizujemy */
+  .hero-panel .weather-big-btn.btn-full{
+    width: auto !important;
+  }
+}
