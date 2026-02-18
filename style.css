@@ -79,7 +79,9 @@ code{
   white-space:nowrap;border:0;
 }
 
-/* Header */
+/* =========================================================
+   Header (POPRAWIONE: menu nie nachodzi na logo)
+   ========================================================= */
 .site-header{
   position: sticky;
   top: 0;
@@ -94,75 +96,34 @@ code{
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 20px 0;
+  padding: 14px 0;
+  flex-wrap: wrap;              /* <<< ważne */
 }
 
 .brand{
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 180px;
+  min-width: 220px;             /* <<< nie ściskamy */
+  flex: 0 0 auto;               /* <<< nie kurcz się */
 }
+
 .brand-logo{
   width: 130px;
   height: 90px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
 }
+
 .brand-text{ display: flex; flex-direction: column; }
-.brand-name{ font-weight: 900; letter-spacing: 0.2px; }
-
-/* NAV */
-.site-nav{
-  display: none;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+.brand-name{
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  white-space: nowrap;          /* <<< nie łam */
 }
+.brand-tagline{ font-size: 12px; color: var(--muted); margin-top: 1px; }
 
-/* NAV jako przyciski */
-.site-nav.nav-buttons a.nav-btn{
-  color: rgba(255,255,255,0.88);
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  font-weight: 800;
-  line-height: 1;
-  transition: background .2s ease, border-color .2s ease, transform .12s ease, color .2s ease;
-}
-
-.site-nav.nav-buttons a.nav-btn:hover{
-  background: rgba(25,196,198,0.12);
-  border-color: rgba(25,196,198,0.35);
-  color: var(--text);
-  transform: translateY(-1px);
-}
-
-.site-nav.nav-buttons a.nav-btn-ghost{
-  background: rgba(0,0,0,0.14);
-}
-
-.site-nav.nav-buttons a.nav-btn-accent{
-  border-color: rgba(25,196,198,0.55);
-  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
-  color: #041116;
-}
-
-.site-nav.nav-buttons a.nav-btn-accent:hover{
-  background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
-  border-color: rgba(25,196,198,0.70);
-}
-
-.nav-sep{
-  width: 10px;
-  height: 1px;
-  opacity: .25;
-  background: rgba(255,255,255,0.6);
-  margin: 0 6px;
-}
-
+/* Mobile: hamburger */
 .nav-toggle{
   appearance: none;
   border: 1px solid rgba(255,255,255,0.12);
@@ -172,6 +133,7 @@ code{
   padding: 10px 12px;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+  flex: 0 0 auto;
 }
 .nav-toggle:focus-visible{
   outline: 3px solid rgba(25,196,198,0.35);
@@ -194,31 +156,80 @@ code{
 .nav-toggle-lines::before{ top: 1px; }
 .nav-toggle-lines::after{ bottom: 1px; }
 
+/* Nav wrapper */
+.site-nav{
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+/* Open on mobile */
 .site-nav.open{
   display: flex;
-  position: absolute;
-  left: 0; right: 0;
-  top: 64px;
-  padding: 12px 16px 16px;
-  background: rgba(10,16,28,0.92);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  width: 100%;
+  order: 3;
+  padding: 12px 0 10px;
+  background: rgba(10,16,28,0.35);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 10px;
 }
 
-@media (max-width: 719px){
-  .site-nav.open a.nav-btn{
-    width: 100%;
-    justify-content: center;
-  }
+/* Nav as buttons */
+.nav-buttons .nav-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.86);
+  font-size: 13px;
+  font-weight: 850;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease, color .2s ease;
+  white-space: nowrap;
+}
+.nav-buttons .nav-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(25,196,198,0.12);
+  border-color: rgba(25,196,198,0.35);
+  color: var(--text);
 }
 
-/* Hero */
-.hero{ padding: 34px 0 18px; }
+.nav-buttons .nav-btn-ghost{
+  background: rgba(0,0,0,0.14);
+}
+
+.nav-buttons .nav-btn-accent{
+  border-color: rgba(25,196,198,0.55);
+  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
+  color: #041116;
+}
+
+.nav-sep{
+  width: 1px;
+  height: 22px;
+  background: rgba(255,255,255,0.12);
+  margin: 0 4px;
+}
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero{
+  padding: 34px 0 18px;
+}
+
 .hero-inner{
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
 }
+
 .hero-copy{ padding: 10px 0; }
 
 .hero h1{
@@ -226,6 +237,7 @@ code{
   margin-bottom: 10px;
   letter-spacing: -0.6px;
 }
+
 .hero-lead{
   color: var(--muted);
   font-size: 16px;
@@ -246,33 +258,104 @@ code{
   gap: 12px;
   margin-top: 12px;
 }
+
 .kpi{
   background: rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 12px;
 }
+
 .kpi-label{ display:block; color: var(--muted2); font-size: 12px; }
-.kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; }
+.kpi-value{ display:block; font-weight: 900; font-size: 18px; margin-top: 2px; letter-spacing: -0.2px; }
 .kpi-sub{ display:block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-/* HERO above-the-fold */
-.hero.hero-fold{ padding: 22px 0 14px; }
+/* Hero extras (links + courses) */
 .hero-links-row{
   display:flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
 .courses-hero{
-  display: grid;
-  gap: 10px;
+  display:grid;
   grid-template-columns: 1fr;
-  margin-top: 2px;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-big{
+  font-size: 15px;
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+/* Sections */
+.section{ padding: 26px 0; }
+.section-tight{ padding: 18px 0; }
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.section-head h2{
+  font-size: 22px;
+  letter-spacing: -0.25px;
+}
+
+.muted{ color: var(--muted); }
+.small{ font-size: 12px; color: var(--muted); }
+
+/* Cards */
+.card{
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+}
+.card h3{ font-size: 18px; }
+.card p{ color: var(--muted); }
+
+.cards-grid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+.cards-2{ grid-template-columns: 1fr; }
+.cards-3{ grid-template-columns: 1fr; }
+
+.card-link{
+  display:block;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(25,196,198,0.35);
+  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
+}
+.card-cta{
+  display:inline-block;
+  margin-top: 8px;
+  color: rgba(25,196,198,0.95);
+  font-weight: 800;
 }
 
 /* Pills / chips */
+.pill{
+  display:inline-block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.86);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.10);
+}
 .chip{
   display:inline-block;
   font-size: 13px;
@@ -328,58 +411,21 @@ code{
 
 .btn-ghost{ background: rgba(0,0,0,0.14); }
 .btn-full{ width: 100%; }
-.btn-big{ padding: 14px 14px; font-size: 0.98rem; border-radius: 14px; }
+.btn-small{ padding: 10px 12px; border-radius: 12px; font-size: 13px; }
 
-/* Sections */
-.section{ padding: 26px 0; }
-.section.section-tight{ padding-top: 18px; }
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.section-head h2{ font-size: 22px; letter-spacing: -0.25px; }
-.muted{ color: var(--muted); }
-.small{ font-size: 12px; color: var(--muted); }
-
-/* Cards */
-.card{
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-}
-.card h3{ font-size: 18px; }
-.card p{ color: var(--muted); }
-
-.cards-grid{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
-}
-.cards-2{ grid-template-columns: 1fr; }
-.cards-3{ grid-template-columns: 1fr; }
-
-.card-link{
-  display:block;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-}
-.card-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(25,196,198,0.35);
-  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
-}
-.card-cta{
-  display:inline-block;
-  margin-top: 8px;
+/* Links */
+.link{
   color: rgba(25,196,198,0.95);
   font-weight: 800;
 }
+.link:hover{ text-decoration: underline; }
 
-/* Forms / inputs */
+/* Lists */
+.list{ color: var(--muted); }
+.list li{ margin-bottom: 8px; }
+.list.compact li{ margin-bottom: 6px; }
+
+/* Filters / inputs */
 .field label{
   display:block;
   font-size: 12px;
@@ -401,44 +447,35 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 0 0 4px rgba(25,196,198,0.16);
 }
 
-.note{
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  background: rgba(255,255,255,0.05);
-  border: 1px dashed rgba(255,255,255,0.16);
-  border-radius: 14px;
-  padding: 12px;
-}
+/* =========================================================
+   Weather: search + map
+   ========================================================= */
 
-/* Weather search + map */
 .weather-search{
   display: grid;
   gap: 12px;
   margin-bottom: 12px;
 }
+
 .weather-search-actions{
-  display:flex;
+  display: flex;
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .weather-map{
-  height: 420px;
+  height: 320px;
   width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(0,0,0,0.14);
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  margin-top: 12px;
 }
 
-@media (max-width: 420px){
-  .weather-map{ height: 340px; }
-}
-
-/* Leaflet controls */
+/* Leaflet controls dopasowane kolorystycznie */
 .leaflet-control-zoom a{
   background: rgba(0,0,0,0.55) !important;
   color: rgba(255,255,255,0.92) !important;
@@ -449,42 +486,80 @@ input:focus, select:focus, textarea:focus{
   border-color: rgba(25,196,198,0.35) !important;
 }
 
-/* Weather CTA */
-.weather-cta{ text-align: center; }
-.weather-big-btn{
-  margin-top: 14px;
-  font-size: 18px;
-  padding: 16px 18px;
-}
+/* =========================================================
+   Weather: forecast tables (24h + 7 dni)
+   ========================================================= */
 
-/* Forecast tables */
 .forecast-table-wrap{
-  overflow: auto;
+  overflow:auto;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(0,0,0,0.10);
+  margin-top: 10px;
 }
+
 .forecast-table{
   width: 100%;
   border-collapse: collapse;
-  min-width: 520px;
+  min-width: 640px; /* żeby nie łamało brzydko na wąsko */
 }
+
 .forecast-table th,
 .forecast-table td{
   text-align: left;
-  padding: 10px 10px;
+  padding: 10px 12px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.86);
   font-size: 14px;
-  white-space: nowrap;
+  vertical-align: top;
 }
+
 .forecast-table th{
   color: rgba(255,255,255,0.92);
   font-size: 13px;
+  position: sticky;
+  top: 0;
+  background: rgba(10,16,28,0.65);
+  backdrop-filter: blur(8px);
 }
-@media (max-width: 520px){
-  .forecast-table th:nth-child(5),
-  .forecast-table td:nth-child(5){ display:none; }
+
+/* Warunki: tylko ikonka */
+.wxcell{
+  width: 1%;
+  white-space: nowrap;
+}
+.wx-icon{
+  width: 18px;
+  height: 18px;
+  display:inline-block;
+  vertical-align: middle;
+  opacity: 0.95;
+}
+.wx-icon svg{
+  width: 100%;
+  height: 100%;
+  display:block;
+}
+.wx-icon path,
+.wx-icon circle,
+.wx-icon line,
+.wx-icon polyline{
+  stroke: rgba(255,255,255,0.88);
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Note */
+.note{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.16);
+  border-radius: 14px;
+  padding: 12px;
 }
 
 /* Footer */
@@ -518,11 +593,25 @@ input:focus, select:focus, textarea:focus{
   color: var(--text);
 }
 
-/* Desktop layout */
+/* Responsive */
 @media (min-width: 720px){
-  .site-nav{ display:flex; }
+  /* desktop: nav widoczna, hamburger znika */
+  .site-nav{
+    display:flex;
+    flex: 1 1 100%;
+    order: 3;                 /* <<< nav pod brandem, nie nachodzi */
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
   .nav-toggle{ display:none; }
-  .site-nav.open{ position: static; padding: 0; background: transparent; border: 0; }
+  .site-nav.open{
+    position: static;
+    width: auto;
+    padding: 10px 0 0;
+    background: transparent;
+    border: 0;
+    margin-top: 0;
+  }
 
   .hero{ padding: 48px 0 22px; }
   .hero-inner{ grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
@@ -531,21 +620,32 @@ input:focus, select:focus, textarea:focus{
   .cards-2{ grid-template-columns: repeat(2, 1fr); }
   .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
+  .courses-hero{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items: center; }
 }
 
 @media (min-width: 980px){
-  .hero.hero-fold .hero-inner{
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 18px;
+  /* na bardzo szerokim: pozwól menu być w tym samym wierszu, jeśli się mieści */
+  .header-inner{
+    flex-wrap: nowrap;
   }
-  .hero-links-row,
-  .courses-hero{
-    grid-column: 1 / -1;
+  .site-nav{
+    flex: 1 1 auto;
+    order: 0;
+    padding-top: 0;
   }
-  .hero.hero-fold h1{ margin-bottom: 8px; }
-  .hero.hero-fold .hero-lead{ font-size: 15px; }
-  .hero.hero-fold .hero-copy{ padding: 0; }
-  .weather-big-btn{ font-size: 16px; padding: 14px 16px; }
-  .courses-hero{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* na telefonie trochę niższa mapa */
+@media (max-width: 420px){
+  .weather-map{ height: 300px; }
+}
+
+/* Accessibility / reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; scroll-behavior: auto !important; }
+  html{ scroll-behavior: auto; }
 }
