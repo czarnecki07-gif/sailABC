@@ -53,9 +53,18 @@ function formatDayLabel(isoDate) {
   return `${d} ${dd}.${mm}`;
 }
 
-/** Open-Meteo weather_code -> ikonka */
-function wxIcon(code) {
+/** Open-Meteo weather_code -> ikonka (dzień/noc) */
+function wxIcon(code, isDay = true) {
   const c = Number(code);
+  const day = isDay !== false; // true jeśli isDay==true/1; false jeśli isDay==false/0
+
+  // NOC: podmieniamy słońce na księżyc dla "pogodnie / głównie pogodnie"
+  if (!day) {
+    if (c === 0) return "🌙";
+    if (c === 1) return "🌙";
+    if (c === 2) return "☁️";
+  }
+
   if (c === 0) return "☀️";
   if (c === 1) return "🌤️";
   if (c === 2) return "⛅";
@@ -116,7 +125,7 @@ async function fetchWeather(lat, lon) {
   // CURRENT
   forecast.searchParams.set(
     "current",
-    "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover,weather_code"
+    "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover,weather_code,is_day"
   );
 
   // HOURLY
@@ -128,7 +137,8 @@ async function fetchWeather(lat, lon) {
       "wind_speed_10m",
       "wind_gusts_10m",
       "wind_direction_10m",
-      "weather_code"
+      "weather_code",
+      "is_day"
     ].join(",")
   );
 
@@ -197,7 +207,9 @@ function renderForecast24(h) {
   const rows = [];
   for (let i = start; i < end; i++) {
     const hour = formatHour(h.time[i]);
-    const ic = wxIcon(h.weather_code?.[i]);
+
+    const isDay = (h.is_day?.[i] ?? 1) === 1;
+    const ic = wxIcon(h.weather_code?.[i], isDay);
 
     const wind = Number(h.wind_speed_10m?.[i] ?? 0);
     const gust = Number(h.wind_gusts_10m?.[i] ?? 0);
@@ -236,7 +248,7 @@ function renderForecast7(d) {
 
   for (let i = 0; i < n; i++) {
     const label = formatDayLabel(d.time[i]);
-    const ic = wxIcon(d.weather_code?.[i]);
+    const ic = wxIcon(d.weather_code?.[i]); // daily bez is_day
 
     const tmax = Math.round(Number(d.temperature_2m_max?.[i] ?? 0));
     const tmin = Math.round(Number(d.temperature_2m_min?.[i] ?? 0));
