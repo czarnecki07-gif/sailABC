@@ -1,239 +1,211 @@
-<!doctype html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+/* =========================================
+   sailABC — OPROGRAMOWANIE / TOOLS
+   ========================================= */
 
-  <title>Oprogramowanie dla żeglarzy – sailABC Tools</title>
-  <meta name="description" content="sailABC Tools – narzędzia nawigacyjne, dziennik pokładowy, planer rejsu, checklisty i kalkulatory dla żeglarzy. Działają offline i bez GPS." />
+.page-tools {
+  padding: 40px 0 60px;
+}
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="oprogramowanie.css" />
-</head>
+/* ================= HERO ================= */
 
-<body>
+.tools-hero {
+  margin-bottom: 32px;
+}
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
-      <img class="brand-logo" src="logo.png" alt="sailABC.com">
-      <span class="brand-name">sailABC.com</span>
-    </a>
+.tools-hero h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 10px;
+  letter-spacing: -0.4px;
+}
 
-    <nav class="site-nav" aria-label="Nawigacja">
-      <a class="nav-btn" href="nawigacja.htm">Nawigacja</a>
-      <a class="nav-btn" href="manewry.html">Manewry</a>
-      <a class="nav-btn" href="bezpieczenstwo.html">Bezpieczeństwo</a>
-      <a class="nav-btn nav-btn-accent" href="oprogramowanie.html">Oprogramowanie</a>
-      <a class="nav-btn" href="quizy.html">Testy i quizy</a>
-    </nav>
-  </div>
-</header>
+/* ================= GRID NARZĘDZI ================= */
 
-<main class="page-tools">
+.tools-grid {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 40px;
+  grid-template-columns: 1fr;
+}
 
-  <!-- ================= HERO ================= -->
-  <section class="container tools-hero">
-    <h1>sailABC Tools</h1>
-    <p class="muted">
-      Profesjonalne narzędzia dla żeglarzy: nawigacja klasyczna, planowanie rejsu,
-      dziennik pokładowy i kalkulatory.
-      <strong>Działają offline — pomagają nawigować nawet bez sygnału GPS.</strong>
-    </p>
-  </section>
+@media (min-width: 860px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-  <!-- ================= NARZĘDZIA ================= -->
-  <section class="container tools-grid" aria-label="Lista narzędzi">
+@media (min-width: 1180px) {
+  .tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-    <!-- 1) Tradycyjna nawigacja -->
-    <article class="tool-card">
-      <div>
-        <h3>Tradycyjna nawigacja <span class="badge-new">NOWE</span></h3>
-        <p>
-          Kurs rzeczywisty/magnetyczny/kompasowy, poprawki Δ i d,
-          znos/prąd (COG/SOG), ETA.
-          <strong>Obliczenia niezależne od GPS.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Egzaminowe</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-nawigacja.html">
-          Otwórz narzędzie
-        </a>
-      </div>
-    </article>
+/* ================= KARTA NARZĘDZIA ================= */
 
-    <!-- 2) Elektroniczny dziennik pokładowy -->
-    <article class="tool-card">
-      <div>
-        <h3>Elektroniczny dziennik pokładowy <span class="badge-new">NOWE</span></h3>
-        <p>
-          Wpisy godzinowe, pozycja, kurs, prędkość, pogoda, zdarzenia
-          + raport rejsu (PDF przez drukowanie).
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Dla armatorów</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-dziennik.html">
-          Otwórz narzędzie
-        </a>
-      </div>
-    </article>
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.04)
+  );
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
 
-    <!-- 3) Planer kursu -->
-    <article class="tool-card">
-      <div>
-        <h3>Planer kursu <span class="badge-new">NOWE</span></h3>
-        <p>
-          Trasa punkt–punkt, kursy między waypointami,
-          dystans, ETA, poprawki kursowe.
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Planowanie rejsu</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-planer.html">
-          Otwórz narzędzie
-        </a>
-      </div>
-    </article>
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(25,196,198,0.35);
+}
 
-    <!-- 4) Checklista + kalkulator zapasów -->
-    <article class="tool-card">
-      <div>
-        <h3>Checklista + kalkulator zapasów <span class="badge-new">NOWE</span></h3>
-        <p>
-          Wyposażenie, dokumenty, paliwo, woda,
-          rezerwa bezpieczeństwa.
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Praktyczne</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-checklista.html">
-          Otwórz narzędzie
-        </a>
-      </div>
-    </article>
+.tool-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 
-    <!-- 5) Wiatr pozorny -->
-    <article class="tool-card">
-      <div>
-        <h3>Kalkulator wiatru pozornego</h3>
-        <p>
-          Wiatr rzeczywisty ↔ pozorny,
-          kurs, prędkość, zależności nawigacyjne.
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Nawigacja</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">
-          Wkrótce
-        </a>
-      </div>
-    </article>
+.tool-card p {
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  line-height: 1.5;
+}
 
-  </section>
+.tool-actions {
+  margin-top: 16px;
+}
 
-  <!-- ================= JAK TO DZIAŁA ================= -->
-  <section class="container card" style="margin-bottom:40px;">
-    <h2>Jak to działa bez GPS?</h2>
+/* ================= BADGE ================= */
 
-    <p class="muted">
-      sailABC Tools wykonuje wszystkie obliczenia lokalnie w przeglądarce.
-      Nie potrzebuje połączenia z internetem ani sygnału GPS.
-    </p>
+.tool-meta {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 
-    <ul class="muted" style="margin-top:12px;">
-      <li>✔ Kursy rzeczywiste / magnetyczne / kompasowe</li>
-      <li>✔ Dead Reckoning (pozycja z czasu, kursu i prędkości)</li>
-      <li>✔ Obliczenia dystansu i ETA</li>
-      <li>✔ Planowanie trasy offline</li>
-      <li>✔ Checklista i kalkulator zapasów z rezerwą</li>
-      <li>✔ Dane zapisywane lokalnie — brak chmury</li>
-    </ul>
+.badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
 
-    <p class="muted small" style="margin-top:12px;">
-      Narzędzia mogą służyć jako awaryjne wsparcie nawigacyjne
-      w sytuacji utraty elektroniki pokładowej.
-    </p>
-  </section>
+/* NOWE */
 
-  <!-- ================= CENNIK ================= -->
-  <section class="container pricing" aria-label="Cennik">
-    <h2>Pakiety sailABC Tools</h2>
+.badge-new {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #19c4c6, #0ea5a8);
+  color: #041116;
+  letter-spacing: 0.4px;
+}
 
-    <div class="pricing-grid">
+/* ================= CENNIK ================= */
 
-      <div class="price-card">
-        <h3>Basic</h3>
-        <div class="price">19 zł</div>
-        <ul>
-          <li>Nawigacja klasyczna</li>
-          <li>Kalkulator wiatru</li>
-          <li>Konwerter jednostek</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Basic</a>
-      </div>
+.pricing {
+  margin-top: 40px;
+}
 
-      <div class="price-card featured">
-        <h3>Pro</h3>
-        <div class="price">39 zł</div>
-        <ul>
-          <li>Wszystko z Basic</li>
-          <li>Dziennik pokładowy</li>
-          <li>Planer kursu</li>
-          <li>Checklista + zapasy</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Pro</a>
-      </div>
+.pricing h2 {
+  margin-bottom: 18px;
+}
 
-      <div class="price-card">
-        <h3>Lifetime</h3>
-        <div class="price">149 zł</div>
-        <ul>
-          <li>Pełny dostęp</li>
-          <li>Wszystkie przyszłe aktualizacje</li>
-          <li>Nowe narzędzia gratis</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Lifetime</a>
-      </div>
+.pricing-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+}
 
-    </div>
-  </section>
+@media (min-width: 860px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-</main>
+.price-card {
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div>
-      <strong>sailABC</strong>
-      <p class="muted small">Profesjonalne narzędzia dla żeglarzy</p>
-    </div>
-    <div class="muted small">
-      © <span id="year"></span> sailABC
-    </div>
-  </div>
-</footer>
+.price-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(25,196,198,0.35);
+}
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+.price-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
 
-</body>
-</html>
+.price {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.price-card li {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* FEATURED PLAN */
+
+.price-card.featured {
+  border: 1px solid rgba(25,196,198,0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(25,196,198,0.15),
+    rgba(0,0,0,0.25)
+  );
+  box-shadow: 0 25px 60px rgba(25,196,198,0.2);
+}
+
+/* ================= CARD (sekcja info) ================= */
+
+.page-tools .card {
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.2);
+}
+
+.page-tools .card h2 {
+  margin-bottom: 12px;
+}
+
+/* ================= RESPONSYWNOŚĆ DROBNA ================= */
+
+@media (max-width: 600px) {
+
+  .tool-card {
+    padding: 16px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+}
