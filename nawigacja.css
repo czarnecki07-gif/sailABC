@@ -1,0 +1,64 @@
+/* ===============================
+   NAWIGACJA — osobny styl podstrony
+   =============================== */
+
+.page-nav{
+  padding: 28px 0 42px;
+}
+
+.nav-hero{
+  margin-bottom: 14px;
+}
+
+.page-nav h1{
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 0 0 10px;
+}
+
+.nav-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top: 12px;
+}
+
+/* układ: tekst + grafika */
+.nav-card{
+  display:grid;
+  gap:16px;
+  align-items:start;
+}
+
+.nav-svg{
+  width:100%;
+  height:auto;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+
+.nav-formula{
+  display:grid;
+  gap:6px;
+  margin: 10px 0 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.nav-list{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.nav-list li{
+  margin-bottom: 8px;
+}
+
+@media (min-width: 860px){
+  .nav-card{
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
