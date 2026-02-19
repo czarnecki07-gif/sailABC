@@ -1,0 +1,107 @@
+/* sailABC Tools — Tradycyjna nawigacja (MVP) */
+
+.tool-page{ padding: 28px 0 46px; }
+.tool-hero{ margin-bottom: 14px; }
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin: 10px 0 14px;
+}
+
+.tab{
+  appearance:none;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.88);
+  padding:10px 12px;
+  border-radius: 14px;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.tab.is-active{
+  border-color: rgba(25,196,198,0.60);
+  background: rgba(25,196,198,0.20);
+  color: rgba(255,255,255,0.95);
+}
+
+.tab-panel{ display:none; }
+.tab-panel.is-active{ display:block; }
+
+.grid2{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 10px;
+}
+
+.grid3{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 10px;
+}
+
+@media (min-width: 860px){
+  .grid2{ grid-template-columns: 1fr 1fr; }
+  .grid3{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.field label{
+  display:block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+}
+
+.field input, .field select{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 14px;
+}
+
+.results{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 16px;
+}
+
+@media (min-width: 860px){
+  .results{ grid-template-columns: repeat(3, 1fr); }
+  #tab2 .results{ grid-template-columns: repeat(3, 1fr); }
+  #tab3 .results{ grid-template-columns: repeat(2, 1fr); }
+}
+
+.res{
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.16);
+}
+
+.res strong{
+  display:block;
+  font-size: 22px;
+  margin-top: 4px;
+  letter-spacing: -0.2px;
+}
