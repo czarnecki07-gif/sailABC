@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Nawigacja żeglarska – poradnik podstawowy | sailABC</title>
+  <meta name="description" content="Podstawy nawigacji żeglarskiej: kursy, namiary, poprawki (deklinacja/dewiacja), prędkość, DR, fix, znaki nawigacyjne (IALA), światła i praktyczne zasady." />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/nawigacja.css" />
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="/logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Nawigacja">
+      <a class="nav-btn" href="/wezly.html">Węzły</a>
+      <a class="nav-btn" href="/manewry.html">Manewry</a>
+      <a class="nav-btn nav-btn-accent" href="/nawigacja.htm">Nawigacja</a>
+      <a class="nav-btn" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
+      <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-nav">
+
+  <section class="container nav-hero">
+    <h1>Nawigacja żeglarska — podstawy</h1>
+    <p class="muted">
+      Ten poradnik to praktyczne ABC nawigacji: kursy, namiary, poprawki kompasu, prędkość i czas,
+      wyznaczanie pozycji (DR i FIX), boje IALA oraz podstawy świateł nawigacyjnych.
+    </p>
+
+    <div class="nav-chips">
+      <a class="chip" href="#kursy">Kursy i poprawki</a>
+      <a class="chip" href="#namiary">Namiary</a>
+      <a class="chip" href="#dr">DR</a>
+      <a class="chip" href="#fix">FIX</a>
+      <a class="chip" href="#iala">IALA</a>
+      <a class="chip" href="#swiatla">Światła</a>
+      <a class="chip" href="#checklista">Checklista</a>
+    </div>
+  </section>
+
+  <!-- 1. Kursy -->
+  <section class="container card nav-card" id="kursy">
+    <div class="nav-text">
+      <h2>Kursy i poprawki: deklinacja i dewiacja</h2>
+      <p><strong>Co musisz rozróżniać:</strong></p>
+      <ul>
+        <li><strong>KD</strong> – kurs drogi (po mapie, gdzie faktycznie płyniesz).</li>
+        <li><strong>KK</strong> – kurs kompasowy (to co widzisz na kompasie).</li>
+        <li><strong>Δ (deklinacja)</strong> – różnica między północą geograficzną i magnetyczną (z mapy).</li>
+        <li><strong>d (dewiacja)</strong> – błąd kompasu na jachcie (z tabeli dewiacji).</li>
+      </ul>
+
+      <div class="note">
+        Egzaminowy skrót myślowy: żeby iść „po mapie”, musisz uwzględnić <strong>Δ + d</strong> i dopiero wtedy sterować po kompasie.
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: północ geo vs mag -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deklinacja: północ geograficzna i magnetyczna">
+        <rect width="640" height="320" fill="#fff"/>
+
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">Deklinacja (Δ)</text>
+        <text x="24" y="62" font-family="Arial" font-size="14" fill="#333">różnica N geograficznej i N magnetycznej</text>
+
+        <!-- kompas/okrąg -->
+        <circle cx="320" cy="185" r="95" fill="none" stroke="#111" stroke-width="3"/>
+
+        <!-- N geo -->
+        <line x1="320" y1="185" x2="320" y2="90" stroke="#1f5fd6" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="320,74 310,94 330,94" fill="#1f5fd6"/>
+        <text x="332" y="98" font-family="Arial" font-size="14" fill="#111">N geo</text>
+
+        <!-- N mag (odchylona) -->
+        <line x1="320" y1="185" x2="365" y2="98" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="372,85 356,102 374,110" fill="#111"/>
+        <text x="378" y="98" font-family="Arial" font-size="14" fill="#111">N mag</text>
+
+        <!-- łuk Δ -->
+        <path d="M320,120 A65,65 0 0 1 352,130" fill="none" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="352,130 340,128 348,118" fill="#e11d48"/>
+        <text x="334" y="150" font-family="Arial" font-size="16" fill="#e11d48">Δ</text>
+      </svg>
+
+      <p class="muted small" style="margin-top:8px;">
+        Δ bierzesz z mapy (róża kompasowa). d z tabeli dewiacji na jachcie.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Namiary -->
+  <section class="container card nav-card" id="namiary">
+    <div class="nav-text">
+      <h2>Namiar i linia pozycyjna (LOP)</h2>
+      <p><strong>Namiar</strong> to kierunek na obiekt (latarnia, maszt, główka portu). Z namiaru rysujesz na mapie <strong>linię pozycyjną</strong>.</p>
+      <ol>
+        <li>Zmierz namiar kompasem na obiekt.</li>
+        <li>Wprowadź poprawki (Δ i d) → namiar rzeczywisty.</li>
+        <li>Na mapie poprowadź linię pod tym kątem przez obiekt.</li>
+      </ol>
+
+      <div class="note">
+        Jeden namiar daje linię. <strong>Dwa namiary</strong> (na dwa obiekty) dają <strong>przecięcie</strong> = pozycję.
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: dwa namiary -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dwa namiary dają przecięcie - fix">
+        <rect width="640" height="320" fill="#fff"/>
+
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">Dwa namiary = FIX</text>
+
+        <!-- obiekty brzegowe -->
+        <circle cx="120" cy="250" r="10" fill="#111"/>
+        <text x="95" y="278" font-family="Arial" font-size="14" fill="#111">Latarnia A</text>
+
+        <rect x="520" y="90" width="18" height="18" fill="#111"/>
+        <text x="500" y="78" font-family="Arial" font-size="14" fill="#111">Obiekt B</text>
+
+        <!-- jacht (punkt) -->
+        <circle cx="330" cy="180" r="8" fill="#1f5fd6"/>
+        <text x="342" y="186" font-family="Arial" font-size="14" fill="#1f5fd6">jacht</text>
+
+        <!-- linie pozycyjne -->
+        <line x1="120" y1="250" x2="520" y2="70" stroke="#e11d48" stroke-width="4"/>
+        <line x1="538" y1="108" x2="80" y2="210" stroke="#e11d48" stroke-width="4"/>
+
+        <!-- punkt przecięcia -->
+        <circle cx="330" cy="180" r="14" fill="none" stroke="#111" stroke-width="3"/>
+        <text x="314" y="165" font-family="Arial" font-size="14" fill="#111">FIX</text>
+      </svg>
+
+      <p class="muted small" style="margin-top:8px;">
+        Najprościej: dwa niezależne namiary na dwa obiekty → przecięcie linii.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. DR -->
+  <section class="container card nav-card" id="dr">
+    <div class="nav-text">
+      <h2>DR: Dead Reckoning (pozycja z drogi)</h2>
+      <p>DR to pozycja wyliczona z <strong>kursu</strong>, <strong>prędkości</strong> i <strong>czasu</strong>, bez obserwacji obiektów.</p>
+
+      <div class="nav-formula">
+        <span><strong>Dystans</strong> = prędkość × czas</span>
+        <span class="muted">np. 5 kn × 2 h = 10 Mm</span>
+      </div>
+
+      <ul>
+        <li>Przydatne gdy nie widzisz obiektów (mgła, noc, otwarte morze).</li>
+        <li>Wymaga aktualizacji po każdym manewrze i zmianie kursu.</li>
+      </ul>
+
+      <div class="note">
+        DR zawsze „pływa” błędem (wiatr, prąd). Dlatego robisz FIX-y gdy tylko możesz.
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: DR wektor -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DR - pozycja z drogi (wektor kursu)">
+        <rect width="640" height="320" fill="#fff"/>
+
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">DR (kurs + prędkość + czas)</text>
+
+        <!-- start -->
+        <circle cx="140" cy="220" r="9" fill="#111"/>
+        <text x="120" y="245" font-family="Arial" font-size="14" fill="#111">Start</text>
+
+        <!-- wektor -->
+        <line x1="140" y1="220" x2="500" y2="120" stroke="#1f5fd6" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="510,117 490,112 496,132" fill="#1f5fd6"/>
+
+        <!-- opis -->
+        <text x="250" y="170" font-family="Arial" font-size="16" fill="#111">Kurs</text>
+        <text x="250" y="195" font-family="Arial" font-size="16" fill="#111">SOG ~ prędkość</text>
+
+        <!-- DR punkt -->
+        <circle cx="500" cy="120" r="12" fill="none" stroke="#e11d48" stroke-width="4"/>
+        <text x="520" y="126" font-family="Arial" font-size="14" fill="#e11d48">DR</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4. FIX -->
+  <section class="container card nav-card" id="fix">
+    <div class="nav-text">
+      <h2>FIX: pozycja z obserwacji</h2>
+      <p>FIX to pozycja wyznaczona z obserwacji: namiary, odległość, głębokość, linie brzegowe, GPS (jako źródło pomocnicze).</p>
+
+      <ul>
+        <li><strong>2 namiary</strong> na dwa obiekty → przecięcie.</li>
+        <li><strong>Namiar + odległość</strong> (np. radar, odległościomierz) → punkt.</li>
+        <li><strong>3 namiary</strong> → trójkąt błędu (normalne!).</li>
+      </ul>
+
+      <div class="note">
+        Egzaminowo: FIX jest „pewniejszy” niż DR i powinien być wykonywany regularnie.
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: trójkąt błędu -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trójkąt błędu z trzech linii pozycyjnych">
+        <rect width="640" height="320" fill="#fff"/>
+
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">Trójkąt błędu (3 linie)</text>
+
+        <line x1="90" y1="240" x2="560" y2="90" stroke="#e11d48" stroke-width="4"/>
+        <line x1="560" y1="230" x2="120" y2="70" stroke="#e11d48" stroke-width="4"/>
+        <line x1="80" y1="140" x2="580" y2="170" stroke="#e11d48" stroke-width="4"/>
+
+        <polygon points="320,155 350,145 340,175" fill="rgba(31,95,214,0.15)" stroke="#1f5fd6" stroke-width="3"/>
+        <text x="360" y="165" font-family="Arial" font-size="14" fill="#111">Pozycja w środku</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 5. IALA -->
+  <section class="container card nav-card" id="iala">
+    <div class="nav-text">
+      <h2>Znaki nawigacyjne IALA (A) — skrót praktyczny</h2>
+      <p>W Polsce obowiązuje <strong>IALA Region A</strong>:</p>
+      <ul>
+        <li><strong>Czerwone</strong> znaki — zostawiasz <strong>po lewej</strong> wchodząc do portu/na tor.</li>
+        <li><strong>Zielone</strong> znaki — zostawiasz <strong>po prawej</strong> wchodząc do portu/na tor.</li>
+      </ul>
+
+      <div class="note">
+        Zapamiętaj: „<strong>czerwone lewa przy wejściu</strong>” (Region A).
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: tor wodny -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IALA A: czerwone po lewej, zielone po prawej przy wejściu">
+        <rect width="640" height="320" fill="#fff"/>
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">Tor wodny — wejście (IALA A)</text>
+
+        <!-- tor -->
+        <path d="M260,280 C280,220 320,180 360,140 C400,100 430,75 460,60"
+              fill="none" stroke="rgba(17,17,17,0.15)" stroke-width="40" stroke-linecap="round"/>
+
+        <!-- czerwone boje (lewa strona wejścia) -->
+        <circle cx="220" cy="250" r="12" fill="#e11d48"/>
+        <circle cx="245" cy="205" r="12" fill="#e11d48"/>
+        <circle cx="285" cy="165" r="12" fill="#e11d48"/>
+
+        <!-- zielone boje (prawa strona wejścia) -->
+        <circle cx="300" cy="260" r="12" fill="#16a34a"/>
+        <circle cx="330" cy="215" r="12" fill="#16a34a"/>
+        <circle cx="370" cy="175" r="12" fill="#16a34a"/>
+
+        <!-- strzałka wejścia -->
+        <line x1="80" y1="270" x2="170" y2="270" stroke="#1f5fd6" stroke-width="6"/>
+        <polygon points="170,270 152,260 152,280" fill="#1f5fd6"/>
+        <text x="78" y="250" font-family="Arial" font-size="14" fill="#111">Wejście</text>
+
+        <text x="150" y="300" font-family="Arial" font-size="14" fill="#e11d48">czerwone = lewa</text>
+        <text x="350" y="300" font-family="Arial" font-size="14" fill="#16a34a">zielone = prawa</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 6. Światła -->
+  <section class="container card nav-card" id="swiatla">
+    <div class="nav-text">
+      <h2>Światła nawigacyjne — minimum, które musisz kojarzyć</h2>
+      <ul>
+        <li><strong>Burtowe:</strong> czerwone (lewa burta) i zielone (prawa burta).</li>
+        <li><strong>Rufowe:</strong> białe na rufie.</li>
+        <li><strong>Masztowe:</strong> białe z przodu (jednostki mechaniczne).</li>
+      </ul>
+
+      <div class="note">
+        Jeśli widzisz <strong>czerwone</strong> światło innej jednostki — jesteś po jej lewej stronie (patrzysz na jej lewą burtę).
+      </div>
+    </div>
+
+    <div class="nav-media">
+      <!-- SVG: światła -->
+      <svg class="nav-svg" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Podstawowe światła: czerwone, zielone i białe">
+        <rect width="640" height="320" fill="#fff"/>
+        <text x="24" y="34" font-family="Arial" font-size="20" fill="#111">Światła — schemat</text>
+
+        <!-- sylwetka jachtu -->
+        <path d="M210,210 L430,210 L390,250 L250,250 Z" fill="#111"/>
+        <rect x="318" y="120" width="6" height="90" fill="#111"/>
+
+        <!-- światła -->
+        <circle cx="220" cy="205" r="12" fill="#e11d48"/>
+        <text x="170" y="200" font-family="Arial" font-size="14" fill="#111">lewa burta</text>
+
+        <circle cx="420" cy="205" r="12" fill="#16a34a"/>
+        <text x="438" y="200" font-family="Arial" font-size="14" fill="#111">prawa burta</text>
+
+        <circle cx="320" cy="255" r="12" fill="#111"/>
+        <circle cx="320" cy="255" r="12" fill="none" stroke="#111" stroke-width="2"/>
+        <text x="332" y="262" font-family="Arial" font-size="14" fill="#111">rufowe (białe)</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Checklista -->
+  <section class="container card" id="checklista">
+    <h2>Checklista nawigacyjna (praktyczna)</h2>
+    <ul class="nav-list">
+      <li><strong>Kierunek wiatru i prąd:</strong> co może znosić jacht z kursu?</li>
+      <li><strong>Tor wodny:</strong> boje/znaki, głębokości, przeszkody.</li>
+      <li><strong>Pozycja:</strong> DR + regularny FIX (gdy są obiekty).</li>
+      <li><strong>Oświetlenie:</strong> nocą włącz światła, obserwuj światła innych.</li>
+      <li><strong>Bezpieczeństwo:</strong> margines od brzegu, mielizn, główek portu.</li>
+    </ul>
+
+    <div class="note">
+      Egzaminowo i praktycznie: <strong>nie płyń „na pamięć”</strong>. Nawet prosta aktualizacja pozycji co kilkanaście minut robi różnicę.
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">Portal edukacyjny dla żeglarzy</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
