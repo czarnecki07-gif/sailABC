@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checklista + kalkulator zapasów – sailABC Tools</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools-checklista.css" />
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo.png" alt="sailABC">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav">
+      <a class="nav-btn" href="oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn nav-btn-accent" href="tools-checklista.html">Checklista</a>
+    </nav>
+  </div>
+</header>
+
+<main class="prep-page">
+
+  <section class="container">
+    <h1>Checklista przed rejsem + kalkulator zapasów</h1>
+    <p class="muted">
+      Upewnij się, że niczego nie zapomniałeś. Policz wodę, paliwo i jedzenie z rezerwą bezpieczeństwa.
+      Działa offline.
+    </p>
+  </section>
+
+  <!-- CHECKLISTA -->
+  <section class="container card">
+    <h2>Checklista przed rejsem</h2>
+
+    <div class="check-grid" id="checklist"></div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" id="btnResetChecklist">Reset checklisty</button>
+    </div>
+  </section>
+
+  <!-- KALKULATOR -->
+  <section class="container card">
+    <h2>Kalkulator zapasów</h2>
+
+    <div class="grid3">
+      <div class="field">
+        <label>Liczba osób</label>
+        <input id="people" type="number" min="1" value="4">
+      </div>
+
+      <div class="field">
+        <label>Liczba dni</label>
+        <input id="days" type="number" min="1" value="3">
+      </div>
+
+      <div class="field">
+        <label>Rezerwa (%)</label>
+        <input id="reserve" type="number" min="0" value="20">
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label>Woda (l/os/dzień)</label>
+        <input id="waterPerDay" type="number" step="0.1" value="3">
+      </div>
+
+      <div class="field">
+        <label>Jedzenie (kg/os/dzień)</label>
+        <input id="foodPerDay" type="number" step="0.1" value="1">
+      </div>
+
+      <div class="field">
+        <label>Spalanie silnika (l/h)</label>
+        <input id="fuelPerHour" type="number" step="0.1" value="2.5">
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label>Planowane godziny pracy silnika</label>
+        <input id="engineHours" type="number" step="0.5" value="5">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btnCalc">Przelicz</button>
+    </div>
+
+    <div class="results">
+      <div class="res-box">
+        <span>Woda</span>
+        <strong id="resWater">—</strong>
+      </div>
+      <div class="res-box">
+        <span>Jedzenie</span>
+        <strong id="resFood">—</strong>
+      </div>
+      <div class="res-box">
+        <span>Paliwo</span>
+        <strong id="resFuel">—</strong>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="tools-checklista.js"></script>
+</body>
+</html>
