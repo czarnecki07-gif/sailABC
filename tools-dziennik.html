@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elektroniczny dziennik pokładowy – sailABC Tools</title>
+  <meta name="description" content="Elektroniczny dziennik pokładowy: wpisy godzinowe, pozycja, kurs, prędkość, pogoda, zdarzenia + raport rejsu PDF." />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools-dziennik.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav">
+      <a class="nav-btn" href="oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn" href="tools-nawigacja.html">Tradycyjna nawigacja</a>
+      <a class="nav-btn nav-btn-accent" href="tools-dziennik.html">Dziennik pokładowy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="log-page">
+  <section class="container log-hero">
+    <h1>Elektroniczny dziennik pokładowy (MVP)</h1>
+    <p class="muted">
+      Wpisy godzinowe: pozycja, kurs, prędkość, pogoda i zdarzenia. Dane zapisują się lokalnie w przeglądarce.
+      Raport PDF zrobisz przez „Drukuj → Zapisz jako PDF”.
+    </p>
+  </section>
+
+  <section class="container card">
+    <h2>Dane rejsu</h2>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="voyageName">Nazwa rejsu</label>
+        <input id="voyageName" type="text" placeholder="np. Mazury 2026 / Bałtyk etap 1">
+      </div>
+      <div class="field">
+        <label for="vesselName">Jacht</label>
+        <input id="vesselName" type="text" placeholder="np. Antila 27 / Bavaria 37">
+      </div>
+      <div class="field">
+        <label for="skipperName">Skipper</label>
+        <input id="skipperName" type="text" placeholder="Imię i nazwisko">
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="crew">Załoga (opcjonalnie)</label>
+        <input id="crew" type="text" placeholder="np. Ala, Bartek, Kuba…">
+      </div>
+      <div class="field">
+        <label for="area">Akwen / rejon</label>
+        <input id="area" type="text" placeholder="np. Zatoka Gdańska / Jez. Niegocin">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" id="btnSaveMeta" type="button">Zapisz dane rejsu</button>
+      <button class="btn btn-ghost" id="btnClearAll" type="button">Wyczyść wszystko</button>
+    </div>
+
+    <p class="muted small" id="saveHint"></p>
+  </section>
+
+  <section class="container card">
+    <div class="log-head">
+      <h2>Nowy wpis</h2>
+      <div class="log-head-actions">
+        <button class="btn btn-primary" id="btnAddNow" type="button">Dodaj wpis „teraz”</button>
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="dt">Czas (data + godzina)</label>
+        <input id="dt" type="datetime-local">
+      </div>
+      <div class="field">
+        <label for="lat">Szerokość (lat)</label>
+        <input id="lat" type="text" placeholder="np. 54.3520N / 54.3520">
+      </div>
+      <div class="field">
+        <label for="lon">Długość (lon)</label>
+        <input id="lon" type="text" placeholder="np. 18.6466E / 18.6466">
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="cog">Kurs (°)</label>
+        <input id="cog" type="number" min="0" max="359" step="1" placeholder="np. 045">
+      </div>
+      <div class="field">
+        <label for="sog">Prędkość (kn)</label>
+        <input id="sog" type="number" min="0" step="0.1" placeholder="np. 5.2">
+      </div>
+      <div class="field">
+        <label for="etaPort">Plan / port docelowy (opc.)</label>
+        <input id="etaPort" type="text" placeholder="np. Hel / Giżycko">
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="wind">Wiatr</label>
+        <input id="wind" type="text" placeholder="np. W 12 kn / 4B, szkwały">
+      </div>
+      <div class="field">
+        <label for="sea">Fala / stan wody</label>
+        <input id="sea" type="text" placeholder="np. 0.5 m / zafalowanie małe">
+      </div>
+      <div class="field">
+        <label for="wx">Pogoda</label>
+        <input id="wx" type="text" placeholder="np. chmury 6/8, przelotny deszcz">
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="events">Zdarzenia</label>
+        <input id="events" type="text" placeholder="np. zwrot przez sztag, ref 1, MOB ćwiczenie">
+      </div>
+      <div class="field">
+        <label for="notes">Notatki</label>
+        <input id="notes" type="text" placeholder="np. obserwacje, usterki, decyzje">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btnAddEntry" type="button">Dodaj wpis</button>
+      <button class="btn btn-ghost" id="btnResetForm" type="button">Wyczyść formularz</button>
+    </div>
+
+    <p class="muted small">
+      Tip: na rejsie wpisy rób co godzinę (albo przy zmianach kursu, pogody, zdarzeniach).
+    </p>
+  </section>
+
+  <section class="container card">
+    <div class="log-head">
+      <h2>Wpisy</h2>
+      <div class="log-head-actions">
+        <button class="btn btn-primary" id="btnPrintPdf" type="button">Raport PDF</button>
+      </div>
+    </div>
+
+    <div class="table-wrap" role="region" aria-label="Tabela wpisów" tabindex="0">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Czas</th>
+            <th>Pozycja</th>
+            <th>Kurs / prędkość</th>
+            <th>Pogoda</th>
+            <th>Zdarzenia / notatki</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </div>
+
+    <p class="muted small" id="countInfo"></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">Dziennik pokładowy — dane lokalne</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="tools-dziennik.js"></script>
+</body>
+</html>
