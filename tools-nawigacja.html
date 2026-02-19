@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tradycyjna nawigacja – sailABC Tools</title>
+  <meta name="description" content="Kursy, poprawki (deklinacja, dewiacja), znos/prąd, ETA. Prosty kalkulator nawigacyjny sailABC Tools." />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/tools-nawigacja.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav">
+      <a class="nav-btn" href="/oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn nav-btn-accent" href="/tools-nawigacja.html">Tradycyjna nawigacja</a>
+      <a class="nav-btn" href="/nawigacja.htm">Poradnik nawigacja</a>
+    </nav>
+  </div>
+</header>
+
+<main class="tool-page">
+  <section class="container tool-hero">
+    <h1>Tradycyjna nawigacja (MVP)</h1>
+    <p class="muted">
+      Kursy: rzeczywisty ↔ magnetyczny ↔ kompasowy • poprawki Δ i d • znos/prąd (COG/SOG) • ETA.
+      Zasada: <strong>E = +</strong>, <strong>W = −</strong>.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="tabs" role="tablist" aria-label="Kalkulatory">
+      <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="tab1">Kursy i poprawki</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="tab2">Znos / prąd</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="tab3">ETA</button>
+    </div>
+
+    <!-- ===== TAB 1 ===== -->
+    <section class="card tab-panel is-active" id="tab1" role="tabpanel">
+      <h2>Kursy i poprawki (Δ, d)</h2>
+
+      <div class="grid2">
+        <div class="field">
+          <label for="mode">Tryb obliczeń</label>
+          <select id="mode">
+            <option value="trueToCompass">KR → KM → KK (z mapy na kompas)</option>
+            <option value="compassToTrue">KK → KM → KR (z kompasu na mapę)</option>
+          </select>
+        </div>
+
+        <div class="note">
+          <strong>Wpisuj stopnie 0–359.</strong> Poprawki wybierz E/W.
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="field">
+          <label for="inCourse">Kurs wejściowy</label>
+          <input id="inCourse" type="number" min="0" max="359" step="1" placeholder="np. 045">
+        </div>
+
+        <div class="field">
+          <label for="declVal">Deklinacja Δ</label>
+          <div class="row">
+            <input id="declVal" type="number" step="0.1" placeholder="np. 6.0">
+            <select id="declDir" aria-label="Deklinacja E/W">
+              <option value="E">E</option>
+              <option value="W">W</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="devVal">Dewiacja d</label>
+          <div class="row">
+            <input id="devVal" type="number" step="0.1" placeholder="np. 2.0">
+            <select id="devDir" aria-label="Dewiacja E/W">
+              <option value="E">E</option>
+              <option value="W">W</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="btnCalcCourses" type="button">Oblicz</button>
+        <button class="btn btn-ghost" id="btnResetCourses" type="button">Wyczyść</button>
+      </div>
+
+      <div class="results">
+        <div class="res">
+          <span class="muted small">KR (rzeczywisty)</span>
+          <strong id="outKR">—</strong>
+        </div>
+        <div class="res">
+          <span class="muted small">KM (magnetyczny)</span>
+          <strong id="outKM">—</strong>
+        </div>
+        <div class="res">
+          <span class="muted small">KK (kompasowy)</span>
+          <strong id="outKK">—</strong>
+        </div>
+      </div>
+
+      <p class="muted small" id="courseExplain"></p>
+    </section>
+
+    <!-- ===== TAB 2 ===== -->
+    <section class="card tab-panel" id="tab2" role="tabpanel">
+      <h2>Znos / prąd (COG i SOG)</h2>
+      <p class="muted">
+        Wpisz kurs sterowany (KR) i prędkość przez wodę (STW). Dodaj prąd: SET (dokąd płynie prąd) i DRIFT (w kn).
+      </p>
+
+      <div class="grid3">
+        <div class="field">
+          <label for="crs">KR (kurs sterowany)</label>
+          <input id="crs" type="number" min="0" max="359" step="1" placeholder="np. 045">
+        </div>
+        <div class="field">
+          <label for="stw">STW (kn)</label>
+          <input id="stw" type="number" min="0" step="0.1" placeholder="np. 5.2">
+        </div>
+        <div class="field">
+          <label for="set">SET (°) – kierunek prądu</label>
+          <input id="set" type="number" min="0" max="359" step="1" placeholder="np. 120">
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label for="drift">DRIFT (kn) – siła prądu</label>
+          <input id="drift" type="number" min="0" step="0.1" placeholder="np. 1.4">
+        </div>
+        <div class="note">
+          Jeśli nie ma prądu: DRIFT = 0.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="btnCalcSetDrift" type="button">Oblicz COG/SOG</button>
+        <button class="btn btn-ghost" id="btnResetSetDrift" type="button">Wyczyść</button>
+      </div>
+
+      <div class="results">
+        <div class="res">
+          <span class="muted small">COG (kurs nad dnem)</span>
+          <strong id="outCOG">—</strong>
+        </div>
+        <div class="res">
+          <span class="muted small">SOG (prędkość nad dnem)</span>
+          <strong id="outSOG">—</strong>
+        </div>
+        <div class="res">
+          <span class="muted small">Znos (°)</span>
+          <strong id="outLeeway">—</strong>
+        </div>
+      </div>
+
+      <p class="muted small" id="setExplain"></p>
+    </section>
+
+    <!-- ===== TAB 3 ===== -->
+    <section class="card tab-panel" id="tab3" role="tabpanel">
+      <h2>ETA (czas dopłynięcia)</h2>
+
+      <div class="grid3">
+        <div class="field">
+          <label for="dist">Dystans (Mm)</label>
+          <input id="dist" type="number" min="0" step="0.1" placeholder="np. 18.5">
+        </div>
+        <div class="field">
+          <label for="spd">Prędkość (kn)</label>
+          <input id="spd" type="number" min="0" step="0.1" placeholder="np. 5.0">
+        </div>
+        <div class="field">
+          <label for="startTime">Start (HH:MM)</label>
+          <input id="startTime" type="time">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="btnCalcETA" type="button">Oblicz ETA</button>
+        <button class="btn btn-ghost" id="btnResetETA" type="button">Wyczyść</button>
+      </div>
+
+      <div class="results">
+        <div class="res">
+          <span class="muted small">Czas</span>
+          <strong id="outTime">—</strong>
+        </div>
+        <div class="res">
+          <span class="muted small">ETA</span>
+          <strong id="outETA">—</strong>
+        </div>
+      </div>
+
+      <p class="muted small" id="etaExplain"></p>
+    </section>
+
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">sailABC Tools (MVP)</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="/tools-nawigacja.js"></script>
+</body>
+</html>
