@@ -6,22 +6,22 @@
   <title>Tradycyjna nawigacja – sailABC Tools</title>
   <meta name="description" content="Kursy, poprawki (deklinacja, dewiacja), znos/prąd, ETA. Prosty kalkulator nawigacyjny sailABC Tools." />
 
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/tools-nawigacja.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools-nawigacja.css" />
 </head>
 
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">
-      <img class="brand-logo" src="/logo.png" alt="sailABC.com">
+    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="logo.png" alt="sailABC.com">
       <span class="brand-name">sailABC.com</span>
     </a>
 
     <nav class="site-nav">
-      <a class="nav-btn" href="/oprogramowanie.html">Oprogramowanie</a>
-      <a class="nav-btn nav-btn-accent" href="/tools-nawigacja.html">Tradycyjna nawigacja</a>
-      <a class="nav-btn" href="/nawigacja.htm">Poradnik nawigacja</a>
+      <a class="nav-btn" href="oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn nav-btn-accent" href="tools-nawigacja.html">Tradycyjna nawigacja</a>
+      <a class="nav-btn" href="nawigacja.htm">Poradnik nawigacja</a>
     </nav>
   </div>
 </header>
@@ -42,7 +42,7 @@
       <button class="tab" type="button" role="tab" aria-selected="false" data-tab="tab3">ETA</button>
     </div>
 
-    <!-- ===== TAB 1 ===== -->
+    <!-- TAB 1 -->
     <section class="card tab-panel is-active" id="tab1" role="tabpanel">
       <h2>Kursy i poprawki (Δ, d)</h2>
 
@@ -96,15 +96,15 @@
 
       <div class="results">
         <div class="res">
-          <span class="muted small">KR (rzeczywisty)</span>
+          <span class="muted small">KR</span>
           <strong id="outKR">—</strong>
         </div>
         <div class="res">
-          <span class="muted small">KM (magnetyczny)</span>
+          <span class="muted small">KM</span>
           <strong id="outKM">—</strong>
         </div>
         <div class="res">
-          <span class="muted small">KK (kompasowy)</span>
+          <span class="muted small">KK</span>
           <strong id="outKK">—</strong>
         </div>
       </div>
@@ -112,12 +112,9 @@
       <p class="muted small" id="courseExplain"></p>
     </section>
 
-    <!-- ===== TAB 2 ===== -->
+    <!-- TAB 2 -->
     <section class="card tab-panel" id="tab2" role="tabpanel">
       <h2>Znos / prąd (COG i SOG)</h2>
-      <p class="muted">
-        Wpisz kurs sterowany (KR) i prędkość przez wodę (STW). Dodaj prąd: SET (dokąd płynie prąd) i DRIFT (w kn).
-      </p>
 
       <div class="grid3">
         <div class="field">
@@ -129,19 +126,17 @@
           <input id="stw" type="number" min="0" step="0.1" placeholder="np. 5.2">
         </div>
         <div class="field">
-          <label for="set">SET (°) – kierunek prądu</label>
+          <label for="set">SET (°)</label>
           <input id="set" type="number" min="0" max="359" step="1" placeholder="np. 120">
         </div>
       </div>
 
       <div class="grid2">
         <div class="field">
-          <label for="drift">DRIFT (kn) – siła prądu</label>
+          <label for="drift">DRIFT (kn)</label>
           <input id="drift" type="number" min="0" step="0.1" placeholder="np. 1.4">
         </div>
-        <div class="note">
-          Jeśli nie ma prądu: DRIFT = 0.
-        </div>
+        <div class="note">Jeśli nie ma prądu: DRIFT = 0.</div>
       </div>
 
       <div class="actions">
@@ -151,15 +146,15 @@
 
       <div class="results">
         <div class="res">
-          <span class="muted small">COG (kurs nad dnem)</span>
+          <span class="muted small">COG</span>
           <strong id="outCOG">—</strong>
         </div>
         <div class="res">
-          <span class="muted small">SOG (prędkość nad dnem)</span>
+          <span class="muted small">SOG</span>
           <strong id="outSOG">—</strong>
         </div>
         <div class="res">
-          <span class="muted small">Znos (°)</span>
+          <span class="muted small">Znos</span>
           <strong id="outLeeway">—</strong>
         </div>
       </div>
@@ -167,9 +162,9 @@
       <p class="muted small" id="setExplain"></p>
     </section>
 
-    <!-- ===== TAB 3 ===== -->
+    <!-- TAB 3 -->
     <section class="card tab-panel" id="tab3" role="tabpanel">
-      <h2>ETA (czas dopłynięcia)</h2>
+      <h2>ETA</h2>
 
       <div class="grid3">
         <div class="field">
@@ -221,6 +216,6 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-<script src="/tools-nawigacja.js"></script>
+<script src="tools-nawigacja.js"></script>
 </body>
 </html>
