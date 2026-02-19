@@ -45,7 +45,7 @@
   <!-- ================= NARZĘDZIA ================= -->
   <section class="container tools-grid" aria-label="Lista narzędzi">
 
-    <!-- Tradycyjna nawigacja -->
+    <!-- 1) Tradycyjna nawigacja -->
     <article class="tool-card">
       <div>
         <h3>Tradycyjna nawigacja</h3>
@@ -60,32 +60,30 @@
         </div>
       </div>
       <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-nawigacja.html">
-          Otwórz narzędzie
-        </a>
+        <a class="btn btn-primary btn-full" href="tools-nawigacja.html">Otwórz narzędzie</a>
       </div>
     </article>
 
-    <!-- Dziennik -->
+    <!-- 2) Elektroniczny dziennik pokładowy -->
     <article class="tool-card">
       <div>
         <h3>Elektroniczny dziennik pokładowy</h3>
         <p>
           Wpisy godzinowe, pozycja, kurs, prędkość, pogoda, zdarzenia
-          + raport rejsu PDF.
+          + raport rejsu (PDF przez drukowanie).
+          <strong>Działa offline.</strong>
         </p>
         <div class="tool-meta">
           <span class="badge">Dla armatorów</span>
+          <span class="badge">Offline</span>
         </div>
       </div>
       <div class="tool-actions">
-        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">
-          Wkrótce
-        </a>
+        <a class="btn btn-primary btn-full" href="tools-dziennik.html">Otwórz narzędzie</a>
       </div>
     </article>
 
-    <!-- Planer -->
+    <!-- 3) Planer kursu -->
     <article class="tool-card">
       <div>
         <h3>Planer kursu</h3>
@@ -98,13 +96,11 @@
         </div>
       </div>
       <div class="tool-actions">
-        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">
-          Wkrótce
-        </a>
+        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">Wkrótce</a>
       </div>
     </article>
 
-    <!-- Checklista -->
+    <!-- 4) Checklista + zapasy -->
     <article class="tool-card">
       <div>
         <h3>Checklista + kalkulator zapasów</h3>
@@ -117,13 +113,11 @@
         </div>
       </div>
       <div class="tool-actions">
-        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">
-          Wkrótce
-        </a>
+        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">Wkrótce</a>
       </div>
     </article>
 
-    <!-- Wiatr -->
+    <!-- 5) Wiatr pozorny -->
     <article class="tool-card">
       <div>
         <h3>Kalkulator wiatru pozornego</h3>
@@ -136,12 +130,32 @@
         </div>
       </div>
       <div class="tool-actions">
-        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">
-          Wkrótce
-        </a>
+        <a class="btn btn-ghost btn-full" href="#" aria-disabled="true">Wkrótce</a>
       </div>
     </article>
 
+  </section>
+
+  <!-- ================= JAK TO DZIAŁA ================= -->
+  <section class="container card" style="margin-bottom:40px;">
+    <h2>Jak to działa bez GPS?</h2>
+    <p class="muted">
+      sailABC Tools nie wymaga stałego dostępu do internetu ani sygnału GPS.
+      Obliczenia wykonywane są lokalnie w przeglądarce — na podstawie
+      wprowadzonych danych: kursu, prędkości, czasu, znosu i namiarów.
+    </p>
+
+    <ul class="muted" style="margin-top:12px;">
+      <li>✔ Kursy rzeczywiste / magnetyczne / kompasowe</li>
+      <li>✔ Pozycja z dryfu (Dead Reckoning)</li>
+      <li>✔ Obliczenia ETA i dystansu</li>
+      <li>✔ Pozycja z namiarów (planowane)</li>
+      <li>✔ Dane zapisywane lokalnie — brak chmury</li>
+    </ul>
+
+    <p class="muted small" style="margin-top:12px;">
+      Narzędzia mogą działać jako awaryjne wsparcie nawigacyjne w sytuacji utraty elektroniki pokładowej.
+    </p>
   </section>
 
   <!-- ================= CENNIK ================= -->
@@ -195,9 +209,7 @@
       <strong>sailABC</strong>
       <p class="muted small">Profesjonalne narzędzia dla żeglarzy</p>
     </div>
-    <div class="muted small">
-      © <span id="year"></span> sailABC
-    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
   </div>
 </footer>
 
