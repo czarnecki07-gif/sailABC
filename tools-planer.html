@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Planer kursu – sailABC Tools</title>
+  <meta name="description" content="Planer kursu: trasa punkt–punkt, kursy między waypointami, dystans, ETA, poprawki. Działa offline." />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools-planer.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav">
+      <a class="nav-btn" href="oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn" href="tools-nawigacja.html">Tradycyjna nawigacja</a>
+      <a class="nav-btn" href="tools-dziennik.html">Dziennik pokładowy</a>
+      <a class="nav-btn nav-btn-accent" href="tools-planer.html">Planer kursu</a>
+    </nav>
+  </div>
+</header>
+
+<main class="planner-page">
+  <section class="container planner-hero">
+    <h1>Planer kursu (punkt–punkt)</h1>
+    <p class="muted">
+      Dodaj waypointy. Narzędzie policzy kurs i dystans między punktami, sumę trasy oraz ETA.
+      Działa offline (zapis w przeglądarce).
+    </p>
+  </section>
+
+  <section class="container card">
+    <h2>Ustawienia trasy</h2>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="tripName">Nazwa trasy</label>
+        <input id="tripName" type="text" placeholder="np. Gdynia → Hel → Jastarnia">
+      </div>
+
+      <div class="field">
+        <label for="speed">Prędkość (kn)</label>
+        <input id="speed" type="number" min="0" step="0.1" placeholder="np. 5.0" value="5.0">
+      </div>
+
+      <div class="field">
+        <label for="courseOffset">Poprawka kursu (°)</label>
+        <input id="courseOffset" type="number" step="1" placeholder="np. +5 / -3" value="0">
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="startTime">Start (HH:MM)</label>
+        <input id="startTime" type="time">
+      </div>
+
+      <div class="note">
+        Współrzędne: <strong>54.35N</strong>, <strong>18.64E</strong> lub <strong>54.35</strong>, <strong>18.64</strong>.
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" id="btnSaveTrip" type="button">Zapisz</button>
+        <button class="btn btn-ghost" id="btnClearTrip" type="button">Wyczyść</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container card">
+    <div class="head">
+      <h2>Waypointy</h2>
+      <div class="head-actions">
+        <button class="btn btn-primary" id="btnAddWp" type="button">Dodaj waypoint</button>
+      </div>
+    </div>
+
+    <div class="table-wrap" role="region" aria-label="Waypointy" tabindex="0">
+      <table class="wp-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nazwa</th>
+            <th>Lat</th>
+            <th>Lon</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="wpBody"></tbody>
+      </table>
+    </div>
+
+    <p class="muted small" id="wpHint"></p>
+  </section>
+
+  <section class="container card">
+    <div class="head">
+      <h2>Odcinki (wyniki)</h2>
+      <div class="head-actions">
+        <button class="btn btn-primary" id="btnRecalc" type="button">Przelicz</button>
+      </div>
+    </div>
+
+    <div class="table-wrap" role="region" aria-label="Odcinki trasy" tabindex="0">
+      <table class="seg-table">
+        <thead>
+          <tr>
+            <th>Odcinek</th>
+            <th>Kurs (°)</th>
+            <th>Dystans (Mm)</th>
+            <th>Czas</th>
+            <th>ETA</th>
+          </tr>
+        </thead>
+        <tbody id="segBody"></tbody>
+      </table>
+    </div>
+
+    <div class="summary">
+      <div class="sumbox">
+        <span class="muted small">Łączny dystans</span>
+        <strong id="sumDist">—</strong>
+      </div>
+      <div class="sumbox">
+        <span class="muted small">Łączny czas</span>
+        <strong id="sumTime">—</strong>
+      </div>
+      <div class="sumbox">
+        <span class="muted small">ETA końcowe</span>
+        <strong id="sumETA">—</strong>
+      </div>
+    </div>
+
+    <p class="muted small" id="calcExplain"></p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">Planer kursu — offline</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="tools-planer.js"></script>
+</body>
+</html>
