@@ -1,0 +1,59 @@
+/* sailABC Tools — Wiatr pozorny */
+
+.awa-page{ padding: 28px 0 46px; }
+.awa-hero{ margin-bottom: 14px; }
+
+.grid3{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 10px;
+}
+@media (min-width: 860px){
+  .grid3{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.field label{
+  display:block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+}
+.field input{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 14px;
+}
+
+.results{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px){
+  .results{ grid-template-columns: repeat(3, 1fr); }
+}
+
+.resbox{
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.16);
+}
+.resbox strong{
+  display:block;
+  font-size: 22px;
+  margin-top: 4px;
+  letter-spacing: -0.2px;
+}
