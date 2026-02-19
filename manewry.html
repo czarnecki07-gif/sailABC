@@ -1,0 +1,324 @@
+<section class="container">
+  <h1>Manewry żeglarskie — poradnik + pytania egzaminacyjne</h1>
+  <p class="muted">
+    Najważniejsze manewry na jachcie: zwroty, podejścia do kei, odejścia i MOB. Na końcu: sekcja egzaminacyjna (typowe pytania).
+  </p>
+
+  <div class="note" style="margin-top:12px;">
+    Skróty: <strong>LW</strong> = linia wiatru, <strong>MOB</strong> = człowiek za burtą.
+  </div>
+</section>
+
+<!-- ========== ZWROT PRZEZ SZTAG ========== -->
+<section class="container man-card card" id="zwrot-przez-sztag">
+  <div class="man-text">
+    <h2>Zwrot przez sztag (tack)</h2>
+    <p><strong>Zastosowanie:</strong> zmiana halsu przy żegludze na wiatr (halsowanie).</p>
+
+    <ol>
+      <li>Sprawdź otoczenie i prędkość (jacht musi “iść”).</li>
+      <li>Komenda: <strong>„Gotów do zwrotu?”</strong> — załoga potwierdza.</li>
+      <li>Komenda: <strong>„Zwrot przez sztag!”</strong> — ster w stronę wiatru.</li>
+      <li>W momencie przejścia dziobu przez wiatr: luzujesz stary szot i wybierasz nowy.</li>
+      <li>Ustabilizuj kurs na nowym halsie.</li>
+    </ol>
+
+    <p class="muted small">
+      Tip: jeśli zwrot “staje w martwym”, zwykle zabrakło prędkości lub zbyt wcześnie poluzowano żagle.
+    </p>
+  </div>
+
+  <div class="man-media">
+    <!-- SVG: tack -->
+    <svg class="man-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat zwrotu przez sztag">
+      <rect width="520" height="260" fill="#ffffff"/>
+      <!-- wiatr -->
+      <g>
+        <text x="22" y="28" font-family="Arial" font-size="16" fill="#111">Wiatr</text>
+        <line x1="20" y1="40" x2="160" y2="40" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="160,40 148,34 148,46" fill="#e11d48"/>
+      </g>
+
+      <!-- linia wiatru -->
+      <line x1="260" y1="55" x2="260" y2="235" stroke="#111" stroke-dasharray="6 6" stroke-width="2"/>
+      <text x="246" y="50" font-family="Arial" font-size="12" fill="#111">LW</text>
+
+      <!-- kurs przed -->
+      <path d="M130,210 C180,170 210,135 238,110" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="238,110 232,122 246,118" fill="#1f5fd6"/>
+      <text x="110" y="225" font-family="Arial" font-size="14" fill="#111">1</text>
+
+      <!-- kurs po -->
+      <path d="M282,110 C310,135 342,165 392,210" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="392,210 380,206 387,196" fill="#1f5fd6"/>
+      <text x="410" y="225" font-family="Arial" font-size="14" fill="#111">3</text>
+
+      <!-- przejście przez wiatr -->
+      <path d="M238,110 C252,98 268,98 282,110" fill="none" stroke="#e11d48" stroke-width="5"/>
+      <polygon points="282,110 270,108 278,98" fill="#e11d48"/>
+      <text x="253" y="95" font-family="Arial" font-size="14" fill="#111">2</text>
+
+      <!-- jacht (ikonka) -->
+      <g transform="translate(248,118) rotate(-90)">
+        <path d="M0,0 L18,10 L0,20 L4,10 Z" fill="#111"/>
+      </g>
+    </svg>
+
+    <p class="muted small" style="margin-top:8px;">
+      1 → 2 → 3: przeprowadź dziób przez LW, zachowując prędkość.
+    </p>
+  </div>
+</section>
+
+<!-- ========== ZWROT PRZEZ RUFĘ ========== -->
+<section class="container man-card card" id="zwrot-przez-rufe">
+  <div class="man-text">
+    <h2>Zwrot przez rufę (gybe)</h2>
+    <p><strong>Uwaga:</strong> manewr potencjalnie niebezpieczny — kontroluj bom (grota).</p>
+
+    <ol>
+      <li>Komenda i przygotowanie załogi (głowy nisko, bom kontrolowany).</li>
+      <li>Przed zwrotem <strong>wybierz grota</strong> (zmniejszasz siłę przejścia bomu).</li>
+      <li>Delikatnie przeprowadź rufę przez LW.</li>
+      <li>Kontroluj przejście bomu i ustaw żagle na nowym kursie.</li>
+    </ol>
+
+    <p class="muted small">
+      Egzaminowo: zwrot przez rufę wykonujemy na kursach pełnych (z wiatrem), pod kontrolą grota.
+    </p>
+  </div>
+
+  <div class="man-media">
+    <!-- SVG: gybe -->
+    <svg class="man-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat zwrotu przez rufę">
+      <rect width="520" height="260" fill="#ffffff"/>
+
+      <!-- wiatr -->
+      <g>
+        <text x="22" y="28" font-family="Arial" font-size="16" fill="#111">Wiatr</text>
+        <line x1="20" y1="40" x2="160" y2="40" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="160,40 148,34 148,46" fill="#e11d48"/>
+      </g>
+
+      <!-- linia wiatru -->
+      <line x1="260" y1="55" x2="260" y2="235" stroke="#111" stroke-dasharray="6 6" stroke-width="2"/>
+      <text x="246" y="50" font-family="Arial" font-size="12" fill="#111">LW</text>
+
+      <!-- kurs przed (z wiatrem) -->
+      <path d="M120,90 C180,120 210,140 238,160" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="238,160 225,158 233,148" fill="#1f5fd6"/>
+      <text x="110" y="85" font-family="Arial" font-size="14" fill="#111">1</text>
+
+      <!-- przejście rufą -->
+      <path d="M238,160 C252,172 268,172 282,160" fill="none" stroke="#e11d48" stroke-width="5"/>
+      <polygon points="282,160 270,162 278,172" fill="#e11d48"/>
+      <text x="253" y="190" font-family="Arial" font-size="14" fill="#111">2</text>
+
+      <!-- kurs po -->
+      <path d="M282,160 C310,140 342,120 400,90" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="400,90 392,102 386,92" fill="#1f5fd6"/>
+      <text x="410" y="85" font-family="Arial" font-size="14" fill="#111">3</text>
+
+      <!-- jacht -->
+      <g transform="translate(248,145) rotate(90)">
+        <path d="M0,0 L18,10 L0,20 L4,10 Z" fill="#111"/>
+      </g>
+    </svg>
+
+    <p class="muted small" style="margin-top:8px;">
+      1 → 2 → 3: przeprowadzasz <strong>rufę</strong> przez LW, kontrolując grota.
+    </p>
+  </div>
+</section>
+
+<!-- ========== PODEJŚCIE DO KEI ========== -->
+<section class="container man-card card" id="podejscie-do-kei">
+  <div class="man-text">
+    <h2>Podejście do kei</h2>
+    <p><strong>Zasada:</strong> podchodzimy <strong>powoli</strong> i z planem wyhamowania.</p>
+
+    <ul>
+      <li>Przygotuj odbijacze i cumy wcześniej.</li>
+      <li>Ustal rolę każdej osoby (kto dziobowa, kto rufowa).</li>
+      <li>Wybierz wariant: pod wiatr / z wiatrem / na silniku.</li>
+    </ul>
+
+    <p class="muted small">
+      Egzaminowo liczy się bezpieczeństwo: prędkość minimalna, komunikacja, gotowe cumy.
+    </p>
+  </div>
+
+  <div class="man-media">
+    <!-- SVG: podejście -->
+    <svg class="man-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat podejścia do kei">
+      <rect width="520" height="260" fill="#ffffff"/>
+
+      <!-- keja -->
+      <rect x="420" y="40" width="60" height="180" fill="#e5e7eb" stroke="#111" stroke-width="2"/>
+      <text x="420" y="30" font-family="Arial" font-size="14" fill="#111">Keja</text>
+
+      <!-- wiatr -->
+      <text x="22" y="28" font-family="Arial" font-size="16" fill="#111">Wiatr</text>
+      <line x1="20" y1="40" x2="160" y2="40" stroke="#e11d48" stroke-width="4"/>
+      <polygon points="160,40 148,34 148,46" fill="#e11d48"/>
+
+      <!-- tor podejścia -->
+      <path d="M60,200 C140,170 250,150 380,140" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="380,140 368,146 372,132" fill="#1f5fd6"/>
+
+      <text x="50" y="220" font-family="Arial" font-size="14" fill="#111">1</text>
+      <text x="240" y="150" font-family="Arial" font-size="14" fill="#111">2</text>
+      <text x="392" y="140" font-family="Arial" font-size="14" fill="#111">3</text>
+
+      <!-- jacht -->
+      <g transform="translate(350,130)">
+        <path d="M0,0 L18,10 L0,20 L4,10 Z" fill="#111"/>
+      </g>
+
+      <!-- strzałka hamowania -->
+      <line x1="350" y1="175" x2="400" y2="175" stroke="#e11d48" stroke-width="4"/>
+      <polygon points="400,175 388,169 388,181" fill="#e11d48"/>
+      <text x="325" y="180" font-family="Arial" font-size="12" fill="#111">wytracaj</text>
+    </svg>
+
+    <p class="muted small" style="margin-top:8px;">
+      1–2: podejście kontrolowane • 3: wytracanie prędkości i podanie cumy.
+    </p>
+  </div>
+</section>
+
+<!-- ========== MOB ========== -->
+<section class="container man-card card" id="mob">
+  <div class="man-text">
+    <h2>Człowiek za burtą (MOB) — schemat manewru</h2>
+    <p><strong>Priorytet:</strong> wzrok na poszkodowanym + natychmiastowe zabezpieczenie (koło, pławka).</p>
+
+    <ol>
+      <li>Alarm: <strong>„Człowiek za burtą!”</strong> — jedna osoba cały czas wskazuje.</li>
+      <li>Rzut koła/pławki.</li>
+      <li>Manewr powrotny (np. “ósemka” lub “Williamson” zależnie od warunków).</li>
+      <li>Podejście z prędkością minimalną, <strong>zawietrznie</strong> od poszkodowanego.</li>
+    </ol>
+
+    <p class="muted small">
+      Egzaminowo: nie podpływaj “na wiatr” na człowieka (ryzyko najechania). Podejście kontrolowane.
+    </p>
+  </div>
+
+  <div class="man-media">
+    <!-- SVG: MOB (wariant ogólny) -->
+    <svg class="man-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat MOB">
+      <rect width="520" height="260" fill="#ffffff"/>
+
+      <!-- wiatr -->
+      <text x="22" y="28" font-family="Arial" font-size="16" fill="#111">Wiatr</text>
+      <line x1="20" y1="40" x2="160" y2="40" stroke="#e11d48" stroke-width="4"/>
+      <polygon points="160,40 148,34 148,46" fill="#e11d48"/>
+
+      <!-- MOB punkt -->
+      <circle cx="360" cy="170" r="10" fill="#111"/>
+      <text x="380" y="175" font-family="Arial" font-size="14" fill="#111">MOB</text>
+
+      <!-- tor powrotny -->
+      <path d="M120,200
+               C180,120 260,90 330,120
+               C390,145 390,205 350,215
+               C310,225 290,205 300,185
+               C315,160 335,160 360,170"
+            fill="none" stroke="#1f5fd6" stroke-width="5"/>
+      <polygon points="360,170 350,176 352,164" fill="#1f5fd6"/>
+
+      <!-- numeracja -->
+      <text x="110" y="220" font-family="Arial" font-size="14" fill="#111">1</text>
+      <text x="250" y="95" font-family="Arial" font-size="14" fill="#111">2</text>
+      <text x="365" y="235" font-family="Arial" font-size="14" fill="#111">3</text>
+
+      <!-- jacht -->
+      <g transform="translate(330,195)">
+        <path d="M0,0 L18,10 L0,20 L4,10 Z" fill="#111"/>
+      </g>
+
+      <!-- podejście zawietrznie (strzałka) -->
+      <line x1="410" y1="200" x2="380" y2="185" stroke="#e11d48" stroke-width="4"/>
+      <polygon points="380,185 392,185 386,195" fill="#e11d48"/>
+      <text x="415" y="210" font-family="Arial" font-size="12" fill="#111">zawietrznie</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== SEKCJA EGZAMINACYJNA ========== -->
+<section class="container card" id="egzamin">
+  <h2>Najczęstsze pytania egzaminacyjne (PZŻ) — manewry</h2>
+  <p class="muted">
+    Poniższe pytania to typowy zakres wiedzy praktycznej wymaganej na patent Żeglarza Jachtowego / JSM.
+  </p>
+
+  <div class="qa">
+    <details class="qa-item">
+      <summary><strong>1) Kiedy wykonujesz zwrot przez sztag, a kiedy przez rufę?</strong></summary>
+      <div class="qa-body">
+        <p><strong>Zwrot przez sztag</strong> wykonujesz przy żegludze na wiatr (kursy ostre), gdy chcesz zmienić hals przechodząc dziobem przez linię wiatru.</p>
+        <p><strong>Zwrot przez rufę</strong> wykonujesz przy kursach pełnych (z wiatrem), gdy zmieniasz hals przechodząc rufą przez linię wiatru.</p>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>2) Co jest warunkiem poprawnego zwrotu przez sztag?</strong></summary>
+      <div class="qa-body">
+        <ul>
+          <li>Odpowiednia <strong>prędkość</strong> (jacht musi mieć rozpęd).</li>
+          <li>Płynna praca sterem (bez “zajechania”).</li>
+          <li>Skuteczna praca szotami: luz starego, wybieranie nowego w dobrym momencie.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>3) Dlaczego zwrot przez rufę jest groźniejszy?</strong></summary>
+      <div class="qa-body">
+        <p>Bo bom grota może przejść gwałtownie (tzw. “strzał”), co grozi urazem załogi i uszkodzeniem takielunku. Manewr wymaga kontroli grota i komunikacji.</p>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>4) Jakie są zasady podejścia do kei (bezpiecznie egzaminowo)?</strong></summary>
+      <div class="qa-body">
+        <ul>
+          <li>Cumy i odbijacze przygotowane <strong>przed</strong> manewrem.</li>
+          <li>Minimalna prędkość — jacht ma “dojechać”, nie “wjechać”.</li>
+          <li>Wyznaczone role w załodze (dziobowa/rufowa, odbijacz, bosak).</li>
+          <li>Plan awaryjny: odejście/krąg, jeśli podejście nie wyjdzie.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>5) Co robisz w pierwszych sekundach po „Człowiek za burtą”?</strong></summary>
+      <div class="qa-body">
+        <ol>
+          <li>Alarm i wskazywanie (jedna osoba ma MOB cały czas w polu widzenia).</li>
+          <li>Rzut koła/pławki/światła.</li>
+          <li>Natychmiastowe rozpoczęcie manewru powrotnego.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>6) Jak podchodzisz do MOB i dlaczego?</strong></summary>
+      <div class="qa-body">
+        <p>Podchodzisz <strong>zawietrznie</strong> (wiatr “znosi” jacht od człowieka) i z minimalną prędkością, żeby uniknąć najechania i utrzymać kontrolę.</p>
+      </div>
+    </details>
+
+    <details class="qa-item">
+      <summary><strong>7) Co to jest „martwy kąt” wiatru i co robisz, gdy jacht w nim staje?</strong></summary>
+      <div class="qa-body">
+        <p>Martwy kąt to strefa “prosto pod wiatr”, gdzie żagle nie pracują i jacht traci napęd. Jeśli jacht utknie po zwrocie: cofasz ster, luzujesz żagle, czasem cofasz się na żaglach lub wspomagasz silnikiem (jeśli dozwolone sytuacyjnie).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="note" style="margin-top:14px;">
+    Na egzaminie liczy się: <strong>bezpieczeństwo, komunikacja i kontrola prędkości</strong>. Lepiej przerwać podejście i zrobić drugą próbę niż “dopychać na siłę”.
+  </div>
+</section>
