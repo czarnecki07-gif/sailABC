@@ -1,0 +1,106 @@
+/* sailABC Tools — Planer kursu */
+
+.planner-page{ padding: 28px 0 46px; }
+.planner-hero{ margin-bottom: 14px; }
+
+.grid3{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 10px;
+}
+@media (min-width: 860px){
+  .grid3{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.field label{
+  display:block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+}
+.field input{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 10px;
+}
+
+.table-wrap{
+  overflow:auto;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.10);
+}
+
+.wp-table, .seg-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width: 760px;
+}
+.wp-table th, .wp-table td,
+.seg-table th, .seg-table td{
+  text-align:left;
+  padding:12px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.86);
+  font-size:14px;
+  vertical-align: top;
+}
+.wp-table th, .seg-table th{
+  color: rgba(255,255,255,0.92);
+  font-size:13px;
+  white-space: nowrap;
+}
+
+.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+.btn-danger{
+  border-color: rgba(225,29,72,0.45);
+  background: rgba(225,29,72,0.18);
+}
+.btn-danger:hover{
+  border-color: rgba(225,29,72,0.65);
+  background: rgba(225,29,72,0.26);
+}
+
+.summary{
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr;
+  margin-top: 14px;
+}
+@media (min-width: 860px){
+  .summary{ grid-template-columns: repeat(3,1fr); }
+}
+.sumbox{
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.16);
+}
+.sumbox strong{
+  display:block;
+  font-size: 22px;
+  margin-top: 4px;
+  letter-spacing: -0.2px;
+}
