@@ -1,0 +1,65 @@
+/* ===============================
+   PRACA ŻAGLI — osobny styl podstrony
+   =============================== */
+
+.page-sails{
+  padding: 28px 0 42px;
+}
+
+.sails-hero{
+  margin-bottom: 14px;
+}
+
+.page-sails h1{
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 0 0 10px;
+}
+
+.sails-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top: 12px;
+}
+
+.sails-card{
+  display:grid;
+  gap:16px;
+  align-items:start;
+}
+
+.sails-svg{
+  width:100%;
+  height:auto;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+
+.sails-list{
+  margin:0;
+  padding-left:18px;
+}
+
+.sails-list li{
+  margin-bottom:8px;
+}
+
+/* FAQ jak w manewrach (lokalnie) */
+.qa{ display:grid; gap:10px; margin-top:12px; }
+.qa-item{
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:16px;
+  background: rgba(0,0,0,0.18);
+  padding:12px 14px;
+}
+.qa-item summary{ cursor:pointer; font-weight:700; }
+.qa-body{ margin-top:10px; color: rgba(255,255,255,0.85); }
+
+/* desktop */
+@media (min-width: 860px){
+  .sails-card{
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
