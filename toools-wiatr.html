@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kalkulator wiatru pozornego – sailABC Tools</title>
+  <meta name="description" content="Kalkulator wiatru pozornego: wiatr rzeczywisty ↔ pozorny, kurs, prędkość, zależności nawigacyjne. Działa offline." />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tools-wiatr.css" />
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav">
+      <a class="nav-btn" href="oprogramowanie.html">Oprogramowanie</a>
+      <a class="nav-btn nav-btn-accent" href="tools-wiatr.html">Wiatr pozorny</a>
+    </nav>
+  </div>
+</header>
+
+<main class="awa-page">
+  <section class="container awa-hero">
+    <h1>Kalkulator wiatru pozornego</h1>
+    <p class="muted">
+      Policz wiatr pozorny z wiatru rzeczywistego i prędkości jachtu.
+      Wejście: <strong>TWS</strong> (siła), <strong>TWA</strong> (kąt względem dziobu), <strong>STW</strong> (prędkość).
+    </p>
+  </section>
+
+  <section class="container card">
+    <h2>Dane wejściowe</h2>
+
+    <div class="grid3">
+      <div class="field">
+        <label for="tws">TWS – wiatr rzeczywisty (kn)</label>
+        <input id="tws" type="number" min="0" step="0.1" value="12">
+      </div>
+
+      <div class="field">
+        <label for="twa">TWA – kąt wiatru rzeczywistego (°)</label>
+        <input id="twa" type="number" min="-180" max="180" step="1" value="45">
+        <div class="muted small" style="margin-top:6px;">
+          Znak: <strong>+</strong> prawa burta (starboard), <strong>-</strong> lewa (port).<br>
+          Np. +45° = wiatr z prawej ćwiartki dziobowej.
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="stw">STW – prędkość jachtu (kn)</label>
+        <input id="stw" type="number" min="0" step="0.1" value="6">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btnCalc" type="button">Oblicz</button>
+      <button class="btn btn-ghost" id="btnReset" type="button">Reset</button>
+    </div>
+  </section>
+
+  <section class="container card">
+    <h2>Wynik</h2>
+
+    <div class="results">
+      <div class="resbox">
+        <span class="muted small">AWS – wiatr pozorny</span>
+        <strong id="aws">—</strong>
+      </div>
+      <div class="resbox">
+        <span class="muted small">AWA – kąt wiatru pozornego</span>
+        <strong id="awa">—</strong>
+      </div>
+      <div class="resbox">
+        <span class="muted small">Burta</span>
+        <strong id="side">—</strong>
+      </div>
+    </div>
+
+    <p class="muted small" id="explain" style="margin-top:12px;"></p>
+  </section>
+
+  <section class="container card">
+    <h2>Jak to czytać?</h2>
+    <ul class="muted">
+      <li><strong>TWA</strong> — kąt wiatru rzeczywistego względem dziobu (0° = z dziobu, 180° = z rufy).</li>
+      <li><strong>AWA</strong> — kąt wiatru pozornego, który „czujesz” na jachcie (ważny do trymu żagli).</li>
+      <li>Im szybciej płyniesz, tym bardziej wiatr „idzie do przodu” i rośnie <strong>AWS</strong>.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">Kalkulator wiatru pozornego — offline</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="tools-wiatr.js"></script>
+</body>
+</html>
