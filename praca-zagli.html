@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Praca żagli – ustawienie, trym i kursy | sailABC</title>
+  <meta name="description" content="Praca żagli krok po kroku: trym grota i foka, ostrzenie/odpadanie, zasada 'na granicy łopotu', skręcanie żagla, twist, refowanie i najczęstsze błędy." />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/praca-zagli.css" />
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="sailABC — strona główna">
+      <img class="brand-logo" src="/logo.png" alt="sailABC.com">
+      <span class="brand-name">sailABC.com</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Nawigacja">
+      <a class="nav-btn" href="/wezly.html">Węzły</a>
+      <a class="nav-btn" href="/manewry.html">Manewry</a>
+      <a class="nav-btn" href="/nawigacja.htm">Nawigacja</a>
+      <a class="nav-btn nav-btn-accent" href="/praca-zagli.html">Praca żagli</a>
+      <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-sails">
+
+  <section class="container sails-hero">
+    <h1>Praca żagli — podstawy trymu</h1>
+    <p class="muted">
+      Jak ustawić grota i foka, żeby jacht płynął szybko i bezpiecznie: kąt do wiatru, zasada „na granicy łopotu”,
+      twist (skręcanie żagla), reakcja na szkwały oraz refowanie.
+    </p>
+
+    <div class="sails-chips">
+      <a class="chip" href="#kursy">Kursy i ustawienie</a>
+      <a class="chip" href="#trym">Trym grota i foka</a>
+      <a class="chip" href="#twist">Twist</a>
+      <a class="chip" href="#sztorm">Szkwały i refy</a>
+      <a class="chip" href="#bledy">Błędy</a>
+      <a class="chip" href="#egzamin">Egzamin</a>
+    </div>
+  </section>
+
+  <!-- =================== KURSY =================== -->
+  <section class="container card sails-card" id="kursy">
+    <div class="sails-text">
+      <h2>Kursy względem wiatru i „korytarz żagli”</h2>
+      <p>
+        Żagle działają, gdy mają właściwy <strong>kąt natarcia</strong>. Zbyt ostro — zaczynają łopotać.
+        Zbyt pełno — tracisz siłę ciągu. Celem jest trym „na granicy łopotu”.
+      </p>
+      <ul>
+        <li><strong>Bajdewind</strong>: żagle blisko osi jachtu, duża siła przechylająca.</li>
+        <li><strong>Półwiatr</strong>: zwykle najszybszy kurs, żagle bardziej otwarte.</li>
+        <li><strong>Baksztag / Fordewind</strong>: żagle otwarte, uwaga na niekontrolowany zwrot przez rufę.</li>
+      </ul>
+
+      <div class="note">
+        Prosta zasada: <strong>ostrząc</strong> (w stronę wiatru) — <strong>dobierasz</strong> żagle.
+        <strong>Odpadjąc</strong> (od wiatru) — <strong>luzujesz</strong>.
+      </div>
+    </div>
+
+    <div class="sails-media">
+      <!-- SVG: róża kursów -->
+      <svg class="sails-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kursy względem wiatru">
+        <rect width="640" height="360" fill="#fff"/>
+
+        <!-- wiatr -->
+        <text x="22" y="34" font-family="Arial" font-size="20" fill="#111">Wiatr</text>
+        <line x1="20" y1="50" x2="170" y2="50" stroke="#e11d48" stroke-width="5"/>
+        <polygon points="170,50 155,42 155,58" fill="#e11d48"/>
+
+        <!-- okrąg -->
+        <circle cx="340" cy="200" r="120" fill="none" stroke="#111" stroke-width="3"/>
+
+        <!-- jacht w środku -->
+        <polygon points="340,165 360,200 340,235 345,200" fill="#111"/>
+
+        <!-- sektory kursów -->
+        <path d="M340,200 L340,80 A120,120 0 0 1 424,112 Z" fill="rgba(31,95,214,0.10)"/>
+        <text x="360" y="110" font-family="Arial" font-size="14" fill="#111">Bajdewind</text>
+
+        <path d="M340,200 L424,112 A120,120 0 0 1 460,200 Z" fill="rgba(31,95,214,0.07)"/>
+        <text x="450" y="170" font-family="Arial" font-size="14" fill="#111">Półwiatr</text>
+
+        <path d="M340,200 L460,200 A120,120 0 0 1 424,288 Z" fill="rgba(31,95,214,0.05)"/>
+        <text x="448" y="240" font-family="Arial" font-size="14" fill="#111">Baksztag</text>
+
+        <path d="M340,200 L424,288 A120,120 0 0 1 340,320 Z" fill="rgba(31,95,214,0.03)"/>
+        <text x="360" y="300" font-family="Arial" font-size="14" fill="#111">Fordewind</text>
+      </svg>
+
+      <p class="muted small" style="margin-top:8px;">
+        Im bardziej pełny kurs, tym bardziej otwierasz żagle.
+      </p>
+    </div>
+  </section>
+
+  <!-- =================== TRYM =================== -->
+  <section class="container card sails-card" id="trym">
+    <div class="sails-text">
+      <h2>Trym grota i foka — najprościej</h2>
+
+      <h3>1) Zasada „na granicy łopotu”</h3>
+      <p>
+        Najpierw lekko <strong>luzujesz</strong> żagiel aż zacznie łopotać, a potem <strong>dobierasz minimalnie</strong>,
+        aż łopot zniknie. To bardzo dobre ustawienie „na szybko”.
+      </p>
+
+      <h3>2) Kolejność na jachcie szkoleniowym</h3>
+      <ol>
+        <li>Ustal kurs i prędkość (jacht musi płynąć).</li>
+        <li>Trymuj <strong>foka</strong>, potem <strong>grot</strong> (albo równolegle).</li>
+        <li>Sprawdź przechył i sterowność: jeśli jacht „ucieka do wiatru” — za dużo mocy.</li>
+      </ol>
+
+      <div class="note">
+        Jeżeli jacht ma duży przechył: <strong>odpuść grota</strong> (odciąża ster i stabilizuje).
+      </div>
+    </div>
+
+    <div class="sails-media">
+      <!-- SVG: łopot -> dociąg -->
+      <svg class="sails-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trym na granicy łopotu">
+        <rect width="640" height="360" fill="#fff"/>
+
+        <text x="22" y="34" font-family="Arial" font-size="20" fill="#111">Trym: luz → łopot → dobierz</text>
+
+        <!-- panel 1 -->
+        <rect x="40" y="70" width="170" height="250" fill="none" stroke="#111" stroke-width="2"/>
+        <text x="55" y="95" font-family="Arial" font-size="14" fill="#111">1) Za mocno</text>
+        <line x1="75" y1="280" x2="75" y2="140" stroke="#111" stroke-width="4"/>
+        <path d="M75,140 C140,170 140,250 75,280" fill="none" stroke="#1f5fd6" stroke-width="6"/>
+        <text x="95" y="210" font-family="Arial" font-size="12" fill="#111">żagiel "zamknięty"</text>
+
+        <!-- panel 2 -->
+        <rect x="235" y="70" width="170" height="250" fill="none" stroke="#111" stroke-width="2"/>
+        <text x="250" y="95" font-family="Arial" font-size="14" fill="#111">2) Luz → łopot</text>
+        <line x1="270" y1="280" x2="270" y2="140" stroke="#111" stroke-width="4"/>
+        <path d="M270,140 C160,170 160,250 270,280" fill="none" stroke="#1f5fd6" stroke-width="6" stroke-dasharray="10 8"/>
+        <text x="286" y="210" font-family="Arial" font-size="12" fill="#111">łopocze</text>
+
+        <!-- panel 3 -->
+        <rect x="430" y="70" width="170" height="250" fill="none" stroke="#111" stroke-width="2"/>
+        <text x="445" y="95" font-family="Arial" font-size="14" fill="#111">3) Dobierz minimalnie</text>
+        <line x1="465" y1="280" x2="465" y2="140" stroke="#111" stroke-width="4"/>
+        <path d="M465,140 C545,170 545,250 465,280" fill="none" stroke="#1f5fd6" stroke-width="6"/>
+        <text x="482" y="210" font-family="Arial" font-size="12" fill="#111">ustawienie OK</text>
+
+        <!-- strzałki -->
+        <line x1="210" y1="195" x2="235" y2="195" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="235,195 224,188 224,202" fill="#e11d48"/>
+
+        <line x1="405" y1="195" x2="430" y2="195" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="430,195 419,188 419,202" fill="#e11d48"/>
+      </svg>
+
+      <p class="muted small" style="margin-top:8px;">
+        To działa na większości jachtów: ustaw na granicy łopotu, potem delikatnie dobierz.
+      </p>
+    </div>
+  </section>
+
+  <!-- =================== TWIST =================== -->
+  <section class="container card sails-card" id="twist">
+    <div class="sails-text">
+      <h2>Twist (skręcanie żagla) — o co chodzi?</h2>
+      <p>
+        Wiatr przy topie masztu jest zwykle silniejszy i bardziej skręcony niż przy pokładzie.
+        Dlatego żagiel powinien mieć <strong>nieco inny kąt</strong> na dole i u góry — to właśnie twist.
+      </p>
+
+      <ul>
+        <li><strong>Za mały twist</strong>: góra żagla jest “przyduszona” → spadek prędkości, przechył.</li>
+        <li><strong>Za duży twist</strong>: góra „ucieka” → tracisz napęd.</li>
+      </ul>
+
+      <div class="note">
+        W praktyce twist regulujesz głównie: <strong>travellerem</strong>, <strong>szotem</strong> i <strong>topenantą / obciągaczem bomu</strong> (vang).
+      </div>
+    </div>
+
+    <div class="sails-media">
+      <!-- SVG: twist -->
+      <svg class="sails-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Twist - skręcanie żagla">
+        <rect width="640" height="360" fill="#fff"/>
+        <text x="22" y="34" font-family="Arial" font-size="20" fill="#111">Twist: dół vs góra żagla</text>
+
+        <!-- maszt -->
+        <line x1="170" y1="300" x2="170" y2="70" stroke="#111" stroke-width="5"/>
+
+        <!-- żagiel dół -->
+        <path d="M170,300 C260,280 310,260 360,240" fill="none" stroke="#1f5fd6" stroke-width="8"/>
+        <!-- żagiel góra (bardziej otwarta) -->
+        <path d="M170,120 C280,110 360,115 430,140" fill="none" stroke="#1f5fd6" stroke-width="8"/>
+
+        <!-- strzałki wiatru -->
+        <line x1="520" y1="120" x2="430" y2="120" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="430,120 442,114 442,126" fill="#e11d48"/>
+        <text x="525" y="125" font-family="Arial" font-size="14" fill="#111">wiatr u góry</text>
+
+        <line x1="520" y1="250" x2="420" y2="250" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="420,250 432,244 432,256" fill="#e11d48"/>
+        <text x="525" y="255" font-family="Arial" font-size="14" fill="#111">wiatr na dole</text>
+
+        <text x="210" y="330" font-family="Arial" font-size="14" fill="#111">dół bardziej „zamknięty”</text>
+        <text x="210" y="70" font-family="Arial" font-size="14" fill="#111">góra bardziej „otwarta”</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== SZKWAŁY / REFY =================== -->
+  <section class="container card sails-card" id="sztorm">
+    <div class="sails-text">
+      <h2>Szkwały i refowanie</h2>
+      <p>
+        Gdy wiatr rośnie, pierwszym objawem jest zwykle <strong>za duży przechył</strong> i “ciężki ster”.
+        Najpierw zredukuj moc trymem, dopiero potem refuj.
+      </p>
+
+      <ol>
+        <li><strong>Odpuść grota</strong> (szot grota) — natychmiast zmniejsza przechył.</li>
+        <li>Otwórz żagle (więcej twist) jeśli jacht jest “przyduszony”.</li>
+        <li>Jeśli nadal za dużo mocy — <strong>ref</strong> (zmniejsz powierzchnię grota), ewentualnie zmiana foka.</li>
+      </ol>
+
+      <div class="note">
+        Egzaminowo: refuje się <strong>zanim</strong> zrobi się niebezpiecznie. Najlepiej wcześnie i spokojnie.
+      </div>
+    </div>
+
+    <div class="sails-media">
+      <!-- SVG: ref -->
+      <svg class="sails-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Refowanie - zmniejszenie powierzchni żagla">
+        <rect width="640" height="360" fill="#fff"/>
+        <text x="22" y="34" font-family="Arial" font-size="20" fill="#111">Refowanie: mniej powierzchni</text>
+
+        <!-- maszt -->
+        <line x1="170" y1="320" x2="170" y2="70" stroke="#111" stroke-width="5"/>
+
+        <!-- grot pełny -->
+        <path d="M170,320 C320,280 360,180 360,80 L170,70 Z" fill="rgba(31,95,214,0.15)" stroke="#1f5fd6" stroke-width="4"/>
+        <text x="380" y="120" font-family="Arial" font-size="14" fill="#111">pełny</text>
+
+        <!-- grot z refem (linia) -->
+        <path d="M170,320 C290,295 325,230 325,150 L170,145 Z" fill="rgba(31,95,214,0.10)" stroke="#1f5fd6" stroke-width="4"/>
+        <text x="380" y="210" font-family="Arial" font-size="14" fill="#111">z refem</text>
+
+        <!-- strzałka -->
+        <line x1="470" y1="165" x2="520" y2="165" stroke="#e11d48" stroke-width="4"/>
+        <polygon points="520,165 508,159 508,171" fill="#e11d48"/>
+        <text x="465" y="150" font-family="Arial" font-size="14" fill="#111">zmniejsz</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== BŁĘDY =================== -->
+  <section class="container card" id="bledy">
+    <h2>Najczęstsze błędy w trymie</h2>
+    <ul class="sails-list">
+      <li><strong>Za mocno dobrane żagle</strong> na pełnych kursach → przechył i hamowanie.</li>
+      <li><strong>Brak prędkości</strong> i trym „na postoju” → nie da się ocenić poprawnie.</li>
+      <li><strong>Ignorowanie steru</strong>: jeśli jacht “idzie do wiatru”, zwykle jest za dużo mocy.</li>
+      <li><strong>Zbyt późne refowanie</strong> → chaos i zmęczenie załogi.</li>
+    </ul>
+  </section>
+
+  <!-- =================== EGZAMIN =================== -->
+  <section class="container card" id="egzamin">
+    <h2>Egzamin: pytania, które często padają</h2>
+
+    <div class="qa">
+      <details class="qa-item">
+        <summary>1) Co robisz, gdy jacht ma za duży przechył?</summary>
+        <div class="qa-body">
+          Najpierw odpuszczam grota (zmniejszam moc), stabilizuję kurs, dopiero potem rozważam refowanie.
+        </div>
+      </details>
+
+      <details class="qa-item">
+        <summary>2) Co oznacza trym „na granicy łopotu”?</summary>
+        <div class="qa-body">
+          Luzuję żagiel do momentu pierwszego łopotu i dobieram minimalnie, żeby łopot zniknął — to szybka metoda ustawienia.
+        </div>
+      </details>
+
+      <details class="qa-item">
+        <summary>3) Co to jest twist?</summary>
+        <div class="qa-body">
+          Różnica ustawienia górnej i dolnej części żagla wynikająca ze skrętu i gradientu wiatru; pozwala żaglowi pracować efektywnie na całej wysokości.
+        </div>
+      </details>
+
+      <details class="qa-item">
+        <summary>4) Kiedy refujesz?</summary>
+        <div class="qa-body">
+          Zanim zrobi się niebezpiecznie — gdy rośnie wiatr, przechył jest duży, a ster staje się ciężki mimo korekt trymu.
+        </div>
+      </details>
+    </div>
+
+    <div class="note" style="margin-top:14px;">
+      Na kursie i egzaminie liczy się praktyka: trym = obserwacja prędkości, przechyłu i zachowania steru.
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>sailABC</strong>
+      <p class="muted small">Portal edukacyjny dla żeglarzy</p>
+    </div>
+    <div class="muted small">© <span id="year"></span> sailABC</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
