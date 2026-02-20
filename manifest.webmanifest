@@ -1,0 +1,23 @@
+{
+  "name": "sailABC Tools",
+  "short_name": "sailABC",
+  "description": "Portal i narzędzia żeglarskie: pogoda, nawigacja, dziennik, planowanie rejsu. Działa offline jako PWA.",
+  "start_url": "/?pwa=1",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#19c4c6",
+  "lang": "pl",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
