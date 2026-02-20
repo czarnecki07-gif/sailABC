@@ -563,6 +563,89 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 /* =========================
    RESPONSIVE
    ========================= */
+/* =========================
+   ACCESS MODAL (DEMO/PRO)
+   ========================= */
+.access-modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:1000;
+}
+
+.access-modal.open{ display:block; }
+
+.access-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+}
+
+.access-modal__card{
+  position:relative;
+  max-width: 520px;
+  margin: 10vh auto 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  padding: 14px;
+}
+
+.access-modal__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 8px;
+}
+
+.access-modal__title{
+  margin:0;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+}
+
+.access-modal__x{
+  appearance:none;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  cursor:pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.access-modal__text{
+  margin: 0 0 12px;
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+}
+
+.access-modal__actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.access-modal__dev{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.access-modal__hint{
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+}
 @media (min-width: 720px){
   .site-nav{ display:flex; }
   .nav-toggle{ display:none; }
