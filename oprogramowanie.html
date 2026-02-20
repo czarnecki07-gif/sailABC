@@ -4,227 +4,366 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Oprogramowanie dla żeglarzy – sailABC Tools</title>
-  <meta name="description" content="sailABC Tools – narzędzia nawigacyjne, dziennik pokładowy, planer kursu, checklisty i kalkulatory dla żeglarzy. Działają offline i bez GPS." />
+  <title>sailABC Tools – narzędzia dla żeglarzy (offline / PWA)</title>
+  <meta name="description" content="sailABC Tools: nawigacja klasyczna bez GPS, dziennik pokładowy, planer kursu, checklista i kalkulatory. Działa offline jako PWA." />
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="oprogramowanie.css" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="sailABC — strona główna">
-      <img class="brand-logo" src="logo.png" alt="sailABC.com">
-      <span class="brand-name">sailABC.com</span>
-    </a>
-
-    <nav class="site-nav" aria-label="Nawigacja">
-      <a class="nav-btn" href="nawigacja.htm">Nawigacja</a>
-      <a class="nav-btn" href="manewry.html">Manewry</a>
-      <a class="nav-btn" href="bezpieczenstwo.html">Bezpieczeństwo</a>
-      <a class="nav-btn nav-btn-accent" href="oprogramowanie.html">Oprogramowanie</a>
-      <a class="nav-btn" href="quizy.html">Testy i quizy</a>
-    </nav>
-  </div>
-</header>
-
-<main class="page-tools">
-
-  <!-- ================= HERO ================= -->
-  <section class="container tools-hero">
-    <h1>sailABC Tools</h1>
-    <p class="muted">
-      Profesjonalne narzędzia dla żeglarzy: nawigacja klasyczna, planowanie rejsu,
-      dziennik pokładowy i kalkulatory.
-      <strong>Działają offline — pomagają nawigować nawet bez sygnału GPS.</strong>
-    </p>
-  </section>
-
-  <!-- ================= NARZĘDZIA ================= -->
-  <section class="container tools-grid" aria-label="Lista narzędzi">
-
-    <!-- 1) Tradycyjna nawigacja -->
-    <article class="tool-card">
-      <div>
-        <h3>Tradycyjna nawigacja <span class="badge-new">NOWE</span></h3>
-        <p>
-          Kurs rzeczywisty/magnetyczny/kompasowy, poprawki Δ i d,
-          znos/prąd (COG/SOG), ETA.
-          <strong>Obliczenia niezależne od GPS.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Egzaminowe</span>
-          <span class="badge">Offline</span>
+  <!-- Nagłówek w stylu index -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="/logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
         </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-nawigacja.html">Otwórz narzędzie</a>
-      </div>
-    </article>
+      </a>
 
-    <!-- 2) Elektroniczny dziennik pokładowy -->
-    <article class="tool-card">
-      <div>
-        <h3>Elektroniczny dziennik pokładowy <span class="badge-new">NOWE</span></h3>
-        <p>
-          Wpisy godzinowe, pozycja, kurs, prędkość, pogoda, zdarzenia
-          + raport rejsu (PDF przez drukowanie).
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Dla armatorów</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-dziennik.html">Otwórz narzędzie</a>
-      </div>
-    </article>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
 
-    <!-- 3) Planer kursu -->
-    <article class="tool-card">
-      <div>
-        <h3>Planer kursu <span class="badge-new">NOWE</span></h3>
-        <p>
-          Trasa punkt–punkt, kursy między waypointami,
-          dystans, ETA, poprawki kursowe.
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Planowanie rejsu</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-planer.html">Otwórz narzędzie</a>
-      </div>
-    </article>
-
-    <!-- 4) Checklista + kalkulator zapasów -->
-    <article class="tool-card">
-      <div>
-        <h3>Checklista + kalkulator zapasów <span class="badge-new">NOWE</span></h3>
-        <p>
-          Wyposażenie, dokumenty, paliwo, woda,
-          rezerwa bezpieczeństwa.
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Praktyczne</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-checklista.html">Otwórz narzędzie</a>
-      </div>
-    </article>
-
-    <!-- 5) Wiatr pozorny -->
-    <article class="tool-card">
-      <div>
-        <h3>Kalkulator wiatru pozornego <span class="badge-new">NOWE</span></h3>
-        <p>
-          Wiatr rzeczywisty ↔ pozorny, kurs i prędkość.
-          Liczy AWS/AWA na podstawie TWS/TWA i STW.
-          <strong>Działa offline.</strong>
-        </p>
-        <div class="tool-meta">
-          <span class="badge">Nawigacja</span>
-          <span class="badge">Offline</span>
-        </div>
-      </div>
-      <div class="tool-actions">
-        <a class="btn btn-primary btn-full" href="tools-wiatr.html">Otwórz narzędzie</a>
-      </div>
-    </article>
-
-  </section>
-
-  <!-- ================= JAK TO DZIAŁA ================= -->
-  <section class="container card" style="margin-bottom:40px;">
-    <h2>Jak to działa bez GPS?</h2>
-
-    <p class="muted">
-      sailABC Tools wykonuje wszystkie obliczenia lokalnie w przeglądarce.
-      Nie potrzebuje połączenia z internetem ani sygnału GPS.
-    </p>
-
-    <ul class="muted" style="margin-top:12px;">
-      <li>✔ Kursy rzeczywiste / magnetyczne / kompasowe</li>
-      <li>✔ Dead Reckoning (pozycja z czasu, kursu i prędkości)</li>
-      <li>✔ Obliczenia dystansu i ETA</li>
-      <li>✔ Planowanie trasy offline</li>
-      <li>✔ Checklista i kalkulator zapasów z rezerwą</li>
-      <li>✔ Wiatr pozorny (AWA/AWS) do trymu żagli</li>
-      <li>✔ Dane zapisywane lokalnie — brak chmury</li>
-    </ul>
-
-    <p class="muted small" style="margin-top:12px;">
-      Narzędzia mogą służyć jako awaryjne wsparcie nawigacyjne
-      w sytuacji utraty elektroniki pokładowej.
-    </p>
-  </section>
-
-  <!-- ================= CENNIK ================= -->
-  <section class="container pricing" aria-label="Cennik">
-    <h2>Pakiety sailABC Tools</h2>
-
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <h3>Basic</h3>
-        <div class="price">19 zł</div>
-        <ul>
-          <li>Nawigacja klasyczna</li>
-          <li>Planer kursu</li>
-          <li>Wiatr pozorny</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Basic</a>
-      </div>
-
-      <div class="price-card featured">
-        <h3>Pro</h3>
-        <div class="price">39 zł</div>
-        <ul>
-          <li>Wszystko z Basic</li>
-          <li>Dziennik pokładowy</li>
-          <li>Checklista + zapasy</li>
-          <li>Raporty PDF</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Pro</a>
-      </div>
-
-      <div class="price-card">
-        <h3>Lifetime</h3>
-        <div class="price">149 zł</div>
-        <ul>
-          <li>Pełny dostęp</li>
-          <li>Wszystkie przyszłe aktualizacje</li>
-          <li>Nowe narzędzia gratis</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-full">Kup Lifetime</a>
-      </div>
-
+      <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
+        <a class="nav-btn" href="/abc.html">ABC</a>
+        <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+        <a class="nav-btn" href="/wezly.html">Węzły</a>
+        <a class="nav-btn" href="/manewry.html">Manewry</a>
+        <a class="nav-btn" href="/nawigacja.html">Nawigacja</a>
+        <a class="nav-btn nav-btn-accent" href="/oprogramowanie.html">Narzędzia</a>
+        <a class="nav-btn nav-btn-ghost" href="/kontakt.html">Kontakt</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-</main>
+  <main id="main">
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div>
-      <strong>sailABC</strong>
-      <p class="muted small">Profesjonalne narzędzia dla żeglarzy</p>
-    </div>
-    <div class="muted small">© <span id="year"></span> sailABC</div>
-  </div>
-</footer>
+    <!-- HERO -->
+    <section class="hero section-tight" aria-label="sailABC Tools">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>sailABC Tools</h1>
+          <p class="hero-lead">
+            Narzędzia do realnej nawigacji i prowadzenia rejsu — w przeglądarce i po instalacji jako aplikacja webowa (PWA).
+            Zaprojektowane tak, żeby pomagały również w sytuacji braku internetu lub sygnału GPS.
+          </p>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+          <div class="hero-links-row">
+            <a class="chip chip-link" href="#narzedzia">Zobacz narzędzia</a>
+            <a class="chip chip-link" href="#pakiety">Demo / PRO</a>
+            <a class="chip chip-link" href="#install">Instalacja (PWA)</a>
+          </div>
+        </div>
 
+        <aside class="hero-panel" aria-label="Szybkie akcje">
+          <div class="panel-card">
+            <h2 style="margin-bottom:8px;">Szybki start</h2>
+            <p class="muted" style="margin-bottom:12px;">
+              Otwórz narzędzia i sprawdź DEMO. Dostęp PRO odblokowuje pełne funkcje.
+            </p>
+            <div class="weather-search-actions" style="margin:0;">
+              <a class="btn btn-primary" href="#narzedzia">Otwórz narzędzia</a>
+              <a class="btn btn-ghost" href="#pakiety">Odblokuj PRO</a>
+            </div>
+
+            <div class="note" style="margin-top:12px;">
+              Status dostępu: <strong data-pro-badge>DEMO</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- NARZĘDZIA -->
+    <section id="narzedzia" class="section" aria-label="Lista narzędzi">
+      <div class="container">
+        <div class="section-head">
+          <h2>Narzędzia</h2>
+          <p class="muted">Kliknij narzędzie. Część jest w DEMO, część w PRO (blokada włączona).</p>
+        </div>
+
+        <div class="cards-grid cards-3">
+
+          <!-- 1: DEMO -->
+          <a class="card card-link" href="#nav-classic" aria-label="Tradycyjna nawigacja (DEMO)">
+            <h3>Tradycyjna nawigacja (DEMO)</h3>
+            <p>
+              Kurs rzeczywisty/magnetyczny, poprawki deklinacji i dewiacji, dryf/znos, ETA.
+              Wersja demo — działa od razu.
+            </p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <!-- 2: PRO -->
+          <a class="card card-link" href="#logbook" data-access="pro" aria-label="Elektroniczny dziennik pokładowy (PRO)">
+            <h3>Elektroniczny dziennik pokładowy (PRO)</h3>
+            <p>
+              Wpisy godzinowe, pozycja, kurs, prędkość, pogoda, zdarzenia + raport rejsu PDF.
+            </p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <!-- 3: PRO -->
+          <a class="card card-link" href="#course-planner" data-access="pro" aria-label="Planer kursu (PRO)">
+            <h3>Planer kursu (PRO)</h3>
+            <p>
+              Trasa punkt–punkt, kursy między waypointami, dystans, ETA i poprawki.
+            </p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <!-- 4: PRO -->
+          <a class="card card-link" href="#checklist" data-access="pro" aria-label="Checklista + kalkulator zapasów (PRO)">
+            <h3>Checklista + kalkulator zapasów (PRO)</h3>
+            <p>
+              Wyposażenie, dokumenty, paliwo, woda, rezerwa bezpieczeństwa — bez stresu przed rejsem.
+            </p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <!-- 5: PRO -->
+          <a class="card card-link" href="#apparent-wind" data-access="pro" aria-label="Kalkulator wiatru pozornego (PRO)">
+            <h3>Kalkulator wiatru pozornego (PRO)</h3>
+            <p>
+              Wiatr rzeczywisty ↔ pozorny: kurs, prędkość, zależności nawigacyjne (praktyczne i egzaminacyjne).
+            </p>
+            <span class="card-cta">Otwórz →</span>
+          </a>
+
+          <!-- 6: przyszłe -->
+          <a class="card card-link" href="#soon" aria-label="Pozostałe narzędzia (wkrótce)">
+            <h3>Więcej narzędzi (wkrótce)</h3>
+            <p>
+              Pływy i prądy, planer wacht, generator zadań, kotwiczenie, konwertery jednostek i więcej.
+            </p>
+            <span class="card-cta">Zobacz plan →</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJE NARZĘDZI (na razie jako opisy / miejsce pod aplikacje) -->
+    <section class="section section-tight" aria-label="Narzędzia – szczegóły">
+      <div class="container">
+        <div class="cards-grid cards-2">
+
+          <article id="nav-classic" class="card">
+            <h3>Tradycyjna nawigacja (DEMO)</h3>
+            <p class="muted">
+              To jest sekcja DEMO. Jeśli masz osobny plik narzędzia, podmień link w kafelku.
+            </p>
+            <ul>
+              <li>Kurs magnetyczny i rzeczywisty</li>
+              <li>Deklinacja i dewiacja</li>
+              <li>Dryf i znos</li>
+              <li>ETA / czas / dystans</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="/oprogramowanie.html">OK, działa</a>
+              <a class="btn btn-ghost" href="#pakiety">Chcę PRO</a>
+            </div>
+          </article>
+
+          <article id="logbook" class="card">
+            <h3>Elektroniczny dziennik pokładowy (PRO)</h3>
+            <p class="muted">
+              Dostęp PRO: wpisy godzinowe, log rejsu i raport PDF. (Klik w kafelek jest blokowany, jeśli nie masz PRO.)
+            </p>
+            <ul>
+              <li>Pozycja, kurs, prędkość, warunki</li>
+              <li>Zdarzenia i uwagi</li>
+              <li>Raport rejsu PDF</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="#pakiety">Odblokuj PRO</a>
+              <a class="btn btn-ghost" href="#install">Instalacja PWA</a>
+            </div>
+          </article>
+
+          <article id="course-planner" class="card">
+            <h3>Planer kursu (PRO)</h3>
+            <p class="muted">Dostęp PRO: planowanie trasy waypoint–waypoint z poprawkami.</p>
+            <ul>
+              <li>Waypointy, dystans, ETA</li>
+              <li>Poprawki kursu</li>
+              <li>Przygotowanie rejsu offline</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="#pakiety">Odblokuj PRO</a>
+            </div>
+          </article>
+
+          <article id="checklist" class="card">
+            <h3>Checklista + kalkulator zapasów (PRO)</h3>
+            <p class="muted">Dostęp PRO: checklisty i wyliczenia zapasów z rezerwą bezpieczeństwa.</p>
+            <ul>
+              <li>Wyposażenie i dokumenty</li>
+              <li>Paliwo / woda / jedzenie</li>
+              <li>Rezerwa bezpieczeństwa</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="#pakiety">Odblokuj PRO</a>
+            </div>
+          </article>
+
+          <article id="apparent-wind" class="card">
+            <h3>Kalkulator wiatru pozornego (PRO)</h3>
+            <p class="muted">Dostęp PRO: obliczenia AV z TV w nawigacyjnym ujęciu.</p>
+            <ul>
+              <li>Wiatr rzeczywisty ↔ pozorny</li>
+              <li>Kurs i prędkość</li>
+              <li>Relacje nawigacyjne</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="#pakiety">Odblokuj PRO</a>
+            </div>
+          </article>
+
+          <article id="soon" class="card">
+            <h3>Roadmapa narzędzi</h3>
+            <p class="muted">Dodamy kolejne moduły bez przebudowy strony — to będzie rosnąć jako pakiet.</p>
+            <ul>
+              <li>Pływy i prądy</li>
+              <li>Planer wacht</li>
+              <li>Kalkulator kotwiczenia</li>
+              <li>Konwertery jednostek</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PAKIETY -->
+    <section id="pakiety" class="section" aria-label="Pakiety i dostęp">
+      <div class="container">
+        <div class="section-head">
+          <h2>Demo vs PRO</h2>
+          <p class="muted">Teraz działa blokada „front-only” (test). W kolejnym kroku podłączymy płatności.</p>
+        </div>
+
+        <div class="cards-grid cards-3">
+          <article class="card">
+            <h3>DEMO</h3>
+            <p class="muted">Podstawowy dostęp do wybranych narzędzi.</p>
+            <ul>
+              <li>Tradycyjna nawigacja (DEMO)</li>
+              <li>Podgląd narzędzi PRO</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>PRO</h3>
+            <p class="muted">Pełny dostęp do wszystkich narzędzi.</p>
+            <ul>
+              <li>Dziennik pokładowy + PDF</li>
+              <li>Planer kursu</li>
+              <li>Checklisty + zapasy</li>
+              <li>Wiatr pozorny</li>
+            </ul>
+            <div class="weather-search-actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="#install">Zainstaluj PWA</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Jak będzie działać płatność?</h3>
+            <p class="muted">
+              Po zakupie użytkownik dostanie dostęp PRO (konto lub klucz). To podłączymy później — krok po kroku.
+            </p>
+            <ul>
+              <li>Prosty system dostępu</li>
+              <li>Odblokowanie narzędzi</li>
+              <li>Możliwe warianty: miesięcznie / lifetime</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALACJA -->
+    <section id="install" class="section section-tight" aria-label="Instalacja PWA">
+      <div class="container">
+        <div class="section-head">
+          <h2>Instalacja jako aplikacja (PWA)</h2>
+          <p class="muted">Działa w przeglądarce i po instalacji na telefonie. Instrukcje zależą od urządzenia.</p>
+        </div>
+
+        <div class="cards-grid cards-2">
+          <article class="card">
+            <h3>Android (Chrome)</h3>
+            <ol>
+              <li>Otwórz sailabc.com</li>
+              <li>Menu ⋮ → <strong>Dodaj do ekranu głównego</strong> lub <strong>Zainstaluj aplikację</strong></li>
+              <li>Gotowe — uruchamiasz jak zwykłą aplikację</li>
+            </ol>
+          </article>
+
+          <article class="card">
+            <h3>iPhone (Safari)</h3>
+            <ol>
+              <li>Otwórz sailabc.com w Safari</li>
+              <li>Udostępnij → <strong>Dodaj do ekranu początkowego</strong></li>
+              <li>Gotowe — skrót działa jak aplikacja</li>
+            </ol>
+          </article>
+        </div>
+
+        <div class="note">
+          Jeśli instalacja nie jest widoczna: strona musi działać po HTTPS oraz mieć manifest i service worker.
+          To dopniemy w kolejnym kroku.
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>sailABC</strong>
+          <p class="muted small">sailabc.com • Tools</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="/">Strona główna</a>
+          <a href="#narzedzia">Narzędzia</a>
+          <a href="#pakiety">Demo/PRO</a>
+        </div>
+
+        <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#site-nav');
+
+    function setNav(open) {
+      if (!toggle || !nav) return;
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('open', open);
+    }
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setNav(!isOpen);
+    });
+
+    nav?.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'A') setNav(false);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- BLOKADA DEMO/PRO -->
+  <script src="/access.js"></script>
 </body>
 </html>
