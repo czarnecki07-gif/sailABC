@@ -1,12 +1,20 @@
+/* sailabc.com — UI (mobile-first). Bez frameworków. */
+/* style.css — stabilny układ: HERO (lewo) + Pogoda (prawo), Tools nad poradnikami (lewo),
+   Poradniki (lewo) + Kursy (prawo) bez zmian po prawej, widoczne bez przewijania (jak wcześniej). */
+
 :root{
   --bg: #0b1220;
   --bg2: #0f1a2f;
+
+  --card: rgba(255,255,255,0.08);
+  --stroke: rgba(255,255,255,0.12);
 
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.68);
   --muted2: rgba(255,255,255,0.52);
 
   --accent: #19c4c6;
+  --accent2: #2563eb;
 
   --shadow: 0 20px 60px rgba(0,0,0,0.35);
   --radius: 18px;
@@ -63,7 +71,9 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   white-space:nowrap;border:0;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+   ========================= */
 .site-header{
   position: sticky;
   top:0;
@@ -72,6 +82,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(10,16,28,0.55);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+
 .header-inner{
   display:flex;
   align-items:center;
@@ -79,6 +90,8 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   gap:12px;
   padding:18px 0;
 }
+
+/* brand */
 .brand{
   display:flex;
   align-items:center;
@@ -96,6 +109,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   letter-spacing:0.2px;
 }
 
+/* nav toggle */
 .nav-toggle{
   appearance:none;
   border:1px solid rgba(255,255,255,0.12);
@@ -127,6 +141,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 .nav-toggle-lines::before{ top:1px; }
 .nav-toggle-lines::after{ bottom:1px; }
 
+/* nav */
 .site-nav{
   display:none;
   gap:8px;
@@ -145,6 +160,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   border-bottom: 1px solid rgba(255,255,255,0.08);
   max-width: none;
 }
+
 .nav-btn{
   font-size:14px;
   color: var(--muted);
@@ -162,6 +178,11 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 .nav-btn-ghost{ background: rgba(0,0,0,0.14); }
+.nav-btn-accent{
+  border-color: rgba(25,196,198,0.55);
+  background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
+  color:#041116;
+}
 .nav-sep{
   width:1px;
   height:26px;
@@ -169,40 +190,155 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   margin:0 6px;
 }
 
-/* HERO */
-.hero{ padding:34px 0 18px; }
+/* =========================
+   HERO / ABOVE THE FOLD
+   ========================= */
+.hero{
+  padding:34px 0 18px;
+}
 
-/* RZĄD 1: Portal + Pogoda */
+/* RZĄD 1: tekst + mała pogoda */
 .hero-row{
   display:grid;
   grid-template-columns: 1fr;
-  gap: 14px;
-  align-items: start;
-  margin-bottom: 14px;
+  gap:14px;
+  align-items:start;
 }
 
-.hero-copy{ padding: 10px 0; }
-.hero-copy h1{
-  font-size: clamp(30px, 4.8vw, 48px);
+.hero-copy{ padding:10px 0; }
+
+.hero h1{
+  font-size: clamp(28px, 4.5vw, 46px);
+  margin-bottom:10px;
   letter-spacing:-0.6px;
-  margin:0 0 10px;
 }
 .hero-lead{
   color: var(--muted);
   font-size:16px;
-  max-width:70ch;
-  margin:0;
+  max-width:62ch;
 }
 
-/* RZĄD 2: Poradniki + Kursy */
+/* pogoda mini (prawa kolumna) */
+.weather-mini{
+  padding:14px;
+}
+.weather-mini-title{
+  font-size:18px;
+  margin-bottom:10px;
+}
+.weather-mini-btn{
+  width:100%;
+  padding:12px 14px;
+}
+
+/* NOWE: tools promo nad poradnikami (lewa strona) */
+.tools-row{ margin: 10px 0 10px; }
+.tools-promo-card{
+  border:1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+  padding: 14px;
+}
+.tools-promo-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom: 8px;
+}
+.tools-title{
+  font-size:18px;
+  margin:0;
+  letter-spacing:-0.2px;
+}
+.tools-pill{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(25,196,198,0.35);
+  background: rgba(25,196,198,0.10);
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+}
+.tools-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.tools-mini{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 10px;
+  margin-top:12px;
+  color: rgba(255,255,255,0.78);
+  font-size:13px;
+}
+.tools-mini-item{
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.14);
+}
+
+/* RZĄD 2: poradniki + kursy */
 .catalog-row{
   display:grid;
   grid-template-columns: 1fr;
-  gap: 14px;
-  align-items: start;
+  gap:14px;
+  align-items:stretch;
+  width:100%;
 }
 
-/* Cards */
+/* LEWA: poradniki jako siatka chipów */
+.courses-guides{
+  display:grid;
+  gap:10px;
+  align-content:start;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* mobile */
+}
+.courses-guides .chip{
+  display:inline-flex;
+  justify-content:center;
+  width:100%;
+  white-space:normal;          /* ważne: nie obcina tekstu */
+  overflow:visible;
+  text-overflow:unset;
+  text-align:center;
+  line-height:1.2;
+  padding:10px 12px;           /* ciut większe, ale nadal chip */
+}
+
+/* PRAWA: kursy jako jedna kolumna dużych przycisków */
+.courses-paid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+  align-content:start;
+}
+
+/* =========================
+   SECTIONS / CARDS
+   ========================= */
+.section{ padding:26px 0; }
+.section-tight{ padding:18px 0; }
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.section-head h2{
+  font-size:22px;
+  letter-spacing:-0.25px;
+}
+
+.muted{ color: var(--muted); }
+.small{ font-size:12px; color: var(--muted); }
+
 .card{
   border:1px solid rgba(255,255,255,0.10);
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
@@ -210,23 +346,36 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   padding:16px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.22);
 }
+.card h3{ font-size:18px; }
+.card p{ color: var(--muted); }
 
-/* Mini pogoda (kompakt) */
-.weather-mini{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding: 12px 14px;
+.cards-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap: var(--gap);
 }
-.weather-mini-title{
-  font-size: 16px;
-  margin:0;
-  line-height:1.1;
-  white-space: nowrap;
+.cards-2{ grid-template-columns:1fr; }
+.cards-3{ grid-template-columns:1fr; }
+
+.card-link{
+  display:block;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(25,196,198,0.35);
+  background: linear-gradient(180deg, rgba(25,196,198,0.12), rgba(255,255,255,0.05));
+}
+.card-cta{
+  display:inline-block;
+  margin-top:8px;
+  color: rgba(25,196,198,0.95);
+  font-weight:800;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS / CHIPS
+   ========================= */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -246,10 +395,12 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(255,255,255,0.09);
   border-color: rgba(255,255,255,0.18);
 }
+.btn:active{ transform: translateY(0); }
 .btn:focus-visible{
   outline:3px solid rgba(25,196,198,0.35);
   outline-offset:2px;
 }
+
 .btn-primary{
   border-color: rgba(25,196,198,0.55);
   background: linear-gradient(180deg, rgba(25,196,198,0.95), rgba(25,196,198,0.72));
@@ -260,37 +411,24 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: linear-gradient(180deg, rgba(25,196,198,1), rgba(25,196,198,0.78));
   border-color: rgba(25,196,198,0.70);
 }
+
 .btn-ghost{ background: rgba(0,0,0,0.14); }
+.btn-full{ width:100%; }
 
-.weather-mini-btn{
-  padding: 10px 14px;
-  font-size: 14px;
-  border-radius: 12px;
-  white-space: nowrap;
-}
-
-/* Poradniki */
-.courses-guides{
-  display:grid;
-  gap:10px;
-  align-content:start;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-}
-.courses-guides .chip{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+/* duże przyciski kursów */
+.btn-big{
   width:100%;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  line-height: 1.15;
-  min-height: 46px;
-  padding: 10px 12px;
+  font-size:17px;
+  padding:15px 16px;
+  border-radius:14px;
+  justify-content:flex-start;
+  text-align:left;
+  white-space:normal;        /* ważne: nie obcina tekstu */
+  overflow:visible;
+  text-overflow:unset;
+  line-height:1.25;
 }
 
-/* Chip base */
 .chip{
   display:inline-block;
   font-size:13px;
@@ -307,56 +445,38 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   transform: translateY(-1px);
 }
 
-/* Kursy */
-.courses-paid{
-  display:grid;
-  gap:10px;
-  align-content:start;
-}
-.btn-big{
-  width:100%;
-  font-size:18px;
-  padding:18px 18px;
-  border-radius:16px;
-  justify-content:flex-start;
-  text-align:left;
-
-  /* mobile: 1 linia + ... */
-  white-space: nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-/* SEKCJE */
-.section{ padding:26px 0; }
-.section-tight{ padding:18px 0; }
-
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:14px;
-}
-.section-head h2{
-  font-size:22px;
-  letter-spacing:-0.25px;
-}
-.muted{ color: var(--muted); }
-.small{ font-size:12px; color: var(--muted); }
-
-/* WEATHER (duża sekcja) */
+/* =========================
+   WEATHER
+   ========================= */
 .weather-search{
   display:grid;
   gap:12px;
   margin-bottom:12px;
 }
+
+.field label{
+  display:block;
+  font-size:13px;
+  color: rgba(255,255,255,0.78);
+  margin-bottom:6px;
+}
+.field input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  outline:none;
+}
+
 .weather-search-actions{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
   align-items:center;
 }
+
 .weather-map{
   height:320px;
   width:100%;
@@ -366,6 +486,17 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   background: rgba(0,0,0,0.14);
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
+
+.leaflet-control-zoom a{
+  background: rgba(0,0,0,0.55) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border:1px solid rgba(255,255,255,0.18) !important;
+}
+.leaflet-control-zoom a:hover{
+  background: rgba(25,196,198,0.18) !important;
+  border-color: rgba(25,196,198,0.35) !important;
+}
+
 .note{
   margin-top:12px;
   color: var(--muted);
@@ -375,6 +506,7 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   border-radius:14px;
   padding:12px;
 }
+
 .panel-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -416,7 +548,16 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   font-size:13px;
 }
 
-/* FOOTER */
+/* większe ikonki pogody */
+.wx-ic{
+  font-size: 20px;
+  line-height: 1;
+  display:inline-block;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
 .site-footer{
   padding:26px 0 34px;
   border-top:1px solid rgba(255,255,255,0.08);
@@ -447,7 +588,9 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   color: var(--text);
 }
 
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (min-width: 720px){
   .site-nav{ display:flex; }
   .nav-toggle{ display:none; }
@@ -455,43 +598,42 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
 
   .hero{ padding:48px 0 22px; }
 
-  /* Portal + Pogoda obok siebie */
+  /* RZĄD 1: lewo/prawo */
   .hero-row{
-    grid-template-columns: 1fr minmax(320px, 420px);
-    gap: 18px;
-    align-items: start;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:22px;
+    align-items:start;
   }
+  .hero-panel{ align-self:start; }
 
-  /* Poradniki + kursy obok siebie */
-  .catalog-row{
-    grid-template-columns: 1fr minmax(420px, 460px);
-    gap: 18px;
-    align-items: start;
-  }
-
-  /* Poradniki gęściej */
-  .courses-guides{
-    grid-template-columns: repeat(3, minmax(220px, 1fr));
-  }
-
-  /* Kursy: 2 linie na desktop */
-  .btn-big{
-    white-space: normal;
-    text-overflow: clip;
-    overflow: hidden;
-    line-height: 1.15;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
+  .cards-grid{ grid-template-columns: repeat(2, 1fr); }
+  .cards-2{ grid-template-columns: repeat(2, 1fr); }
+  .cards-3{ grid-template-columns: repeat(3, 1fr); }
 
   .footer-inner{ grid-template-columns: 1.2fr 1fr auto; align-items:center; }
+
+  /* RZĄD 2: poradniki lewo / kursy prawo */
+  .catalog-row{
+    grid-template-columns: 1.35fr 0.65fr; /* lewa szerzej */
+    gap:16px;
+    align-items: stretch;
+  }
+
+  /* poradniki: 3 w rzędzie (jak chcesz) */
+  .courses-guides{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* kursy: trzymają się bliżej środka */
+  .courses-paid{
+    justify-items: stretch;
+  }
 }
 
 @media (min-width: 980px){
+  /* dalej 3 w rzędzie (bez upychania 4) */
   .courses-guides{
-    grid-template-columns: repeat(4, minmax(230px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -499,184 +641,8 @@ h1,h2,h3,h4{ line-height:1.15; margin:0 0 10px; }
   .weather-map{ height:340px; }
 }
 
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
   html{ scroll-behavior:auto; }
 }
-/* =========================
-   DESKTOP LAYOUT: 2 rzędy, 2 kolumny
-   - pogoda nie nachodzi na chipsy
-   - kursy zawsze w prawej kolumnie (obok poradników)
-   - poradniki limitujemy do kilku wierszy, żeby kursy były w "fold"
-   ========================= */
-
-@media (min-width: 720px){
-
-  /* 1) RZĄD 1: Portal + Pogoda — pogoda kompaktowa i nie rozpycha */
-  .hero-row{
-    align-items: start;
-  }
-
-  .hero-panel{
-    align-self: start;
-  }
-
-  .hero-panel .weather-mini{
-    height: 64px;                 /* kompakt */
-    padding: 10px 12px;
-    overflow: hidden;
-  }
-
-  .hero-panel .weather-mini-title{
-    margin: 0;
-    font-size: 16px;
-    line-height: 1;
-  }
-
-  /* 2) RZĄD 2: Poradniki + Kursy — wymuszamy kolumny obok siebie */
-  .catalog-row{
-    display: grid !important;
-    grid-template-columns: 1fr minmax(420px, 460px) !important;
-    gap: 18px !important;
-    align-items: start !important;
-  }
-
-  /* prawa kolumna nie może spaść pod spód */
-  .courses-paid{
-    align-self: start;
-  }
-
-  /* 3) Poradniki: nie mogą zjechać pod pogodę / nie mogą rozepchać wysokości całego folda */
-  .courses-guides{
-    align-self: start;
-    /* pokaż max kilka wierszy bez przewijania całej strony */
-    max-height: 250px;            /* dopasuj: 220–320 */
-    overflow: hidden;             /* reszta chipsów schowana */
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  /* żeby chipsy wyglądały równo w ograniczonej wysokości */
-  .courses-guides .chip{
-    min-height: 42px;
-    padding: 9px 12px;
-  }
-
-  /* 4) Kursy: czytelne i mieszczą się — trochę mniejsze, ale nadal “duże” */
-  .btn-big{
-    font-size: 16px;
-    padding: 14px 16px;
-    border-radius: 14px;
-  }
-
-  /* desktop: 2 linie max, żeby nie robić bardzo wysokich przycisków */
-  .btn-big{
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: clip;
-    line-height: 1.15;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-}
-@media (min-width: 720px){
-
-  /* 1) Poradniki: zawsze 3 w rzędzie */
-  .courses-guides{
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
-  /* 2) Kursy mniej w prawo: zwężamy prawą kolumnę i dajemy więcej miejsca lewemu blokowi */
-  .catalog-row{
-    grid-template-columns: 1.35fr 0.65fr !important; /* było 1fr minmax(420px,460px) */
-    gap: 16px !important;
-  }
-
-  /* 3) Prawa kolumna (kursy) ma się dopasować i nie być “przyklejona” do prawej */
-  .courses-paid{
-    justify-self: start;          /* zamiast stretch do prawej krawędzi */
-    width: 100%;
-    max-width: 380px;             /* żeby wyglądało kompaktowo (zmień na 360–420 wg gustu) */
-  }
-}
-/* === FIX: nie ucinaj poradników + kursy bez zbędnego "zapasu" === */
-@media (min-width: 720px){
-
-  /* 1) Poradniki: usuń obcinanie (wcześniejszy max-height/overflow) */
-  .courses-guides{
-    max-height: none !important;
-    overflow: visible !important;
-
-    /* 3 w rzędzie */
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
-  /* chipy: pozwól na pełny tekst (2 linie max dla estetyki) */
-  .courses-guides .chip{
-    white-space: normal !important;
-    overflow: hidden !important;
-    text-overflow: clip !important;
-    line-height: 1.15;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;        /* max 2 linie, ale NIC nie ucinamy wysokością kontenera */
-    -webkit-box-orient: vertical;
-
-    min-height: 44px;
-    padding: 10px 12px;
-  }
-
-  /* 2) Kolumny: daj kursom mniej szerokości (żeby nie było wielkiej pustki) */
-  .catalog-row{
-    grid-template-columns: 1fr 380px !important; /* stała, sensowna szerokość dla kursów */
-    gap: 16px !important;
-  }
-
-  /* 3) Kursy: mniej "pasów", bardziej kompaktowo */
-  .courses-paid{
-    width: 100%;
-    max-width: 380px;
-    justify-self: start;
-    gap: 10px;
-  }
-
-  .courses-paid .btn-big{
-    padding: 12px 14px !important;
-    font-size: 15px !important;
-    border-radius: 14px !important;
-
-    /* 2 linie, ale bez nadmiernej wysokości */
-    white-space: normal !important;
-    overflow: hidden !important;
-    text-overflow: clip !important;
-    line-height: 1.15;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-}
-
-/* Opcjonalnie: na bardzo dużych ekranach jeszcze ciut węższa kolumna kursów */
-@media (min-width: 1100px){
-  .catalog-row{ grid-template-columns: 1fr 360px !important; }
-  .courses-paid{ max-width: 360px; }
-}
-/* FIX: poradniki nie mogą być ucinane (kasuje stare max-height/overflow) */
-@media (min-width: 720px){
-  .courses-guides{
-    max-height: none !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  /* czasem ucinanie siedzi na rodzicu — zdejmujemy je też tam */
-  .catalog-row,
-  .hero,
-  .hero-fold,
-  .container{
-    overflow: visible;
-  }
-}
-.wx-ic{ font-size: 26px; line-height: 1; }
