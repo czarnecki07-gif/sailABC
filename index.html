@@ -11,115 +11,272 @@
 </head>
 
 <body>
-<a class="skip-link" href="#main">Przejdź do treści</a>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="/">
-      <img class="brand-logo" src="logo.png" alt="sailABC.com" />
-      <span class="brand-name">sailABC.com</span>
-    </a>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
+        </div>
+      </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false">
-      <span class="nav-toggle-lines"></span>
-    </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
 
-    <nav id="site-nav" class="site-nav">
-      <a class="nav-btn" href="/abc.html">ABC</a>
-      <a class="nav-btn" href="/quizy.html">Testy</a>
-      <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
-      <a class="nav-btn" href="/mariny.html">Mariny</a>
-      <a class="nav-btn" href="/spolecznosc.html">Społeczność</a>
-      <a class="nav-btn nav-btn-accent" href="/oprogramowanie.html">Narzędzia</a>
-    </nav>
-  </div>
-</header>
+      <nav id="site-nav" class="site-nav nav-buttons" aria-label="Główna nawigacja">
+        <a class="nav-btn" href="/abc.html">ABC</a>
+        <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
+        <a class="nav-btn" href="/wolna-koja.html">Wolna koja</a>
+        <a class="nav-btn" href="/mariny.html">Wolne miejsca w marinach</a>
+        <a class="nav-btn" href="/spolecznosc.html">Społeczność</a>
+        <a class="nav-btn" href="/kontakt.html">Kontakt i FAQ</a>
 
-<main id="main">
+        <span class="nav-sep" aria-hidden="true"></span>
 
-<section class="hero">
-  <div class="container">
+        <a class="nav-btn nav-btn-ghost" href="/gielda-jachtow.html">Giełda jachtów</a>
+        <a class="nav-btn nav-btn-ghost" href="/gielda-osprzetu.html">Giełda osprzętu</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-regat.html">Agregator regat</a>
+        <a class="nav-btn nav-btn-ghost" href="/agregator-ofert.html">Agregator ofert</a>
+        <a class="nav-btn nav-btn-ghost" href="/artykuly.html">Artykuły i poradniki</a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="hero-row">
-      <div>
-        <h1>Portal dla żeglarzy</h1>
-        <p class="hero-lead">
-          Edukacja, praktyka i nowoczesne narzędzia żeglarskie w jednym miejscu.
-        </p>
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero hero-fold" aria-label="Start">
+      <div class="container">
+
+        <!-- RZĄD 1: Portal dla żeglarzy (lewo) + Pogoda (prawo) -->
+        <div class="hero-row">
+          <div class="hero-copy">
+            <h1>Portal dla żeglarzy</h1>
+            <p class="hero-lead">
+              sailABC wspiera edukację i praktykę żeglarską: ABC, testy, poradniki, narzędzia, wolna koja,
+              mariny oraz rozbudowana prognoza pogody dla żeglugi.
+            </p>
+          </div>
+
+          <aside class="hero-panel" aria-label="Szybki dostęp do pogody">
+            <div class="card weather-mini">
+              <h2 class="weather-mini-title">Pogoda dla żeglarzy</h2>
+              <a class="btn btn-primary weather-mini-btn" href="#pogoda">Otwórz pogodę</a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- RZĄD 2: Poradniki (lewo) + Kursy (prawo) -->
+        <div class="catalog-row" aria-label="Poradniki i kursy">
+
+          <!-- LEWA KOLUMNA -->
+          <div class="catalog-left">
+
+            <!-- MAŁY, ELEGANCKI PANEL TOOLS (nad poradnikami) -->
+            <section class="tools-compact" aria-label="sailABC Tools">
+              <div class="tools-compact__top">
+                <h2 class="tools-compact__title">sailABC Tools</h2>
+                <span class="tools-compact__badge">Offline / PWA</span>
+              </div>
+
+              <p class="tools-compact__text">
+                Narzędzia do realnej nawigacji i prowadzenia rejsu: obliczenia kursów i poprawek, planowanie trasy,
+                dziennik pokładowy oraz checklisty. Pomagają także w sytuacji braku internetu lub GPS.
+              </p>
+
+              <div class="tools-compact__cta">
+                <a class="btn btn-primary" href="/oprogramowanie.html">Otwórz narzędzia</a>
+                <a class="btn btn-ghost" href="/oprogramowanie.html#pakiety">Wersja PRO</a>
+              </div>
+            </section>
+
+            <!-- PORADNIKI -->
+            <div class="courses-guides" aria-label="Poradniki">
+              <a class="chip chip-link" href="/wezly.html">Węzły</a>
+              <a class="chip chip-link" href="/manewry.html">Manewry</a>
+              <a class="chip chip-link" href="/nawigacja.html">Nawigacja</a>
+              <a class="chip chip-link" href="/praca-zagli.html">Praca żagli</a>
+              <a class="chip chip-link" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
+              <a class="chip chip-link" href="/oprogramowanie.html">Oprogramowanie dla żeglarzy</a>
+
+              <a class="chip chip-link" href="/przepisy-i-znaki.html">Przepisy i znaki (COLREG + śródlądzie)</a>
+              <a class="chip chip-link" href="/meteo.html">Meteo i interpretacja prognoz</a>
+              <a class="chip chip-link" href="/locja.html">Locja i wejścia do portów</a>
+              <a class="chip chip-link" href="/cumowanie-i-kotwiczenie.html">Cumowanie i kotwiczenie</a>
+              <a class="chip chip-link" href="/planowanie-trasy-i-wachty.html">Planowanie trasy i wachty</a>
+              <a class="chip chip-link" href="/vhf-procedury.html">Komunikacja VHF / procedury radiowe</a>
+              <a class="chip chip-link" href="/pierwsza-pomoc-na-wodzie.html">Pierwsza pomoc na wodzie</a>
+              <a class="chip chip-link" href="/awaryjne-sytuacje.html">Awaryjne sytuacje (MOB, pożar, wyciek, uszkodzenie steru)</a>
+              <a class="chip chip-link" href="/silnik-serwis.html">Silnik i podstawy serwisu</a>
+              <a class="chip chip-link" href="/takielunek-olinowanie.html">Takielunek i olinowanie (kontrola, wymiana)</a>
+              <a class="chip chip-link" href="/elektronika-pokladowa.html">Elektronika pokładowa (AIS, radar, autopilot)</a>
+              <a class="chip chip-link" href="/energia-na-jachcie.html">Energia na jachcie (akumulatory, ładowanie, solary)</a>
+              <a class="chip chip-link" href="/srodki-ratunkowe.html">Środki ratunkowe i dobór kamizelek</a>
+              <a class="chip chip-link" href="/checklisty.html">Lista check-list (przed wyjściem / po rejsie / zimowanie)</a>
+              <a class="chip chip-link" href="/rejs-morski-vs-srodladowy.html">Rejs morski vs śródlądowy — różnice</a>
+              <a class="chip chip-link" href="/praktyka-kapitanska.html">Praktyka kapitańska (briefing, podział ról)</a>
+              <a class="chip chip-link" href="/pakowanie.html">Pakowanie i wyposażenie załogi</a>
+              <a class="chip chip-link" href="/dziennik-jachtowy.html">Dziennik jachtowy — jak prowadzić</a>
+              <a class="chip chip-link" href="/etykieta-marina.html">Etykieta i dobre praktyki w marinie</a>
+              <a class="chip chip-link" href="/nawigacja-nocna.html">Nawigacja nocna</a>
+              <a class="chip chip-link" href="/ograniczona-widzialnosc.html">Nawigacja w ograniczonej widzialności</a>
+              <a class="chip chip-link" href="/elektroniczna-vs-papierowa.html">Nawigacja elektroniczna vs papierowa — procedury awaryjne</a>
+            </div>
+
+          </div>
+
+          <!-- PRAWA KOLUMNA: KURSY (bez zmian) -->
+          <div class="courses-paid" aria-label="Kursy (płatne)">
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/zeglarz-jachtowy" target="_blank" rel="noopener">Żeglarz jachtowy – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/jachtowy-sternik-morski" target="_blank" rel="noopener">Jachtowy sternik morski – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/sternik-motorowodny" target="_blank" rel="noopener">Sternik motorowodny – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/motorowodny-sternik-morski" target="_blank" rel="noopener">Motorowodny sternik morski – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/nawigacja-elektroniczna" target="_blank" rel="noopener">Obsługa nawigacji elektronicznej – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-src" target="_blank" rel="noopener">Operator SRC – kurs</a>
+            <a class="btn btn-primary btn-big" href="https://TWOJ-LINK-FABRYKA-KURSOW/operator-lrc" target="_blank" rel="noopener">Operator LRC – kurs</a>
+          </div>
+
+        </div>
+
       </div>
+    </section>
 
-      <aside class="hero-panel">
-        <div class="card weather-mini">
-          <h2>Pogoda dla żeglarzy</h2>
-          <a class="btn btn-primary btn-full" href="#pogoda">Otwórz pogodę</a>
-        </div>
-      </aside>
-    </div>
-
-    <!-- ELEGANCKI PANEL TOOLS -->
-    <div class="tools-row">
-      <section class="tools-panel">
-
-        <div class="tools-panel__head">
-          <h2>sailABC Tools</h2>
-          <span class="tools-tag">Offline / Instaluj jak aplikację</span>
+    <!-- POGODA -->
+    <section class="section section-tight" id="pogoda" aria-label="Pogoda">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pogoda i warunki na wodzie</h2>
+          <p class="muted">Wpisz miejsce albo kliknij na mapie. Pokażemy warunki aktualne, 24 godziny i 7 dni.</p>
         </div>
 
-        <p class="tools-lead">
-          Profesjonalne narzędzia wspierające realną nawigację i prowadzenie rejsu —
-          również bez dostępu do internetu lub sygnału GPS.
-        </p>
+        <div class="cards-grid cards-2">
+          <article class="card">
+            <h3>Wybierz miejsce</h3>
 
-        <div class="tools-grid">
-          <div>
-            <h4>Nawigacja klasyczna</h4>
-            <p>Kursy, poprawki, znos, ETA — w przejrzystej formie krok po kroku.</p>
-          </div>
+            <div class="weather-search">
+              <div class="field" style="margin:0;">
+                <label for="place">Miejsce</label>
+                <input id="place" type="text" placeholder="np. Zalew Szczeciński / Szczecin / Hel / Giżycko" />
+              </div>
 
-          <div>
-            <h4>Dziennik pokładowy</h4>
-            <p>Wpisy godzinowe + raport rejsu PDF gotowy do wysłania.</p>
-          </div>
+              <div class="weather-search-actions">
+                <button class="btn btn-ghost" id="btnSearchPlace" type="button">Szukaj na mapie</button>
+                <button class="btn btn-primary" id="btnCheckWeather" type="button" disabled>Sprawdź pogodę</button>
+              </div>
 
-          <div>
-            <h4>Planer kursu</h4>
-            <p>Waypointy, dystans, czas i poprawki — przygotowanie trasy offline.</p>
-          </div>
+              <div class="muted small" id="pickedInfo">Kliknij na mapie albo wyszukaj miejsce.</div>
+            </div>
+
+            <div id="weatherMap" class="weather-map" aria-label="Mapa pogody"></div>
+
+            <div class="note" id="weatherNote" style="margin-top:12px;">
+              Kliknij na mapie lub wyszukaj miejscowość/akwen.
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Aktualne warunki</h3>
+
+            <div class="panel-grid" style="margin-top:8px;">
+              <div class="kpi">
+                <span class="kpi-label">Wiatr</span>
+                <span class="kpi-value" id="wWind">—</span>
+                <span class="kpi-sub" id="wWindSub">—</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Temperatura</span>
+                <span class="kpi-value" id="wTemp">—</span>
+                <span class="kpi-sub" id="wTime">—</span>
+              </div>
+            </div>
+
+            <h3 style="margin-top:14px;">Prognoza 24 godziny</h3>
+            <p class="muted" id="hourlyMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 24h" tabindex="0">
+              <table class="forecast-table" aria-describedby="hourlyMeta">
+                <thead>
+                  <tr>
+                    <th>Godzina</th>
+                    <th>Warunki</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast24"></tbody>
+              </table>
+            </div>
+
+            <h3 style="margin-top:14px;">Prognoza 7 dni</h3>
+            <p class="muted" id="forecastMeta">Wybierz punkt na mapie lub wpisz miejsce.</p>
+
+            <div class="forecast-table-wrap" role="region" aria-label="Prognoza 7 dni" tabindex="0">
+              <table class="forecast-table" aria-describedby="forecastMeta">
+                <thead>
+                  <tr>
+                    <th>Dzień</th>
+                    <th>Warunki</th>
+                    <th>Wiatr</th>
+                    <th>Temp.</th>
+                    <th>Opad</th>
+                  </tr>
+                </thead>
+                <tbody id="forecast7"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>sailABC</strong>
+          <p class="muted small">sailabc.com • Twój portal żeglarski</p>
         </div>
 
-        <div class="tools-actions">
-          <a class="btn btn-primary" href="/oprogramowanie.html">Otwórz narzędzia</a>
-          <a class="btn btn-ghost" href="/oprogramowanie.html#pakiety">Wersja PRO</a>
-          <a class="btn" href="/oprogramowanie.html#install">Instalacja</a>
+        <div class="footer-links">
+          <a href="/abc.html">ABC</a>
+          <a href="#pogoda">Pogoda</a>
+          <a href="/kontakt.html">Kontakt</a>
         </div>
 
-      </section>
-    </div>
+        <div class="muted small">© <span id="year"></span> sailABC • GitHub Pages</div>
+      </div>
+    </footer>
 
-  </div>
-</section>
+  </main>
 
-<section id="pogoda" class="section">
-  <div class="container">
-    <h2>Pogoda i warunki na wodzie</h2>
-    <div id="weatherMap" class="weather-map"></div>
-  </div>
-</section>
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#site-nav');
 
-<footer class="site-footer">
-  <div class="container">
-    <small>© <span id="year"></span> sailABC</small>
-  </div>
-</footer>
+    function setNav(open) {
+      if (!toggle || !nav) return;
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('open', open);
+    }
 
-</main>
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setNav(!isOpen);
+    });
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    nav?.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'A') setNav(false);
+    });
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="weather.js?v=6"></script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="weather.js?v=6"></script>
 </body>
 </html>
