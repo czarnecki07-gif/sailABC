@@ -2,6 +2,9 @@
    PANCERNA wersja:
    - event delegation (łapie klik nawet gdy DOM się zmienia)
    - zawsze pokaże modal albo alert (nie będzie "nic się nie dzieje")
+   + DOPIĘTE:
+   - bramka na poziomie strony: <body data-require="pro">
+   - aktywacja kodu z linku: ?kod=SABC-BETA-0001
 */
 
 (() => {
@@ -121,7 +124,7 @@
             font-weight:800; text-decoration:none;
           ">Mam kod testera</a>
 
-          <a href="#pakiety" id="accessModalPlans" style="
+          <a href="/oprogramowanie.html#pakiety" id="accessModalPlans" style="
             display:inline-flex; align-items:center; justify-content:center;
             padding:12px 14px; border-radius:14px;
             border:1px solid rgba(25,196,198,0.55);
@@ -152,6 +155,30 @@
     } catch {
       alert("To narzędzie jest w wersji PRO. Przejdź do sekcji pakietów lub użyj kodu testera.");
     }
+  }
+
+  // --- NOWE: aktywacja kodu z linku ?kod=... ---
+  function activateFromQuery() {
+    const params = new URLSearchParams(location.search);
+    const code = normalizeCode(params.get("kod"));
+    if (!code) return false;
+
+    if (!ACCESS.testerCodes.has(code)) {
+      alert("Niepoprawny kod testera.");
+      return false;
+    }
+
+    // już aktywny? zostaw
+    if (isProActive()) return true;
+
+    const startedAt = nowMs();
+    const expiresAt = startedAt + daysToMs(ACCESS.testerDays);
+    writeState({ code, startedAt, expiresAt });
+
+    alert("Aktywowano TESTER PRO na 30 dni.");
+    // czyścimy parametr z URL, żeby nie aktywować w kółko
+    history.replaceState({}, "", location.pathname + location.hash);
+    return true;
   }
 
   // --- tester controls ---
@@ -205,20 +232,36 @@
       const a = e.target?.closest?.('a[data-access="pro"]');
       if (!a) return;
 
-      if (isProActive()) return; // PRO aktywne => normalnie przechodzimy
+      if (isProActive()) return;
 
-      // brak PRO => blokujemy i pokazujemy modal
       e.preventDefault();
       openModalOrAlert();
     }, true);
   }
 
+  // --- NOWE: bramka na poziomie strony ---
+  function gatePageIfRequired() {
+    const req = document.body?.dataset?.require;
+    if (req !== "pro") return;
+
+    if (isProActive()) return;
+
+    // pokaż modal i wróć do narzędzi
+    openModalOrAlert();
+
+    // bezpieczeństwo: jeśli ktoś zamknie modal i tak przekierujemy po chwili
+    setTimeout(() => {
+      if (!isProActive()) location.href = "/oprogramowanie.html#pakiety";
+    }, 900);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    activateFromQuery();      // nowa funkcja
     updateBadge();
     bindGating();
     bindTesterControls();
+    gatePageIfRequired();     // nowa funkcja
   });
 
-  // pomocniczo: żebyś mógł sprawdzić, czy plik się załadował
   window.__sailabc_access_loaded = true;
 })();
