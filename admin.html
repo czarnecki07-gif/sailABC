@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel admina – sailABC</title>
+  <meta name="description" content="Panel admina sailABC – nadawanie PRO jednym kliknięciem." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
+        </div>
+      </a>
+
+      <nav class="site-nav nav-buttons" aria-label="Nawigacja">
+        <a class="nav-btn nav-btn-ghost" href="/oprogramowanie.html">Narzędzia</a>
+        <a class="nav-btn nav-btn-accent" href="/login.html">Logowanie</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container" style="max-width: 760px;">
+
+      <div class="section-head">
+        <h1>Panel admina</h1>
+        <p class="muted">Szybkie nadawanie dostępu TESTER / PRO oraz cofanie do DEMO.</p>
+      </div>
+
+      <div class="cards-grid cards-2">
+        <article class="card">
+          <h3>Status</h3>
+          <div class="note" id="statusBox">Sprawdzam sesję…</div>
+          <div class="muted small" id="statusDetails" style="margin-top:10px;"></div>
+        </article>
+
+        <article class="card">
+          <h3>Akcje „1 klik”</h3>
+
+          <div class="field">
+            <label for="email">Email użytkownika</label>
+            <input id="email" type="email" autocomplete="email" placeholder="np. tester@domena.pl" />
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
+            <button class="btn btn-primary" id="btnPro30" type="button">Nadaj PRO 30 dni</button>
+            <button class="btn btn-primary" id="btnPro365" type="button">Nadaj PRO 365 dni</button>
+            <button class="btn btn-ghost" id="btnProLife" type="button">Nadaj PRO bezterminowo</button>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
+            <button class="btn btn-ghost" id="btnTester" type="button">Nadaj TESTER</button>
+            <button class="btn btn-ghost" id="btnDemo" type="button">Cofnij do DEMO</button>
+          </div>
+
+          <div class="muted small" id="result" style="margin-top:12px;"></div>
+        </article>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>Uwaga (ważne)</h3>
+        <ul class="muted">
+          <li>Musisz być zalogowany jako admin (email na liście adminów w konfiguracji serwera).</li>
+          <li>PRO „czasowe” zapisuje datę wygaśnięcia. PRO „bezterminowe” zapisuje expiresAt = null.</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const statusBox = document.getElementById("statusBox");
+    const statusDetails = document.getElementById("statusDetails");
+    const result = document.getElementById("result");
+    const emailEl = document.getElementById("email");
+
+    const btnPro30 = document.getElementById("btnPro30");
+    const btnPro365 = document.getElementById("btnPro365");
+    const btnProLife = document.getElementById("btnProLife");
+    const btnTester = document.getElementById("btnTester");
+    const btnDemo = document.getElementById("btnDemo");
+
+    const nowMs = () => Date.now();
+    const daysToMs = (d) => d * 24 * 60 * 60 * 1000;
+
+    function setResult(msg) {
+      result.textContent = msg || "";
+    }
+
+    function getEmail() {
+      return String(emailEl.value || "").trim().toLowerCase();
+    }
+
+    async function apiMe() {
+      const r = await fetch("/api/me", { credentials: "include" });
+      if (!r.ok) throw new Error("Nie mogę pobrać /api/me.");
+      return await r.json();
+    }
+
+    async function setPlan(email, plan, expiresAt, note) {
+      const r = await fetch("/api/admin/set-plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, plan, expiresAt, note })
+      });
+
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || "Błąd admin/set-plan.");
+      return data;
+    }
+
+    async function init() {
+      try {
+        const me = await apiMe();
+
+        if (!me.authenticated) {
+          statusBox.textContent = "Nie jesteś zalogowany.";
+          statusDetails.innerHTML = 'Wejdź w <a href="/login.html">logowanie</a>, a potem wróć tutaj.';
+          disableAll(true);
+          return;
+        }
+
+        statusBox.textContent = "Zalogowano.";
+        statusDetails.textContent = `Twoje konto: ${me.email} • plan: ${String(me.plan).toUpperCase()}`;
+
+        // Uprawnienia admina weryfikuje serwer na /api/admin/set-plan.
+        disableAll(false);
+      } catch (e) {
+        statusBox.textContent = "Błąd połączenia /api/me.";
+        statusDetails.textContent = String(e.message || e);
+        disableAll(true);
+      }
+    }
+
+    function disableAll(disabled) {
+      [btnPro30, btnPro365, btnProLife, btnTester, btnDemo].forEach(b => b.disabled = disabled);
+    }
+
+    async function handle(action) {
+      setResult("");
+      const email = getEmail();
+      if (!email) return setResult("Wpisz email użytkownika.");
+
+      try {
+        disableAll(true);
+
+        if (action === "pro30") {
+          const expiresAt = nowMs() + daysToMs(30);
+          await setPlan(email, "pro", expiresAt, "admin: pro 30d");
+          setResult("OK: nadano PRO na 30 dni.");
+        }
+
+        if (action === "pro365") {
+          const expiresAt = nowMs() + daysToMs(365);
+          await setPlan(email, "pro", expiresAt, "admin: pro 365d");
+          setResult("OK: nadano PRO na 365 dni.");
+        }
+
+        if (action === "prolife") {
+          await setPlan(email, "pro", null, "admin: pro lifetime");
+          setResult("OK: nadano PRO bezterminowo.");
+        }
+
+        if (action === "tester") {
+          await setPlan(email, "tester", null, "admin: tester");
+          setResult("OK: nadano TESTER.");
+        }
+
+        if (action === "demo") {
+          await setPlan(email, "demo", null, "admin: revoke");
+          setResult("OK: cofnięto do DEMO.");
+        }
+
+      } catch (e) {
+        setResult("BŁĄD: " + (e.message || e));
+      } finally {
+        disableAll(false);
+      }
+    }
+
+    btnPro30.addEventListener("click", () => handle("pro30"));
+    btnPro365.addEventListener("click", () => handle("pro365"));
+    btnProLife.addEventListener("click", () => handle("prolife"));
+    btnTester.addEventListener("click", () => handle("tester"));
+    btnDemo.addEventListener("click", () => handle("demo"));
+
+    init();
+  </script>
+</body>
+</html>
