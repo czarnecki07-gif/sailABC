@@ -65,7 +65,6 @@
           <div class="hero-links-row">
             <a class="chip chip-link" href="#narzedzia">Zobacz narzędzia</a>
             <a class="chip chip-link" href="#tester">Kod testera</a>
-            <a class="chip chip-link" href="#pakiety">Demo / PRO</a>
             <a class="chip chip-link" href="#install">Instalacja (PWA)</a>
           </div>
         </div>
@@ -74,12 +73,12 @@
           <div class="panel-card">
             <h2 style="margin-bottom:8px;">Szybki start</h2>
             <p class="muted" style="margin-bottom:12px;">
-              Otwórz narzędzia i sprawdź DEMO. Dostęp PRO odblokowuje pełne funkcje.
+              Otwórz narzędzia i korzystaj online lub po instalacji offline.
             </p>
 
             <div class="weather-search-actions" style="margin:0;">
               <a class="btn btn-primary" href="#narzedzia">Otwórz narzędzia</a>
-              <a class="btn btn-ghost" href="#pakiety">Odblokuj PRO</a>
+              <a class="btn btn-ghost" href="/moje-konto.html">Moje konto</a>
               <button class="btn" id="btnInstallPwa" type="button" hidden>Zainstaluj aplikację</button>
             </div>
 
@@ -91,10 +90,109 @@
       </div>
     </section>
 
-    <!-- RESZTA STRONY BEZ ZMIAN -->
-    <!-- (narzędzia, pakiety, instalacja, roadmap itd. – dokładnie jak w Twoim oryginale) -->
+    <!-- NARZĘDZIA -->
+    <section id="narzedzia" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Narzędzia</h2>
+          <p class="muted">Poniżej są linki do narzędzi. Jeśli widzisz PRO i jesteś zalogowany – powinno działać.</p>
+        </div>
 
-    <!-- Tu zostaje CAŁA dalsza zawartość Twojego pliku bez zmian -->
+        <div class="cards-grid cards-2">
+          <article class="card">
+            <h3>Nawigacja klasyczna</h3>
+            <p class="muted">Narzędzie nawigacyjne do pracy „tradycyjnej” – wsparcie w sytuacjach bez zasięgu.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="tools-nawigacja.html" data-access="pro">Otwórz (PRO)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Dziennik pokładowy</h3>
+            <p class="muted">Prosty dziennik do wpisów i organizacji rejsu.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="tools-dziennik.html" data-access="pro">Otwórz (PRO)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Planer kursu</h3>
+            <p class="muted">Planowanie kursu i podstawowe obliczenia na trasie.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="tools-planer.html" data-access="pro">Otwórz (PRO)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Kalkulator wiatru</h3>
+            <p class="muted">Szybkie obliczenia i przeliczenia związane z wiatrem.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="tools-wiatr.html" data-access="pro">Otwórz (PRO)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Checklista</h3>
+            <p class="muted">Lista kontrolna przed rejsem / w trakcie.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="tools-checklista.html" data-access="pro">Otwórz (PRO)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Moje konto</h3>
+            <p class="muted">Sprawdź plan (DEMO/TESTER/PRO) i wyloguj się.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-ghost" href="/moje-konto.html">Przejdź</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTER -->
+    <section id="tester" class="section">
+      <div class="container" style="max-width:760px;">
+        <div class="section-head">
+          <h2>Kod testera</h2>
+          <p class="muted">Jeśli masz kod testera, możesz aktywować dostęp (lokalnie) na 30 dni.</p>
+        </div>
+
+        <div class="card">
+          <div class="field">
+            <label for="testerCode">Kod testera</label>
+            <input id="testerCode" type="text" placeholder="np. SABC-BETA-0001" />
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <button class="btn btn-primary" id="btnActivateTester" type="button">Aktywuj TESTER</button>
+            <button class="btn btn-ghost" id="btnDeactivateTester" type="button">Wyłącz TESTER</button>
+          </div>
+
+          <div id="testerInfo" class="muted small" style="margin-top:12px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALACJA -->
+    <section id="install" class="section">
+      <div class="container" style="max-width: 900px;">
+        <div class="section-head">
+          <h2>Instalacja (PWA)</h2>
+          <p class="muted">
+            Możesz zainstalować aplikację na telefonie/komputerze i korzystać offline.
+          </p>
+        </div>
+
+        <div class="card">
+          <ol class="muted" style="line-height:1.7;">
+            <li>Otwórz stronę w Chrome / Edge.</li>
+            <li>Kliknij „Zainstaluj aplikację” (jeśli się pojawi) lub z menu przeglądarki „Dodaj do ekranu głównego”.</li>
+            <li>Po instalacji uruchamiaj z ikony.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -117,15 +215,11 @@
       const t = e.target;
       if (t && t.tagName === 'A') setNav(false);
     });
-
-    document.getElementById('year')?.textContent = new Date().getFullYear();
   </script>
 
-  <!-- BLOKADA DEMO/PRO -->
-  <script src="access.js"></script>
-
-  <!-- Dynamiczny przycisk logowania -->
-  <script src="auth-ui.js"></script>
+  <!-- ACCESS + UI (cache-busting, żeby PWA nie brało starego) -->
+  <script src="access.js?v=7"></script>
+  <script src="auth-ui.js?v=7"></script>
 
   <!-- PWA -->
   <script src="pwa.js"></script>
