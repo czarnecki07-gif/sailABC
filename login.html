@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logowanie – sailABC</title>
+  <meta name="description" content="Logowanie do sailABC Tools – dostęp DEMO / TESTER / PRO." />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
+        </div>
+      </a>
+
+      <nav class="site-nav nav-buttons">
+        <a class="nav-btn nav-btn-accent" href="/">Strona główna</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container" style="max-width:520px;">
+
+      <div class="card">
+        <h1 style="margin-bottom:10px;">Logowanie / Rejestracja</h1>
+        <p class="muted" style="margin-bottom:18px;">
+          Zaloguj się, aby odblokować dostęp TESTER lub PRO.
+        </p>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Hasło</label>
+          <input id="password" type="password" autocomplete="current-password" required />
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button class="btn btn-primary" id="btnLogin" type="button">Zaloguj</button>
+          <button class="btn btn-ghost" id="btnRegister" type="button">Załóż konto</button>
+        </div>
+
+        <div id="authInfo" class="muted small" style="margin-top:12px;"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const emailEl = document.getElementById("email");
+    const passEl = document.getElementById("password");
+    const infoEl = document.getElementById("authInfo");
+
+    async function handleLogin() {
+      infoEl.textContent = "Logowanie...";
+      try {
+        const r = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            email: emailEl.value,
+            password: passEl.value
+          })
+        });
+
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || "Błąd logowania");
+
+        infoEl.textContent = "Zalogowano. Przekierowanie...";
+        setTimeout(() => location.href = "/oprogramowanie.html", 800);
+      } catch (e) {
+        infoEl.textContent = e.message;
+      }
+    }
+
+    async function handleRegister() {
+      infoEl.textContent = "Rejestracja...";
+      try {
+        const r = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            email: emailEl.value,
+            password: passEl.value
+          })
+        });
+
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || "Błąd rejestracji");
+
+        infoEl.textContent = "Konto utworzone. Przekierowanie...";
+        setTimeout(() => location.href = "/oprogramowanie.html", 800);
+      } catch (e) {
+        infoEl.textContent = e.message;
+      }
+    }
+
+    document.getElementById("btnLogin").addEventListener("click", handleLogin);
+    document.getElementById("btnRegister").addEventListener("click", handleRegister);
+  </script>
+</body>
+</html>
