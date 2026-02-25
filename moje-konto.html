@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moje konto – sailABC</title>
+  <meta name="description" content="Moje konto sailABC – status DEMO / TESTER / PRO." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="sailABC — strona główna">
+        <img class="brand-logo" src="logo.png" alt="sailABC.com" />
+        <div class="brand-text">
+          <span class="brand-name">sailABC.com</span>
+        </div>
+      </a>
+
+      <nav class="site-nav nav-buttons">
+        <a class="nav-btn nav-btn-ghost" href="/oprogramowanie.html">Narzędzia</a>
+        <a class="nav-btn nav-btn-accent" href="/">Strona główna</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container" style="max-width: 640px;">
+
+      <div class="section-head">
+        <h1>Moje konto</h1>
+        <p class="muted">Status dostępu do narzędzi sailABC.</p>
+      </div>
+
+      <div class="card">
+        <div id="loading">Sprawdzam dane konta...</div>
+
+        <div id="accountData" hidden>
+          <div class="field">
+            <label>Email</label>
+            <div id="accEmail" class="note"></div>
+          </div>
+
+          <div class="field">
+            <label>Plan</label>
+            <div id="accPlan" class="note"></div>
+          </div>
+
+          <div class="field" id="expiresWrap" hidden>
+            <label>Ważny do</label>
+            <div id="accExpires" class="note"></div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <button class="btn btn-ghost" id="btnLogout" type="button">Wyloguj</button>
+          </div>
+        </div>
+
+        <div id="notLogged" hidden>
+          <p class="muted">Nie jesteś zalogowany.</p>
+          <a class="btn btn-primary" href="/login.html">Przejdź do logowania</a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const loading = document.getElementById("loading");
+    const accountData = document.getElementById("accountData");
+    const notLogged = document.getElementById("notLogged");
+
+    const accEmail = document.getElementById("accEmail");
+    const accPlan = document.getElementById("accPlan");
+    const accExpires = document.getElementById("accExpires");
+    const expiresWrap = document.getElementById("expiresWrap");
+
+    const btnLogout = document.getElementById("btnLogout");
+
+    function formatDate(ms) {
+      const d = new Date(Number(ms));
+      return d.toLocaleString("pl-PL");
+    }
+
+    async function init() {
+      try {
+        const r = await fetch("/api/me", { credentials: "include" });
+        const data = await r.json();
+
+        loading.hidden = true;
+
+        if (!data.authenticated) {
+          notLogged.hidden = false;
+          return;
+        }
+
+        accountData.hidden = false;
+
+        accEmail.textContent = data.email || "-";
+        accPlan.textContent = String(data.plan || "demo").toUpperCase();
+
+        if (data.expiresAt) {
+          expiresWrap.hidden = false;
+          accExpires.textContent = formatDate(data.expiresAt);
+        }
+
+      } catch (e) {
+        loading.textContent = "Błąd połączenia z serwerem.";
+      }
+    }
+
+    btnLogout.addEventListener("click", async () => {
+      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      location.href = "/";
+    });
+
+    init();
+  </script>
+</body>
+</html>
