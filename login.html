@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Logowanie – sailABC</title>
   <meta name="description" content="Logowanie do sailABC Tools – dostęp DEMO / TESTER / PRO." />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -58,14 +57,17 @@
   </main>
 
   <script>
+    const API = "https://sailabc.onrender.com";
+
     const emailEl = document.getElementById("email");
     const passEl = document.getElementById("password");
     const infoEl = document.getElementById("authInfo");
 
     async function handleLogin() {
       infoEl.textContent = "Logowanie...";
+
       try {
-        const r = await fetch("/api/auth/login", {
+        const r = await fetch(`${API}/api/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -79,7 +81,8 @@
         if (!r.ok) throw new Error(data.error || "Błąd logowania");
 
         infoEl.textContent = "Zalogowano. Przekierowanie...";
-        setTimeout(() => location.href = "/oprogramowanie.html", 800);
+        setTimeout(() => location.href = "/moje-konto.html", 800);
+
       } catch (e) {
         infoEl.textContent = e.message;
       }
@@ -87,8 +90,9 @@
 
     async function handleRegister() {
       infoEl.textContent = "Rejestracja...";
+
       try {
-        const r = await fetch("/api/auth/register", {
+        const r = await fetch(`${API}/api/auth/register`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -102,7 +106,8 @@
         if (!r.ok) throw new Error(data.error || "Błąd rejestracji");
 
         infoEl.textContent = "Konto utworzone. Przekierowanie...";
-        setTimeout(() => location.href = "/oprogramowanie.html", 800);
+        setTimeout(() => location.href = "/moje-konto.html", 800);
+
       } catch (e) {
         infoEl.textContent = e.message;
       }
