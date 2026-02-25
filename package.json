@@ -1,5 +1,5 @@
 {
-  "name": "sailabc-weather",
+  "name": "sailabc-api",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,6 +7,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3"
   }
 }
