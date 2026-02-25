@@ -1,6 +1,6 @@
 /* service-worker.js — sailABC PWA (simple, safe) */
 
-const CACHE_NAME = "sailabc-v1";
+const CACHE_NAME = "sailabc-v2";
 
 // Podstawowe pliki do cache (dodaj tu więcej jeśli chcesz)
 const ASSETS = [
@@ -13,7 +13,8 @@ const ASSETS = [
   "/manifest.webmanifest",
   "/logo.png",
   "/icon-192.png",
-  "/icon-512.png"
+  "/icon-512.png",
+  "/pwa.js"
 ];
 
 self.addEventListener("install", (event) => {
@@ -34,12 +35,16 @@ self.addEventListener("activate", (event) => {
 });
 
 // helper: czy to request do API pogodowego?
-function isApiRequest(url) {
+function isExternalApiRequest(url) {
   return (
     url.hostname.includes("open-meteo.com") ||
-    url.hostname.includes("openstreetmap.org") || // kafelki mapy (zostawiamy sieć)
+    url.hostname.includes("openstreetmap.org") ||
     url.hostname.includes("tile.openstreetmap.org")
   );
+}
+
+function isInternalApi(url) {
+  return url.origin === self.location.origin && url.pathname.startsWith("/api/");
 }
 
 self.addEventListener("fetch", (event) => {
@@ -49,9 +54,14 @@ self.addEventListener("fetch", (event) => {
   // tylko GET
   if (req.method !== "GET") return;
 
-  // API + kafelki mapy: zawsze sieć (nie cache’ujemy, żeby nie psuć pogody/mapy)
-  if (isApiRequest(url)) {
+  // NIE cache’uj /api/* (login, /api/me itp.)
+  if (isInternalApi(url)) {
     return; // przeglądarka ogarnie normalnie
+  }
+
+  // API + kafelki mapy: zawsze sieć (nie cache’ujemy, żeby nie psuć pogody/mapy)
+  if (isExternalApiRequest(url)) {
+    return;
   }
 
   // Dla reszty: cache-first z fallbackiem do sieci
