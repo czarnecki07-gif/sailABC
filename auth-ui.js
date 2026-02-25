@@ -18,7 +18,7 @@
       "DEMO";
 
     mainBtn.textContent = `Moje konto (${tag})`;
-    mainBtn.setAttribute("href", "/oprogramowanie.html");
+    mainBtn.setAttribute("href", "/moje-konto.html");
     logoutBtn.hidden = false;
   }
 
