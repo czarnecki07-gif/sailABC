@@ -5,6 +5,10 @@
    + DOPIĘTE:
    - bramka na poziomie strony: <body data-require="pro">
    - aktywacja kodu z linku: ?kod=SABC-BETA-0001
+
+   NOWE (bez upraszczania):
+   - integracja z backend: GET /api/me
+   - offline grace period: ostatnie potwierdzenie PRO/TESTER trzymane lokalnie
 */
 
 (() => {
@@ -18,7 +22,13 @@
       "SABC-BETA-0026","SABC-BETA-0027","SABC-BETA-0028","SABC-BETA-0029","SABC-BETA-0030"
     ]),
     testerDays: 30,
-    storageKey: "sailabc_tester_access" // JSON: { code, startedAt, expiresAt }
+
+    // legacy: kody testerów w localStorage
+    storageKey: "sailabc_tester_access", // JSON: { code, startedAt, expiresAt }
+
+    // nowe: cache planu z /api/me do działania offline
+    entitlementCacheKey: "sailabc_entitlement_cache", // JSON: { plan, expiresAt, cachedAt }
+    offlineGraceDays: 14
   };
 
   const nowMs = () => Date.now();
@@ -42,7 +52,28 @@
     localStorage.removeItem(ACCESS.storageKey);
   }
 
-  function isProActive() {
+  function readEntitlementCache() {
+    try {
+      const raw = localStorage.getItem(ACCESS.entitlementCacheKey);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeEntitlementCache(st) {
+    try {
+      localStorage.setItem(ACCESS.entitlementCacheKey, JSON.stringify(st));
+    } catch {}
+  }
+
+  function clearEntitlementCache() {
+    try {
+      localStorage.removeItem(ACCESS.entitlementCacheKey);
+    } catch {}
+  }
+
+  function isLegacyProActive() {
     const st = readState();
     if (!st || !st.expiresAt) return false;
     if (nowMs() > Number(st.expiresAt)) {
@@ -52,7 +83,7 @@
     return true;
   }
 
-  function remainingDays() {
+  function remainingLegacyDays() {
     const st = readState();
     if (!st || !st.expiresAt) return null;
     const ms = Number(st.expiresAt) - nowMs();
@@ -60,11 +91,98 @@
     return Math.ceil(ms / daysToMs(1));
   }
 
+  // --- backend entitlement ---
+  let meState = {
+    loaded: false,
+    authenticated: false,
+    email: null,
+    plan: "demo",
+    expiresAt: null,
+    source: "init"
+  };
+
+  function isPlanActive(plan, expiresAt) {
+    if (plan === "pro") {
+      if (expiresAt == null) return true;
+      return nowMs() <= Number(expiresAt);
+    }
+    if (plan === "tester") return true;
+    return false;
+  }
+
+  function getEffectiveAccess() {
+    // 1) backend state (jeśli mamy)
+    if (meState.loaded) {
+      const ok = isPlanActive(meState.plan, meState.expiresAt);
+      return { ok, plan: meState.plan, expiresAt: meState.expiresAt, source: meState.source };
+    }
+
+    // 2) cache offline z backendu (grace)
+    const cached = readEntitlementCache();
+    if (cached && cached.plan) {
+      const age = nowMs() - Number(cached.cachedAt || 0);
+      const withinGrace = age >= 0 && age <= daysToMs(ACCESS.offlineGraceDays);
+      const ok = withinGrace && isPlanActive(cached.plan, cached.expiresAt);
+      if (ok) return { ok: true, plan: cached.plan, expiresAt: cached.expiresAt, source: "offline-cache" };
+    }
+
+    // 3) legacy kody testerów (żeby nic nie padło)
+    if (isLegacyProActive()) {
+      return { ok: true, plan: "tester", expiresAt: readState()?.expiresAt || null, source: "legacy-code" };
+    }
+
+    return { ok: false, plan: "demo", expiresAt: null, source: "demo" };
+  }
+
+  async function loadMe() {
+    try {
+      const r = await fetch("/api/me", { credentials: "include" });
+      if (!r.ok) throw new Error("me not ok");
+      const data = await r.json();
+
+      meState = {
+        loaded: true,
+        authenticated: !!data.authenticated,
+        email: data.email || null,
+        plan: data.plan || "demo",
+        expiresAt: data.expiresAt ?? null,
+        source: "api/me"
+      };
+
+      // zapis do offline cache
+      writeEntitlementCache({
+        plan: meState.plan,
+        expiresAt: meState.expiresAt,
+        cachedAt: nowMs()
+      });
+
+      updateBadge();
+      return true;
+    } catch {
+      // fallback: offline cache / legacy
+      meState.loaded = false;
+      updateBadge();
+      return false;
+    }
+  }
+
   function updateBadge() {
     const badge = document.querySelector("[data-pro-badge]");
     if (!badge) return;
-    if (isProActive()) {
-      badge.textContent = `TESTER PRO (${remainingDays()} dni)`;
+
+    const eff = getEffectiveAccess();
+    if (eff.ok) {
+      if (eff.plan === "pro") {
+        badge.textContent = "PRO";
+      } else {
+        // tester
+        const d = remainingLegacyDays();
+        if (eff.source === "legacy-code" && d != null) {
+          badge.textContent = `TESTER PRO (${d} dni)`;
+        } else {
+          badge.textContent = "TESTER";
+        }
+      }
     } else {
       badge.textContent = "DEMO";
     }
@@ -101,8 +219,7 @@
               To narzędzie jest w wersji PRO
             </div>
             <div style="margin-top:8px; color:rgba(255,255,255,0.72); line-height:1.45;">
-              Jeśli masz <strong>kod testera</strong>, aktywujesz darmowy PRO na 30 dni.
-              W przeciwnym razie przejdź do pakietów.
+              Zaloguj się, aby odblokować PRO (tester lub płatny). Jeśli masz <strong>kod testera</strong>, możesz go też użyć.
             </div>
           </div>
           <button type="button" id="accessModalClose" style="
@@ -115,6 +232,15 @@
         </div>
 
         <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="/login.html" id="accessModalLogin" style="
+            display:inline-flex; align-items:center; justify-content:center;
+            padding:12px 14px; border-radius:14px;
+            border:1px solid rgba(255,255,255,0.12);
+            background:rgba(255,255,255,0.06);
+            color:rgba(255,255,255,0.92);
+            font-weight:800; text-decoration:none;
+          ">Zaloguj / załóż konto</a>
+
           <a href="#tester" id="accessModalTester" style="
             display:inline-flex; align-items:center; justify-content:center;
             padding:12px 14px; border-radius:14px;
@@ -153,11 +279,11 @@
       const modal = ensureModal();
       modal.style.display = "flex";
     } catch {
-      alert("To narzędzie jest w wersji PRO. Przejdź do sekcji pakietów lub użyj kodu testera.");
+      alert("To narzędzie jest w wersji PRO. Zaloguj się, przejdź do pakietów lub użyj kodu testera.");
     }
   }
 
-  // --- NOWE: aktywacja kodu z linku ?kod=... ---
+  // --- legacy: aktywacja kodu z linku ?kod=... ---
   function activateFromQuery() {
     const params = new URLSearchParams(location.search);
     const code = normalizeCode(params.get("kod"));
@@ -168,8 +294,12 @@
       return false;
     }
 
+    // jeśli już mamy dostęp z /api/me — nie nadpisuj
+    const eff = getEffectiveAccess();
+    if (eff.ok && eff.source === "api/me") return true;
+
     // już aktywny? zostaw
-    if (isProActive()) return true;
+    if (isLegacyProActive()) return true;
 
     const startedAt = nowMs();
     const expiresAt = startedAt + daysToMs(ACCESS.testerDays);
@@ -181,7 +311,7 @@
     return true;
   }
 
-  // --- tester controls ---
+  // --- tester controls (legacy UI) ---
   function bindTesterControls() {
     const input = document.getElementById("testerCode");
     const btnOn = document.getElementById("btnActivateTester");
@@ -190,9 +320,22 @@
 
     function refresh() {
       if (!info) return;
-      if (isProActive()) {
+
+      // jeśli mamy /api/me i jesteśmy pro/tester — pokaż to
+      if (meState.loaded) {
+        const effOk = isPlanActive(meState.plan, meState.expiresAt);
+        if (effOk) {
+          info.textContent = `Aktywny dostęp: ${meState.plan.toUpperCase()}${meState.authenticated && meState.email ? " • " + meState.email : ""}`;
+          if (btnOn) btnOn.disabled = true;
+          if (btnOff) btnOff.disabled = true;
+          updateBadge();
+          return;
+        }
+      }
+
+      if (isLegacyProActive()) {
         const st = readState();
-        info.textContent = `Aktywny TESTER PRO: ${st?.code || ""} • pozostało: ${remainingDays()} dni`;
+        info.textContent = `Aktywny TESTER PRO: ${st?.code || ""} • pozostało: ${remainingLegacyDays()} dni`;
         if (btnOn) btnOn.disabled = true;
         if (btnOff) btnOff.disabled = false;
         if (input && st?.code) input.value = st.code;
@@ -228,39 +371,46 @@
 
   // --- gating: event delegation ---
   function bindGating() {
-    document.addEventListener("click", (e) => {
-      const a = e.target?.closest?.('a[data-access="pro"]');
-      if (!a) return;
+    document.addEventListener(
+      "click",
+      (e) => {
+        const a = e.target?.closest?.('a[data-access="pro"]');
+        if (!a) return;
 
-      if (isProActive()) return;
+        const eff = getEffectiveAccess();
+        if (eff.ok) return;
 
-      e.preventDefault();
-      openModalOrAlert();
-    }, true);
+        e.preventDefault();
+        openModalOrAlert();
+      },
+      true
+    );
   }
 
-  // --- NOWE: bramka na poziomie strony ---
+  // --- bramka na poziomie strony ---
   function gatePageIfRequired() {
     const req = document.body?.dataset?.require;
     if (req !== "pro") return;
 
-    if (isProActive()) return;
+    const eff = getEffectiveAccess();
+    if (eff.ok) return;
 
-    // pokaż modal i wróć do narzędzi
     openModalOrAlert();
 
-    // bezpieczeństwo: jeśli ktoś zamknie modal i tak przekierujemy po chwili
     setTimeout(() => {
-      if (!isProActive()) location.href = "/oprogramowanie.html#pakiety";
+      const eff2 = getEffectiveAccess();
+      if (!eff2.ok) location.href = "/oprogramowanie.html#pakiety";
     }, 900);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    activateFromQuery();      // nowa funkcja
+  document.addEventListener("DOMContentLoaded", async () => {
+    activateFromQuery();
     updateBadge();
     bindGating();
     bindTesterControls();
-    gatePageIfRequired();     // nowa funkcja
+
+    await loadMe(); // spróbuj pobrać plan użytkownika (online)
+    gatePageIfRequired();
   });
 
   window.__sailabc_access_loaded = true;
