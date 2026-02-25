@@ -1,15 +1,20 @@
 /* service-worker.js — sailABC PWA (simple, safe) */
 
-const CACHE_NAME = "sailabc-v2";
+const CACHE_NAME = "sailabc-v3"; // <-- ZMIANA: v3 żeby wymusić odświeżenie cache
 
-// Podstawowe pliki do cache (dodaj tu więcej jeśli chcesz)
+// Podstawowe pliki do cache
+// (dodałem wersjonowanie dla access/auth-ui żeby nie brało starych)
 const ASSETS = [
   "/",
   "/index.html",
   "/style.css",
   "/weather.js",
-  "/access.js",
+  "/access.js?v=7",
+  "/auth-ui.js?v=7",
   "/oprogramowanie.html",
+  "/login.html",
+  "/moje-konto.html",
+  "/admin.html",
   "/manifest.webmanifest",
   "/logo.png",
   "/icon-192.png",
@@ -26,7 +31,6 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      // usuń stare cache
       const keys = await caches.keys();
       await Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : null)));
       await self.clients.claim();
@@ -34,7 +38,6 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// helper: czy to request do API pogodowego?
 function isExternalApiRequest(url) {
   return (
     url.hostname.includes("open-meteo.com") ||
@@ -51,20 +54,14 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // tylko GET
   if (req.method !== "GET") return;
 
-  // NIE cache’uj /api/* (login, /api/me itp.)
-  if (isInternalApi(url)) {
-    return; // przeglądarka ogarnie normalnie
-  }
+  // nie cache’uj /api/*
+  if (isInternalApi(url)) return;
 
-  // API + kafelki mapy: zawsze sieć (nie cache’ujemy, żeby nie psuć pogody/mapy)
-  if (isExternalApiRequest(url)) {
-    return;
-  }
+  // zewnętrzne API zawsze sieć
+  if (isExternalApiRequest(url)) return;
 
-  // Dla reszty: cache-first z fallbackiem do sieci
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
@@ -73,13 +70,11 @@ self.addEventListener("fetch", (event) => {
 
       try {
         const fresh = await fetch(req);
-        // cache’uj tylko zasoby z tego samego origin
         if (fresh && fresh.ok && url.origin === self.location.origin) {
           cache.put(req, fresh.clone());
         }
         return fresh;
       } catch (e) {
-        // Offline fallback: jeśli to nawigacja do strony, spróbuj index
         if (req.mode === "navigate") {
           const fallback = await cache.match("/index.html");
           if (fallback) return fallback;
