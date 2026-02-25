@@ -70,6 +70,8 @@
   </main>
 
   <script>
+    const API = "https://sailabc.onrender.com";
+
     const loading = document.getElementById("loading");
     const accountData = document.getElementById("accountData");
     const notLogged = document.getElementById("notLogged");
@@ -88,7 +90,7 @@
 
     async function init() {
       try {
-        const r = await fetch("/api/me", { credentials: "include" });
+        const r = await fetch(`${API}/api/me`, { credentials: "include" });
         const data = await r.json();
 
         loading.hidden = true;
@@ -114,7 +116,9 @@
     }
 
     btnLogout.addEventListener("click", async () => {
-      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      try {
+        await fetch(`${API}/api/auth/logout`, { method: "POST", credentials: "include" });
+      } catch {}
       location.href = "/";
     });
 
