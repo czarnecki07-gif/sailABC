@@ -22,7 +22,7 @@
 
       <nav class="site-nav nav-buttons" aria-label="Nawigacja">
         <a class="nav-btn nav-btn-ghost" href="/oprogramowanie.html">Narzędzia</a>
-        <a class="nav-btn nav-btn-accent" href="/login.html">Logowanie</a>
+        <a class="nav-btn nav-btn-accent" href="/moje-konto.html">Moje konto</a>
       </nav>
     </div>
   </header>
@@ -68,7 +68,7 @@
       <div class="card" style="margin-top:16px;">
         <h3>Uwaga (ważne)</h3>
         <ul class="muted">
-          <li>Musisz być zalogowany jako admin (email na liście adminów w konfiguracji serwera).</li>
+          <li>Musisz być zalogowany jako admin (wgc@world24.pl).</li>
           <li>PRO „czasowe” zapisuje datę wygaśnięcia. PRO „bezterminowe” zapisuje expiresAt = null.</li>
         </ul>
       </div>
@@ -77,6 +77,8 @@
   </main>
 
   <script>
+    const API = "https://sailabc.onrender.com";
+
     const statusBox = document.getElementById("statusBox");
     const statusDetails = document.getElementById("statusDetails");
     const result = document.getElementById("result");
@@ -100,13 +102,13 @@
     }
 
     async function apiMe() {
-      const r = await fetch("/api/me", { credentials: "include" });
+      const r = await fetch(`${API}/api/me`, { credentials: "include" });
       if (!r.ok) throw new Error("Nie mogę pobrać /api/me.");
       return await r.json();
     }
 
     async function setPlan(email, plan, expiresAt, note) {
-      const r = await fetch("/api/admin/set-plan", {
+      const r = await fetch(`${API}/api/admin/set-plan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -116,6 +118,10 @@
       const data = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(data.error || "Błąd admin/set-plan.");
       return data;
+    }
+
+    function disableAll(disabled) {
+      [btnPro30, btnPro365, btnProLife, btnTester, btnDemo].forEach(b => b.disabled = disabled);
     }
 
     async function init() {
@@ -132,17 +138,13 @@
         statusBox.textContent = "Zalogowano.";
         statusDetails.textContent = `Twoje konto: ${me.email} • plan: ${String(me.plan).toUpperCase()}`;
 
-        // Uprawnienia admina weryfikuje serwer na /api/admin/set-plan.
+        // Uprawnienia admina weryfikuje serwer na /api/admin/set-plan
         disableAll(false);
       } catch (e) {
-        statusBox.textContent = "Błąd połączenia /api/me.";
+        statusBox.textContent = "Błąd połączenia z serwerem API.";
         statusDetails.textContent = String(e.message || e);
         disableAll(true);
       }
-    }
-
-    function disableAll(disabled) {
-      [btnPro30, btnPro365, btnProLife, btnTester, btnDemo].forEach(b => b.disabled = disabled);
     }
 
     async function handle(action) {
