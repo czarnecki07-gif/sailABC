@@ -44,7 +44,8 @@
   <a class="nav-btn nav-btn-ghost" href="/artykuly.html">Artykuły i poradniki</a>
 
   <span class="nav-sep" aria-hidden="true"></span>
-  <a class="nav-btn nav-btn-accent" href="/login.html">PRO / Logowanie</a>
+<a class="nav-btn nav-btn-accent" id="navAuthMain" href="/login.html">Zaloguj</a>
+<button class="nav-btn nav-btn-ghost" id="navAuthLogout" type="button" hidden>Wyloguj</button>
 </nav>
 </div>
 </header>
@@ -281,5 +282,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="weather.js?v=6"></script>
+  <script src="auth-ui.js"></script>
 </body>
 </html>
