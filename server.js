@@ -76,11 +76,12 @@ app.use(
     secret: "SUPER_SECRET_CHANGE_THIS",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
       httpOnly: true,
-      // ważne dla GitHub Pages -> onrender (cross-site cookies)
       sameSite: "none",
-      secure: true
+      secure: true,
+      domain: ".sailabc.onrender.com"
     }
   })
 );
