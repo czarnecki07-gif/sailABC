@@ -1,34 +1,18 @@
 // sailABC Tools — Elektroniczny dziennik pokładowy (MVP)
 // - localStorage
 // - raport PDF: otwiera widok raportu i uruchamia druk (zapis jako PDF)
-// + PRO gate: narzędzie działa tylko z aktywnym PRO/TESTER (30 dni) z access.js
+// - PRO gate (prosto): działa tylko jeśli wpisano kod PRO (localStorage)
 
 const KEY = "sailabc_log_v1";
 
 /* =========================
-   PRO / TESTER gate (twardy)
+   PRO gate (super prosty)
    ========================= */
-const ACCESS_KEY = "sailabc_tester_access"; // wspólne z access.js
-
-function readAccessState() {
-  try {
-    const raw = localStorage.getItem(ACCESS_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
+const PRO_STORAGE_KEY = "sailabc_pro_code";
+const PRO_CODE = "SAILABC-PRO-2026";
 
 function isProActiveLocal() {
-  const st = readAccessState();
-  if (!st || !st.expiresAt) return false;
-  const exp = Number(st.expiresAt);
-  if (!Number.isFinite(exp)) return false;
-  if (Date.now() > exp) {
-    try { localStorage.removeItem(ACCESS_KEY); } catch {}
-    return false;
-  }
-  return true;
+  return localStorage.getItem(PRO_STORAGE_KEY) === PRO_CODE;
 }
 
 function showProGateOverlay() {
@@ -56,11 +40,10 @@ function showProGateOverlay() {
             Elektroniczny dziennik pokładowy jest w wersji PRO
           </div>
           <div style="margin-top:8px; color:rgba(255,255,255,0.74); line-height:1.45;">
-            To narzędzie zapisuje wpisy i generuje raport PDF.  
-            Jeśli masz <strong>kod testera</strong> — aktywuj PRO na 30 dni na stronie narzędzi.
+            Wpisz kod PRO, aby odblokować narzędzie na tym urządzeniu.
           </div>
         </div>
-        <a href="/oprogramowanie.html#pakiety" style="
+        <button id="btnEnterProCode" type="button" style="
           display:inline-flex; align-items:center; justify-content:center;
           padding:10px 12px; border-radius:12px;
           border:1px solid rgba(25,196,198,0.55);
@@ -68,19 +51,11 @@ function showProGateOverlay() {
           color:#041116;
           font-weight:900; text-decoration:none;
           white-space:nowrap;
-        ">Przejdź do pakietów</a>
+          cursor:pointer;
+        ">Wpisz kod</button>
       </div>
 
       <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="/oprogramowanie.html#tester" style="
-          display:inline-flex; align-items:center; justify-content:center;
-          padding:12px 14px; border-radius:14px;
-          border:1px solid rgba(255,255,255,0.12);
-          background:rgba(255,255,255,0.06);
-          color:rgba(255,255,255,0.92);
-          font-weight:800; text-decoration:none;
-        ">Mam kod testera</a>
-
         <a href="/oprogramowanie.html#narzedzia" style="
           display:inline-flex; align-items:center; justify-content:center;
           padding:12px 14px; border-radius:14px;
@@ -92,21 +67,30 @@ function showProGateOverlay() {
       </div>
 
       <div style="margin-top:12px; color:rgba(255,255,255,0.7); font-size:12px;">
-        (To jest blokada po stronie frontu — na razie. Prawdziwą blokadę serwerową dopniemy przy płatnościach.)
+        (To jest blokada po stronie frontu.)
       </div>
     </div>
   `;
 
   document.body.appendChild(wrap);
+
+  wrap.querySelector("#btnEnterProCode")?.addEventListener("click", () => {
+    const code = prompt("Wpisz kod PRO:");
+    if (!code) return;
+    if (code.trim() === PRO_CODE) {
+      localStorage.setItem(PRO_STORAGE_KEY, PRO_CODE);
+      location.reload();
+    } else {
+      alert("Zły kod.");
+    }
+  });
 }
 
 /* Jeśli brak PRO, nie uruchamiamy logiki narzędzia */
 if (!isProActiveLocal()) {
-  // Minimalnie „zatrzymujemy” UI: overlay i koniec
   window.addEventListener("DOMContentLoaded", () => {
     showProGateOverlay();
   });
-  // NIE inicjalizujemy dalej skryptu
   throw new Error("sailABC: PRO required for tools-dziennik");
 }
 
@@ -153,7 +137,6 @@ function esc(s) {
 
 function fmtDT(iso) {
   if (!iso) return "—";
-  // iso from datetime-local: "YYYY-MM-DDTHH:MM"
   return iso.replace("T", " ");
 }
 
