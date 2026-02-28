@@ -1,19 +1,30 @@
-/* Podstrona: COLREG / przepisy – styl zgodny z układem sailABC */
+.page-przepisy { padding: 28px 0 60px; }
 
-.page-colreg { padding: 28px 0 60px; }
+.hero { margin-bottom: 10px; }
+.hero h1 { margin-bottom: 8px; }
 
-.pill-row{
+.chips{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
   margin-top:12px;
 }
-.pill{
-  font-size:12px;
-  padding:6px 10px;
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px;
   border-radius:999px;
   border:1px solid rgba(17,17,17,0.12);
   background: rgba(17,17,17,0.03);
+  font-size:12px;
+  text-decoration:none;
+  color: inherit;
+}
+.chip:hover{ background: rgba(17,17,17,0.05); }
+.chip-accent{
+  border-color: rgba(31,95,214,0.35);
+  background: rgba(31,95,214,0.10);
 }
 
 .card{
@@ -24,6 +35,7 @@
   padding:16px;
   box-shadow: 0 8px 24px rgba(17,17,17,0.06);
 }
+.card-head{ margin-bottom: 10px; }
 
 .grid-2{
   display:grid;
@@ -31,45 +43,28 @@
   gap:14px;
 }
 @media (min-width: 900px){
-  .grid-2{ grid-template-columns: 1.1fr 0.9fr; }
+  .grid-2{ grid-template-columns: 1.15fr 0.85fr; }
 }
 
-.steps{ padding-left: 18px; }
-.steps li{ margin: 7px 0; }
+.bullets{ margin:0; padding-left:18px; }
+.bullets li{ margin:7px 0; }
 
-.mini{
-  width:100%;
-  border-collapse: collapse;
+.steps{ padding-left:18px; margin:0; }
+.steps li{ margin:7px 0; }
+
+.kpi{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
   margin-top:10px;
-  border:1px solid rgba(17,17,17,0.10);
-  border-radius:12px;
-  overflow:hidden;
 }
-.mini th, .mini td{
-  padding:9px 10px;
-  border-bottom:1px solid rgba(17,17,17,0.08);
-  text-align:left;
-  vertical-align:top;
-}
-.mini th{
-  width: 110px;
-  background: rgba(17,17,17,0.04);
-}
-
-.table{
-  width:100%;
-  border-collapse: collapse;
-  border:1px solid rgba(17,17,17,0.10);
-  border-radius:12px;
-  overflow:hidden;
-}
-.table th, .table td{
+.kpi .k{
   padding:10px;
-  border-bottom:1px solid rgba(17,17,17,0.08);
-  text-align:left;
-  vertical-align:top;
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  background: rgba(17,17,17,0.02);
 }
-.table th{ background: rgba(17,17,17,0.04); }
+.kpi .k strong{ display:block; }
 
 .callout{
   margin-top:12px;
@@ -83,6 +78,65 @@
   background: rgba(225,29,72,0.06);
 }
 
+.rank{
+  list-style:none;
+  padding:0;
+  margin:10px 0 0;
+  display:grid;
+  gap:8px;
+}
+.rank li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 10px;
+  border-radius:12px;
+  border:1px solid rgba(17,17,17,0.10);
+  background: rgba(17,17,17,0.02);
+}
+.rank-dot{
+  width:10px; height:10px;
+  border-radius:999px;
+  background: rgba(17,17,17,0.35);
+}
+
+.scenario{
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  padding:12px;
+  background: #fff;
+  margin-top:10px;
+}
+.scenario-title{
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.mini-card{
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  padding:12px;
+  background: rgba(17,17,17,0.02);
+}
+.mini-card h4{ margin: 0 0 8px; }
+
+.table{
+  width:100%;
+  border-collapse: collapse;
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.table th, .table td{
+  padding:10px;
+  border-bottom:1px solid rgba(17,17,17,0.08);
+  text-align:left;
+  vertical-align:top;
+}
+.table th{ background: rgba(17,17,17,0.04); font-weight:600; }
+
+.svg-wrap{ margin-top: 12px; }
 .svg{
   width:100%;
   height:auto;
@@ -92,7 +146,7 @@
 }
 
 .check{ margin:0; padding-left:18px; }
-.check li{ margin:6px 0; }
+.check li{ margin:7px 0; }
 
 .qa{ display:grid; gap:10px; margin-top:10px; }
 .qa-item{
@@ -101,8 +155,25 @@
   padding:10px 12px;
   background:#fff;
 }
-.qa-item summary{ cursor:pointer; font-weight:600; }
-.qa-body{ margin-top:8px; color: rgba(17,17,17,0.85); line-height:1.5; }
+.qa-item summary{ cursor:pointer; font-weight:700; }
+.qa-body{ margin-top:8px; color: rgba(17,17,17,0.88); line-height:1.55; }
 
-.bullets{ margin:0; padding-left:18px; }
-.bullets li{ margin:6px 0; }
+.cta{
+  margin-top:14px;
+  background: rgba(31,95,214,0.06);
+  border-color: rgba(31,95,214,0.18);
+}
+.cta-row{
+  margin-top:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.pill{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(17,17,17,0.12);
+  background: rgba(17,17,17,0.03);
+}
