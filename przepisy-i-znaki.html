@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>COLREG i przepisy śródlądowe – znaki, światła, pierwszeństwo | sailABC</title>
-  <meta name="description" content="Najważniejsze zasady COLREG i śródlądowe: kto komu ustępuje, światła i znaki, sygnały dźwiękowe. Ściąga + pytania egzaminacyjne." />
+  <title>Przepisy i znaki (COLREG + śródlądzie) – ściąga, światła, pierwszeństwo | sailABC</title>
+  <meta name="description" content="COLREG w praktyce: obserwacja, bezpieczna prędkość, kto komu ustępuje, wyprzedzanie, światła i znaki dzienne, sygnały dźwiękowe. Ściąga + pytania egzaminacyjne." />
 
   <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/colreg.css" />
+  <link rel="stylesheet" href="/przepisy-i-znaki.css" />
 </head>
 
 <body>
@@ -23,292 +23,472 @@
     <nav class="site-nav">
       <a class="nav-btn" href="/wezly.html">Węzły</a>
       <a class="nav-btn" href="/manewry.html">Manewry</a>
-      <a class="nav-btn nav-btn-accent" href="/colreg.html">Przepisy</a>
+      <a class="nav-btn nav-btn-accent" href="/przepisy-i-znaki.html">Przepisy i znaki</a>
       <a class="nav-btn" href="/bezpieczenstwo.html">Bezpieczeństwo</a>
       <a class="nav-btn" href="/quizy.html">Testy i quizy</a>
     </nav>
   </div>
 </header>
 
-<main class="page-colreg">
+<main class="page-przepisy">
 
-  <section class="container">
+  <!-- HERO -->
+  <section class="container hero">
     <h1>Przepisy i znaki: COLREG + śródlądzie</h1>
     <p class="muted">
-      Praktyczny skrót zasad pierwszeństwa, obserwacji, świateł, znaków i sygnałów.
-      Na końcu znajdziesz sekcję „egzaminową”: typowe pytania „kto ustępuje”.
+      To jest praktyczna „ściąga kapitańska”: jak oceniać ryzyko kolizji, kto komu ustępuje,
+      jak rozpoznawać jednostki po światłach/znakach oraz jakie sygnały dawać.
+      Na dole masz pytania egzaminacyjne + scenariusze.
     </p>
 
-    <div class="pill-row">
-      <span class="pill">COLREG</span>
-      <span class="pill">Światła</span>
-      <span class="pill">Znaki dzienne</span>
-      <span class="pill">Sygnały dźwiękowe</span>
-      <span class="pill">Śródlądzie</span>
+    <div class="chips">
+      <a class="chip" href="#zasady">Zasady ogólne</a>
+      <a class="chip" href="#pierwszenstwo">Pierwszeństwo</a>
+      <a class="chip" href="#wyprzedzanie">Wyprzedzanie</a>
+      <a class="chip" href="#swiatla">Światła</a>
+      <a class="chip" href="#znaki">Znaki dzienne</a>
+      <a class="chip" href="#sygnaly">Sygnały</a>
+      <a class="chip" href="#srodladzie">Śródlądzie</a>
+      <a class="chip chip-accent" href="#qa">Pytania</a>
     </div>
   </section>
 
-  <!-- ===================== ZASADY OGÓLNE ===================== -->
-  <section class="container card">
-    <h2>1) Zasady ogólne (które ratują rejs)</h2>
+  <!-- ZASADY OGÓLNE -->
+  <section id="zasady" class="container card">
+    <div class="card-head">
+      <h2>1) Zasady ogólne, które robią różnicę</h2>
+      <p class="muted small">Jeśli zapamiętasz tylko to — i tak będziesz pływać bezpieczniej.</p>
+    </div>
 
     <div class="grid-2">
       <div>
-        <h3>Obserwacja i prędkość</h3>
-        <ul>
-          <li><strong>Reguła 5:</strong> stała obserwacja wzrokiem i słuchem (360°).</li>
-          <li><strong>Reguła 6:</strong> bezpieczna prędkość – taka, by móc wykonać skuteczny manewr.</li>
-          <li><strong>Reguła 7:</strong> ryzyko zderzenia: <em>stały namiar + malejąca odległość</em>.</li>
-          <li><strong>Reguła 8:</strong> manewry wcześnie i wyraźnie – małe korekty często nie zmieniają CPA.</li>
+        <h3>Reguły „fundament” (w praktyce)</h3>
+        <ul class="bullets">
+          <li><strong>Obserwacja 360°</strong> (wzrok + słuch + instrumenty). Nie „co jakiś czas”, tylko ciągle.</li>
+          <li><strong>Bezpieczna prędkość</strong>: taka, by móc wykonać skuteczny manewr i zatrzymać się/odejść.</li>
+          <li><strong>Ryzyko zderzenia</strong>: stały namiar + malejąca odległość = problem.</li>
+          <li><strong>Manewr wcześnie i wyraźnie</strong>: ma być widać intencję i poprawę CPA.</li>
+          <li><strong>Bezpieczeństwo &gt; „prawo drogi”</strong>: gdy ktoś nie ustępuje, Ty też działasz.</li>
         </ul>
 
         <div class="callout">
-          <strong>Najczęstszy błąd:</strong> „odpuszczę o 2° i będzie OK”. Druga jednostka nie widzi intencji, a CPA często się nie poprawia.
+          <strong>Najczęstszy błąd:</strong> mikrokorekty kursu (1–3°). Drugi jacht ich nie widzi,
+          a CPA często praktycznie się nie zmienia.
         </div>
       </div>
 
       <div>
-        <h3>Mini-ściąga decyzji</h3>
+        <h3>Checklist: ocena sytuacji w 15 sekund</h3>
         <ol class="steps">
-          <li>Rozpoznaj typ jednostki (napęd/żagle/rybołówstwo/NUC/RAM).</li>
-          <li>Oceń ryzyko (namiar, AIS/radar jeśli masz, ale nie tylko).</li>
-          <li>Ustal: kto ustępuje, a kto ma prawo drogi.</li>
-          <li>Zrób manewr wcześnie i jednoznacznie.</li>
-          <li>Jeśli druga strona nie reaguje – <strong>działaj</strong> (bezpieczeństwo &gt; „prawo”).</li>
+          <li>Co widzę: żagle czy silnik? duży statek? mała łódź?</li>
+          <li>Jaki jest trend namiaru (kompas / „na oko”)?</li>
+          <li>Czy mam przestrzeń na manewr (głębokość, brzeg, tor)?</li>
+          <li>Jaki minimalny dystans minięcia akceptuję (CPA)?</li>
+          <li>Co będzie „czytelne” dla drugiej jednostki?</li>
         </ol>
 
-        <table class="mini">
-          <tr><th>CPA</th><td>minimalna odległość minięcia</td></tr>
-          <tr><th>TCPA</th><td>czas do CPA</td></tr>
-          <tr><th>NUC</th><td>brak sterowności</td></tr>
-          <tr><th>RAM</th><td>ograniczona zdolność manewrowa</td></tr>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PIERWSZEŃSTWO (PRAKTYKA) ===================== -->
-  <section class="container card">
-    <h2>2) Pierwszeństwo – najczęstsze sytuacje (praktycznie)</h2>
-
-    <div class="grid-2">
-      <div>
-        <h3>Żaglówka vs żaglówka</h3>
-        <ul>
-          <li><strong>Różne halsy:</strong> <strong>lewy hals ustępuje</strong> prawemu.</li>
-          <li><strong>Ten sam hals:</strong> jednostka <strong>nawietrzna ustępuje</strong> zawietrznej.</li>
-          <li>Jeśli nie jesteś pewien halsu drugiej jednostki – zachowaj większy margines.</li>
-        </ul>
-
-        <h3>Jacht na silniku vs żagle</h3>
-        <ul>
-          <li>Co do zasady: <strong>silnik ustępuje żaglom</strong>.</li>
-          <li>Wyjątki wynikają z ograniczeń (NUC/RAM/rybołówstwo itd.).</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Sytuacje klasyczne</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Sytuacja</th>
-              <th>Kto ustępuje?</th>
-              <th>Typowy manewr</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Przecięcie kursów (crossing)</td>
-              <td>Ten, który ma drugą jednostkę <strong>z prawej burty</strong></td>
-              <td>Wyraźna zmiana kursu, zwykle w prawo, zwiększ CPA</td>
-            </tr>
-            <tr>
-              <td>Zbliżanie czołowe (head-on)</td>
-              <td><strong>Obie</strong></td>
-              <td>Obie w prawo (minięcie lewymi burtami)</td>
-            </tr>
-            <tr>
-              <td>Wyprzedzanie</td>
-              <td><strong>Wyprzedzający</strong></td>
-              <td>Wyprzedzaj z dużym marginesem, utrzymuj kontrolę</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="callout warn">
-          <strong>Uwaga:</strong> „Prawo drogi” nie zwalnia z obowiązku działania, gdy zderzenie jest realne.
+        <div class="kpi">
+          <div class="k"><strong>CPA</strong><span class="muted small">min. odległość minięcia</span></div>
+          <div class="k"><strong>TCPA</strong><span class="muted small">czas do CPA</span></div>
+          <div class="k"><strong>NUC</strong><span class="muted small">brak sterowności</span></div>
+          <div class="k"><strong>RAM</strong><span class="muted small">ogran. zdolność manewrowa</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== ŚWIATŁA I ZNAKI ===================== -->
-  <section class="container card">
-    <h2>3) Światła nawigacyjne i znaki dzienne – jak rozpoznawać</h2>
+  <!-- PIERWSZEŃSTWO -->
+  <section id="pierwszenstwo" class="container card">
+    <h2>2) Pierwszeństwo (kto komu ustępuje) – bez lania wody</h2>
 
     <div class="grid-2">
       <div>
-        <h3>Kolory i logika</h3>
-        <ul>
-          <li><strong>Czerwone</strong> = lewa burta, <strong>zielone</strong> = prawa burta.</li>
-          <li><strong>Białe</strong> = światło rufowe / masztowe / holownicze (zależy od układu).</li>
-          <li>Najpierw rozpoznaj <strong>układ świateł</strong>, dopiero potem typ jednostki.</li>
+        <h3>„Hierarchia” w uproszczeniu (zapamiętaj logikę)</h3>
+        <p class="muted small">
+          To nie jest pełna lista wyjątków — ale daje dobrą intuicję: kto ma najmniej możliwości manewru,
+          ten zwykle ma „pierwszeństwo”.
+        </p>
+
+        <ul class="rank">
+          <li><span class="rank-dot"></span><strong>NUC</strong> – brak sterowności</li>
+          <li><span class="rank-dot"></span><strong>RAM</strong> – ograniczona zdolność manewrowa</li>
+          <li><span class="rank-dot"></span><strong>Rybołówstwo</strong> (z narzędziami w wodzie)</li>
+          <li><span class="rank-dot"></span><strong>Żagle</strong></li>
+          <li><span class="rank-dot"></span><strong>Silnik</strong></li>
         </ul>
 
-        <h3>Najczęstsze układy (w skrócie)</h3>
-        <ul class="bullets">
-          <li><strong>Widzisz czerwone+zielone:</strong> idzie na ciebie (prawie czołowo).</li>
-          <li><strong>Widzisz tylko czerwone:</strong> widzisz lewą burtę tej jednostki.</li>
-          <li><strong>Widzisz tylko zielone:</strong> widzisz prawą burtę tej jednostki.</li>
-          <li><strong>Widzisz białe rufowe:</strong> jesteś za jednostką (często ją wyprzedzasz).</li>
-        </ul>
+        <div class="callout warn">
+          <strong>Uwaga praktyczna:</strong> duże statki na torach wodnych mają ograniczenia
+          wynikające z zanurzenia i bezwładności — nie zakładaj, że „zawsze zdążą”.
+        </div>
       </div>
 
       <div>
-        <h3>Prosty schemat sektorów</h3>
+        <h3>3 scenariusze, które pojawiają się wszędzie</h3>
 
-        <svg class="svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-          <rect width="520" height="260" fill="#ffffff"/>
-          <circle cx="260" cy="140" r="70" fill="none" stroke="#111" stroke-width="2"/>
-          <line x1="260" y1="140" x2="260" y2="45" stroke="#111" stroke-width="2"/>
-          <text x="248" y="35" font-size="12" fill="#111">DZIOB</text>
+        <div class="scenario">
+          <div class="scenario-title">Przecięcie kursów (crossing)</div>
+          <p class="muted small">
+            Jeśli widzisz jednostkę <strong>z prawej burty</strong> — zwykle to Ty ustępujesz.
+            Manewr ma zwiększyć CPA (często czytelna jest zmiana w prawo i/lub redukcja prędkości).
+          </p>
+        </div>
 
-          <!-- port (red) -->
-          <path d="M260,140 L200,110 A70,70 0 0,0 260,70 Z" fill="rgba(225,29,72,0.18)"/>
-          <text x="170" y="118" font-size="12" fill="#111">CZERWONE</text>
+        <div class="scenario">
+          <div class="scenario-title">Zbliżanie czołowe (head-on)</div>
+          <p class="muted small">
+            Obie strony powinny wykonać manewr (standardowo w prawo, minięcie lewymi burtami).
+          </p>
+        </div>
 
-          <!-- starboard (green) -->
-          <path d="M260,140 L320,110 A70,70 0 0,1 260,70 Z" fill="rgba(34,197,94,0.18)"/>
-          <text x="330" y="118" font-size="12" fill="#111">ZIELONE</text>
+        <div class="scenario">
+          <div class="scenario-title">Niepewność sytuacji</div>
+          <p class="muted small">
+            Jeśli nie jesteś pewien — <strong>zwolnij</strong>, zwiększ obserwację i wykonaj manewr,
+            który jest bezpieczny i czytelny. Bezpieczeństwo wygrywa.
+          </p>
+        </div>
+      </div>
+    </div>
 
-          <!-- stern (white) -->
-          <path d="M260,140 L190,170 A70,70 0 0,0 330,170 Z" fill="rgba(17,17,17,0.08)"/>
-          <text x="238" y="205" font-size="12" fill="#111">BIAŁE (RUFA)</text>
+    <h3 style="margin-top:14px;">Żaglówka vs żaglówka (egzaminowe klasyki)</h3>
+    <div class="grid-2">
+      <div class="mini-card">
+        <h4>Różne halsy</h4>
+        <ul class="bullets">
+          <li><strong>Lewy hals ustępuje</strong> prawemu.</li>
+          <li>Gdy nie potrafisz ustalić halsu — zachowaj większy margines.</li>
+        </ul>
+      </div>
+
+      <div class="mini-card">
+        <h4>Ten sam hals</h4>
+        <ul class="bullets">
+          <li>Jednostka <strong>nawietrzna ustępuje</strong> zawietrznej.</li>
+          <li>Wątpliwości? — najpierw bezpieczeństwo, potem „kto miał rację”.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <svg class="svg" viewBox="0 0 820 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat przecięcia kursów: jednostka z prawej burty">
+        <rect width="820" height="280" fill="#ffffff"/>
+        <text x="20" y="30" font-size="16" fill="#111">Crossing: jednostka z prawej burty → zwykle ustępujesz</text>
+
+        <!-- Our boat -->
+        <path d="M150 210 L220 210 L250 170 L220 130 L150 130 Z" fill="rgba(31,95,214,0.15)" stroke="#1f5fd6" stroke-width="3"/>
+        <text x="130" y="240" font-size="14" fill="#111">Ty</text>
+
+        <!-- Other boat -->
+        <path d="M560 85 L630 85 L660 125 L630 165 L560 165 Z" fill="rgba(225,29,72,0.12)" stroke="#e11d48" stroke-width="3"/>
+        <text x="640" y="70" font-size="14" fill="#111">On (z prawej)</text>
+
+        <!-- Arrows -->
+        <path d="M250 170 C360 160 430 150 520 130" fill="none" stroke="#1f5fd6" stroke-width="5"/>
+        <polygon points="520,130 505,122 506,140" fill="#1f5fd6"/>
+
+        <path d="M560 165 C520 205 450 230 360 240" fill="none" stroke="#e11d48" stroke-width="5"/>
+        <polygon points="360,240 375,232 374,250" fill="#e11d48"/>
+
+        <text x="300" y="115" font-size="13" fill="#111">czytelny manewr: zwiększ CPA</text>
+      </svg>
+      <p class="muted small">Schemat poglądowy: celem jest wyraźne zwiększenie dystansu minięcia (CPA).</p>
+    </div>
+
+  </section>
+
+  <!-- WYPRZEDZANIE -->
+  <section id="wyprzedzanie" class="container card">
+    <h2>3) Wyprzedzanie – prosta zasada, dużo wpadek</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Zasada</h3>
+        <p>
+          <strong>Wyprzedzający ustępuje</strong> — niezależnie od tego, czy jest na żaglach czy na silniku.
+          To Ty masz obowiązek zrobić to tak, żeby było bezpiecznie i bez „dreszczyku”.
+        </p>
+
+        <ul class="bullets">
+          <li>Wyprzedzaj z <strong>dużym marginesem</strong> i z czytelną intencją.</li>
+          <li>Nie „przecinaj dziobu” po minięciu — zostaw przestrzeń na błąd drugiej strony.</li>
+          <li>W portach i na torach: wyprzedzanie często jest zły pomysł.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Praktyczna podpowiedź:</strong> jeśli widzisz głównie światło rufowe (białe),
+        jesteś z tyłu — i to często oznacza, że wchodzisz w strefę wyprzedzania.
+      </div>
+    </div>
+  </section>
+
+  <!-- ŚWIATŁA -->
+  <section id="swiatla" class="container card">
+    <h2>4) Światła nawigacyjne – jak myśleć, żeby nie zgadywać</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Logika kolorów</h3>
+        <ul class="bullets">
+          <li><strong>Czerwone</strong> = lewa burta, <strong>Zielone</strong> = prawa burta.</li>
+          <li><strong>Białe</strong> = zwykle rufa i/lub masztowe (zależnie od jednostki).</li>
+          <li>Najpierw ustal: <strong>z której strony ją widzisz</strong>, dopiero potem „co to jest”.</li>
+        </ul>
+
+        <div class="mini-card">
+          <h4>Rozpoznanie w 3 krokach</h4>
+          <ol class="steps">
+            <li>Widzę czerwone czy zielone? (którą burtę?)</li>
+            <li>Widzę białe? (czy jestem za nią / czy ma masztowe?)</li>
+            <li>Czy układ pasuje do „typowej” jednostki? (jeśli nie: ostrożność)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="svg-wrap">
+        <svg class="svg" viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sektory świateł burty i rufy">
+          <rect width="520" height="290" fill="#ffffff"/>
+          <text x="18" y="28" font-size="15" fill="#111">Sektory (poglądowo)</text>
+
+          <circle cx="260" cy="155" r="90" fill="none" stroke="#111" stroke-width="2"/>
+          <line x1="260" y1="155" x2="260" y2="50" stroke="#111" stroke-width="2"/>
+          <text x="244" y="44" font-size="12" fill="#111">DZIOB</text>
+
+          <path d="M260,155 L182,120 A90,90 0 0,0 260,65 Z" fill="rgba(225,29,72,0.18)"/>
+          <text x="120" y="125" font-size="12" fill="#111">CZERWONE</text>
+
+          <path d="M260,155 L338,120 A90,90 0 0,1 260,65 Z" fill="rgba(34,197,94,0.18)"/>
+          <text x="365" y="125" font-size="12" fill="#111">ZIELONE</text>
+
+          <path d="M260,155 L165,205 A90,90 0 0,0 355,205 Z" fill="rgba(17,17,17,0.08)"/>
+          <text x="205" y="235" font-size="12" fill="#111">BIAŁE (RUFA)</text>
         </svg>
 
         <p class="muted small">
-          To ilustracja „logiki sektorów” – szczegóły zależą od typu jednostki i przepisów.
+          To schemat mentalny: „co widzę” → „z której strony” → „jak bezpiecznie minąć”.
         </p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:14px;">„Co widzę” → „co to może znaczyć” (ściąga)</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Co widzisz</th>
+          <th>Co to zwykle znaczy</th>
+          <th>Co robić praktycznie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Czerwone + zielone</strong></td>
+          <td>Jednostka prawie „na czołówkę”</td>
+          <td>Zwykle obie w prawo + zwiększ dystans</td>
+        </tr>
+        <tr>
+          <td><strong>Tylko czerwone</strong></td>
+          <td>Widzisz jej lewą burtę</td>
+          <td>Sprawdź, czy nie przecinacie kursów; ustaw bezpieczne minięcie</td>
+        </tr>
+        <tr>
+          <td><strong>Tylko zielone</strong></td>
+          <td>Widzisz jej prawą burtę</td>
+          <td>Jak wyżej; jeśli ona jest „z prawej” — często Ty ustępujesz</td>
+        </tr>
+        <tr>
+          <td><strong>Białe rufowe</strong></td>
+          <td>Jesteś za nią (możesz wyprzedzać)</td>
+          <td>Wyprzedzaj z dużym marginesem lub poczekaj</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ZNAKI DZIENNE -->
+  <section id="znaki" class="container card">
+    <h2>5) Znaki dzienne – po co są i jak je czytać</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Co to są znaki dzienne?</h3>
+        <p class="muted">
+          To kształty (kule, stożki, romby), które informują o statusie jednostki za dnia.
+          Nie musisz znać wszystkiego na pamięć, ale warto rozpoznać „nietypowe” jednostki
+          (np. ograniczona zdolność manewrowa).
+        </p>
+
+        <div class="callout">
+          <strong>Praktycznie:</strong> jeśli widzisz jednostkę „nietypową” (prace, pogłębiarka, holowanie),
+          zostaw jej więcej miejsca i nie wchodź w wąskie gardła na styk.
+        </div>
+      </div>
+
+      <div>
+        <h3>Ściąga: gdy coś wygląda „inaczej”</h3>
+        <ul class="check">
+          <li>Jednostka pracująca/przy przeszkodach – może nie mieć gdzie uciec.</li>
+          <li>Holowanie – długość zestawu bywa duża, nie przecinaj za blisko.</li>
+          <li>Rybołówstwo – narzędzia w wodzie ograniczają manewr.</li>
+          <li>Duże statki – bezwładność i ograniczenia toru wodnego.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===================== SYGNAŁY DŹWIĘKOWE ===================== -->
-  <section class="container card">
-    <h2>4) Sygnały dźwiękowe (praktyczna lista)</h2>
+  <!-- SYGNAŁY -->
+  <section id="sygnaly" class="container card">
+    <h2>6) Sygnały dźwiękowe – minimalny zestaw, który warto znać</h2>
 
     <table class="table">
       <thead>
         <tr>
           <th>Sygnał</th>
-          <th>Znaczenie (w uproszczeniu)</th>
-          <th>Kiedy przydatne?</th>
+          <th>Znaczenie (w praktyce)</th>
+          <th>Gdzie się przydaje</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>1 krótki</strong></td>
-          <td>„Zmieniam kurs w prawo”</td>
-          <td>Manewry w ruchu, ciasne przejścia</td>
+          <td>Zmieniam kurs w prawo</td>
+          <td>Ciasne przejścia, manewry w ruchu</td>
         </tr>
         <tr>
           <td><strong>2 krótkie</strong></td>
-          <td>„Zmieniam kurs w lewo”</td>
+          <td>Zmieniam kurs w lewo</td>
           <td>Jak wyżej</td>
         </tr>
         <tr>
           <td><strong>3 krótkie</strong></td>
-          <td>„Pracuję wstecz”</td>
-          <td>Port/ciasne manewry</td>
+          <td>Pracuję wstecz</td>
+          <td>Port, manewry przy kei</td>
         </tr>
         <tr>
           <td><strong>5 krótkich</strong></td>
-          <td>„Nie rozumiem Twoich zamiarów / nie zgadzam się”</td>
-          <td>Gdy sytuacja jest niejasna</td>
+          <td>Nie rozumiem zamiarów / uważam, że działasz niebezpiecznie</td>
+          <td>Gdy sytuacja jest niejasna lub ryzykowna</td>
         </tr>
       </tbody>
     </table>
 
     <p class="muted small">
-      Na śródlądziu mogą obowiązywać dodatkowe lokalne zasady i znaki – zawsze sprawdzaj regulaminy akwenu.
+      Na śródlądziu mogą występować dodatkowe zasady i znaki lokalne (szlaki, śluzy, mosty).
+      Traktuj sygnały jako narzędzie bezpieczeństwa, nie „dyskusję o racji”.
     </p>
   </section>
 
-  <!-- ===================== ŚRÓDLĄDZIE: CO DOCHODZI ===================== -->
-  <section class="container card">
-    <h2>5) Śródlądzie: co „dochodzi” do COLREG</h2>
+  <!-- ŚRÓDLĄDZIE -->
+  <section id="srodladzie" class="container card">
+    <h2>7) Śródlądzie: co się zmienia vs morze</h2>
 
     <div class="grid-2">
       <div>
-        <h3>Znaki i oznakowanie</h3>
-        <ul>
-          <li>Znaki brzegowe, ograniczenia prędkości, strefy zakazu, znaki ostrzegawcze.</li>
-          <li>Oznakowanie toru: trzymaj się znaków i pilnuj głębokości.</li>
-          <li>Śluzy, mosty, przeprawy – tu obowiązują dodatkowe procedury.</li>
+        <h3>Najważniejsze różnice (praktycznie)</h3>
+        <ul class="bullets">
+          <li>Więcej <strong>ograniczeń i znaków brzegowych</strong> (prędkość, strefy, zakazy).</li>
+          <li>Więcej <strong>przeszkód i płycizn</strong> — głębokość ma znaczenie non-stop.</li>
+          <li><strong>Wąskie gardła</strong> (mosty, przesmyki, śluzy) wymagają planu i cierpliwości.</li>
+          <li>Więcej „miękkich” uczestników: SUP, kajaki, pływacy — często bez świadomości zasad.</li>
         </ul>
+
+        <div class="callout warn">
+          <strong>Najczęstsza pułapka śródlądowa:</strong> płynięcie „za szybko” w pobliżu brzegu.
+          Hamowanie, skręt i reakcja na przeszkody wymagają zapasu.
+        </div>
       </div>
 
       <div>
-        <h3>Zasada praktyczna</h3>
-        <div class="callout">
-          <strong>Na śródlądziu</strong> więcej jest „twardych” ograniczeń (prędkość, strefy, śluzy),
-          a mniej przestrzeni na improwizację. Zawsze miej zapas na hamowanie i manewr.
-        </div>
-
+        <h3>Checklist śródlądowa</h3>
         <ul class="check">
-          <li>Sprawdź lokalne przepisy akwenu (regulamin, rozporządzenia).</li>
-          <li>Uważaj na kąpiących się, SUP-y i małe łodzie bez elektroniki.</li>
-          <li>Nie licz, że inni znają przepisy – zostaw margines.</li>
+          <li>Sprawdź ograniczenia prędkości na akwenie i w kanałach.</li>
+          <li>Miej bosak i odbijacze gotowe (wąsko, dużo manewrów).</li>
+          <li>Trzymaj większy dystans od pływaków i małych jednostek.</li>
+          <li>Przed mostem/śluzą: przygotuj cumy i ustal role.</li>
+          <li>Nie zakładaj, że „inni znają przepisy” — zostaw margines.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===================== SEKCJA EGZAMINACYJNA ===================== -->
-  <section class="container card">
-    <h2>Najczęstsze pytania egzaminacyjne / praktyczne</h2>
+  <!-- QA -->
+  <section id="qa" class="container card">
+    <h2>Najczęstsze pytania (egzamin + praktyka)</h2>
 
     <div class="qa">
-
       <details class="qa-item">
         <summary>1) Jak rozpoznasz ryzyko zderzenia?</summary>
         <div class="qa-body">
-          Jeśli namiar na jednostkę jest (prawie) stały, a odległość maleje – ryzyko zderzenia istnieje (reguła 7).
-          Potwierdzaj obserwacją oraz instrumentami (AIS/radar), ale nie opieraj się na jednym źródle.
+          Jeśli namiar na jednostkę jest (prawie) stały, a odległość maleje — ryzyko zderzenia istnieje.
+          Potwierdzaj obserwacją i instrumentami, ale nie polegaj tylko na AIS/plotterze.
         </div>
       </details>
 
       <details class="qa-item">
         <summary>2) Kto ustępuje przy przecięciu kursów?</summary>
         <div class="qa-body">
-          Jednostka, która ma drugą jednostkę <strong>z prawej burty</strong> (czyli widzi ją po swojej prawej stronie), powinna ustąpić.
+          Zwykle ustępuje ten, kto ma drugą jednostkę <strong>z prawej burty</strong>.
+          Najlepszy manewr to taki, który <strong>wyraźnie zwiększa CPA</strong>.
         </div>
       </details>
 
       <details class="qa-item">
         <summary>3) Co oznacza „manewr wcześnie i wyraźnie”?</summary>
         <div class="qa-body">
-          Zmiana kursu/prędkości powinna być na tyle duża, żeby druga jednostka jednoznacznie zobaczyła intencję
-          oraz żeby poprawił się CPA. „Kosmetyczne” korekty często nie działają.
+          Manewr ma być zauważalny dla drugiej strony i realnie poprawić sytuację. Małe korekty często są niewidoczne
+          i nie zmieniają dystansu minięcia.
         </div>
       </details>
 
       <details class="qa-item">
-        <summary>4) Czy jednostka z prawem drogi zawsze utrzymuje kurs i prędkość?</summary>
+        <summary>4) Żaglówka vs żaglówka: różne halsy – kto ustępuje?</summary>
         <div class="qa-body">
-          Zasadniczo tak, ale gdy widać, że druga strona nie ustępuje skutecznie i rośnie ryzyko kolizji,
-          jednostka z prawem drogi <strong>ma obowiązek działać</strong>, by uniknąć zderzenia.
+          Jednostka na <strong>lewym halsie</strong> ustępuje jednostce na <strong>prawym halsie</strong>.
         </div>
       </details>
 
       <details class="qa-item">
-        <summary>5) Co oznaczają 5 krótkich dźwięków?</summary>
+        <summary>5) Żaglówka vs żaglówka: ten sam hals – kto ustępuje?</summary>
         <div class="qa-body">
-          „Nie rozumiem Twoich zamiarów / uważam, że Twoje działanie jest niebezpieczne”. W praktyce: ostrzegasz i domagasz się wyjaśnienia sytuacji.
+          Jednostka <strong>nawietrzna</strong> ustępuje <strong>zawietrznej</strong>.
         </div>
       </details>
 
+      <details class="qa-item">
+        <summary>6) Wyprzedzanie – kto ma obowiązek ustąpić?</summary>
+        <div class="qa-body">
+          <strong>Wyprzedzający</strong> — zawsze. Twoim zadaniem jest wyprzedzić bezpiecznie i czytelnie.
+        </div>
+      </details>
+
+      <details class="qa-item">
+        <summary>7) Co oznacza 5 krótkich dźwięków?</summary>
+        <div class="qa-body">
+          „Nie rozumiem Twoich zamiarów / uważam, że działasz niebezpiecznie”.
+          W praktyce: ostrzegasz i wymuszasz wzrost ostrożności.
+        </div>
+      </details>
+
+      <details class="qa-item">
+        <summary>8) Czy jednostka z „prawem drogi” może nic nie robić?</summary>
+        <div class="qa-body">
+          Nie. Jeśli widzisz, że druga strona nie ustępuje skutecznie i rośnie ryzyko kolizji,
+          masz obowiązek działać, by uniknąć zderzenia.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container card cta">
+    <h2>Co dalej?</h2>
+    <p class="muted">
+      Jeśli ta strona Ci pasuje stylistycznie i merytorycznie, robimy kolejną w identycznym układzie:
+      <strong>Meteo i interpretacja prognoz</strong> (też z checklistami i pytaniami).
+    </p>
+    <div class="cta-row">
+      <span class="pill">Następny poradnik:</span>
+      <strong>Meteo i interpretacja prognoz</strong>
     </div>
   </section>
 
