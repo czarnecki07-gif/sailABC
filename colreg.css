@@ -1,0 +1,108 @@
+/* Podstrona: COLREG / przepisy – styl zgodny z układem sailABC */
+
+.page-colreg { padding: 28px 0 60px; }
+
+.pill-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.pill{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(17,17,17,0.12);
+  background: rgba(17,17,17,0.03);
+}
+
+.card{
+  margin-top:14px;
+  background:#fff;
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:14px;
+  padding:16px;
+  box-shadow: 0 8px 24px rgba(17,17,17,0.06);
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:14px;
+}
+@media (min-width: 900px){
+  .grid-2{ grid-template-columns: 1.1fr 0.9fr; }
+}
+
+.steps{ padding-left: 18px; }
+.steps li{ margin: 7px 0; }
+
+.mini{
+  width:100%;
+  border-collapse: collapse;
+  margin-top:10px;
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  overflow:hidden;
+}
+.mini th, .mini td{
+  padding:9px 10px;
+  border-bottom:1px solid rgba(17,17,17,0.08);
+  text-align:left;
+  vertical-align:top;
+}
+.mini th{
+  width: 110px;
+  background: rgba(17,17,17,0.04);
+}
+
+.table{
+  width:100%;
+  border-collapse: collapse;
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  overflow:hidden;
+}
+.table th, .table td{
+  padding:10px;
+  border-bottom:1px solid rgba(17,17,17,0.08);
+  text-align:left;
+  vertical-align:top;
+}
+.table th{ background: rgba(17,17,17,0.04); }
+
+.callout{
+  margin-top:12px;
+  padding:12px;
+  border-radius:12px;
+  border-left:5px solid #1f5fd6;
+  background: rgba(31,95,214,0.06);
+}
+.callout.warn{
+  border-left-color:#e11d48;
+  background: rgba(225,29,72,0.06);
+}
+
+.svg{
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  border:1px solid rgba(17,17,17,0.10);
+  background:#fff;
+}
+
+.check{ margin:0; padding-left:18px; }
+.check li{ margin:6px 0; }
+
+.qa{ display:grid; gap:10px; margin-top:10px; }
+.qa-item{
+  border:1px solid rgba(17,17,17,0.10);
+  border-radius:12px;
+  padding:10px 12px;
+  background:#fff;
+}
+.qa-item summary{ cursor:pointer; font-weight:600; }
+.qa-body{ margin-top:8px; color: rgba(17,17,17,0.85); line-height:1.5; }
+
+.bullets{ margin:0; padding-left:18px; }
+.bullets li{ margin:6px 0; }
